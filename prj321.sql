@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 25, 2020 lúc 08:47 AM
+-- Thời gian đã tạo: Th7 06, 2020 lúc 08:48 AM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -120,16 +120,23 @@ CREATE TABLE `comment` (
 
 CREATE TABLE `customer` (
   `cID` int(11) NOT NULL,
-  `cPassword` varchar(32) DEFAULT NULL,
-  `cUsername` varchar(30) DEFAULT NULL,
-  `cName` varchar(50) DEFAULT NULL,
-  `phonenumber` varchar(15) DEFAULT NULL,
-  `address` varchar(150) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `gender` int(11) DEFAULT NULL
+  `cPassword` varchar(32) NOT NULL,
+  `cUsername` varchar(30) NOT NULL,
+  `cName` varchar(50) NOT NULL,
+  `phonenumber` varchar(15) NOT NULL,
+  `address` varchar(150) NOT NULL,
+  `birthday` date NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `status` int(11) NOT NULL,
+  `gender` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `customer`
+--
+
+INSERT INTO `customer` (`cID`, `cPassword`, `cUsername`, `cName`, `phonenumber`, `address`, `birthday`, `email`, `status`, `gender`) VALUES
+(3, '123', 'Nhien', 'Nhien', '01222333', '123', '2020-07-10', 'huynhthinhien23@gmail.com', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -188,18 +195,26 @@ CREATE TABLE `productcolor` (
 
 CREATE TABLE `products` (
   `pID` int(11) NOT NULL,
-  `spID` int(11) DEFAULT NULL,
-  `brID` int(11) DEFAULT NULL,
-  `tID` int(11) DEFAULT NULL,
-  `supID` int(11) DEFAULT NULL,
-  `pName` varchar(50) DEFAULT NULL,
-  `sellingPrice` int(11) DEFAULT NULL,
-  `price` int(11) DEFAULT NULL,
-  `describle` varchar(250) DEFAULT NULL,
-  `pDate` datetime DEFAULT NULL,
-  `size` int(11) DEFAULT NULL,
-  `material` varchar(100) DEFAULT NULL
+  `spID` int(11) NOT NULL,
+  `brID` int(11) NOT NULL,
+  `tID` int(11) NOT NULL,
+  `supID` int(11) NOT NULL,
+  `pName` varchar(50) NOT NULL,
+  `sellingPrice` double NOT NULL,
+  `price` double NOT NULL,
+  `describle` varchar(250) NOT NULL,
+  `pDate` datetime NOT NULL,
+  `size` int(11) NOT NULL,
+  `material` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `products`
+--
+
+INSERT INTO `products` (`pID`, `spID`, `brID`, `tID`, `supID`, `pName`, `sellingPrice`, `price`, `describle`, `pDate`, `size`, `material`) VALUES
+(4, 7, 9, 9, 9, '9', 0, 100, '9', '2020-07-16 00:00:00', 9, '9'),
+(5, 7, 2, 3, 66, '4', 55, 55, 'bbbb', '2020-07-02 00:00:00', 9, 'hnt');
 
 -- --------------------------------------------------------
 
@@ -294,7 +309,8 @@ ALTER TABLE `comment`
 -- Chỉ mục cho bảng `customer`
 --
 ALTER TABLE `customer`
-  ADD PRIMARY KEY (`cID`);
+  ADD PRIMARY KEY (`cID`),
+  ADD UNIQUE KEY `cUsername` (`cUsername`);
 
 --
 -- Chỉ mục cho bảng `history`
@@ -355,6 +371,28 @@ ALTER TABLE `supplier`
 --
 ALTER TABLE `type`
   ADD PRIMARY KEY (`tID`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `cID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `products`
+--
+ALTER TABLE `products`
+  MODIFY `pID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT cho bảng `type`
+--
+ALTER TABLE `type`
+  MODIFY `tID` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
