@@ -7,15 +7,21 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.DAO.AdminDAO;
+import model.DAO.CustomerDAO;
+import model.entity.Customer;
 
 /**
  *
- * @author NhienHT
+ * @author Dat
  */
 @WebServlet(name = "AccountController", urlPatterns = {"/AccountController"})
 public class AccountController extends HttpServlet {
@@ -37,7 +43,7 @@ public class AccountController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AccountController</title>");            
+            out.println("<title>Servlet AccountController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet AccountController at " + request.getContextPath() + "</h1>");
@@ -72,7 +78,79 @@ public class AccountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+
+        Customer c = new Customer();
+        CustomerDAO cDao = new CustomerDAO();
+        if (request.getParameter("btnSignIn") != null) {
+            c.setcPassword(request.getParameter("cPassword"));
+            c.setcUsername(request.getParameter("cUsername"));
+            c.setcName(request.getParameter("cName"));
+            c.setPhonenumber(request.getParameter("cPhonenumber"));
+            c.setAddress(request.getParameter("address"));
+            Date birthday = Date.valueOf(request.getParameter("birthday"));
+            c.setBirthday(birthday);
+            c.setEmail(request.getParameter("email"));
+            c.setStatus(1);
+            c.setGender(request.getParameter("gender"));
+            cDao.insert(c);
+
+            response.sendRedirect("./auth/login.jsp");
+        } else if (request.getParameter("btnLogin") != null) {
+            // CustomerDAO cDao = new CustomerDAO();
+            String user = request.getParameter("user");
+            String pass = request.getParameter("pass");
+            int id = cDao.login(user, pass);
+            if (id != -1) {
+                Cookie userCookie = new Cookie("user", user);
+                Cookie passCookie = new Cookie("pass", pass);
+                Cookie idCookie = new Cookie("idCustomer", String.valueOf(id));
+
+                userCookie.setMaxAge(60 * 60 * 24);
+                passCookie.setMaxAge(60 * 60 * 24);
+                idCookie.setMaxAge(60 * 60 * 24);
+
+                response.addCookie(userCookie);
+                response.addCookie(passCookie);
+                response.addCookie(idCookie);
+
+                response.sendRedirect("home.jsp");
+            } else {
+//                out.println("<script type=\"text/javascript\">");
+//                out.println("alert('User or password incorrect');");
+//                out.println("location='login.jsp';");
+//                out.println("</script>");
+                response.sendRedirect("./auth/login.jsp");
+
+            }
+        } else if (request.getParameter("adminLogin") != null) {
+            AdminDAO aDao = new AdminDAO();
+            String user = request.getParameter("user");
+            String pass = request.getParameter("pass");
+
+            boolean check = aDao.login(user, pass);
+            if (check) {
+//                 Cookie userCookie = new Cookie("user", user);
+//                Cookie passCookie = new Cookie("pass", pass);
+//
+//                userCookie.setMaxAge(60 * 60 * 24);
+//                passCookie.setMaxAge(60 * 60 * 24);
+//
+//                response.addCookie(userCookie);
+//                response.addCookie(passCookie);
+                response.sendRedirect("./admin/product/listproducts.jsp");
+                out.print("<script> alert('Login successful');</script>");
+            } else {
+//                out.println("<script type=\"text/javascript\">");
+//                out.println("alert('User or password incorrect');");
+//                out.println("location='login.jsp';");
+//                out.println("</script>");
+                response.sendRedirect("./auth/login.jsp");
+
+            }
+
+        }
+
     }
 
     /**

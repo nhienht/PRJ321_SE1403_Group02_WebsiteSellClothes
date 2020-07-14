@@ -7,15 +7,18 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.DAO.CustomerDAO;
+import model.entity.Customer;
 
 /**
  *
- * @author NhienHT
+ * @author Dat
  */
 @WebServlet(name = "CustomerController", urlPatterns = {"/CustomerController"})
 public class CustomerController extends HttpServlet {
@@ -37,7 +40,7 @@ public class CustomerController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CustomerController</title>");            
+            out.println("<title>Servlet CustomerController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CustomerController at " + request.getContextPath() + "</h1>");
@@ -72,7 +75,26 @@ public class CustomerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //   processRequest(request, response);
+        Customer c = new Customer();
+        c.setcID(Integer.parseInt(request.getParameter("cID")));
+        c.setcPassword(request.getParameter("cPassword"));
+        c.setcUsername(request.getParameter("cUsername"));
+        c.setcName(request.getParameter("cName"));
+        c.setPhonenumber(request.getParameter("phonenumber"));
+        c.setAddress(request.getParameter("address"));
+        Date bDate = Date.valueOf(request.getParameter("birthday"));
+        c.setBirthday(bDate);
+        c.setEmail(request.getParameter("email"));
+        c.setStatus(Integer.parseInt(request.getParameter("status")));
+        c.setGender(request.getParameter("gender"));
+        CustomerDAO cDao = new CustomerDAO();
+        cDao.update(c);
+        response.sendRedirect("./admins/customer/listcustomer.jsp");
+     
+
+    
+
     }
 
     /**
@@ -81,7 +103,7 @@ public class CustomerController extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+        public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
