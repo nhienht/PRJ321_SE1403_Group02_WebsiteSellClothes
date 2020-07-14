@@ -1,6 +1,6 @@
 <%-- 
     Document   : order
-    Created on : Jul 14, 2020, 12:25:49 PM
+    Created on : Jul 7, 2020, 1:54:23 PM
     Author     : NhienHT
 --%>
 
@@ -13,5 +13,13 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        <form action="./../../OrderController" method="POST">
+            Ten <input type="text" name="nameCustomer" > </br>
+            Dia chi <input type="text" name="address"  ></br>
+            SDT <input type="text" name="phone"  ></br>
+            <textarea name="note">Ghi chu</textarea> </br>
+            <input type="submit" value="Order" name="btnOrder">
+        
+        </form>
     </body>
 </html>
