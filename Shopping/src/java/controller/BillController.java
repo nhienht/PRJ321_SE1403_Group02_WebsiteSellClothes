@@ -7,15 +7,18 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.DAO.BillDAO;
+import model.entity.Bill;
 
 /**
  *
- * @author NhienHT
+ * @author 
  */
 @WebServlet(name = "BillController", urlPatterns = {"/BillController"})
 public class BillController extends HttpServlet {
@@ -58,7 +61,8 @@ public class BillController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //   processRequest(request, response);
+        
     }
 
     /**
@@ -72,7 +76,25 @@ public class BillController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        // processRequest(request, response);
+        if (request.getParameter("btnUpdate") != null) {
+            Bill b = new Bill();
+            b.setbID(Integer.parseInt(request.getParameter("bID")));
+            b.setcID(Integer.parseInt(request.getParameter("cID")));
+            b.setbStatus(request.getParameter("bStatus"));
+            b.setCustomerName(request.getParameter("customerName"));
+            Date bDate = Date.valueOf(request.getParameter("pDate"));
+            b.setDate(bDate);
+            b.setPhone(request.getParameter("phone"));
+            b.setAddress(request.getParameter("address"));
+            b.setNote(request.getParameter("note"));
+            b.setTotal(Double.parseDouble(request.getParameter("total")));
+            BillDAO bDao = new BillDAO();
+            bDao.update(b);
+            
+        }
+        response.sendRedirect("./admin/bill/listbill.jsp");
+        
     }
 
     /**

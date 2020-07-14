@@ -7,11 +7,14 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.DAO.ProductsDAO;
+import model.entity.Products;
 
 /**
  *
@@ -37,10 +40,10 @@ public class ProductController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProductController</title>");            
+            out.println("<title>Servlet AdminController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ProductController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -72,7 +75,34 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //  processRequest(request, response);
+        Products p = new Products();
+        p.setSpID(Integer.parseInt(request.getParameter("spID")));
+        p.setBrID(Integer.parseInt(request.getParameter("brID")));
+        p.settID(Integer.parseInt(request.getParameter("tID")));
+        p.setSupID(Integer.parseInt(request.getParameter("supID")));
+        p.setpName(request.getParameter("pName"));
+        p.setSellingPrice(Double.parseDouble(request.getParameter("sellingPrice")));
+        p.setPrice(Double.parseDouble(request.getParameter("price")));
+        p.setDescrible(request.getParameter("describle"));
+        Date pDate = Date.valueOf(request.getParameter("pDate"));
+        p.setpDate(pDate);
+        //  p.setpDate(Date.from(Instant.now()));
+        p.setSize(Integer.parseInt(request.getParameter("size")));
+        p.setMaterial(request.getParameter("material"));
+        p.setQuantity(Integer.parseInt(request.getParameter("quantity")));
+        p.setDiscount(Float.parseFloat(request.getParameter("discount")));
+        ProductsDAO pDao = new ProductsDAO();
+        if (request.getParameter("btnUpdate") != null) {
+            int pID = Integer.parseInt(request.getParameter("pID"));
+            p.setpID(pID);
+            pDao.update(p);
+
+        } else {
+            pDao.insert(p);
+        }
+        response.sendRedirect("./admin/product/listproducts.jsp");
+
     }
 
     /**
