@@ -7,11 +7,19 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.DAO.BillDAO;
+import model.DAO.BillDetailDAO;
+import model.DAO.ProductsDAO;
+import model.entity.Products;
 
 /**
  *
@@ -37,7 +45,7 @@ public class OrderController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet OrderController</title>");            
+            out.println("<title>Servlet OrderController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet OrderController at " + request.getContextPath() + "</h1>");
@@ -72,17 +80,59 @@ public class OrderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        // processRequest(request, response);
+        //String id = request.getAttribute("customerId").toString();
+        String cID = "";
+        if (request.getParameter("btnOrder") != null) {
+            Cookie[] cookie = request.getCookies();
+            for (Cookie c : cookie) {
+                String cName = c.getName();
+                if (cName.equals("idCustomer")) {
+                    cID = c.getValue();
+                }
+            }
+        }
+        String name = request.getParameter("nameCustomer");
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phone");
+        String note = request.getParameter("note");
+        //double total = Double.parseDouble(session.getAttribute("totalPrice").toString());
+        double total = Double.parseDouble(getServletContext().getAttribute("total").toString());
+        BillDAO bDao = new BillDAO();
+          bDao.addBill(Integer.parseInt(cID), "New", name, address, phone, note, total);
+        int billID = bDao.getMaxBill();
+        BillDetailDAO bdDao = new BillDetailDAO();
+        Enumeration<String> pIds = session.getAttributeNames();
+        int success = 1;  // tạo biến kiểm tra mua thành công hay không   
+        // đi đến từng sản phẩm, true nếu còn product trongg pIds
+        while (pIds.hasMoreElements()) {
+            // lấy id từng product
+            String pId = pIds.nextElement();
+            ProductsDAO pDao = new ProductsDAO();
+            Products p = pDao.getProduct(Integer.parseInt(pId));
+            // lấy số lượng từ session
+            int quantity = (int) session.getAttribute(pId);
+
+            //insert bill detail, nếu thành công trả về 1, không thành công trả về 0
+            bdDao.addBillDetail(billID, Integer.parseInt(pId), quantity, quantity * p.getPrice());
+            //     success = 0;
+            //}
+            response.sendRedirect("./customer/bill/billDetail.jsp");
+
+        }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo
+        
+            () {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
 
-}
+    }
