@@ -170,5 +170,21 @@ public class ProductsDAO {
         }
         return null;
    }
+   
+    public int getMax() {
+        try {
+           
+            String sql = "Select max(pID) as pID from products";
+            PreparedStatement st = conn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("pID");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
 
 }

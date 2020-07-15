@@ -4,6 +4,7 @@
     Author     : NhienHT
 --%>
 
+<%@page import="model.DAO.ImageDAO"%>
 <%@page import="model.DAO.ProductsDAO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="model.DAO.ProductsDAO"%>
@@ -51,6 +52,7 @@
             <%
                 ProductsDAO pDao = new ProductsDAO();
                 ResultSet rs = pDao.getAll();
+                ImageDAO iDao = new ImageDAO();
                 while (rs.next()) {
                     out.print("<tr>");
 
@@ -65,6 +67,11 @@
                     out.print("<td>" + rs.getInt("size") + "</td>");
                     out.print("<td>" + rs.getString("material") + "</td>");
                     out.print("<td>" + rs.getString("gender") + "</td>");
+                    ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
+                      while (rsImg.next()) {
+                        out.print("<td><img src='../../data/" + rsImg.getString(3) + "' height='100px' width='100px' /></td>");
+                        break;
+                    }
                     // out.print("<td><a href='cart.jsp?id=" + rs.getInt("pID") + "'>Them vao gio hang</a></td>");
                     out.print("<td> <a href='./../../CartController?id=" + rs.getInt("pID") + "'>Buy</td>");
                     out.print("</tr>");

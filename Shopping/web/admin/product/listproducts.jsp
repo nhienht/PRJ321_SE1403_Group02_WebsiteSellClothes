@@ -4,6 +4,7 @@
     Author     : 
 --%>
 
+<%@page import="model.DAO.ImageDAO"%>
 <%@page import="model.DAO.ProductsDAO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="model.DAO.ProductsDAO"%>
@@ -107,7 +108,7 @@
                 padding-left: 550px;
                 padding-top: 30px;
             }
-            
+
 
 
         </style>
@@ -166,6 +167,7 @@
                 <th>Material</th>
                 <th>Update</th>
                 <th>Clothing</th>
+                <th>Image</th>
                 <th>Gender</th>
 
 
@@ -173,7 +175,9 @@
             <%
                 ProductsDAO pDao = new ProductsDAO();
                 ResultSet rs = pDao.getAll();
+                ImageDAO iDao = new ImageDAO();
                 while (rs.next()) {
+
                     out.print("<tr>");
                     out.print("<td>" + rs.getInt("pID") + "</td>");
                     out.print("<td>" + rs.getInt("status") + "</td>");
@@ -187,7 +191,13 @@
                     out.print("<td>" + rs.getDate("pDate") + "</td>");
                     out.print("<td>" + rs.getInt("size") + "</td>");
                     out.print("<td>" + rs.getString("material") + "</td>");
-                     out.print("<td>" + rs.getString("gender") + "</td>");
+                    out.print("<td>" + rs.getString("gender") + "</td>");
+                    ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
+                    while (rsImg.next()) {
+                        out.print("<td><img src='../../data/" + rsImg.getString(3) + "' height='100px' width='100px' /></td>");
+                        break;
+                    }
+                   
                     out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'>Update</a></td>");
                     out.print("<td><a href='?id=" + rs.getInt("pID") + "'>Delete</a></td>");
 

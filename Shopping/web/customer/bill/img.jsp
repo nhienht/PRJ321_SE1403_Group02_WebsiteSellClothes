@@ -22,7 +22,7 @@
         <sql:query var="image" dataSource="${conn}" sql=" select * from image where pID = 1"/>
 
         <c:forEach var="img" items="${image.rows}" >
-            <img src="../../data/${img.imageName}"/>
+            <img src="../../data/${img.imageName}" height='100px' width='100px'/>
             <c:out value="${img.imageName}"></c:out>
         </c:forEach>
     </body>
