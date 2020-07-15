@@ -57,9 +57,9 @@
             email <input type="text" name="email" value="<%= email%>" ></br>
             status <input type="text" name="status" value="<%= status%>" ></br>
             <select name="gender" >
-                            <option  value="0">Nam</option>
-                            <option value="1">Nữ</option>
-                            <option  value="2">Khác</option>
+                            <option  value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option  value="Other">Other</option>
                         </select>
            
             <input type="submit" value="UPDATE" name="btnUpdate">

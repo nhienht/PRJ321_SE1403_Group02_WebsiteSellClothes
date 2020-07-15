@@ -7,19 +7,20 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import model.DAO.ImageDAO;
 
 /**
  *
  * @author NhienHT
  */
-@WebServlet(name = "CartController", urlPatterns = {"/CartController"})
-public class CartController extends HttpServlet {
+@WebServlet(name = "ImageController", urlPatterns = {"/ImageController"})
+public class ImageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,21 +36,14 @@ public class CartController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-           String id = request.getParameter("id");
-      // kiểm tra id đó có tồn tại hay không
-      if(id != null){
-          // tạo session
-          HttpSession session = request.getSession();
-          // nếu session tại sản phẩm đó tồn tại
-          if(session.getAttribute(id) != null){
-              // thì số lượng trong cart sẽ được công lên 1
-              int quantity = (int) session.getAttribute(id) + 1;
-              session.setAttribute(id, quantity);
-          }else{ // nếu chưa tồn tại thì bắt đầu với số lượng là 1
-              session.setAttribute(id, 1);
-          }
-      }
-      response.sendRedirect("./customer/product/cart.jsp");
+            ImageDAO iDao = new ImageDAO();
+            String[] path = request.getParameterValues("img");
+            out.println(path.length);
+            for (int i = 0 ; i <= path.length ; i++){
+                out.println(path[i]);
+                iDao.insert(1, path[i]);
+            }
+           // response.sendRedirect("img.jsp");
         }
     }
 
@@ -79,7 +73,8 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       // processRequest(request, response);
+     
     }
 
     /**

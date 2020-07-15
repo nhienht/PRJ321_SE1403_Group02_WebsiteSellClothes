@@ -46,7 +46,7 @@ public class ProductsDAO {
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                Products p = new Products(id, rs.getInt("spID"), rs.getInt("brID"), rs.getInt("tID"), rs.getInt("supID"), rs.getString("pName"), rs.getDouble("sellingPrice"), rs.getDouble("price"), rs.getString("describle"), rs.getDate("pDate"), rs.getInt("size"), rs.getString("material"), rs.getInt("quantity"), rs.getFloat("discount"));
+                Products p = new Products(id, rs.getInt("status"), rs.getInt("brID"), rs.getInt("tID"), rs.getInt("supID"), rs.getString("pName"), rs.getDouble("sellingPrice"), rs.getDouble("price"), rs.getString("describle"), rs.getDate("pDate"), rs.getInt("size"), rs.getString("material"), rs.getInt("quantity"), rs.getFloat("discount"), rs.getString("gender"));
                 return p;
             }
         } catch (SQLException ex) {
@@ -56,7 +56,7 @@ public class ProductsDAO {
 
     public boolean insert(Products p) {
         try {
-            String sql = "insert into products (`spID`, `brID`, `tID`, `supID`, `pName`, `sellingPrice`, `price`, `describle`, `pDate`, `size`, `material`, `quantity`, `discount`) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into products (`status`, `brID`, `tID`, `supID`, `pName`, `sellingPrice`, `price`, `describle`, `pDate`, `size`, `material`, `quantity`, `discount`, gender) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, p.getSpID());
             pst.setInt(2, p.getBrID());
@@ -71,6 +71,7 @@ public class ProductsDAO {
             pst.setString(11, p.getMaterial());
             pst.setInt(12, p.getQuantity());
             pst.setFloat(13, p.getDiscount());
+            pst.setString(14, p.getGender());
             return pst.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -80,7 +81,7 @@ public class ProductsDAO {
 
     public int update(Products p) {
         try {
-            String sql = "update products set spID=?, brID=?, tID=?, supID=?, pName=?, sellingPrice=?, price=?, describle=?, pDate=?, size=?, material=?, quantity = ?, discount=? where pID=?";
+            String sql = "update products set status=?, brID=?, tID=?, supID=?, pName=?, sellingPrice=?, price=?, describle=?, pDate=?, size=?, material=?, quantity = ?, discount=?, gender=? where pID=?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, p.getSpID());
             pst.setInt(2, p.getBrID());
@@ -95,7 +96,8 @@ public class ProductsDAO {
             pst.setString(11, p.getMaterial());
             pst.setInt(12, p.getQuantity());
             pst.setFloat(13, p.getDiscount());
-            pst.setInt(14, p.getpID());
+            pst.setString(14, p.getGender());
+            pst.setInt(15, p.getpID());
             return pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -146,7 +148,7 @@ public class ProductsDAO {
     }
    public int ChangeStatus(int id, int status) {
         try {
-            String sql = "UPDATE `customer` SET `status`=? WHERE  `cID`=?";
+            String sql = "UPDATE `products` SET `status`=? WHERE  `cID`=?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, status);
             pst.setInt(2, id);
@@ -156,5 +158,17 @@ public class ProductsDAO {
         }
         return 0;
     }
+   public ResultSet getProductByType(int id){
+       
+        try {
+            String sql = "Select * from products where tID = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, id);
+            return pst.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+   }
 
 }

@@ -91,8 +91,8 @@
 
         </style>
         <%
-            int id = 0, spID = 0, brID = 0, tID = 0, supID = 0, size = 0, quantity = 0;
-            String pName = "", description = "", material = "";
+            int id = 0, status = 0, brID = 0, tID = 0, supID = 0, size = 0, quantity = 0;
+            String pName = "", description = "", material = "", gender= "";
             Double sellingPrice = 0.0, price = 0.0;
             float discount = 0;
             Date pDate = null;
@@ -100,7 +100,7 @@
                 id = Integer.parseInt(request.getParameter("id"));
                 ProductsDAO pDao = new ProductsDAO();
                 Products p = pDao.getProduct(id);
-                spID = p.getSpID();
+                status = p.getSpID();
                 brID = p.getBrID();
                 tID = p.gettID();
                 supID = p.getSupID();
@@ -113,6 +113,7 @@
                 material = p.getMaterial();
                 quantity = p.getQuantity();
                 discount = p.getDiscount();
+                gender = p.getGender();
             }
         %>
 
@@ -148,7 +149,7 @@
                 </div>
                 <div class="form-group">
                     <label for="StatusID" class="col-sm-3 control-label">Status product ID</label>
-                    <input value="<%= spID%>" type="text" name="spID" class="form-control" autofocus required="Please input" >
+                    <input value="<%= status%>" type="text" name="status" class="form-control" autofocus required="Please input" >
 
                 </div>
                 <div class="form-group">
@@ -158,7 +159,18 @@
 
                 <div class="form-group">
                     <label for="TypeP" class="col-sm-3 control-label">Type product ID</label>
-                    <input value="<%= tID%>" class="form-control" autofocus="" required=" " name="tID" >
+                    <select name="tID" class="form-control" autofocus="">
+                            <option  value=1>T-shirt</option>
+                            <option value=2>Short</option>
+                            <option  value=3>Skirt</option>
+                            <option  value=4>Dress</option>
+                            <option value=5>Pants</option>
+                            <option  value=6>Jacket</option>
+                            <option  value=7>Jeans</option>
+                            <option value=8>Shirt</option>
+                            <option  value=9>Sweater</option>
+                        </select>  
+                
                 </div>
 
                 <div class="form-group">
@@ -209,6 +221,14 @@
                     <label for="Discount" class="col-sm-3 control-label">Discount</label>
                     <input value="<%= discount%>" type="text"class="form-control" autofocus="" required=" " name="discount" >
                 </div>
+                <div class="form-group">
+                    <label for="Discount" class="col-sm-3 control-label">Gender</label>
+                    <select name="gender" value="<%= gender%>" >
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                      </div>
                 <input type="submit" value="UPDATE" name="btnUpdate">
             </form>
         </div>

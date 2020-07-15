@@ -42,6 +42,7 @@
                 <th>Ngay nhap</th>
                 <th>kich thuoc </th>
                 <th>chat lieu</th>
+                <th>Gioi tinh</th>
                 <th></th>
                 <th></th>
 
@@ -53,7 +54,7 @@
                 while (rs.next()) {
                     out.print("<tr>");
 
-                    out.print("<td>" + rs.getInt("spID") + "</td>");
+                    out.print("<td>" + rs.getInt("status") + "</td>");
                     out.print("<td>" + rs.getInt("brID") + "</td>");
                     out.print("<td>" + rs.getInt("tID") + "</td>");
                     out.print("<td>" + rs.getInt("supID") + "</td>");
@@ -63,6 +64,7 @@
                     out.print("<td>" + rs.getDate("pDate") + "</td>");
                     out.print("<td>" + rs.getInt("size") + "</td>");
                     out.print("<td>" + rs.getString("material") + "</td>");
+                    out.print("<td>" + rs.getString("gender") + "</td>");
                     // out.print("<td><a href='cart.jsp?id=" + rs.getInt("pID") + "'>Them vao gio hang</a></td>");
                     out.print("<td> <a href='./../../CartController?id=" + rs.getInt("pID") + "'>Buy</td>");
                     out.print("</tr>");

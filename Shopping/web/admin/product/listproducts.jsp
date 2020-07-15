@@ -166,6 +166,7 @@
                 <th>Material</th>
                 <th>Update</th>
                 <th>Clothing</th>
+                <th>Gender</th>
 
 
             </tr>
@@ -175,7 +176,7 @@
                 while (rs.next()) {
                     out.print("<tr>");
                     out.print("<td>" + rs.getInt("pID") + "</td>");
-                    out.print("<td>" + rs.getInt("spID") + "</td>");
+                    out.print("<td>" + rs.getInt("status") + "</td>");
                     out.print("<td>" + rs.getInt("brID") + "</td>");
                     out.print("<td>" + rs.getInt("tID") + "</td>");
                     out.print("<td>" + rs.getInt("supID") + "</td>");
@@ -186,6 +187,7 @@
                     out.print("<td>" + rs.getDate("pDate") + "</td>");
                     out.print("<td>" + rs.getInt("size") + "</td>");
                     out.print("<td>" + rs.getString("material") + "</td>");
+                     out.print("<td>" + rs.getString("gender") + "</td>");
                     out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'>Update</a></td>");
                     out.print("<td><a href='?id=" + rs.getInt("pID") + "'>Delete</a></td>");
 

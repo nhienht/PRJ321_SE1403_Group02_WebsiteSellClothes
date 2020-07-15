@@ -77,7 +77,7 @@ public class ProductController extends HttpServlet {
             throws ServletException, IOException {
         //  processRequest(request, response);
         Products p = new Products();
-        p.setSpID(Integer.parseInt(request.getParameter("spID")));
+        p.setSpID(Integer.parseInt(request.getParameter("status")));
         p.setBrID(Integer.parseInt(request.getParameter("brID")));
         p.settID(Integer.parseInt(request.getParameter("tID")));
         p.setSupID(Integer.parseInt(request.getParameter("supID")));
@@ -92,6 +92,7 @@ public class ProductController extends HttpServlet {
         p.setMaterial(request.getParameter("material"));
         p.setQuantity(Integer.parseInt(request.getParameter("quantity")));
         p.setDiscount(Float.parseFloat(request.getParameter("discount")));
+        p.setGender(request.getParameter("gender"));
         ProductsDAO pDao = new ProductsDAO();
         if (request.getParameter("btnUpdate") != null) {
             int pID = Integer.parseInt(request.getParameter("pID"));
