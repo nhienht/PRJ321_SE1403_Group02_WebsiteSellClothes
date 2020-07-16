@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.DAO.ImageDAO;
 import model.DAO.ProductsDAO;
 import model.entity.Products;
 
@@ -93,6 +94,7 @@ public class ProductController extends HttpServlet {
         p.setQuantity(Integer.parseInt(request.getParameter("quantity")));
         p.setDiscount(Float.parseFloat(request.getParameter("discount")));
         p.setGender(request.getParameter("gender"));
+        String[] path = request.getParameterValues("img");
         ProductsDAO pDao = new ProductsDAO();
         if (request.getParameter("btnUpdate") != null) {
             int pID = Integer.parseInt(request.getParameter("pID"));
@@ -101,7 +103,13 @@ public class ProductController extends HttpServlet {
 
         } else {
             pDao.insert(p);
+            int pID = pDao.getMax();
+            ImageDAO imgDao = new ImageDAO();
+            for(int i = 0 ; i < path.length ; i++){
+                imgDao.insert(pID, path[i]);
+            }
         }
+        
         response.sendRedirect("./admin/product/listproducts.jsp");
 
     }

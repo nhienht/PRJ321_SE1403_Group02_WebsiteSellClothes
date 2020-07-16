@@ -199,7 +199,7 @@
                 </div>
                 
                  <div class="form-group">
-                    <label for="Material" class="col-sm-3 control-label">Img</label>
+                    <label for="Material" class="col-sm-3 control-label">Image</label>
                     <input  type="file"class="form-control" autofocus="" required=" " name="img" multiple >
                 </div>
                 

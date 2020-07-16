@@ -146,7 +146,8 @@ public class ProductsDAO {
             }
         }
     }
-   public int ChangeStatus(int id, int status) {
+
+    public int ChangeStatus(int id, int status) {
         try {
             String sql = "UPDATE `products` SET `status`=? WHERE  `cID`=?";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -158,8 +159,9 @@ public class ProductsDAO {
         }
         return 0;
     }
-   public ResultSet getProductByType(int id){
-       
+
+    public ResultSet getProductByType(int id) {
+
         try {
             String sql = "Select * from products where tID = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -169,6 +171,38 @@ public class ProductsDAO {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-   }
+    }
+
+    public int getMax() {
+        try {
+
+            String sql = "Select max(pID) as pID from products";
+            PreparedStatement st = conn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("pID");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public ResultSet getProductbyPrice(double startPrice, double endPrice) {
+        try {
+            String sql = "SELECT * FROM `products` WHERE price > ? and price < ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setDouble(1, startPrice);
+            pst.setDouble(2, endPrice);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
 }

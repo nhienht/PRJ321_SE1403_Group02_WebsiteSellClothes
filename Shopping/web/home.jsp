@@ -156,7 +156,7 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="./images/Capture.PNG" class="d-block w-100" alt="...">
+                    <img src="./images/Capture.PNG" class="d-block w-100" alt="..." >
                 </div>
                 <div class="carousel-item">
                     <img src="./images/pic3.png" class="d-block w-100" alt="...">

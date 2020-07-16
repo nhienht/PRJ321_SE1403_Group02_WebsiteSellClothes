@@ -90,10 +90,7 @@ public class CustomerController extends HttpServlet {
         c.setGender(request.getParameter("gender"));
         CustomerDAO cDao = new CustomerDAO();
         cDao.update(c);
-        response.sendRedirect("./admins/customer/listcustomer.jsp");
-     
-
-    
+        response.sendRedirect("./admin/customer/listcustomer.jsp");
 
     }
 

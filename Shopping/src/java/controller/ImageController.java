@@ -42,8 +42,9 @@ public class ImageController extends HttpServlet {
             for (int i = 0 ; i <= path.length ; i++){
                 out.println(path[i]);
                 iDao.insert(1, path[i]);
+                
             }
-           // response.sendRedirect("img.jsp");
+            response.sendRedirect("./admin/bill/img.jsp");
         }
     }
 
