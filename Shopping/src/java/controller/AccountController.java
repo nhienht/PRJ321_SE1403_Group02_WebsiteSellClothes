@@ -15,6 +15,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.DAO.AdminDAO;
 import model.DAO.CustomerDAO;
 import model.entity.Customer;
@@ -93,9 +94,12 @@ public class AccountController extends HttpServlet {
             c.setEmail(request.getParameter("email"));
             c.setStatus(1);
             c.setGender(request.getParameter("gender"));
-            cDao.insert(c);
+            cDao.insert(c);   
+            HttpSession session= request.getSession();
+            session.setAttribute("checkLogin", true);
+            response.sendRedirect("./index.jsp");
 
-            response.sendRedirect("./auth/login.jsp");
+           
         } else if (request.getParameter("btnLogin") != null) {
             // CustomerDAO cDao = new CustomerDAO();
             String user = request.getParameter("user");
@@ -113,7 +117,8 @@ public class AccountController extends HttpServlet {
                 response.addCookie(userCookie);
                 response.addCookie(passCookie);
                 response.addCookie(idCookie);
-
+                HttpSession session= request.getSession();
+ session.setAttribute("checkLogin", true);
                 response.sendRedirect("home.jsp");
             } else {
 //                out.println("<script type=\"text/javascript\">");

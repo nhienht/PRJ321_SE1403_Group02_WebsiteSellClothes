@@ -4,6 +4,7 @@
     Author     : NhienHT
 --%>
 
+<%@page import="model.entity.Admin"%>
 <!doctype html>
 <html lang="en">
 
@@ -80,7 +81,18 @@
 
 
         </style>
+        <%
+            boolean isLogin;
+            Admin ad = (Admin) session.getAttribute("checkLogin");
+            if (ad != null) {
+                isLogin = true;
 
+            } else {
+                isLogin = false;
+
+            }
+
+        %>
     </head>
 
     <body>
@@ -100,8 +112,9 @@
                         <li class="nav-item">
                             <a href="./index.jsp" class="nav-link ">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="./customer/product/list.jsp" class="nav-link">Products</a>
+                        <li class="nav-item dropdown">
+                            <a href="./customer/product/list.jsp" class="nav-link ">Products</a>
+
                         </li>
                         <li class="nav-item">
                             <a href="./auth/about.jsp" class="nav-link">About us</a>
@@ -109,21 +122,23 @@
                         <li class="nav-item">
                             <a href="./auth/contact.jsp" class="nav-link">Contact</a>
                         </li>
+
+                        <c:if test = "${!isLogin}"> 
                         <li class="nav-item">
-                        <c:if test="${session.getAttribute("checkLogin") != null}">
-            <a href="./auth/signin.jsp" title="Login" class="nav-link" >
-                            Sign In
-                        </a>
+
+                            <a href="./auth/signin.jsp" title="Login" class="nav-link" >
+                                Sign In
+                            </a>
+                        </li>
+                    </c:if>
+                    <c:if test = "${isLogin}"> 
+                        <li class="nav-item">
+                            <a href="./auth/login.jsp?logout=1" title="Login" class="nav-link">
+                                Logout
+                            </a>
+                        </li>
                     </c:if>
 
-                    </li>
-                    <li class="nav-item">
-                    <c:if test="${session.getAttribute("checkLogin") == null}">
-                        <a href="./auth/login.jsp?logout=1" title="??ng nh?p" class="nav-link">
-                            Log In
-                        </a>
-                    </c:if>
-                    </li>
 
 
 
@@ -132,7 +147,7 @@
                 </ul>
             </div>
         </nav>
-        
+
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
