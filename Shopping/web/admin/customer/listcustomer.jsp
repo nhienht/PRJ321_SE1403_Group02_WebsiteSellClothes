@@ -22,6 +22,7 @@
             <th>address</th>
             <th>birthday</th>
             <th>email</th>
+            <th>Status</th>
             <th>gender</th>
                 <%
                     CustomerDAO cDao = new CustomerDAO();
@@ -34,14 +35,12 @@
                         out.print("<td>" + rs.getString(5) + "</td>");
                         out.print("<td>" + rs.getString(6) + "</td>");
                         out.print("<td>" + rs.getDate(7) + "</td>");
-                        out.print("<td>" + rs.getString(8) + "</td>");
-                        if (rs.getInt(10) == 1) {
-                            out.print("<td>Nam</td>");
-                        } else {
-                            out.print("<td>Nu</td>");
-                        }
+                        out.print("<td>" + rs.getString(8) + "</td>");  
+                         out.print("<td>" + rs.getString(9) + "</td>");  
+                            out.print("<td>"+rs.getString(10)+"</td>");
                         //                            out.print("<td><a href='billDetail.jsp?id=" + rs.getInt("bID") + "'>Xem chi tiet hoa don</a></td>");
                         out.print("<td><a href='updateCustomer.jsp?id=" + rs.getInt("cID") + "'>Cap nhat</a></td>");
+                        
                         out.print("</tr>");
                     }
                 %>

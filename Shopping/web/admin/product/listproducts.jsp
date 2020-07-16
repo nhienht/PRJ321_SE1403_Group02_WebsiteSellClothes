@@ -130,6 +130,9 @@
                     <li class="nav-item">
                         <a href="./../bill/listbill.jsp" class="nav-link ">Bill</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="./../customer/listcustomer.jsp" class="nav-link ">Customer</a>
+                    </li>
                 </ul>
             </div>
         </nav>

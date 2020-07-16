@@ -26,13 +26,13 @@
                 Date date = null;
                 String email = "";
                 int status = 0;
-                int gender = -1; 
+                String gender =""; 
                 
                 if(request.getParameter("id") != null){
                     cID = Integer.parseInt(request.getParameter("id"));
                     CustomerDAO cDao = new CustomerDAO();
                     Customer c = cDao.getCustomer(cID);
-                    cUsername = c.getcName();
+                    cUsername = c.getcUsername();
                     cPassword = c.getcPassword();
                     cName = c.getcName();
                     phonenumber = c.getPhonenumber();
@@ -41,8 +41,6 @@
                     email = c.getEmail();
                     status = c.getStatus();
                     gender = c.getGender();
-                    
-                    
                 }
                 %>
                <form action="./../../CustomerController" method="POST">

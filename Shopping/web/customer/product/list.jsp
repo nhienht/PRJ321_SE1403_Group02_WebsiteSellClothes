@@ -68,8 +68,11 @@
                     out.print("<td>" + rs.getString("material") + "</td>");
                     out.print("<td>" + rs.getString("gender") + "</td>");
                     ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
-                      while (rsImg.next()) {
-                        out.print("<td><img src='../../data/" + rsImg.getString(3) + "' height='100px' width='100px' /></td>");
+                    while (rsImg.next()) {
+                       out.print("<td><a href='productDetail.jsp?pID="+rs.getInt("pID")+"'>");
+                     
+                        out.print("<img src='../../data/" + rsImg.getString(3) + "' height='100px' width='100px' />");
+                          out.print("</a></td>");
                         break;
                     }
                     // out.print("<td><a href='cart.jsp?id=" + rs.getInt("pID") + "'>Them vao gio hang</a></td>");
@@ -82,21 +85,21 @@
         <%
             try {
                 Cookie[] cookies = request.getCookies();
-                out.print("<h1> a "+ cookies.length +"</h1>");
-                if (cookies.length <=1) {
+                out.print("<h1> a " + cookies.length + "</h1>");
+                if (cookies.length <= 1) {
                     // out.print("Username: ");
                     response.sendRedirect("../../auth/login.jsp");
                 }
-                
-             //   String user = request.getCookies()[1].getValue();
-              //  out.print("Username: " + user);
+
+                //   String user = request.getCookies()[1].getValue();
+                //  out.print("Username: " + user);
             } catch (Exception ex) {
-                  response.sendRedirect("../../auth/login.jsp");
+                response.sendRedirect("../../auth/login.jsp");
             }
 
         %>
         <a href="../../auth/login.jsp?logout=1">logout</a>
-       
+
     </body>
 </body>
 </html>
