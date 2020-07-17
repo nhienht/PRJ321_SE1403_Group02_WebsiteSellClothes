@@ -73,7 +73,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto" style="padding-left: 900px">
                     <li class="nav-item">
-                        <a href="./home.jsp" class="nav-link ">Home</a>
+                        <a href="../../home.jsp" class="nav-link ">Home</a>
                     </li>
                     <li class="nav-item">
                         <a href="./../product/insertProduct.jsp" class="nav-link">Insert</a>

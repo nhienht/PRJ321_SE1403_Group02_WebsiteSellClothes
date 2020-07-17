@@ -83,14 +83,14 @@
         </style>
         <%
             boolean isLogin;
-            Admin ad = (Admin) session.getAttribute("checkLogin");
-            if (ad != null) {
-                isLogin = true;
-
-            } else {
-                isLogin = false;
-
-            }
+            // Admin ad = (Admin) session.getAttribute("checkLogin");
+//            if (ad != null) {
+//                isLogin = true;
+//
+//            } else {
+//                isLogin = false;
+//
+//            }
 
         %>
     </head>
@@ -138,12 +138,6 @@
                             </a>
                         </li>
                     </c:if>
-
-
-
-
-
-
                 </ul>
             </div>
         </nav>

@@ -26,17 +26,17 @@ public class ImageDAO {
         this.conn = db.getDBConnection();
     }
 
-    public boolean insert(int pID, String path) {
+    public void insert(int pID, String path) {
         try {
             String sql = "INSERT INTO `image`(`pID`, `imageName`) VALUES (?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, pID);
             pst.setString(2, path);
-            return pst.execute();
+            pst.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ImageDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+    
 
     }
     public ResultSet getImage(int pID){

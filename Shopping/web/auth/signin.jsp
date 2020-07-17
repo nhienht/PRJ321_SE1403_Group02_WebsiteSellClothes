@@ -53,6 +53,7 @@
         </style>
     </head>
     <body>
+        
         <div class="container">
             <form class="form-horizontal" role="form" action="./../AccountController" method="POST" name="register">
                 <h2>Registration</h2>
