@@ -26,113 +26,291 @@
         crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
         <title>List Products </title>
-        <style>
-            @import url('https://fonts.google.com/specimen/Balsamiq+Sans');
-            html ,body {
-                width: 100%;
+ <style>
+            html {
+                position: relative;
+                min-height: 100%;
+            }
+
+            body {
                 height: 100%;
-                font-family: 'Balsamiq Sans';   
-                font-size: 17px;
-                color: #222;
-                background: url('./../../images/vin.jpg') fixed;
-            }
-            .navbar{
-                background-color: #F5A9BC !important;
-            }
-            .navbar li a {
-                color: #f8f2f2!important ;
-
-            }
-            .navbar li a:hover {
-                color: #000000 !important ;
-
-            }
-            .container-fluid
-            {
-                padding-top: 8em;
             }
 
+            #wrapper {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+            }
 
-            .overlay {
-                position: absolute; 
-                bottom: 0; 
-                background: rgb(0, 0, 0);
-                background: rgba(0, 0, 0, 0.5); /* Black see-through */
-                color: #f1f1f1; 
+            #wrapper #content-wrapper {
+                overflow-x: hidden;
                 width: 100%;
-                transition: .5s ease;
-                opacity:0;
-                color: white;
-                font-size: 20px;
-                padding: 20px;
+                padding-top: 1rem;
+                padding-bottom: 80px;
+            }
+
+            body.fixed-nav #content-wrapper {
+                margin-top: 56px;
+                padding-left: 90px;
+            }
+
+            body.fixed-nav.sidebar-toggled #content-wrapper {
+                padding-left: 0;
+            }
+
+            @media (min-width: 768px) {
+                body.fixed-nav #content-wrapper {
+                    padding-left: 225px;
+                }
+
+                body.fixed-nav.sidebar-toggled #content-wrapper {
+                    padding-left: 90px;
+                }
+            }
+
+            .scroll-to-top {
+                position: fixed;
+                right: 15px;
+                bottom: 15px;
+                display: none;
+                width: 50px;
+                height: 50px;
                 text-align: center;
+                color: #fff;
+                background: #F5A9BC;
+                line-height: 46px;
             }
-            .container-fluid:hover .overlay {
-                opacity: 1;
-            }
-            .nav-item{
-                padding-right: 20px;
-                font-size: 25px;
-            }
-            .fotter{
-                background-color: black;
+
+            .scroll-to-top:focus,
+            .scroll-to-top:hover {
                 color: white;
             }
-            table{
-                font-family: 'Pangolin', cursive;
+
+            .scroll-to-top:hover {
+                background: #F5A9BC;
+            }
+
+            .scroll-to-top i {
+                font-weight: 800;
+            }
+
+            .smaller {
+                font-size: 0.7rem;
+            }
+
+            .o-hidden {
+                overflow: hidden !important;
+            }
+
+            .z-0 {
+                z-index: 0;
+            }
+
+            .z-1 {
+                z-index: 1;
+            }
+
+            .navbar-nav .form-inline .input-group {
                 width: 100%;
+            }
+
+            .navbar-nav .nav-item.active .nav-link {
+                color: #fff;
+            }
+
+            .navbar-nav .nav-item.dropdown .dropdown-toggle::after {
+                width: 1rem;
                 text-align: center;
-                background-color: #f8f2f2;
-                border-style: solid;
-                opacity: 0.9;
-            }
-            th{
-                border-style: solid;
-            }
-
-            .table{
-                padding : 20px;
-                padding-top: 100px;
-
-            }
-            .insert{
-                padding: 10px;
-                background: #f8f2f2;
-                border-style: solid;
-                opacity: 0.9;
-            }
-            .container{
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                padding-left: 550px;
-                padding-top: 30px;
+                float: right;
+                vertical-align: 0;
+                border: 0;
+                font-weight: 900;
+                content: '\f105';
+                font-family: 'Font Awesome 5 Free';
             }
 
+            .navbar-nav .nav-item.dropdown.show .dropdown-toggle::after {
+                content: '\f107';
+            }
 
+            .navbar-nav .nav-item.dropdown.no-arrow .dropdown-toggle::after {
+                display: none;
+            }
 
-        </style>
+            .navbar-nav .nav-item .nav-link:focus {
+                outline: none;
+            }
+
+            .navbar-nav .nav-item .nav-link .badge {
+                position: absolute;
+                margin-left: 0.75rem;
+                top: 0.3rem;
+                font-weight: 400;
+                font-size: 0.5rem;
+            }
+
+            @media (min-width: 768px) {
+                .navbar-nav .form-inline .input-group {
+                    width: auto;
+                }
+            }
+
+            .sidebar {
+                width: 90px !important;
+                background-color: #F5A9BC;
+                min-height: calc(100vh - 56px);
+            }
+
+            .sidebar .nav-item:last-child {
+                margin-bottom: 1rem;
+            }
+
+            .sidebar .nav-item .nav-link {
+                text-align: center;
+                padding: 0.75rem 1rem;
+                width: 90px;
+            }
+
+            .sidebar .nav-item .nav-link span {
+                font-size: 0.65rem;
+                display: block;
+            }
+
+            .sidebar .nav-item .dropdown-menu {
+                position: absolute !important;
+                -webkit-transform: none !important;
+                transform: none !important;
+                left: calc(90px + 0.5rem) !important;
+                margin: 0;
+            }
+
+            .sidebar .nav-item .dropdown-menu.dropup {
+                bottom: 0;
+                top: auto !important;
+            }
+
+            .sidebar .nav-item.dropdown .dropdown-toggle::after {
+                display: none;
+            }
+
+            .sidebar .nav-item .nav-link {
+                color:#212529;
+            }
+
+            .sidebar .nav-item .nav-link:active,
+            .sidebar .nav-item .nav-link:focus,
+            .sidebar .nav-item .nav-link:hover {
+                color: #cccccc;
+            }
+
+            .sidebar.toggled {
+                width: 0 !important;
+                overflow: hidden;
+            }
+
+            @media (min-width: 768px) {
+                .sidebar {
+                    width: 225px !important;
+                }
+
+                .sidebar .nav-item .nav-link {
+                    display: block;
+                    width: 100%;
+                    text-align: left;
+                    padding: 1rem;
+                    width: 225px;
+                }
+
+                .sidebar .nav-item .nav-link span {
+                    font-size: 1rem;
+                    display: inline;
+                }
+
+                .sidebar .nav-item .dropdown-menu {
+                    position: static !important;
+                    margin: 0 1rem;
+                    top: 0;
+                }
+
+                .sidebar .nav-item.dropdown .dropdown-toggle::after {
+                    display: block;
+                }
+
+                .sidebar.toggled {
+                    overflow: visible;
+                    width: 90px !important;
+                }
+
+                .sidebar.toggled .nav-item:last-child {
+                    margin-bottom: 1rem;
+                }
+
+                .sidebar.toggled .nav-item .nav-link {
+                    text-align: center;
+                    padding: 0.75rem 1rem;
+                    width: 90px;
+                }
+
+                .sidebar.toggled .nav-item .nav-link span {
+                    font-size: 0.65rem;
+                    display: block;
+                }
+
+                .sidebar.toggled .nav-item .dropdown-menu {
+                    position: absolute !important;
+                    -webkit-transform: none !important;
+                    transform: none !important;
+                    left: calc(90px + 0.5rem) !important;
+                    margin: 0;
+                }
+
+                .sidebar.toggled .nav-item .dropdown-menu.dropup {
+                    bottom: 0;
+                    top: auto !important;
+                }
+
+                .sidebar.toggled .nav-item.dropdown .dropdown-toggle::after {
+                    display: none;
+                }
+            }
+
+            .sidebar.fixed-top {
+                top: 56px;
+                height: calc(100vh - 56px);
+                overflow-y: auto;
+            }
+
+            .card-body-icon {
+                position: absolute;
+                z-index: 0;
+                top: -1.25rem;
+                right: -1rem;
+                opacity: 0.4;
+                font-size: 5rem;
+                -webkit-transform: rotate(15deg);
+                transform: rotate(15deg);
+            }
+
+            @media (min-width: 576px) {
+                .card-columns {
+                    -webkit-column-count: 1;
+                    column-count: 1;
+                }
+            }
+
+            @media (min-width: 768px) {
+                .card-columns {
+                    -webkit-column-count: 2;
+                    column-count: 2;
+                }
+                .bg-dark {
+                    background-color: #343a40!important;
+                }
+            </style>
     </head>
-    <body>
-        <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
-
-            <a class="navbar-branch" href="index.jsp">
-                <img src="./../../images/logo.jpg" height="80px" alt="">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto" style="padding-left: 600px">
-                    <li class="nav-item">
-                        <a href="./../../home.jsp" class="nav-link ">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="./../bill/listbill.jsp" class="nav-link ">Bill</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+  
+        
+        
         <%
             if (request.getParameter("id") != null) {
                 int pId = Integer.parseInt(request.getParameter("id"));
@@ -149,88 +327,80 @@
 
     <body id="page-top" class="">
 
-        <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-            <a class="navbar-brand mr-1 fas" href="#">
-                <h3>Clothing</h3>
-            </a>
 
-            <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-                <i class="fas fa-bars"></i>
-            </button>
+            <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+                <a class="navbar-brand mr-1 fas" href="#">
+                    <h3>Clothing</h3>
+                </a>
 
-            <!-- Navbar Search -->
-            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+                    <i class="fas fa-bars"></i>
+                </button>
 
-            </form>
+                <!-- Navbar Search -->
+                <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
 
-            <!-- Navbar -->
-            <ul class="navbar-nav ml-auto ml-md-0">
-                <li class="nav-item dropdown no-arrow mx-1"></li>
-                <li class="nav-item dropdown no-arrow mx-1"></li>
+                </form>
 
-                <!-- LOGOUT-->
-                <li class="nav-item dropdown no-arrow  ">
-                    <a class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        <h3><i class="fas fa-user-circle fa-fw"></i></h3>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Logout</a>
-                    </div>
-                </li>
-            </ul>
+                <!-- Navbar -->
+                <ul class="navbar-nav ml-auto ml-md-0">
+                    <li class="nav-item dropdown no-arrow mx-1"></li>
+                    <li class="nav-item dropdown no-arrow mx-1"></li>
 
-        </nav>
+                    <!-- LOGOUT-->
+                    <li class="nav-item dropdown no-arrow  ">
+                        <a class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <h3><i class="fas fa-user-circle fa-fw"></i></h3>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+
+            </nav>
 
         <div id="wrapper">
 
-            <!-- Sidebar -->
-            <ul class="sidebar navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-
-                <li class="nav-item ">
-                    <a class="nav-link" href="../customer/listcustomer.jsp">
-                        <i class="fas fa-fw fa-user"></i>
-                        <span>Account</span></a>
-                </li>
-
-                <li class="nav-item active">
-                    <a class="nav-link" href="../customer/listcustomer.jsp">
-                        <i class="fas fa-fw fa-book"></i>
-                        <span>List Customer</span></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="../product/listproducts.jsp" id="pagesDropdown" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-fw fa-box-open"></i>
-                        <span>Product</span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                        <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
-                        <a class="dropdown-item" href="../product/updateProduct.jsp">Update Products</a>
-                        <a class="dropdown-item" href="typesProduct.jsp">List Types Product</a>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="suppliers.jsp">
-                        <i class="fas fa-fw fa-book"></i>
-                        <span>Suppliers</span></a>
-                </li>
-
-                <li class="nav-item ">
-                    <a class="nav-link" href="feedback.jsp">
-                        <i class="fas fa-fw fa-book"></i>
-                        <span>Feedbacks</span></a>
-                </li>
 
 
-            </ul>
+                <!-- Sidebar -->
+                <ul class="sidebar navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../product/listproducts.jsp">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link" href="account.jsp">
+                            <i class="fas fa-fw fa-user"></i>
+                            <span>Account</span></a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../customer/listcustomer.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>List Customer</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="../product/listproducts.jsp" id="pagesDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-fw fa-box-open"></i>
+                            <span>Product</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                            <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
+                            <a class="dropdown-item" href="../product/updateProduct.jsp">Update Products</a>
+                        
+                        </div>
+                    </li>
+
+
+
+                </ul>
 
             <div id="content-wrapper">
 

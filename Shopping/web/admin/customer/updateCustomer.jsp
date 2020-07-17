@@ -350,7 +350,7 @@
                 <!-- Sidebar -->
                 <ul class="sidebar navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.jsp">
+                        <a class="nav-link" href="../product/listproducts.jsp">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
@@ -376,21 +376,10 @@
                         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                             <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
                             <a class="dropdown-item" href="../product/updateProduct.jsp">Update Products</a>
-                            <a class="dropdown-item" href="typesProduct.jsp">List Types Product</a>
+                        
                         </div>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-fw fa-book"></i>
-                            <span></span></a>
-                    </li>
-
-                    <li class="nav-item ">
-                        <a class="nav-link" href="feedback.jsp">
-                            <i class="fas fa-fw fa-book"></i>
-                            <span>Feedbacks</span></a>
-                    </li>
 
 
                 </ul>
@@ -440,6 +429,8 @@
                                                        style="width: 100%;">
                                                     <thead>
                                                         <tr>
+                                                            <th>Customer ID </th>
+                                                            <th>Password</th>
                                                             <th>User Name</th>
                                                             <th>Name</th>
                                                             <th>Phone Number</th>
@@ -448,12 +439,9 @@
                                                             <th>Email</th>
                                                             <th>Status</th>
                                                             <th>
-                                                                <select name="gender">
-                                                                    <option value="Male">Male</option>
-                                                                    <option value="Female">Female</option>
-                                                                    <option value="Other">Other</option>
-                                                                </select>
+                                                              Gender
                                                             </th>
+                                                            <th>Submit</th>
 
                                                         </tr>
                                                     </thead>
@@ -489,8 +477,8 @@
 
                                                     <form action="./../../CustomerController" method="POST">
                                                         <tr>
-                                                            <td> <input type="hidden" value="<%= cID%>" name="cID" /></td>
-                                                            <td> <input type="hidden" value="<%= cPassword%>"
+                                                            <td> <input type="text" value="<%= cID%>" name="cID" /></td>
+                                                            <td> <input type="text" value="<%= cPassword%>"
                                                                         name="cPassword" /></td>
 
                                                             <td> <input type="text" name="cUsername"

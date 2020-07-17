@@ -346,10 +346,11 @@
 
             <div id="wrapper">
 
+
                 <!-- Sidebar -->
                 <ul class="sidebar navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.jsp">
+                        <a class="nav-link" href="../product/listproducts.jsp">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
@@ -367,29 +368,18 @@
                             <span>List Customer</span></a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="../product/listproducts.jsp" id="pagesDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="../product/listproducts.jsp" id="pagesDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-fw fa-box-open"></i>
                             <span>Product</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                             <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
                             <a class="dropdown-item" href="../product/updateProduct.jsp">Update Products</a>
-                            <a class="dropdown-item" href="typesProduct.jsp">List Types Product</a>
+                        
                         </div>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="suppliers.jsp">
-                            <i class="fas fa-fw fa-book"></i>
-                            <span>Suppliers</span></a>
-                    </li>
-
-                    <li class="nav-item ">
-                        <a class="nav-link" href="feedback.jsp">
-                            <i class="fas fa-fw fa-book"></i>
-                            <span>Feedbacks</span></a>
-                    </li>
 
 
                 </ul>

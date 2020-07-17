@@ -372,10 +372,11 @@
 
             <div id="wrapper">
 
+
                 <!-- Sidebar -->
                 <ul class="sidebar navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.jsp">
+                        <a class="nav-link" href="../product/listproducts.jsp">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
@@ -401,21 +402,10 @@
                         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                             <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
                             <a class="dropdown-item" href="../product/updateProduct.jsp">Update Products</a>
-                            <a class="dropdown-item" href="typesProduct.jsp">List Types Product</a>
+                        
                         </div>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="suppliers.jsp">
-                            <i class="fas fa-fw fa-book"></i>
-                            <span>Suppliers</span></a>
-                    </li>
-
-                    <li class="nav-item ">
-                        <a class="nav-link" href="feedback.jsp">
-                            <i class="fas fa-fw fa-book"></i>
-                            <span>Feedbacks</span></a>
-                    </li>
 
 
                 </ul>
@@ -477,7 +467,6 @@
                                                             <th>Date</th>
                                                             <th>Size </th>
                                                             <th>Material</th>
-
                                                             <th>Quantity</th>
                                                             <th>Discount</th>
                                                             <th>Gender</th>

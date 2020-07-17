@@ -1,18 +1,18 @@
 <%-- 
-    Document   : home
-    Created on : Jul 6, 2020, 2:15:36 PM
-    Author     : NhienHT
+    Document   : products
+    Created on : Jul 5, 2020, 9:22:47 AM
+    Author     : HP
 --%>
 
-<%@page import="model.entity.Admin"%>
-<%@page import="model.DAO.ImageDAO"%>
-<%@page import="model.DAO.ProductsDAO"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="model.DAO.ProductsDAO"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="no-js" lang="zxx">
     <head>
+        <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -28,77 +28,65 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+
+        <title>Clothing </title>
+        <style>
+            @import url('https://fonts.google.com/specimen/Balsamiq+Sans');
+            html ,body {
+                width: 100%;
+                height: 100%;
+                font-family: 'Balsamiq Sans';   
+                font-size: 17px;
+                color: #222;
+            }
+            .navbar{
+                background-color: #F5A9BC !important;
+            }
+            .navbar li a {
+                color: #f8f2f2!important ;
+
+            }
+            .navbar li a:hover {
+                color: #000000 !important ;
+
+            }
+            .container-fluid
+            {
+                padding-top: 8em;
+            }
+
+
+            .overlay {
+                position: absolute; 
+                bottom: 0; 
+                background: rgb(0, 0, 0);
+                background: rgba(0, 0, 0, 0.5); /* Black see-through */
+                color: #f1f1f1; 
+                width: 100%;
+                transition: .5s ease;
+                opacity:0;
+                color: white;
+                font-size: 20px;
+                padding: 20px;
+                text-align: center;
+            }
+            .container-fluid:hover .overlay {
+                opacity: 1;
+            }
+            .nav-item{
+                padding-right: 20px;
+                font-size: 25px;
+            }
+            .fotter{
+                background-color: black;
+                color: white;
+            }
+
+
+        </style>  
     </head>
-    <style>
-        @import url('https://fonts.google.com/specimen/Balsamiq+Sans');
-        html ,body {
-            width: 100%;
-            height: 100%;
-            font-family: 'Balsamiq Sans';   
-            font-size: 17px;
-            color: #222;
-        }
-        .navbar{
-            background-color: #F5A9BC !important;
-        }
-        .navbar li a {
-            color: #f8f2f2!important ;
 
-        }
-        .navbar li a:hover {
-            color: #000000 !important ;
-
-        }
-        .container-fluid
-        {
-            padding-top: 8em;
-        }
-
-
-        .overlay {
-            position: absolute; 
-            bottom: 0; 
-            background: rgb(0, 0, 0);
-            background: rgba(0, 0, 0, 0.5); /* Black see-through */
-            color: #f1f1f1; 
-            width: 100%;
-            transition: .5s ease;
-            opacity:0;
-            color: white;
-            font-size: 20px;
-            padding: 20px;
-            text-align: center;
-        }
-        .container-fluid:hover .overlay {
-            opacity: 1;
-        }
-        .nav-item{
-            padding-right: 20px;
-            font-size: 25px;
-        }
-        .fotter{
-            background-color: black;
-            color: white;
-        }
-
-
-    </style>
-    <%
-        boolean isLogin;
-        Admin ad = (Admin) session.getAttribute("checkLogin");
-        if (ad != null) {
-            isLogin = true;
-
-        } else {
-            isLogin = false;
-
-        }
-
-    %>
-</head>
-
-<body>
-    <jsp:include page="../../header/header.jsp" ></jsp:include>
+    <body>
 
 
         <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -112,126 +100,77 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto" style="padding-left: 600px">
                     <li class="nav-item">
-                        <a href="../../index.jsp" class="nav-link ">Home</a>
+                        <a href="./index.jsp" class="nav-link ">Home</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href=list.jsp class="nav-link ">Products</a>
+                        <a href="./customer/product/list.jsp" class="nav-link ">Products</a>
 
                     </li>
                     <li class="nav-item">
-                        <a href="../../auth/about.jsp" class="nav-link">About us</a>
+                        <a href="./auth/about.jsp" class="nav-link">About us</a>
                     </li>
                     <li class="nav-item">
-                        <a href="../../auth/contact.jsp" class="nav-link">Contact</a>
+                        <a href="./auth/contact.jsp" class="nav-link">Contact</a>
                     </li>
 
                     <c:if test = "${!isLogin}"> 
-                    <li class="nav-item">
+                        <li class="nav-item">
 
-                        <a href="../../auth/signin.jsp" title="Login" class="nav-link" >
-                            Sign In
-                        </a>
-                    </li>
-                </c:if>
-                <c:if test = "${isLogin}"> 
-                    <li class="nav-item">
-                        <a href="../../auth/login.jsp?logout=1" title="Login" class="nav-link">
-                            Logout
-                        </a>
-                    </li>
-                </c:if>
+                            <a href="./auth/signin.jsp" title="Login" class="nav-link" >
+                                Sign In
+                            </a>
+                        </li>
+                    </c:if>
+                    <c:if test = "${isLogin}"> 
+                        <li class="nav-item">
+                            <a href="./auth/login.jsp?logout=1" title="Login" class="nav-link">
+                                Logout
+                            </a>
+                        </li>
+                    </c:if>
+                </ul>
+            </div>
+        </nav>
+        <sql:setDataSource var="conn" scope="session"
+                           url="jdbc:mysql://localhost/prj321"
+                           user="root" password=""
+                           driver="com.mysql.jdbc.Driver"/>
+        <sql:query var="p" dataSource="${conn}">	
+            SELECT * FROM products	
+        </sql:query>	
+
+        <sql:query dataSource="${conn}" var="i"	
+                   sql="select * from image where pID=?">		
+            <sql:param value="${row.pID}"/>	
+        </sql:query>
+
+        <div class="container-fluid padding">
+            <div class="row text-center padding">   
+                <c:forEach var="row" items="${p.rows}">	
+                    <sql:query dataSource="${conn}" var="i"	
+                               sql="select * from image where pID=?">	
+
+                        <sql:param value="${row.pID}"/>	
+                    </sql:query>	
 
 
+                    <div class="col-xs-12 col-sm-6 col-md-3 boder bg-light">
+                        <c:forEach var="img" items="${i.rows}" begin="1" end="1">
+
+                            <img src="../../data/${img.imageName}" height="150px" class="image" alt="Error"/>	
+
+                        </c:forEach>
+                        <div class="overlay">
+                            <c:out value="${row.pName}"/>
+                            <c:out value="${row.sellingPrice}" />
+                        </div>
+                    </div>  
 
 
-
-
-            </ul>
+                    <a href="./../../CartController?id=${row.pID}">Buy</a>
+                </c:forEach>
+            </div>
         </div>
-    </nav>
 
-    <%            if (request.getParameter("id") != null) {
-            int pId = Integer.parseInt(request.getParameter("id"));
-            ProductsDAO pDao = new ProductsDAO();
-            int kq = pDao.delete(pId);
-            if (kq > 0) {
-                out.println("<script> alert('Xoa thanh cong');</script>");
-            } else {
-                out.println("<script>alert('Xoa that bai');</script>");
-            }
-            out.println("<script>location.href='listproducts.jsp';</script>");
-        }
-    %>
-    <table border="1" cellpadding="0" cellspacing="0">
-        <tr>
-
-            <th>Trang thai san pham</th>
-            <th> brand</th>
-            <th>type</th>
-            <th>nha san xuat </th>
-            <th>ten</th>
-            <th>Gia</th>
-            <th>Mo ta</th>
-            <th>Ngay nhap</th>
-            <th>kich thuoc </th>
-            <th>chat lieu</th>
-            <th>Gioi tinh</th>
-            <th></th>
-            <th></th>
-
-
-        </tr>
-        <%
-            ProductsDAO pDao = new ProductsDAO();
-            ResultSet rs = pDao.getAll();
-            ImageDAO iDao = new ImageDAO();
-            while (rs.next()) {
-                out.print("<tr>");
-
-                out.print("<td>" + rs.getInt("status") + "</td>");
-                out.print("<td>" + rs.getInt("brID") + "</td>");
-                out.print("<td>" + rs.getInt("tID") + "</td>");
-                out.print("<td>" + rs.getInt("supID") + "</td>");
-                out.print("<td>" + rs.getString("pName") + "</td>");
-                out.print("<td>" + rs.getInt("price") + "</td>");
-                out.print("<td>" + rs.getString("describle") + "</td>");
-                out.print("<td>" + rs.getDate("pDate") + "</td>");
-                out.print("<td>" + rs.getInt("size") + "</td>");
-                out.print("<td>" + rs.getString("material") + "</td>");
-                out.print("<td>" + rs.getString("gender") + "</td>");
-                ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
-                while (rsImg.next()) {
-                    out.print("<td><a href='productDetail.jsp?pID=" + rs.getInt("pID") + "'>");
-
-                    out.print("<img src='../../data/" + rsImg.getString(3) + "' height='100px' width='100px' />");
-                    out.print("</a></td>");
-                    break;
-                }
-                // out.print("<td><a href='cart.jsp?id=" + rs.getInt("pID") + "'>Them vao gio hang</a></td>");
-                out.print("<td> <a href='./../../CartController?id=" + rs.getInt("pID") + "'>Buy</td>");
-                out.print("</tr>");
-            }
-        %>
-
-    </table>
-    <%
-        try {
-            Cookie[] cookies = request.getCookies();
-            out.print("<h1> a " + cookies.length + "</h1>");
-            if (cookies.length <= 1) {
-                // out.print("Username: ");
-                response.sendRedirect("../../auth/login.jsp");
-            }
-
-            //   String user = request.getCookies()[1].getValue();
-            //  out.print("Username: " + user);
-        } catch (Exception ex) {
-            response.sendRedirect("../../auth/login.jsp");
-        }
-
-    %>
-    <a href="../../auth/login.jsp?logout=1">logout</a>
-
-</body>
-
+    </body>
 </html>
