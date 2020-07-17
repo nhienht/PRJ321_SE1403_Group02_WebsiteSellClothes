@@ -359,14 +359,14 @@
                 <!-- Sidebar -->
                 <ul class="sidebar navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.jsp">
+                        <a class="nav-link" href="">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link" href="account.jsp">
+                        <a class="nav-link" href="../customer/listcustomer.jsp">
                             <i class="fas fa-fw fa-user"></i>
                             <span>Account</span></a>
                     </li>

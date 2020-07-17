@@ -112,30 +112,30 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto" style="padding-left: 600px">
                     <li class="nav-item">
-                        <a href="./index.jsp" class="nav-link ">Home</a>
+                        <a href="../../index.jsp" class="nav-link ">Home</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="./customer/product/list.jsp" class="nav-link ">Products</a>
+                        <a href=list.jsp class="nav-link ">Products</a>
 
                     </li>
                     <li class="nav-item">
-                        <a href="./auth/about.jsp" class="nav-link">About us</a>
+                        <a href="../../auth/about.jsp" class="nav-link">About us</a>
                     </li>
                     <li class="nav-item">
-                        <a href="./auth/contact.jsp" class="nav-link">Contact</a>
+                        <a href="../../auth/contact.jsp" class="nav-link">Contact</a>
                     </li>
 
                     <c:if test = "${!isLogin}"> 
                     <li class="nav-item">
 
-                        <a href="./auth/signin.jsp" title="Login" class="nav-link" >
+                        <a href="../../auth/signin.jsp" title="Login" class="nav-link" >
                             Sign In
                         </a>
                     </li>
                 </c:if>
                 <c:if test = "${isLogin}"> 
                     <li class="nav-item">
-                        <a href="./auth/login.jsp?logout=1" title="Login" class="nav-link">
+                        <a href="../../auth/login.jsp?logout=1" title="Login" class="nav-link">
                             Logout
                         </a>
                     </li>
