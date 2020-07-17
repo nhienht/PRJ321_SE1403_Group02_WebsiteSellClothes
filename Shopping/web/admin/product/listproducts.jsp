@@ -188,7 +188,6 @@
                     out.print("<td>" + rs.getString("material") + "</td>");
                     out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'>Update</a></td>");
                     out.print("<td><a href='?id=" + rs.getInt("pID") + "'>Delete</a></td>");
-
                     out.print("</tr>");
                 }
             %>

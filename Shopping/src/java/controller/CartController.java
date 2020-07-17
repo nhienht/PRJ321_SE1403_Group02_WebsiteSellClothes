@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,15 +35,21 @@ public class CartController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CartController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CartController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+           String id = request.getParameter("id");
+      // kiểm tra id đó có tồn tại hay không
+      if(id != null){
+          // tạo session
+          HttpSession session = request.getSession();
+          // nếu session tại sản phẩm đó tồn tại
+          if(session.getAttribute(id) != null){
+              // thì số lượng trong cart sẽ được công lên 1
+              int quantity = (int) session.getAttribute(id) + 1;
+              session.setAttribute(id, quantity);
+          }else{ // nếu chưa tồn tại thì bắt đầu với số lượng là 1
+              session.setAttribute(id, 1);
+          }
+      }
+      response.sendRedirect("./customer/product/cart.jsp");
         }
     }
 
