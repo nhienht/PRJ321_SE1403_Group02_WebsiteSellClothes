@@ -26,33 +26,34 @@ public class ImageDAO {
         this.conn = db.getDBConnection();
     }
 
-    public void insert(int pID, String path) {
+    public boolean insert(int pID, String path) {
         try {
             String sql = "INSERT INTO `image`(`pID`, `imageName`) VALUES (?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, pID);
             pst.setString(2, path);
-            pst.execute();
+            return pst.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ImageDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+        return false;
 
     }
-    public ResultSet getImage(int pID){
+
+    public ResultSet getImage(int pID) {
         try {
             String sql = "select * from image where pID = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, pID);
             ResultSet rs = pst.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return rs;
             }
         } catch (SQLException ex) {
             Logger.getLogger(ImageDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-        
+
     }
 
 }

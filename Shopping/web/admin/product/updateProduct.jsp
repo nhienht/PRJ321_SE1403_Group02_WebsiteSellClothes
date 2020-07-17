@@ -477,15 +477,16 @@
                                                             <th>Date</th>
                                                             <th>Size </th>
                                                             <th>Material</th>
-                                                            <th>Update</th>
-                                                            <th>Clothing</th>
-                                                            <th>Image</th>
+
+                                                            <th>Quantity</th>
+                                                            <th>Discount</th>
                                                             <th>Gender</th>
                                                             <th>Submit</th>
                                                         </tr>
                                                     </thead>
 
                                                     <tbody>
+                                                    <form action="../../ProductController" method="post">
                                                         <tr>
                                                             <td>  <input value="<%= id%>" type="text" name="pID" class="form-control" autofocus required="Please input ID" ></td>
                                                             <td> <input value="<%= status%>" type="text" name="status" class="form-control" autofocus required="Please input" ></td>
@@ -509,7 +510,7 @@
                                                             <td><input value="<%= pDate%>" type="date"class="form-control" autofocus="" required=" " name="pDate" ></td>
                                                             <td> <input value="<%= size%>"  type="text"class="form-control" autofocus="" required=" " name="size" ></td>
                                                             <td>  <input value="<%= material%>" type="text"class="form-control" autofocus="" required=" " name="material" ></td>
-                                                            <td>input value="<%= quantity%>" type="text"class="form-control" autofocus="" required=" " name="quantity" ></td>
+                                                            <td><input value="<%= quantity%>" type="text"class="form-control" autofocus="" required=" " name="quantity" ></td>
                                                             <td><input value="<%= discount%>" type="text"class="form-control" autofocus="" required=" " name="discount" ></td>
                                                             <td>    <select name="gender" value="<%= gender%>" >
                                                                     <option value="Male">Male</option>
@@ -518,6 +519,8 @@
                                                                 </select></td>
                                                             <td> <input type="submit" value="UPDATE" name="btnUpdate"></td>
                                                         </tr>
+                                                    </form>
+
                                                     </tbody>
                                                 </table>
                                             </div>

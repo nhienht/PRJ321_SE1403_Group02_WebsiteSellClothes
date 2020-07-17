@@ -4,6 +4,7 @@
     Author     : 
 --%>
 
+<%@page import="model.DAO.ImageDAO"%>
 <%@page import="model.DAO.ProductsDAO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="model.DAO.ProductsDAO"%>
@@ -107,7 +108,7 @@
                 padding-left: 550px;
                 padding-top: 30px;
             }
-            
+
 
 
         </style>
@@ -146,213 +147,213 @@
             }
         %>
 
-        <body id="page-top" class="">
+    <body id="page-top" class="">
 
-            <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-                <a class="navbar-brand mr-1 fas" href="#">
-                    <h3>Clothing</h3>
-                </a>
+        <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+            <a class="navbar-brand mr-1 fas" href="#">
+                <h3>Clothing</h3>
+            </a>
 
-                <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-                    <i class="fas fa-bars"></i>
-                </button>
+            <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+                <i class="fas fa-bars"></i>
+            </button>
 
-                <!-- Navbar Search -->
-                <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+            <!-- Navbar Search -->
+            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
 
-                </form>
+            </form>
 
-                <!-- Navbar -->
-                <ul class="navbar-nav ml-auto ml-md-0">
-                    <li class="nav-item dropdown no-arrow mx-1"></li>
-                    <li class="nav-item dropdown no-arrow mx-1"></li>
+            <!-- Navbar -->
+            <ul class="navbar-nav ml-auto ml-md-0">
+                <li class="nav-item dropdown no-arrow mx-1"></li>
+                <li class="nav-item dropdown no-arrow mx-1"></li>
 
-                    <!-- LOGOUT-->
-                    <li class="nav-item dropdown no-arrow  ">
-                        <a class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            <h3><i class="fas fa-user-circle fa-fw"></i></h3>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">Logout</a>
-                        </div>
-                    </li>
-                </ul>
+                <!-- LOGOUT-->
+                <li class="nav-item dropdown no-arrow  ">
+                    <a class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <h3><i class="fas fa-user-circle fa-fw"></i></h3>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </li>
+            </ul>
 
-            </nav>
+        </nav>
 
-            <div id="wrapper">
+        <div id="wrapper">
 
-                <!-- Sidebar -->
-                <ul class="sidebar navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="">
-                            <i class="fas fa-fw fa-tachometer-alt"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
+            <!-- Sidebar -->
+            <ul class="sidebar navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
 
-                    <li class="nav-item ">
-                        <a class="nav-link" href="../customer/listcustomer.jsp">
-                            <i class="fas fa-fw fa-user"></i>
-                            <span>Account</span></a>
-                    </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="../customer/listcustomer.jsp">
+                        <i class="fas fa-fw fa-user"></i>
+                        <span>Account</span></a>
+                </li>
 
-                    <li class="nav-item active">
-                        <a class="nav-link" href="../customer/listcustomer.jsp">
-                            <i class="fas fa-fw fa-book"></i>
-                            <span>List Customer</span></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="../product/listproducts.jsp" id="pagesDropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-fw fa-box-open"></i>
-                            <span>Product</span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                            <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
-                            <a class="dropdown-item" href="../product/updateProduct.jsp">Update Products</a>
-                            <a class="dropdown-item" href="typesProduct.jsp">List Types Product</a>
-                        </div>
-                    </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../customer/listcustomer.jsp">
+                        <i class="fas fa-fw fa-book"></i>
+                        <span>List Customer</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="../product/listproducts.jsp" id="pagesDropdown" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-fw fa-box-open"></i>
+                        <span>Product</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                        <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
+                        <a class="dropdown-item" href="../product/updateProduct.jsp">Update Products</a>
+                        <a class="dropdown-item" href="typesProduct.jsp">List Types Product</a>
+                    </div>
+                </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="suppliers.jsp">
-                            <i class="fas fa-fw fa-book"></i>
-                            <span>Suppliers</span></a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="suppliers.jsp">
+                        <i class="fas fa-fw fa-book"></i>
+                        <span>Suppliers</span></a>
+                </li>
 
-                    <li class="nav-item ">
-                        <a class="nav-link" href="feedback.jsp">
-                            <i class="fas fa-fw fa-book"></i>
-                            <span>Feedbacks</span></a>
-                    </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="feedback.jsp">
+                        <i class="fas fa-fw fa-book"></i>
+                        <span>Feedbacks</span></a>
+                </li>
 
 
-                </ul>
+            </ul>
 
-                <div id="content-wrapper">
+            <div id="content-wrapper">
 
-                    <div class="container-fluid">
+                <div class="container-fluid">
 
-                        <!-- Breadcrumbs-->
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="index.jsp">Dashboard</a>
-                            </li>
-                            <li class="breadcrumb-item active">Orders</li>
+                    <!-- Breadcrumbs-->
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.jsp">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item active">Orders</li>
 
-                        </ol>
+                    </ol>
 
-                        <!-- DataTables Example -->
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <i class="fas fa-user"></i>
-                                List Orders</div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-6">
-                                                <div class="dataTables_length" id="dataTable_length"><label>Show <select
-                                                            name="dataTable_length" aria-controls="dataTable"
-                                                            class="custom-select custom-select-sm form-control form-control-sm">
-                                                            <option value="10">10</option>
-                                                            <option value="25">25</option>
-                                                            <option value="50">50</option>
-                                                            <option value="100">100</option>
-                                                        </select> entries</label></div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-6">
-                                                <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input
-                                                            type="search" class="form-control form-control-sm" placeholder=""
-                                                            aria-controls="dataTable"></label></div>
-                                            </div>
+                    <!-- DataTables Example -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-user"></i>
+                            List Orders</div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="dataTable_length"><label>Show <select
+                                                        name="dataTable_length" aria-controls="dataTable"
+                                                        class="custom-select custom-select-sm form-control form-control-sm">
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                        <option value="100">100</option>
+                                                    </select> entries</label></div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
-                                                       cellspacing="0" role="grid" aria-describedby="dataTable_info"
-                                                       style="width: 100%;">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>ID Products</th>
-                                                            <th>Status Product</th>
-                                                            <th>Brand Products</th>
-                                                            <th>Type Products</th>
-                                                            <th>Supplier </th>
-                                                            <th>Product's name</th>
-                                                            <th>Saleprice</th>
-                                                            <th>Price</th>
-                                                            <th>Describle</th>
-                                                            <th>Date</th>
-                                                            <th>Size </th>
-                                                            <th>Material</th>
-                                                            <th>Update</th>
-                                                            <th>Clothing</th>
-                                                            <th>Image</th>
-                                                            <th>Gender</th>
-                                                        </tr>
-                                                    </thead>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input
+                                                        type="search" class="form-control form-control-sm" placeholder=""
+                                                        aria-controls="dataTable"></label></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                                   cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                                   style="width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID Products</th>
+                                                        <th>Status Product</th>
+                                                        <th>Brand Products</th>
+                                                        <th>Type Products</th>
+                                                        <th>Supplier </th>
+                                                        <th>Product's name</th>
+                                                        <th>Saleprice</th>
+                                                        <th>Price</th>
+                                                        <th>Describle</th>
+                                                        <th>Date</th>
+                                                        <th>Size </th>
+                                                        <th>Material</th>
+                                                        <th>Update</th>
+                                                        <th>Clothing</th>
+                                                        <th>Image</th>
+                                                        <th>Gender</th>
+                                                    </tr>
+                                                </thead>
 
-                                                    <tbody>
+                                                <tbody>
 
-                                                        <%
-                                                            ProductsDAO pDao = new ProductsDAO();
-                                                            ResultSet rs = pDao.getAll();
+                                                    <%
+                                                        ProductsDAO pDao = new ProductsDAO();
+                                                        ResultSet rs = pDao.getAll();
+                                                        while (rs.next()) {
+                                                           
+
+                                                            out.print("<tr>");
+                                                            out.print("<td>" + rs.getInt("pID") + "</td>");
+                                                            out.print("<td>" + rs.getInt("status") + "</td>");
+                                                            out.print("<td>" + rs.getInt("brID") + "</td>");
+                                                            out.print("<td>" + rs.getInt("tID") + "</td>");
+                                                            out.print("<td>" + rs.getInt("supID") + "</td>");
+                                                            out.print("<td>" + rs.getString("pName") + "</td>");
+                                                            out.print("<td>" + rs.getInt("sellingPrice") + "</td>");
+                                                            out.print("<td>" + rs.getInt("price") + "</td>");
+                                                            out.print("<td>" + rs.getString("describle") + "</td>");
+                                                            out.print("<td>" + rs.getDate("pDate") + "</td>");
+                                                            out.print("<td>" + rs.getInt("size") + "</td>");
+                                                            out.print("<td>" + rs.getString("material") + "</td>");
+                                                            out.print("<td>" + rs.getString("gender") + "</td>");
                                                             ImageDAO iDao = new ImageDAO();
-                                                            while (rs.next()) {
-
-                                                                out.print("<tr>");
-                                                                out.print("<td>" + rs.getInt("pID") + "</td>");
-                                                                out.print("<td>" + rs.getInt("status") + "</td>");
-                                                                out.print("<td>" + rs.getInt("brID") + "</td>");
-                                                                out.print("<td>" + rs.getInt("tID") + "</td>");
-                                                                out.print("<td>" + rs.getInt("supID") + "</td>");
-                                                                out.print("<td>" + rs.getString("pName") + "</td>");
-                                                                out.print("<td>" + rs.getInt("sellingPrice") + "</td>");
-                                                                out.print("<td>" + rs.getInt("price") + "</td>");
-                                                                out.print("<td>" + rs.getString("describle") + "</td>");
-                                                                out.print("<td>" + rs.getDate("pDate") + "</td>");
-                                                                out.print("<td>" + rs.getInt("size") + "</td>");
-                                                                out.print("<td>" + rs.getString("material") + "</td>");
-                                                                out.print("<td>" + rs.getString("gender") + "</td>");
-                                                                ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
-                                                                while (rsImg.next()) {
-                                                                    out.print("<td><img src='../../data/" + rsImg.getString(3) + "' height='100px' width='100px' /></td>");
-                                                                    break;
-                                                                }
-
-                                                                out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'>Update</a></td>");
-                                                                out.print("<td><a href='?id=" + rs.getInt("pID") + "'>Delete</a></td>");
-
-                                                                out.print("</tr>");
+                                                            ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
+                                                            while (rsImg.next()) {
+                                                                out.print("<td><img src='../../data/" + rsImg.getString(3) + "' height='100px' width='100px' /></td>");
+                                                                break;
                                                             }
-                                                        %>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+
+                                                            out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'>Update</a></td>");
+                                                            out.print("<td><a href='?id=" + rs.getInt("pID") + "'>Delete</a></td>");
+
+                                                            out.print("</tr>");
+                                                        }
+                                                    %>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-5">
-                                                <div class="dataTables_info" id="dataTable_info" role="status"
-                                                     aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-7">
-                                                <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                    <ul class="pagination">
-                                                        <li class="paginate_button page-item previous disabled"
-                                                            id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                                   data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                        </li>
-                                                        <li class="paginate_button page-item active"><a href="#"
-                                                                                                        aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                        class="page-link">1</a></li>
-                                                        <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                            <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                               class="page-link">Next</a></li>
-                                                    </ul>
-                                                </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info" id="dataTable_info" role="status"
+                                                 aria-live="polite">Showing 1 to 1 of 1 entries</div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button page-item previous disabled"
+                                                        id="dataTable_previous"><a href="#" aria-controls="dataTable"
+                                                                               data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                                    </li>
+                                                    <li class="paginate_button page-item active"><a href="#"
+                                                                                                    aria-controls="dataTable" data-dt-idx="1" tabindex="0"
+                                                                                                    class="page-link">1</a></li>
+                                                    <li class="paginate_button page-item next disabled" id="dataTable_next">
+                                                        <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
+                                                           class="page-link">Next</a></li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -361,26 +362,27 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-            <!-- /#wrapper -->
 
-            <!-- Scroll to Top Button-->
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fas fa-angle-up"></i>
-            </a>
+        </div>
+        <!-- /#wrapper -->
 
-
-
-
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
 
 
 
 
 
-        </body>
 
 
-    </html>
+
+
+    </body>
+
+
+</html>
 

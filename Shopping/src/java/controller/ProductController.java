@@ -115,21 +115,29 @@ public class ProductController extends HttpServlet {
             try {
                 List<Part> fileParts = (List<Part>) request.getParts();
                 String pathOld = request.getServletContext().getRealPath("") + File.separator + DIR;
+                //   String path = request.getServletContext().getRealPath("") + File.separator + DIR;
+               // out.print("1");
                 for (Part filePart : fileParts) {
+                   // out.print("2");
                     if (filePart.getSubmittedFileName() != null) {
-                        String fileName = filePart.getSubmittedFileName(); // Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-                        imgDao.insert(pID, fileName);
-                        filePart.write(pathOld + File.separator + fileName);
+                     //   out.print("3");
+                        String fileName = filePart.getSubmittedFileName(); // 
+                        // String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+                        boolean check = imgDao.insert(pID, fileName);
+                        if (!check) {
+                            filePart.write(pathOld + File.separator + fileName);
+                        }
 
                     }
                 }
             } catch (Exception ex) {
+                System.out.println(ex);
                 out.print("hi");
 
             }
         }
 
-        //  response.sendRedirect("./admin/product/listproducts.jsp");
+          response.sendRedirect("./admin/product/listproducts.jsp");
     }
 
     /**

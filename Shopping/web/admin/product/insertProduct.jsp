@@ -460,7 +460,7 @@
                                                     </thead>
 
                                                     <tbody>
-                                                    <form action="./../../ProductController" method="POST"> 
+                                                    <form action="./../../ProductController" method="POST" enctype='multipart/form-data' > 
                                                         <tr>
 
                                                             <td> <input type="text" name="status" class="form-control" autofocus
