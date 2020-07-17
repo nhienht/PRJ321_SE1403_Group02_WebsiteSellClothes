@@ -91,7 +91,7 @@
 
         <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
-            <a class="navbar-branch" href="index.jsp">
+            <a class="navbar-branch" href="../../home.jsp">
                 <img src="./images/logo.jpg" height="80px" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
@@ -100,17 +100,17 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto" style="padding-left: 600px">
                     <li class="nav-item">
-                        <a href="./index.jsp" class="nav-link ">Home</a>
+                        <a href="./../../index.jsp" class="nav-link ">Home</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="./customer/product/list.jsp" class="nav-link ">Products</a>
+                        <a href="list.jsp" class="nav-link ">Products</a>
 
                     </li>
                     <li class="nav-item">
-                        <a href="./auth/about.jsp" class="nav-link">About us</a>
+                        <a href="../../auth/about.jsp" class="nav-link">About us</a>
                     </li>
                     <li class="nav-item">
-                        <a href="./auth/contact.jsp" class="nav-link">Contact</a>
+                        <a href="../../auth/contact.jsp" class="nav-link">Contact</a>
                     </li>
 
                     <c:if test = "${!isLogin}"> 
@@ -156,13 +156,16 @@
 
                     <div class="col-xs-12 col-sm-6 col-md-3 boder bg-light">
                         <c:forEach var="img" items="${i.rows}" begin="1" end="1">
-
+                            <a href="productDetail.jsp">
                             <img src="../../data/${img.imageName}" height="150px" class="image" alt="Error"/>	
-
+     
+                            </a>
+                           
                         </c:forEach>
                         <div class="overlay">
                             <c:out value="${row.pName}"/>
                             <c:out value="${row.sellingPrice}" />
+                           
                         </div>
                     </div>  
 

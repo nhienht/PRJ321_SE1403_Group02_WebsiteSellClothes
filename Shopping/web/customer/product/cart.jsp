@@ -114,6 +114,10 @@
 
                                     while (pName.hasMoreElements()) {
                                         String id = pName.nextElement();
+                                        if(id.equals("conn")){
+                                            continue;
+                                        }
+                                        System.out.println(id);
                                         Products p = pDao.getProduct(Integer.parseInt(id));
                                         total += p.getPrice() * Integer.parseInt(session.getAttribute(id).toString());
 

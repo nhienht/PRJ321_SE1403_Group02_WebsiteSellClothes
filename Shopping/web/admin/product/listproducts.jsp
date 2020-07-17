@@ -362,10 +362,6 @@
             </nav>
 
         <div id="wrapper">
-
-
-
-                <!-- Sidebar -->
                 <ul class="sidebar navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="../product/listproducts.jsp">
@@ -375,17 +371,17 @@
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link" href="account.jsp">
+                        <a class="nav-link" href="../bill/listbill.jsp">
                             <i class="fas fa-fw fa-user"></i>
-                            <span>Account</span></a>
+                            <span>Bill</span></a>
                     </li>
 
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="../customer/listcustomer.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Customer</span></a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="../product/listproducts.jsp" id="pagesDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-fw fa-box-open"></i>
@@ -393,7 +389,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                             <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
-                            <a class="dropdown-item" href="../product/updateProduct.jsp">Update Products</a>
+                            <a class="dropdown-item" href="../product/insertProduct.jsp">Insert Products</a>
                         
                         </div>
                     </li>
