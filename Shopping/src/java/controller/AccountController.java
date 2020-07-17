@@ -94,19 +94,18 @@ public class AccountController extends HttpServlet {
             c.setEmail(request.getParameter("email"));
             c.setStatus(1);
             c.setGender(request.getParameter("gender"));
-            cDao.insert(c);   
-            HttpSession session= request.getSession();
+            cDao.insert(c);
+            HttpSession session = request.getSession();
             session.setAttribute("checkLogin", true);
             response.sendRedirect("./index.jsp");
 
-           
         } else if (request.getParameter("btnLogin") != null) {
             // CustomerDAO cDao = new CustomerDAO();
             String user = request.getParameter("user");
             String pass = request.getParameter("pass");
             int id = cDao.login(user, pass);
             if (id != -1) {
-                Cookie userCookie = new Cookie("user", user);
+               Cookie userCookie = new Cookie("user", user);
                 Cookie passCookie = new Cookie("pass", pass);
                 Cookie idCookie = new Cookie("idCustomer", String.valueOf(id));
 
@@ -117,8 +116,8 @@ public class AccountController extends HttpServlet {
                 response.addCookie(userCookie);
                 response.addCookie(passCookie);
                 response.addCookie(idCookie);
-                HttpSession session= request.getSession();
- session.setAttribute("checkLogin", true);
+//                HttpSession session= request.getSession();
+// session.setAttribute("checkLogin", true);
                 response.sendRedirect("home.jsp");
             } else {
 //                out.println("<script type=\"text/javascript\">");

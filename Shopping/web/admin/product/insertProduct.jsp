@@ -114,8 +114,8 @@
                 </ul>
             </div>
         </nav>
-        <div class="container">
-            <form action="./../../ProductController" method="POST">
+        <div class="container" >
+            <form action="./../../ProductController" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="StatusID" class="col-sm-3 control-label">Status product </label>
                     <input type="text" name="status" class="form-control" autofocus required="Please input" >
@@ -200,7 +200,7 @@
                 
                  <div class="form-group">
                     <label for="Material" class="col-sm-3 control-label">Image</label>
-                    <input  type="file"class="form-control" autofocus="" required=" " name="img" multiple >
+                    <input  type="file"class="form-control" autofocus="" required=" " name="pImage" multiple >
                 </div>
                 
                 <input type="submit" value="INSERT">

@@ -5,14 +5,20 @@
  */
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.nio.file.Paths;
 import java.sql.Date;
+import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import model.DAO.ImageDAO;
 import model.DAO.ProductsDAO;
 import model.entity.Products;
@@ -22,6 +28,7 @@ import model.entity.Products;
  * @author NhienHT
  */
 @WebServlet(name = "ProductController", urlPatterns = {"/ProductController"})
+@MultipartConfig
 public class ProductController extends HttpServlet {
 
     /**
@@ -94,7 +101,7 @@ public class ProductController extends HttpServlet {
         p.setQuantity(Integer.parseInt(request.getParameter("quantity")));
         p.setDiscount(Float.parseFloat(request.getParameter("discount")));
         p.setGender(request.getParameter("gender"));
-        String[] path = request.getParameterValues("img");
+        String DIR = "data";
         ProductsDAO pDao = new ProductsDAO();
         if (request.getParameter("btnUpdate") != null) {
             int pID = Integer.parseInt(request.getParameter("pID"));
@@ -105,13 +112,24 @@ public class ProductController extends HttpServlet {
             pDao.insert(p);
             int pID = pDao.getMax();
             ImageDAO imgDao = new ImageDAO();
-            for(int i = 0 ; i < path.length ; i++){
-                imgDao.insert(pID, path[i]);
+            try {
+                List<Part> fileParts = (List<Part>) request.getParts();
+                String pathOld = request.getServletContext().getRealPath("") + File.separator + DIR;
+                for (Part filePart : fileParts) {
+                    if (filePart.getSubmittedFileName() != null) {
+                        String fileName = filePart.getSubmittedFileName(); // Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+                        imgDao.insert(pID, fileName);
+                        filePart.write(pathOld + File.separator + fileName);
+
+                    }
+                }
+            } catch (Exception ex) {
+                out.print("hi");
+
             }
         }
-        
-        response.sendRedirect("./admin/product/listproducts.jsp");
 
+        //  response.sendRedirect("./admin/product/listproducts.jsp");
     }
 
     /**
