@@ -14,7 +14,7 @@ import java.util.Date;
 public class Products {
 
     private int pID;
-    private int spID;
+    private int status;
     private int brID;
     private int tID;
     private int supID;
@@ -27,13 +27,14 @@ public class Products {
     private String material;
     private int quantity;
     private float discount;
+    private String gender;
 
     public Products() {
     }
 
-    public Products(int pID, int spID, int brID, int tID, int supID, String pName, double sellingPrice, double price, String describle, Date pDate, int size, String material, int quantity, float discount) {
+    public Products(int pID, int status, int brID, int tID, int supID, String pName, double sellingPrice, double price, String describle, Date pDate, int size, String material, int quantity, float discount, String gender) {
         this.pID = pID;
-        this.spID = spID;
+        this.status = status;
         this.brID = brID;
         this.tID = tID;
         this.supID = supID;
@@ -46,6 +47,7 @@ public class Products {
         this.material = material;
         this.quantity = quantity;
         this.discount = discount;
+        this.gender = gender;
     }
 
     
@@ -58,11 +60,11 @@ public class Products {
     }
 
     public int getSpID() {
-        return spID;
+        return status;
     }
 
-    public void setSpID(int spID) {
-        this.spID = spID;
+    public void setSpID(int status) {
+        this.status = status;
     }
 
     public int getBrID() {
@@ -160,6 +162,15 @@ public class Products {
     public void setDiscount(float discount) {
         this.discount = discount;
     }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+    
     
 
 }

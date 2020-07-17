@@ -318,21 +318,29 @@
     </head>
     <body>
         <c:if test="${! empty param.logout}">
- <%
-            if (request.getParameter("logout") != null) {
-                Cookie[] cookies = request.getCookies();
-                for (Cookie cookie : cookies) {
-                    String cookieName = cookie.getName();
-                    if (cookieName.equals("user") || cookieName.equals("pass") || cookieName.equals("idCustomer")) {
-                        //   cookie.setValue("");
-                        cookie.setMaxAge(0);
-                        response.addCookie(cookie);
+            <%
+                if (Integer.parseInt(request.getParameter("logout")) == 1) {
+                    Cookie[] cookies = request.getCookies();
+                    //         for (Cookie cookie : cookies) {
+                    //           String cookieName = cookie.getName();
+                    //         if (cookieName.equals("user") || cookieName.equals("pass") || cookieName.equals("idCustomer")) {
+                    //           //   cookie.setValue("");
+                    //         cookie.setMaxAge(0);
+                    //       response.addCookie(cookie);
+                    // }
+                    //}
+                    for (int i = 0; i < cookies.length; i++) {
+                        String cookieName = cookies[i].getName();
+                        if (cookieName.equals("user") || cookieName.equals("pass") || cookieName.equals("idCustomer")) {
+                            cookies[i].setMaxAge(0);
+                            response.addCookie(cookies[i]);
+
+                        }
                     }
                 }
-            }
-        %>
+            %>
         </c:if>
-       
+
         <!--  <form action="">         
             User <input type="text" name="user" required=""> </br>
             Password <input type="password" name="pass" required=""> </br> 

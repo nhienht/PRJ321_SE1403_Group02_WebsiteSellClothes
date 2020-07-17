@@ -7,21 +7,20 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
+import static java.lang.System.out;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.DAO.CustomerDAO;
-import model.entity.Customer;
+import model.DAO.ImageDAO;
 
 /**
  *
- * @author Dat
+ * @author NhienHT
  */
-@WebServlet(name = "CustomerController", urlPatterns = {"/CustomerController"})
-public class CustomerController extends HttpServlet {
+@WebServlet(name = "ImageController", urlPatterns = {"/ImageController"})
+public class ImageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,15 +36,15 @@ public class CustomerController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CustomerController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CustomerController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            ImageDAO iDao = new ImageDAO();
+            String[] path = request.getParameterValues("img");
+            out.println(path.length);
+            for (int i = 0 ; i <= path.length ; i++){
+                out.println(path[i]);
+                iDao.insert(1, path[i]);
+                
+            }
+            response.sendRedirect("./admin/bill/img.jsp");
         }
     }
 
@@ -75,23 +74,8 @@ public class CustomerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //   processRequest(request, response);
-        Customer c = new Customer();
-        c.setcID(Integer.parseInt(request.getParameter("cID")));
-        c.setcPassword(request.getParameter("cPassword"));
-        c.setcUsername(request.getParameter("cUsername"));
-        c.setcName(request.getParameter("cName"));
-        c.setPhonenumber(request.getParameter("phonenumber"));
-        c.setAddress(request.getParameter("address"));
-        Date bDate = Date.valueOf(request.getParameter("birthday"));
-        c.setBirthday(bDate);
-        c.setEmail(request.getParameter("email"));
-        c.setStatus(Integer.parseInt(request.getParameter("status")));
-        c.setGender(request.getParameter("gender"));
-        CustomerDAO cDao = new CustomerDAO();
-        cDao.update(c);
-        response.sendRedirect("./admin/customer/listcustomer.jsp");
-
+       // processRequest(request, response);
+     
     }
 
     /**
@@ -100,7 +84,7 @@ public class CustomerController extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-        public String getServletInfo() {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

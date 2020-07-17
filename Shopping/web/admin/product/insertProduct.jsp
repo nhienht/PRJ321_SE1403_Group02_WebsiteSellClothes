@@ -1,189 +1,556 @@
-<%-- 
-    Document   : insertProduct.jsp
-    Created on : Jul 5, 2020, 10:18:24 AM
-    Author     : NhienHT
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.DAO.ImageDAO"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="model.DAO.ProductsDAO"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
     <head>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!------ Include the above in your HEAD tag ---------->
+        <meta charset="UTF-8">
+        <!-- CSS only -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+              integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
-        <title>Insert Products</title>
+        <!-- JS, Popper.js, and jQuery -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+                integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
         <style>
+            html {
+                position: relative;
+                min-height: 100%;
+            }
 
-            html ,body {
-                width: 100%;
+            body {
                 height: 100%;
-                font-family: 'Balsamiq Sans';   
-                font-size: 17px;
-                color: #222;
-                background: url(../../images/vin.jpg) fixed;
-            }
-            .navbar{
-                background-color: #F5A9BC !important;
-            }
-            .navbar li a {
-                color: #f8f2f2!important ;
-
-            }
-            .navbar li a:hover {
-                color: #000000 !important ;
-
-            }
-            .container-fluid
-            {
-                padding-top: 8em;
+                background-color: #D8D8D8;
             }
 
+            #wrapper {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+            }
 
-            .overlay {
-                position: absolute; 
-                bottom: 0; 
-                background: rgb(0, 0, 0);
-                background: rgba(0, 0, 0, 0.5); /* Black see-through */
-                color: #f1f1f1; 
+            #wrapper #content-wrapper {
+                overflow-x: hidden;
                 width: 100%;
-                transition: .5s ease;
-                opacity:0;
-                color: white;
-                font-size: 20px;
-                padding: 20px;
+                padding-top: 1rem;
+                padding-bottom: 80px;
+            }
+
+            body.fixed-nav #content-wrapper {
+                margin-top: 56px;
+                padding-left: 90px;
+            }
+
+            body.fixed-nav.sidebar-toggled #content-wrapper {
+                padding-left: 0;
+            }
+
+            @media (min-width: 768px) {
+                body.fixed-nav #content-wrapper {
+                    padding-left: 225px;
+                }
+
+                body.fixed-nav.sidebar-toggled #content-wrapper {
+                    padding-left: 90px;
+                }
+            }
+
+            .scroll-to-top {
+                position: fixed;
+                right: 15px;
+                bottom: 15px;
+                display: none;
+                width: 50px;
+                height: 50px;
                 text-align: center;
+                color: #fff;
+                background: #F5A9BC;
+                line-height: 46px;
             }
-            .container-fluid:hover .overlay {
-                opacity: 1;
-            }
-            .nav-item{
-                padding-right: 20px;
-                font-size: 25px;
-            }
-            .fotter{
-                background-color: black;
+
+            .scroll-to-top:focus,
+            .scroll-to-top:hover {
                 color: white;
             }
-            .container{
-                font-family: 'Pangolin', cursive;
-                width: 50%;
-                text-align: center;
-                background-color: #f8f2f2;
-                border-style: solid;
-                opacity: 0.9;
+
+            .scroll-to-top:hover {
+                background: #F5A9BC;
             }
 
+            .scroll-to-top i {
+                font-weight: 800;
+            }
+
+            .smaller {
+                font-size: 0.7rem;
+            }
+
+            .o-hidden {
+                overflow: hidden !important;
+            }
+
+            .z-0 {
+                z-index: 0;
+            }
+
+            .z-1 {
+                z-index: 1;
+            }
+
+            .navbar-nav .form-inline .input-group {
+                width: 100%;
+            }
+
+            .navbar-nav .nav-item.active .nav-link {
+                color: #fff;
+            }
+
+            .navbar-nav .nav-item.dropdown .dropdown-toggle::after {
+                width: 1rem;
+                text-align: center;
+                float: right;
+                vertical-align: 0;
+                border: 0;
+                font-weight: 900;
+                content: '\f105';
+                font-family: 'Font Awesome 5 Free';
+            }
+
+            .navbar-nav .nav-item.dropdown.show .dropdown-toggle::after {
+                content: '\f107';
+            }
+
+            .navbar-nav .nav-item.dropdown.no-arrow .dropdown-toggle::after {
+                display: none;
+            }
+
+            .navbar-nav .nav-item .nav-link:focus {
+                outline: none;
+            }
+
+            .navbar-nav .nav-item .nav-link .badge {
+                position: absolute;
+                margin-left: 0.75rem;
+                top: 0.3rem;
+                font-weight: 400;
+                font-size: 0.5rem;
+            }
+
+            @media (min-width: 768px) {
+                .navbar-nav .form-inline .input-group {
+                    width: auto;
+                }
+            }
+
+            .sidebar {
+                width: 90px !important;
+                background-color: #F5A9BC;
+                min-height: calc(100vh - 56px);
+            }
+
+            .sidebar .nav-item:last-child {
+                margin-bottom: 1rem;
+            }
+
+            .sidebar .nav-item .nav-link {
+                text-align: center;
+                padding: 0.75rem 1rem;
+                width: 90px;
+            }
+
+            .sidebar .nav-item .nav-link span {
+                font-size: 0.65rem;
+                display: block;
+            }
+
+            .sidebar .nav-item .dropdown-menu {
+                position: absolute !important;
+                -webkit-transform: none !important;
+                transform: none !important;
+                left: calc(90px + 0.5rem) !important;
+                margin: 0;
+            }
+
+            .sidebar .nav-item .dropdown-menu.dropup {
+                bottom: 0;
+                top: auto !important;
+            }
+
+            .sidebar .nav-item.dropdown .dropdown-toggle::after {
+                display: none;
+            }
+
+            .sidebar .nav-item .nav-link {
+                color: #212529;
+            }
+
+            .sidebar .nav-item .nav-link:active,
+            .sidebar .nav-item .nav-link:focus,
+            .sidebar .nav-item .nav-link:hover {
+                color: #cccccc;
+            }
+
+            .sidebar.toggled {
+                width: 0 !important;
+                overflow: hidden;
+            }
+
+            @media (min-width: 768px) {
+                .sidebar {
+                    width: 225px !important;
+                }
+
+                .sidebar .nav-item .nav-link {
+                    display: block;
+                    width: 100%;
+                    text-align: left;
+                    padding: 1rem;
+                    width: 225px;
+                }
+
+                .sidebar .nav-item .nav-link span {
+                    font-size: 1rem;
+                    display: inline;
+                }
+
+                .sidebar .nav-item .dropdown-menu {
+                    position: static !important;
+                    margin: 0 1rem;
+                    top: 0;
+                }
+
+                .sidebar .nav-item.dropdown .dropdown-toggle::after {
+                    display: block;
+                }
+
+                .sidebar.toggled {
+                    overflow: visible;
+                    width: 90px !important;
+                }
+
+                .sidebar.toggled .nav-item:last-child {
+                    margin-bottom: 1rem;
+                }
+
+                .sidebar.toggled .nav-item .nav-link {
+                    text-align: center;
+                    padding: 0.75rem 1rem;
+                    width: 90px;
+                }
+
+                .sidebar.toggled .nav-item .nav-link span {
+                    font-size: 0.65rem;
+                    display: block;
+                }
+
+                .sidebar.toggled .nav-item .dropdown-menu {
+                    position: absolute !important;
+                    -webkit-transform: none !important;
+                    transform: none !important;
+                    left: calc(90px + 0.5rem) !important;
+                    margin: 0;
+                }
+
+                .sidebar.toggled .nav-item .dropdown-menu.dropup {
+                    bottom: 0;
+                    top: auto !important;
+                }
+
+                .sidebar.toggled .nav-item.dropdown .dropdown-toggle::after {
+                    display: none;
+                }
+            }
+
+            .sidebar.fixed-top {
+                top: 56px;
+                height: calc(100vh - 56px);
+                overflow-y: auto;
+            }
+
+            .card-body-icon {
+                position: absolute;
+                z-index: 0;
+                top: -1.25rem;
+                right: -1rem;
+                opacity: 0.4;
+                font-size: 5rem;
+                -webkit-transform: rotate(15deg);
+                transform: rotate(15deg);
+            }
+
+            @media (min-width: 576px) {
+                .card-columns {
+                    -webkit-column-count: 1;
+                    column-count: 1;
+                }
+            }
+
+            @media (min-width: 768px) {
+                .card-columns {
+                    -webkit-column-count: 2;
+                    column-count: 2;
+                }
+
+                .bg-dark {
+                    background-color: #343a40 !important;
+                }
+            </style>
+        </head>
 
 
 
-        </style>
-    </head>
-    <body>
-        <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top" style="">
+        <body id="page-top" class="">
 
-            <a class="navbar-branch" href="index.jsp">
-                <img src="./images/logo.jpg" height="80px" alt="">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto" style="padding-left: 900px">
-                    <li class="nav-item">
-                        <a href="./../../home.jsp" class="nav-link ">Home</a>
+            <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+                <a class="navbar-brand mr-1 fas" href="#">
+                    <h3>Clothing</h3>
+                </a>
+
+                <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Navbar Search -->
+                <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+
+                </form>
+
+                <!-- Navbar -->
+                <ul class="navbar-nav ml-auto ml-md-0">
+                    <li class="nav-item dropdown no-arrow mx-1"></li>
+                    <li class="nav-item dropdown no-arrow mx-1"></li>
+
+                    <!-- LOGOUT-->
+                    <li class="nav-item dropdown no-arrow  ">
+                        <a class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <h3><i class="fas fa-user-circle fa-fw"></i></h3>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </div>
                     </li>
+                </ul>
+
+            </nav>
+
+            <div id="wrapper">
+
+                <!-- Sidebar -->
+                <ul class="sidebar navbar-nav">
                     <li class="nav-item">
-                        <a href="./insertProduct.jsp" class="nav-link">Insert</a>
+                        <a class="nav-link" href="index.jsp">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
                     </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link" href="account.jsp">
+                            <i class="fas fa-fw fa-user"></i>
+                            <span>Account</span></a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../customer/listcustomer.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>List Customer</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="../product/listproducts.jsp" id="pagesDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-fw fa-box-open"></i>
+                            <span>Product</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                            <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
+                            <a class="dropdown-item" href="../product/updateProduct.jsp">Update Products</a>
+                            <a class="dropdown-item" href="typesProduct.jsp">List Types Product</a>
+                        </div>
+                    </li>
+
                     <li class="nav-item">
-                        <a href="./listproducts.jsp" class="nav-link">Products</a>
+                        <a class="nav-link" href="suppliers.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Suppliers</span></a>
                     </li>
 
-
-
-
+                    <li class="nav-item ">
+                        <a class="nav-link" href="feedback.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Feedbacks</span></a>
+                    </li>
 
 
                 </ul>
+
+                <div id="content-wrapper">
+
+                    <div class="container-fluid">
+
+                        <!-- Breadcrumbs-->
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="index.jsp">Dashboard</a>
+                            </li>
+                            <li class="breadcrumb-item active">Orders</li>
+
+                        </ol>
+
+                        <!-- DataTables Example -->
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <i class="fas fa-user"></i>
+                                List Orders</div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6">
+                                                <div class="dataTables_length" id="dataTable_length"><label>Show <select
+                                                            name="dataTable_length" aria-controls="dataTable"
+                                                            class="custom-select custom-select-sm form-control form-control-sm">
+                                                            <option value="10">10</option>
+                                                            <option value="25">25</option>
+                                                            <option value="50">50</option>
+                                                            <option value="100">100</option>
+                                                        </select> entries</label></div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input
+                                                            type="search" class="form-control form-control-sm" placeholder=""
+                                                            aria-controls="dataTable"></label></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                                       cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                                       style="width: 100%;">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th>Status Product</th>
+                                                            <th>Brand product ID</th>
+                                                            <th>Type Products</th>
+                                                            <th>Supplier ID </th>
+                                                            <th>Product's name</th>
+                                                            <th>Saleprice</th>
+                                                            <th>Price</th>
+                                                            <th>Describle</th>
+                                                            <th>Date</th>
+                                                            <th>Size </th>
+                                                            <th>Material</th>
+                                                            <th>Quantity</th>
+                                                            <th>Discount</th>
+                                                            <th>Gender</th>
+                                                            <th>Image</th>
+                                                            <th>Submit</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                    <form action="./../../ProductController" method="POST"> 
+                                                        <tr>
+
+                                                            <td> <input type="text" name="status" class="form-control" autofocus
+                                                                        required="Please input"></td>
+                                                            <td> <input class="form-control" autofocus="" required=" "
+                                                                        name="brID"></td>
+                                                            <td> <select name="tID" class="form-control" autofocus="">
+                                                                    <option value=1>T-shirt</option>
+                                                                    <option value=2>Short</option>
+                                                                    <option value=3>Skirt</option>
+                                                                    <option value=4>Dress</option>
+                                                                    <option value=5>Pants</option>
+                                                                    <option value=6>Jacket</option>
+                                                                    <option value=7>Jeans</option>
+                                                                    <option value=8>Shirt</option>
+                                                                    <option value=9>Sweater</option>
+                                                                </select>
+                                                            </td>
+                                                            <td><input class="form-control" autofocus="" required=" "
+                                                                       name="supID"></td>
+                                                            <td><input class="form-control" autofocus="" required=" "
+                                                                       name="pName"></td>
+                                                            <td> <input class="form-control" autofocus="" required=" "
+                                                                        name="sellingPrice"></td>
+                                                            <td> <input class="form-control" autofocus="" required=" "
+                                                                        name="price"></td>
+                                                            <td> <input class="form-control" autofocus="" required=" "
+                                                                        name="describle"></td>
+                                                            <td> <input type="date" class="form-control" autofocus=""
+                                                                        required=" " name="pDate"></td>
+                                                            <td> <input type="text" class="form-control" autofocus=""
+                                                                        required=" " name="size"></td>
+                                                            <td> <input type="text" class="form-control" autofocus=""
+                                                                        required=" " name="material"></td>
+                                                            <td> <input type="text" class="form-control" autofocus=""
+                                                                        required=" " name="quantity"></td>
+                                                            <td><input type="text" class="form-control" autofocus=""
+                                                                       required=" " name="discount"></td>
+                                                            <td> <select name="gender">
+                                                                    <option value="Male">Male</option>
+                                                                    <option value="Female">Female</option>
+                                                                    <option value="Unisex">Unisex</option>
+                                                                </select> </td>
+                                                            <td>
+                                                                <input type="file" class="form-control" autofocus=""
+                                                                       required=" " name="img" multiple>
+                                                            </td>
+                                                            <td> <input type="submit" value="INSERT"></td>
+                                                        </tr>
+                                                    </form>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-5">
+                                                <div class="dataTables_info" id="dataTable_info" role="status"
+                                                     aria-live="polite">Showing 1 to 1 of 1 entries</div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-7">
+                                                <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                                    <ul class="pagination">
+                                                        <li class="paginate_button page-item previous disabled"
+                                                            id="dataTable_previous"><a href="#" aria-controls="dataTable"
+                                                                                   data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                                        </li>
+                                                        <li class="paginate_button page-item active"><a href="#"
+                                                                                                        aria-controls="dataTable" data-dt-idx="1" tabindex="0"
+                                                                                                        class="page-link">1</a></li>
+                                                        <li class="paginate_button page-item next disabled" id="dataTable_next">
+                                                            <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
+                                                               class="page-link">Next</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        </nav>
-        <div class="container">
-            <form action="./../../ProductController" method="POST">
-                <div class="form-group">
-                    <label for="StatusID" class="col-sm-3 control-label">Status product ID</label>
-                    <input type="text" name="spID" class="form-control" autofocus required="Please input" >
+            <!-- /#wrapper -->
 
-                </div>
-
-                <div class="form-group">
-                    <label for="BrandID" class="col-sm-3 control-label">Brand product ID</label>
-                    <input class="form-control" autofocus="" required=" " name="brID" >
-                </div>
-
-                <div class="form-group">
-                    <label for="TypeP" class="col-sm-3 control-label">Type product ID</label>
-                    <input class="form-control" autofocus="" required=" " name="tID" >
-                </div>
-
-                <div class="form-group">
-                    <label for="SupP" class="col-sm-3 control-label">Supplier product ID</label>
-                    <input class="form-control" autofocus="" required=" " name="supID" >
-                </div>
-
-                <div class="form-group">
-                    <label for="NameP" class="col-sm-3 control-label">Name product </label>
-                    <input class="form-control" autofocus="" required=" " name="pName" >
-                </div>
-
-                <div class="form-group">
-                    <label for="priceS" class="col-sm-3 control-label">Price's Sale</label>
-                    <input class="form-control" autofocus="" required=" " name="sellingPrice" >
-                </div>
-
-                <div class="form-group">
-                    <label for="Price" class="col-sm-3 control-label">Price</label>
-                    <input class="form-control" autofocus="" required=" " name="price" >
-                </div>
-
-                <div class="form-group">
-                    <label for="Des" class="col-sm-3 control-label">Description</label>
-                    <input class="form-control" autofocus="" required=" " name="describle" >
-                </div>
-
-                <div class="form-group">
-                    <label for="Des" class="col-sm-3 control-label">Date</label>
-                    <input  type="date"class="form-control" autofocus="" required=" " name="pDate" >
-                </div>
-
-                <div class="form-group">
-                    <label for="Size" class="col-sm-3 control-label">Size product</label>
-                    <input  type="text"class="form-control" autofocus="" required=" " name="size" >
-                </div>
-                <div class="form-group">
-                    <label for="Material" class="col-sm-3 control-label">Material</label>
-                    <input  type="text"class="form-control" autofocus="" required=" " name="material" >
-                </div>
-                <div class="form-group">
-                    <label for="Material" class="col-sm-3 control-label">Quantity</label>
-                    <input  type="text"class="form-control" autofocus="" required=" " name="quantity" >
-                </div>
-
-                <div class="form-group">
-                    <label for="Material" class="col-sm-3 control-label">Discount</label>
-                    <input  type="text"class="form-control" autofocus="" required=" " name="discount" >
-                </div>
-                 <div class="form-group">
-                    <label for="Material" class="col-sm-3 control-label">Img</label>
-                    <input  type="file"class="form-control" autofocus="" required=" " name="img" >
-                </div>
-                <input type="submit" value="INSERT">
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
 
 
 
@@ -194,8 +561,7 @@
 
 
 
-            </form>
-        </div>
+        </body>
 
-    </body>
-</html>
+
+    </html>

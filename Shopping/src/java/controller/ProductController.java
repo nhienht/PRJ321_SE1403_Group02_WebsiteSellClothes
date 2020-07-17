@@ -5,14 +5,21 @@
  */
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.nio.file.Paths;
 import java.sql.Date;
+import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import model.DAO.ImageDAO;
 import model.DAO.ProductsDAO;
 import model.entity.Products;
 
@@ -21,6 +28,7 @@ import model.entity.Products;
  * @author NhienHT
  */
 @WebServlet(name = "ProductController", urlPatterns = {"/ProductController"})
+@MultipartConfig
 public class ProductController extends HttpServlet {
 
     /**
@@ -77,7 +85,7 @@ public class ProductController extends HttpServlet {
             throws ServletException, IOException {
         //  processRequest(request, response);
         Products p = new Products();
-        p.setSpID(Integer.parseInt(request.getParameter("spID")));
+        p.setSpID(Integer.parseInt(request.getParameter("status")));
         p.setBrID(Integer.parseInt(request.getParameter("brID")));
         p.settID(Integer.parseInt(request.getParameter("tID")));
         p.setSupID(Integer.parseInt(request.getParameter("supID")));
@@ -92,6 +100,8 @@ public class ProductController extends HttpServlet {
         p.setMaterial(request.getParameter("material"));
         p.setQuantity(Integer.parseInt(request.getParameter("quantity")));
         p.setDiscount(Float.parseFloat(request.getParameter("discount")));
+        p.setGender(request.getParameter("gender"));
+        String DIR = "data";
         ProductsDAO pDao = new ProductsDAO();
         if (request.getParameter("btnUpdate") != null) {
             int pID = Integer.parseInt(request.getParameter("pID"));
@@ -100,9 +110,26 @@ public class ProductController extends HttpServlet {
 
         } else {
             pDao.insert(p);
-        }
-        response.sendRedirect("./admin/product/listproducts.jsp");
+            int pID = pDao.getMax();
+            ImageDAO imgDao = new ImageDAO();
+            try {
+                List<Part> fileParts = (List<Part>) request.getParts();
+                String pathOld = request.getServletContext().getRealPath("") + File.separator + DIR;
+                for (Part filePart : fileParts) {
+                    if (filePart.getSubmittedFileName() != null) {
+                        String fileName = filePart.getSubmittedFileName(); // Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+                        imgDao.insert(pID, fileName);
+                        filePart.write(pathOld + File.separator + fileName);
 
+                    }
+                }
+            } catch (Exception ex) {
+                out.print("hi");
+
+            }
+        }
+
+        //  response.sendRedirect("./admin/product/listproducts.jsp");
     }
 
     /**
