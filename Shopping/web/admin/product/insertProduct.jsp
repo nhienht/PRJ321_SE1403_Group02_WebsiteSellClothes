@@ -30,6 +30,7 @@
 
             body {
                 height: 100%;
+                background-color: #D8D8D8;
             }
 
             #wrapper {

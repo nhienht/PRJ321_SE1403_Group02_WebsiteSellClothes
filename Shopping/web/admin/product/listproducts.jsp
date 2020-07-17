@@ -1,16 +1,19 @@
-<%@page import="model.DAO.ImageDAO"%>
+<%-- 
+    Document   : listproducts
+    Created on : Jul 5, 2020, 9:50:45 AM
+    Author     : 
+--%>
+
+<%@page import="model.DAO.ProductsDAO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="model.DAO.ProductsDAO"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
     <head>
-        <meta charset="UTF-8">
-        <!-- CSS only -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
               integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-        <!-- JS, Popper.js, and jQuery -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
                 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -20,292 +23,116 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+        <title>List Products </title>
         <style>
-            html {
-                position: relative;
-                min-height: 100%;
-            }
-
-            body {
-                height: 100%;
-            }
-
-            #wrapper {
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex;
-            }
-
-            #wrapper #content-wrapper {
-                overflow-x: hidden;
+            @import url('https://fonts.google.com/specimen/Balsamiq+Sans');
+            html ,body {
                 width: 100%;
-                padding-top: 1rem;
-                padding-bottom: 80px;
+                height: 100%;
+                font-family: 'Balsamiq Sans';   
+                font-size: 17px;
+                color: #222;
+                background: url('./../../images/vin.jpg') fixed;
+            }
+            .navbar{
+                background-color: #F5A9BC !important;
+            }
+            .navbar li a {
+                color: #f8f2f2!important ;
+
+            }
+            .navbar li a:hover {
+                color: #000000 !important ;
+
+            }
+            .container-fluid
+            {
+                padding-top: 8em;
             }
 
-            body.fixed-nav #content-wrapper {
-                margin-top: 56px;
-                padding-left: 90px;
-            }
 
-            body.fixed-nav.sidebar-toggled #content-wrapper {
-                padding-left: 0;
-            }
-
-            @media (min-width: 768px) {
-                body.fixed-nav #content-wrapper {
-                    padding-left: 225px;
-                }
-
-                body.fixed-nav.sidebar-toggled #content-wrapper {
-                    padding-left: 90px;
-                }
-            }
-
-            .scroll-to-top {
-                position: fixed;
-                right: 15px;
-                bottom: 15px;
-                display: none;
-                width: 50px;
-                height: 50px;
+            .overlay {
+                position: absolute; 
+                bottom: 0; 
+                background: rgb(0, 0, 0);
+                background: rgba(0, 0, 0, 0.5); /* Black see-through */
+                color: #f1f1f1; 
+                width: 100%;
+                transition: .5s ease;
+                opacity:0;
+                color: white;
+                font-size: 20px;
+                padding: 20px;
                 text-align: center;
-                color: #fff;
-                background: #F5A9BC;
-                line-height: 46px;
             }
-
-            .scroll-to-top:focus,
-            .scroll-to-top:hover {
+            .container-fluid:hover .overlay {
+                opacity: 1;
+            }
+            .nav-item{
+                padding-right: 20px;
+                font-size: 25px;
+            }
+            .fotter{
+                background-color: black;
                 color: white;
             }
-
-            .scroll-to-top:hover {
-                background: #F5A9BC;
-            }
-
-            .scroll-to-top i {
-                font-weight: 800;
-            }
-
-            .smaller {
-                font-size: 0.7rem;
-            }
-
-            .o-hidden {
-                overflow: hidden !important;
-            }
-
-            .z-0 {
-                z-index: 0;
-            }
-
-            .z-1 {
-                z-index: 1;
-            }
-
-            .navbar-nav .form-inline .input-group {
+            table{
+                font-family: 'Pangolin', cursive;
                 width: 100%;
-            }
-
-            .navbar-nav .nav-item.active .nav-link {
-                color: #fff;
-            }
-
-            .navbar-nav .nav-item.dropdown .dropdown-toggle::after {
-                width: 1rem;
                 text-align: center;
-                float: right;
-                vertical-align: 0;
-                border: 0;
-                font-weight: 900;
-                content: '\f105';
-                font-family: 'Font Awesome 5 Free';
+                background-color: #f8f2f2;
+                border-style: solid;
+                opacity: 0.9;
+            }
+            th{
+                border-style: solid;
             }
 
-            .navbar-nav .nav-item.dropdown.show .dropdown-toggle::after {
-                content: '\f107';
+            .table{
+                padding : 20px;
+                padding-top: 100px;
+
             }
-
-            .navbar-nav .nav-item.dropdown.no-arrow .dropdown-toggle::after {
-                display: none;
+            .insert{
+                padding: 10px;
+                background: #f8f2f2;
+                border-style: solid;
+                opacity: 0.9;
             }
-
-            .navbar-nav .nav-item .nav-link:focus {
-                outline: none;
+            .container{
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                padding-left: 550px;
+                padding-top: 30px;
             }
+            
 
-            .navbar-nav .nav-item .nav-link .badge {
-                position: absolute;
-                margin-left: 0.75rem;
-                top: 0.3rem;
-                font-weight: 400;
-                font-size: 0.5rem;
-            }
 
-            @media (min-width: 768px) {
-                .navbar-nav .form-inline .input-group {
-                    width: auto;
-                }
-            }
-
-            .sidebar {
-                width: 90px !important;
-                background-color: #F5A9BC;
-                min-height: calc(100vh - 56px);
-            }
-
-            .sidebar .nav-item:last-child {
-                margin-bottom: 1rem;
-            }
-
-            .sidebar .nav-item .nav-link {
-                text-align: center;
-                padding: 0.75rem 1rem;
-                width: 90px;
-            }
-
-            .sidebar .nav-item .nav-link span {
-                font-size: 0.65rem;
-                display: block;
-            }
-
-            .sidebar .nav-item .dropdown-menu {
-                position: absolute !important;
-                -webkit-transform: none !important;
-                transform: none !important;
-                left: calc(90px + 0.5rem) !important;
-                margin: 0;
-            }
-
-            .sidebar .nav-item .dropdown-menu.dropup {
-                bottom: 0;
-                top: auto !important;
-            }
-
-            .sidebar .nav-item.dropdown .dropdown-toggle::after {
-                display: none;
-            }
-
-            .sidebar .nav-item .nav-link {
-                color:#212529;
-            }
-
-            .sidebar .nav-item .nav-link:active,
-            .sidebar .nav-item .nav-link:focus,
-            .sidebar .nav-item .nav-link:hover {
-                color: #cccccc;
-            }
-
-            .sidebar.toggled {
-                width: 0 !important;
-                overflow: hidden;
-            }
-
-            @media (min-width: 768px) {
-                .sidebar {
-                    width: 225px !important;
-                }
-
-                .sidebar .nav-item .nav-link {
-                    display: block;
-                    width: 100%;
-                    text-align: left;
-                    padding: 1rem;
-                    width: 225px;
-                }
-
-                .sidebar .nav-item .nav-link span {
-                    font-size: 1rem;
-                    display: inline;
-                }
-
-                .sidebar .nav-item .dropdown-menu {
-                    position: static !important;
-                    margin: 0 1rem;
-                    top: 0;
-                }
-
-                .sidebar .nav-item.dropdown .dropdown-toggle::after {
-                    display: block;
-                }
-
-                .sidebar.toggled {
-                    overflow: visible;
-                    width: 90px !important;
-                }
-
-                .sidebar.toggled .nav-item:last-child {
-                    margin-bottom: 1rem;
-                }
-
-                .sidebar.toggled .nav-item .nav-link {
-                    text-align: center;
-                    padding: 0.75rem 1rem;
-                    width: 90px;
-                }
-
-                .sidebar.toggled .nav-item .nav-link span {
-                    font-size: 0.65rem;
-                    display: block;
-                }
-
-                .sidebar.toggled .nav-item .dropdown-menu {
-                    position: absolute !important;
-                    -webkit-transform: none !important;
-                    transform: none !important;
-                    left: calc(90px + 0.5rem) !important;
-                    margin: 0;
-                }
-
-                .sidebar.toggled .nav-item .dropdown-menu.dropup {
-                    bottom: 0;
-                    top: auto !important;
-                }
-
-                .sidebar.toggled .nav-item.dropdown .dropdown-toggle::after {
-                    display: none;
-                }
-            }
-
-            .sidebar.fixed-top {
-                top: 56px;
-                height: calc(100vh - 56px);
-                overflow-y: auto;
-            }
-
-            .card-body-icon {
-                position: absolute;
-                z-index: 0;
-                top: -1.25rem;
-                right: -1rem;
-                opacity: 0.4;
-                font-size: 5rem;
-                -webkit-transform: rotate(15deg);
-                transform: rotate(15deg);
-            }
-
-            @media (min-width: 576px) {
-                .card-columns {
-                    -webkit-column-count: 1;
-                    column-count: 1;
-                }
-            }
-
-            @media (min-width: 768px) {
-                .card-columns {
-                    -webkit-column-count: 2;
-                    column-count: 2;
-                }
-                .bg-dark {
-    background-color: #343a40!important;
-}
         </style>
-        </head>
+    </head>
+    <body>
+        <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
-      <%
+            <a class="navbar-branch" href="index.jsp">
+                <img src="./../../images/logo.jpg" height="80px" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto" style="padding-left: 600px">
+                    <li class="nav-item">
+                        <a href="./../../home.jsp" class="nav-link ">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./../bill/listbill.jsp" class="nav-link ">Bill</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <%
             if (request.getParameter("id") != null) {
                 int pId = Integer.parseInt(request.getParameter("id"));
                 ProductsDAO pDao = new ProductsDAO();
@@ -556,3 +383,4 @@
 
 
     </html>
+
