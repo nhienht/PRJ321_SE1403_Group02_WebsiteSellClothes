@@ -5,6 +5,8 @@
 <html lang="en">
 
     <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <meta charset="UTF-8">
         <!-- CSS only -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -21,8 +23,19 @@
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <title>Document</title>
         <style>
+            .form-control-borderless {
+                border: none;
+
+            }
+
+            .form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+                border: none;
+                outline: none;
+                box-shadow: none;
+            }
             html {
                 position: relative;
                 min-height: 100%;
@@ -304,6 +317,52 @@
                 .bg-dark {
                     background-color: #343a40 !important;
                 }
+                .input-group{
+                    padding-bottom:  30px;
+                }
+                .searchbar{
+                    margin-bottom: auto;
+                    margin-top: auto;
+                    height: 60px;
+                    background-color: #F5A9BC;
+                    border-radius: 30px;
+                    padding: 10px;
+                }
+
+                .search_input{
+                    color: white;
+                    border: 0;
+                    outline: 0;
+                    background: none;
+                    width: 0;
+                    caret-color:transparent;
+                    line-height: 40px;
+                    transition: width 0.4s linear;
+                }
+
+                .searchbar:hover > .search_input{
+                    padding: 0 10px;
+                    width: 450px;
+                    caret-color:red;
+                    transition: width 0.4s linear;
+                }
+
+                .searchbar:hover > .search_icon{
+                    background: white;
+                    color: #e74c3c;
+                }
+
+                .search_icon{
+                    height: 40px;
+                    width: 40px;
+                    float: right;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 50%;
+                    color:white;
+                    text-decoration:none;
+                }
             </style>
         </head>
 
@@ -412,142 +471,162 @@
                                                             <option value="100">100</option>
                                                         </select></label></div>
                                             </div>
-                                            <div class="col-sm-12 col-md-6">
-                                                <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input
-                                                            type="search" class="form-control form-control-sm" placeholder=""
-                                                            aria-controls="dataTable"></label></div>
+
+                                            <div class="container h-100">
+                                                <div class="d-flex justify-content-center h-100">
+                                                    <div class="searchbar">
+                                                        <input class="search_input" type="text" name="" placeholder="Search...">
+                                                        <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                           <form action="./../../ProductController" method="POST" enctype='multipart/form-data'>
-                                                        <div class="contact-form">
-                                                            <div class="row">
-                                                                <div class="col-sm-6 col-xs-12">
-                                                                    <div class="input-group">
 
-                                                                        <td> <input placeholder="Status Product" type="text" name="status" class="form-control" autofocus
-                                                                                    required="Please input"></td>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-xs-12">
-                                                                    <div class="input-group">
-                                                                        <td> <input placeholder="Brand ID" class="form-control" autofocus="" required=" " name="brID"></td>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-xs-12">
-                                                                    <div class="input-group">
-                                                                        <select aria-placeholder="Type Product" name="tID" class="form-control" autofocus="">
-                                                                            <option value=1>T-shirt</option>
-                                                                            <option value=2>Short</option>
-                                                                            <option value=3>Skirt</option>
-                                                                            <option value=4>Dress</option>
-                                                                            <option value=5>Pants</option>
-                                                                            <option value=6>Jacket</option>
-                                                                            <option value=7>Jeans</option>
-                                                                            <option value=8>Shirt</option>
-                                                                            <option value=9>Sweater</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-xs-12">
+                                    </div>
+                                    <form action="./../../ProductController" method="POST" enctype='multipart/form-data'>
+                                        <div class="contact-form">
+                                            <div class="row">
 
-                                                                </div>
-                                                                <div class="col-sm-6 col-xs-12">
-                                                                    <div class="input-group">
-                                                                        <input placeholder="Supplier ID" class="form-control" autofocus="" required=" " name="supID">
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Status Product </div>
+                                                    <div class="input-group">
 
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-xs-12">
-                                                                    <div class="input-group">
-                                                                        <input placeholder="Product's Name" class="form-control" autofocus="" required=" " name="pName">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-xs-12">
-                                                                    <div class="input-group">
-                                                                        <input placeholder="Selling Price" class="form-control" autofocus="" required=" "
-                                                                               name="sellingPrice">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-xs-12">
-                                                                    <div class="input-group">
-                                                                        <input placeholder="Price" class="form-control" autofocus="" required=" " name="price">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-xs-12">
-                                                                    <div class="input-group">
-                                                                        <input placeholder="Describle" class="form-control" autofocus="" required=" " name="describle">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-xs-12">
-                                                                    <div class="input-group">
-                                                                        <input placeholder="Date" type="date" class="form-control" autofocus="" required=" " name="pDate">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-xs-12">
-                                                                    <div class="input-group">
-                                                                        <input placeholder="Size" type="text" class="form-control" autofocus="" required=" " name="size">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-xs-12">
-                                                                    <div class="input-group">
-                                                                        <input placeholder="Material" type="text" class="form-control" autofocus=""
-                                                                               required=" " name="material">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-xs-12">
-                                                                    <div class="input-group">
-                                                                        <input placeholder="Quantity" type="text" class="form-control" autofocus=""
-                                                                               required=" " name="quantity">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-xs-12">
-                                                                    <div class="input-group">
-                                                                        <input placeholder="Discount" type="text" class="form-control" autofocus=""
-                                                                               required=" " name="discount">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-xs-12">
-                                                                    <div class="input-group">
-                                                                        <select aria-placeholder="Gender" name="gender" class="form-control" autofocus="">
-                                                                            <option value="Male">Male</option>
-                                                                            <option value="Female">Female</option>
-                                                                            <option value="Unisex">Unisex</option>
-                                                                        </select> 
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-xs-12">
-                                                                    <div class="input-group">
-                                                                        <input type="file" class="form-control" autofocus="" required=" " name="img" multiple>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-12 col-xs-12">
-                                                                    <div class="input-group">
-                                                                        <input type="submit" value="INSERT">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-5">
-                                                <div class="dataTables_info" id="dataTable_info" role="status"
-                                                     aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-7">
-                                                <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                    <ul class="pagination">
-                                                        <li class="paginate_button page-item previous disabled"
-                                                            id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                                   data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                        </li>
-                                                        <li class="paginate_button page-item active"><a href="#"
-                                                                                                        aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                        class="page-link">1</a></li>
-                                                        <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                            <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                               class="page-link">Next</a></li>
-                                                    </ul>
+                                                        <input placeholder="Status Product" type="text" name="status" class="form-control" autofocus
+                                                               required="Please input">
+                                                    </div>
                                                 </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Brand ID</div>
+                                                    <div class="input-group">
+                                                        <td> <input placeholder="Brand ID" class="form-control" autofocus="" required=" " name="brID"></td>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Type Product </div>
+                                                    <div class="input-group">
+                                                        <select aria-placeholder="Type Product" name="tID" class="form-control" autofocus="">
+                                                            <option value=1>T-shirt</option>
+                                                            <option value=2>Short</option>
+                                                            <option value=3>Skirt</option>
+                                                            <option value=4>Dress</option>
+                                                            <option value=5>Pants</option>
+                                                            <option value=6>Jacket</option>
+                                                            <option value=7>Jeans</option>
+                                                            <option value=8>Shirt</option>
+                                                            <option value=9>Sweater</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Supplier ID</div>
+                                                    <div class="input-group">
+                                                        <input placeholder="Supplier ID" class="form-control" autofocus="" required=" " name="supID">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Product's Name</div>
+                                                    <div class="input-group">
+                                                        <input placeholder="Product's Name" class="form-control" autofocus="" required=" " name="pName">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Selling Price</div>
+                                                    <div class="input-group">
+                                                        <input placeholder="Selling Price" class="form-control" autofocus="" required=" "
+                                                               name="sellingPrice">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Price</div>
+                                                    <div class="input-group">
+                                                        <input placeholder="Price" class="form-control" autofocus="" required=" " name="price">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Describle</div>
+                                                    <div class="input-group">
+                                                        <input placeholder="Describle" class="form-control" autofocus="" required=" " name="describle">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Date</div>
+                                                    <div class="input-group">
+                                                        <input placeholder="Date" type="date" class="form-control" autofocus="" required=" " name="pDate">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Size</div>
+                                                    <div class="input-group">
+                                                        <input placeholder="Size" type="text" class="form-control" autofocus="" required=" " name="size">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Material</div>
+                                                    <div class="input-group">
+                                                        <input placeholder="Material" type="text" class="form-control" autofocus=""
+                                                               required=" " name="material">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Quantity</div>
+                                                    <div class="input-group">
+                                                        <input placeholder="Quantity" type="text" class="form-control" autofocus=""
+                                                               required=" " name="quantity">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Discount</div>
+                                                    <div class="input-group">
+                                                        <input placeholder="Discount" type="text" class="form-control" autofocus=""
+                                                               required=" " name="discount">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Gender</div>
+                                                    <div class="input-group">
+                                                        <select aria-placeholder="Gender" name="gender" class="form-control" autofocus="">
+                                                            <option value="Male">Male</option>
+                                                            <option value="Female">Female</option>
+                                                            <option value="Unisex">Unisex</option>
+                                                        </select> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-xs-12">
+                                                    <div>Image</div>
+                                                    <div class="input-group">
+                                                        <input type="file" class="form-control" autofocus="" required=" " name="img" multiple>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div> Insert</div>
+                                                    <div class="input-group">
+                                                        <input  type="submit" value="INSERT">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info" id="dataTable_info" role="status"
+                                                 aria-live="polite">Showing 1 to 1 of 1 entries</div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button page-item previous disabled"
+                                                        id="dataTable_previous"><a href="#" aria-controls="dataTable"
+                                                                               data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                                    </li>
+                                                    <li class="paginate_button page-item active"><a href="#"
+                                                                                                    aria-controls="dataTable" data-dt-idx="1" tabindex="0"
+                                                                                                    class="page-link">1</a></li>
+                                                    <li class="paginate_button page-item next disabled" id="dataTable_next">
+                                                        <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
+                                                           class="page-link">Next</a></li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -556,25 +635,26 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-            <!-- /#wrapper -->
 
-            <!-- Scroll to Top Button-->
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fas fa-angle-up"></i>
-            </a>
+        </div>
+        <!-- /#wrapper -->
 
-
-
-
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
 
 
 
 
 
-        </body>
 
 
-    </html>
+
+
+    </body>
+
+
+</html>

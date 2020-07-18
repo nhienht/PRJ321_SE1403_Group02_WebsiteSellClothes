@@ -6,6 +6,8 @@
 <html lang="en">
 
     <head>
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <meta charset="UTF-8">
         <!-- CSS only -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -455,7 +457,7 @@
                                                                 out.print("<td>" + rs.getString(9) + "</td>");
                                                                 out.print("<td>" + rs.getString(10) + "</td>");
                                                                 //                            out.print("<td><a href='billDetail.jsp?id=" + rs.getInt("bID") + "'>Xem chi tiet hoa don</a></td>");
-                                                                out.print("<td><a href='updateCustomer.jsp?id=" + rs.getInt("cID") + "'>Cap nhat</a></td>");
+                                                                out.print("<td><a href='updateCustomer.jsp?id=" + rs.getInt("cID") + "'>Update</a></td>");
                                                                 out.print("</tr>");
                                                             }
                                                         %>
