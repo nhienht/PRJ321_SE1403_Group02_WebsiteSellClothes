@@ -12,6 +12,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
               integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -26,7 +28,7 @@
         crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
         <title>List Products </title>
- <style>
+        <style>
             html {
                 position: relative;
                 min-height: 100%;
@@ -307,10 +309,10 @@
                     background-color: #343a40!important;
                 }
             </style>
-    </head>
-  
-        
-        
+        </head>
+
+
+
         <%
             if (request.getParameter("id") != null) {
                 int pId = Integer.parseInt(request.getParameter("id"));
@@ -325,7 +327,7 @@
             }
         %>
 
-    <body id="page-top" class="">
+        <body id="page-top" class="">
 
 
             <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -361,7 +363,7 @@
 
             </nav>
 
-        <div id="wrapper">
+            <div id="wrapper">
                 <ul class="sidebar navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="../product/listproducts.jsp">
@@ -390,7 +392,7 @@
                         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                             <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
                             <a class="dropdown-item" href="../product/insertProduct.jsp">Insert Products</a>
-                        
+
                         </div>
                     </li>
 
@@ -398,133 +400,132 @@
 
                 </ul>
 
-            <div id="content-wrapper">
+                <div id="content-wrapper">
 
-                <div class="container-fluid">
+                    <div class="container-fluid">
 
-                    <!-- Breadcrumbs-->
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="index.jsp">Dashboard</a>
-                        </li>
-                        <li class="breadcrumb-item active">Orders</li>
+                        <!-- Breadcrumbs-->
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="index.jsp">Dashboard</a>
+                            </li>
+                            <li class="breadcrumb-item active">Orders</li>
 
-                    </ol>
+                        </ol>
 
-                    <!-- DataTables Example -->
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            <i class="fas fa-user"></i>
-                            List Orders</div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="dataTables_length" id="dataTable_length"><label>Show <select
-                                                        name="dataTable_length" aria-controls="dataTable"
-                                                        class="custom-select custom-select-sm form-control form-control-sm">
-                                                        <option value="10">10</option>
-                                                        <option value="25">25</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
-                                                    </select> entries</label></div>
+                        <!-- DataTables Example -->
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <i class="fas fa-user"></i>
+                                List Orders</div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6">
+                                                <div class="dataTables_length" id="dataTable_length"><label>Show <select
+                                                            name="dataTable_length" aria-controls="dataTable"
+                                                            class="custom-select custom-select-sm form-control form-control-sm">
+                                                            <option value="10">10</option>
+                                                            <option value="25">25</option>
+                                                            <option value="50">50</option>
+                                                            <option value="100">100</option>
+                                                        </select> </label></div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input
+                                                            type="search" class="form-control form-control-sm" placeholder=""
+                                                            aria-controls="dataTable"></label></div>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input
-                                                        type="search" class="form-control form-control-sm" placeholder=""
-                                                        aria-controls="dataTable"></label></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table class="table table-bordered dataTable" id="dataTable" width="100%"
-                                                   cellspacing="0" role="grid" aria-describedby="dataTable_info"
-                                                   style="width: 100%;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID Products</th>
-                                                        <th>Status Product</th>
-                                                        <th>Brand Products</th>
-                                                        <th>Type Products</th>
-                                                        <th>Supplier </th>
-                                                        <th>Product's name</th>
-                                                        <th>Saleprice</th>
-                                                        <th>Price</th>
-                                                        <th>Describle</th>
-                                                        <th>Date</th>
-                                                        <th>Size </th>
-                                                        <th>Material</th>
-                                                        <th>Update</th>
-                                                        <th>Clothing</th>
-                                                        <th>Image</th>
-                                                        <th>Gender</th>
-                                                    </tr>
-                                                </thead>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                                       cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                                       style="width: 100%;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID Products</th>
+                                                            <th>Status Product</th>
+                                                            <th>Brand Products</th>
+                                                            <th>Type Products</th>
+                                                            <th>Supplier </th>
+                                                            <th>Product's name</th>
+                                                            <th>Saleprice</th>
+                                                            <th>Price</th>
+                                                            <th>Describle</th>
+                                                            <th>Date</th>
+                                                            <th>Size </th>
+                                                            <th>Material</th>
+                                                            <th>Update</th>
+                                                            <th>Clothing</th>
+                                                            <th>Image</th>
+                                                            <th>Gender</th>
+                                                        </tr>
+                                                    </thead>
 
-                                                <tbody>
+                                                    <tbody>
 
-                                                    <%
-                                                        ProductsDAO pDao = new ProductsDAO();
-                                                        ResultSet rs = pDao.getAll();
-                                                        while (rs.next()) {
-                                                           
+                                                        <%
+                                                            ProductsDAO pDao = new ProductsDAO();
+                                                            ResultSet rs = pDao.getAll();
+                                                            while (rs.next()) {
 
-                                                            out.print("<tr>");
-                                                            out.print("<td>" + rs.getInt("pID") + "</td>");
-                                                            out.print("<td>" + rs.getInt("status") + "</td>");
-                                                            out.print("<td>" + rs.getInt("brID") + "</td>");
-                                                            out.print("<td>" + rs.getInt("tID") + "</td>");
-                                                            out.print("<td>" + rs.getInt("supID") + "</td>");
-                                                            out.print("<td>" + rs.getString("pName") + "</td>");
-                                                            out.print("<td>" + rs.getInt("sellingPrice") + "</td>");
-                                                            out.print("<td>" + rs.getInt("price") + "</td>");
-                                                            out.print("<td>" + rs.getString("describle") + "</td>");
-                                                            out.print("<td>" + rs.getDate("pDate") + "</td>");
-                                                            out.print("<td>" + rs.getInt("size") + "</td>");
-                                                            out.print("<td>" + rs.getString("material") + "</td>");
-                                                            out.print("<td>" + rs.getString("gender") + "</td>");
-                                                            ImageDAO iDao = new ImageDAO();
-                                                            ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
-                                                           System.out.println(rsImg.getString("imageName"));
-                                                         //  System.out.println(rsImg.next());
-                                                           // while (rsImg.first()) {
+                                                                out.print("<tr>");
+                                                                out.print("<td>" + rs.getInt("pID") + "</td>");
+                                                                out.print("<td>" + rs.getInt("status") + "</td>");
+                                                                out.print("<td>" + rs.getInt("brID") + "</td>");
+                                                                out.print("<td>" + rs.getInt("tID") + "</td>");
+                                                                out.print("<td>" + rs.getInt("supID") + "</td>");
+                                                                out.print("<td>" + rs.getString("pName") + "</td>");
+                                                                out.print("<td>" + rs.getInt("sellingPrice") + "</td>");
+                                                                out.print("<td>" + rs.getInt("price") + "</td>");
+                                                                out.print("<td>" + rs.getString("describle") + "</td>");
+                                                                out.print("<td>" + rs.getDate("pDate") + "</td>");
+                                                                out.print("<td>" + rs.getInt("size") + "</td>");
+                                                                out.print("<td>" + rs.getString("material") + "</td>");
+                                                                out.print("<td>" + rs.getString("gender") + "</td>");
+                                                                ImageDAO iDao = new ImageDAO();
+                                                                ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
+                                                                System.out.println(rsImg.getString("imageName"));
+                                                                //  System.out.println(rsImg.next());
+                                                                // while (rsImg.first()) {
                                                                 System.out.println(rsImg.getString("imageName"));
                                                                 out.print("<td><img src='../../data/" + rsImg.getString("imageName") + "' height='100px' width='100px' /></td>");
-                                                             //   break;
-                                                          ///  }
+                                                                //   break;
+                                                                ///  }
 
-                                                            out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'>Update</a></td>");
-                                                            out.print("<td><a href='?id=" + rs.getInt("pID") + "'>Delete</a></td>");
+                                                                out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'>Update</a></td>");
+                                                                out.print("<td><a href='?id=" + rs.getInt("pID") + "'>Delete</a></td>");
 
-                                                            out.print("</tr>");
-                                                        }
-                                                    %>
-                                                </tbody>
-                                                
-                                                <img src='../../data/hihi.jpg' height='100px' width='100px' />
-                                            </table>
+                                                                out.print("</tr>");
+                                                            }
+                                                        %>
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="dataTable_info" role="status"
-                                                 aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled"
-                                                        id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                               data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item active"><a href="#"
-                                                                                                    aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                    class="page-link">1</a></li>
-                                                    <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                        <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                           class="page-link">Next</a></li>
-                                                </ul>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-5">
+                                                <div class="dataTables_info" id="dataTable_info" role="status"
+                                                     aria-live="polite">Showing 1 to 1 of 1 entries</div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-7">
+                                                <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                                    <ul class="pagination">
+                                                        <li class="paginate_button page-item previous disabled"
+                                                            id="dataTable_previous"><a href="#" aria-controls="dataTable"
+                                                                                   data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                                        </li>
+                                                        <li class="paginate_button page-item active"><a href="#"
+                                                                                                        aria-controls="dataTable" data-dt-idx="1" tabindex="0"
+                                                                                                        class="page-link">1</a></li>
+                                                        <li class="paginate_button page-item next disabled" id="dataTable_next">
+                                                            <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
+                                                               class="page-link">Next</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -533,15 +534,14 @@
                         </div>
                     </div>
                 </div>
+
             </div>
+            <!-- /#wrapper -->
 
-        </div>
-        <!-- /#wrapper -->
-
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
 
 
 
@@ -552,8 +552,8 @@
 
 
 
-    </body>
+        </body>
 
 
-</html>
+    </html>
 
