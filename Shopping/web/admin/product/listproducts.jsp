@@ -486,10 +486,13 @@
                                                             out.print("<td>" + rs.getString("gender") + "</td>");
                                                             ImageDAO iDao = new ImageDAO();
                                                             ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
-                                                            while (rsImg.next()) {
-                                                                out.print("<td><img src='../../data/" + rsImg.getString(3) + "' height='100px' width='100px' /></td>");
-                                                                break;
-                                                            }
+                                                           System.out.println(rsImg.getString("imageName"));
+                                                         //  System.out.println(rsImg.next());
+                                                           // while (rsImg.first()) {
+                                                                System.out.println(rsImg.getString("imageName"));
+                                                                out.print("<td><img src='../../data/" + rsImg.getString("imageName") + "' height='100px' width='100px' /></td>");
+                                                             //   break;
+                                                          ///  }
 
                                                             out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'>Update</a></td>");
                                                             out.print("<td><a href='?id=" + rs.getInt("pID") + "'>Delete</a></td>");
@@ -498,6 +501,8 @@
                                                         }
                                                     %>
                                                 </tbody>
+                                                
+                                                <img src='../../data/hihi.jpg' height='100px' width='100px' />
                                             </table>
                                         </div>
                                     </div>

@@ -85,9 +85,9 @@
 
         </style> 
     </head>
-        <%
-            boolean isLogin;
-            // Admin ad = (Admin) session.getAttribute("checkLogin");
+    <%
+        boolean isLogin;
+        // Admin ad = (Admin) session.getAttribute("checkLogin");
 //            if (ad != null) {
 //                isLogin = true;
 //
@@ -96,9 +96,9 @@
 //
 //            }
 
-        %>
+    %>
     <body>
-        
+
         <%@include file="../../header/header.jsp" %>
 
         <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top" style="">
@@ -165,11 +165,12 @@
                         <sql:param value="${row.pID}"/>	
                     </sql:query>	
 
-
                     <div class="col-xs-12 col-sm-6 col-md-3 boder bg-light">
-                        <c:forEach var="img" items="${i.rows}" begin="1" end="1">
+                        <!--                             <img src="../../data/hihi.jpg" height="150px" width="150px" class="image" alt="Error"/>	-->
+
+                        <c:forEach var="img" items="${i.rows}" begin="0" end="0">
                             <a href="productDetail.jsp">
-                                <img src="../../data/${img.imageName}" height="150px" class="image" alt="Error"/>	
+                                <img src="../../data/${img.imageName}" height="150px" width="150px" class="image" alt="Error"/>	
 
                             </a>
 
