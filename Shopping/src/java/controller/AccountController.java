@@ -105,7 +105,7 @@ public class AccountController extends HttpServlet {
             String pass = request.getParameter("pass");
             int id = cDao.login(user, pass);
             if (id != -1) {
-               Cookie userCookie = new Cookie("user", user);
+                Cookie userCookie = new Cookie("user", user);
                 Cookie passCookie = new Cookie("pass", pass);
                 Cookie idCookie = new Cookie("idCustomer", String.valueOf(id));
 
@@ -131,7 +131,15 @@ public class AccountController extends HttpServlet {
             AdminDAO aDao = new AdminDAO();
             String user = request.getParameter("user");
             String pass = request.getParameter("pass");
-
+             Cookie userCookie = new Cookie("user", user);
+                Cookie passCookie = new Cookie("pass", pass);
+               
+                userCookie.setMaxAge(60 * 60 * 24);
+                passCookie.setMaxAge(60 * 60 * 24);
+                
+                response.addCookie(userCookie);
+                response.addCookie(passCookie);
+                
             boolean check = aDao.login(user, pass);
             if (check) {
 //                 Cookie userCookie = new Cookie("user", user);
@@ -153,6 +161,8 @@ public class AccountController extends HttpServlet {
 
             }
 
+        }else if(request.getParameter("btnSignInPage") != null){
+           response.sendRedirect("./auth/signin.jsp");   
         }
 
     }

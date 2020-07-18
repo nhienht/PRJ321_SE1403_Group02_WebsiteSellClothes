@@ -82,7 +82,7 @@
 
         </style>
         <%
-            boolean isLogin;
+          //  boolean isLogin;
             // Admin ad = (Admin) session.getAttribute("checkLogin");
 //            if (ad != null) {
 //                isLogin = true;
@@ -91,6 +91,12 @@
 //                isLogin = false;
 //
 //            }
+//        Cookie[] cookies = request.getCookies();
+//        for(Cookie cookie :cookies){
+//            if(cookie.getName().equals("user") && cookie.getValue().equals("admin")){
+//               response.sendRedirect("./admin/product/listproducts.jsp");
+//            }
+//        }
 
         %>
     </head>
@@ -133,9 +139,9 @@
                     </c:if>
                     <c:if test = "${isLogin}"> 
                         <li class="nav-item">
-                            <a href="./auth/login.jsp?logout=1" title="Login" class="nav-link">
+                            <a href="LogoutController"  title="Login" class="nav-link">
                                 Logout
-                            </a>
+                            </a>                       
                         </li>
                     </c:if>
                 </ul>

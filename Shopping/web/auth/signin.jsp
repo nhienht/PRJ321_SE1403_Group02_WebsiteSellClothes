@@ -132,10 +132,6 @@
 
                 </div>
 
-
-
-
-
                 <button type="submit" class="btn btn-primary btn-block" id="btnSignIn" name="btnSignIn">Register</button>
             </form> 
         </div> 

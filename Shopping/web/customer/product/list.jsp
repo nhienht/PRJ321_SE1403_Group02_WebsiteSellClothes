@@ -86,7 +86,7 @@
         </style> 
     </head>
     <%
-        boolean isLogin;
+        boolean isLogin = false;
         // Admin ad = (Admin) session.getAttribute("checkLogin");
 //            if (ad != null) {
 //                isLogin = true;
@@ -95,6 +95,12 @@
 //                isLogin = false;
 //
 //            }
+        Cookie[] cookies = request.getCookies();
+        for(Cookie cookie: cookies){
+            if(cookie.getName().equals("idCustomer") && !cookie.getValue().equals("0")){
+                isLogin = true;
+            }
+        }
 
     %>
     <body>
@@ -183,6 +189,7 @@
                         </div>
                         <div class="overlay">
                             <a href="./../../CartController?id=${row.pID}" class="btn btn-info btn-lg">
+                                
                                 <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
                             </a>
                         </div>

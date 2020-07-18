@@ -173,6 +173,49 @@ public class ProductsDAO {
         return null;
     }
 
+    public ResultSet getProductByStatus(int status) {
+        try {
+            String sql = "select * from products where status=?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, status);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public ResultSet getProductConHang(){
+        try {
+            String sql = "select * from product where quantity > 0";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public ResultSet getProductHetHang(){
+        try {
+            String sql = "select * from product where quantity = 0";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public int getMax() {
         try {
 
