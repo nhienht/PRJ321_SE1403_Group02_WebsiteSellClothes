@@ -83,13 +83,25 @@
             }
 
 
-        </style>  
+        </style> 
     </head>
+        <%
+            boolean isLogin;
+            // Admin ad = (Admin) session.getAttribute("checkLogin");
+//            if (ad != null) {
+//                isLogin = true;
+//
+//            } else {
+//                isLogin = false;
+//
+//            }
 
+        %>
     <body>
+        
+        <%@include file="../../header/header.jsp" %>
 
-
-        <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
+        <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top" style="">
 
             <a class="navbar-branch" href="../../home.jsp">
                 <img src="./images/logo.jpg" height="80px" alt="">
@@ -116,7 +128,7 @@
                     <c:if test = "${!isLogin}"> 
                         <li class="nav-item">
 
-                            <a href="./auth/signin.jsp" title="Login" class="nav-link" >
+                            <a href="../../auth/signin.jsp" title="Login" class="nav-link" >
                                 Sign In
                             </a>
                         </li>
@@ -157,20 +169,26 @@
                     <div class="col-xs-12 col-sm-6 col-md-3 boder bg-light">
                         <c:forEach var="img" items="${i.rows}" begin="1" end="1">
                             <a href="productDetail.jsp">
-                            <img src="../../data/${img.imageName}" height="150px" class="image" alt="Error"/>	
-     
+                                <img src="../../data/${img.imageName}" height="150px" class="image" alt="Error"/>	
+
                             </a>
-                           
+
                         </c:forEach>
+                        <div >
+                            <c:out value="${row.pName}"/>                     
+                        </div>
+                        <div>
+                            Price:   <c:out value="${row.sellingPrice}" />
+                        </div>
                         <div class="overlay">
-                            <c:out value="${row.pName}"/>
-                            <c:out value="${row.sellingPrice}" />
-                           
+                            <a href="./../../CartController?id=${row.pID}" class="btn btn-info btn-lg">
+                                <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+                            </a>
                         </div>
                     </div>  
 
 
-                    <a href="./../../CartController?id=${row.pID}">Buy</a>
+
                 </c:forEach>
             </div>
         </div>

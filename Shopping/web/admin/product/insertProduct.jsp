@@ -345,7 +345,7 @@
             </nav>
 
             <div id="wrapper">
-              <ul class="sidebar navbar-nav">
+                <ul class="sidebar navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="../product/listproducts.jsp">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -380,7 +380,7 @@
 
 
                 </ul>
-               <div id="content-wrapper">
+                <div id="content-wrapper">
 
                     <div class="container-fluid">
 
@@ -410,7 +410,7 @@
                                                             <option value="25">25</option>
                                                             <option value="50">50</option>
                                                             <option value="100">100</option>
-                                                        </select> entries</label></div>
+                                                        </select></label></div>
                                             </div>
                                             <div class="col-sm-12 col-md-6">
                                                 <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input
@@ -418,89 +418,116 @@
                                                             aria-controls="dataTable"></label></div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
-                                                       cellspacing="0" role="grid" aria-describedby="dataTable_info"
-                                                       style="width: 100%;">
-                                                    <thead>
-                                                        <tr>
+                           <form action="./../../ProductController" method="POST" enctype='multipart/form-data'>
+                                                        <div class="contact-form">
+                                                            <div class="row">
+                                                                <div class="col-sm-6 col-xs-12">
+                                                                    <div class="input-group">
 
-                                                            <th>Status Product</th>
-                                                            <th>Brand product ID</th>
-                                                            <th>Type Products</th>
-                                                            <th>Supplier ID </th>
-                                                            <th>Product's name</th>
-                                                            <th>Saleprice</th>
-                                                            <th>Price</th>
-                                                            <th>Describle</th>
-                                                            <th>Date</th>
-                                                            <th>Size </th>
-                                                            <th>Material</th>
-                                                            <th>Quantity</th>
-                                                            <th>Discount</th>
-                                                            <th>Gender</th>
-                                                            <th>Image</th>
-                                                            <th>Submit</th>
-                                                        </tr>
-                                                    </thead>
+                                                                        <td> <input placeholder="Status Product" type="text" name="status" class="form-control" autofocus
+                                                                                    required="Please input"></td>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xs-12">
+                                                                    <div class="input-group">
+                                                                        <td> <input placeholder="Brand ID" class="form-control" autofocus="" required=" " name="brID"></td>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xs-12">
+                                                                    <div class="input-group">
+                                                                        <select aria-placeholder="Type Product" name="tID" class="form-control" autofocus="">
+                                                                            <option value=1>T-shirt</option>
+                                                                            <option value=2>Short</option>
+                                                                            <option value=3>Skirt</option>
+                                                                            <option value=4>Dress</option>
+                                                                            <option value=5>Pants</option>
+                                                                            <option value=6>Jacket</option>
+                                                                            <option value=7>Jeans</option>
+                                                                            <option value=8>Shirt</option>
+                                                                            <option value=9>Sweater</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xs-12">
 
-                                                    <tbody>
-                                                    <form action="./../../ProductController" method="POST" enctype='multipart/form-data' > 
-                                                        <tr>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xs-12">
+                                                                    <div class="input-group">
+                                                                        <input placeholder="Supplier ID" class="form-control" autofocus="" required=" " name="supID">
 
-                                                            <td> <input type="text" name="status" class="form-control" autofocus
-                                                                        required="Please input"></td>
-                                                            <td> <input class="form-control" autofocus="" required=" "
-                                                                        name="brID"></td>
-                                                            <td> <select name="tID" class="form-control" autofocus="">
-                                                                    <option value=1>T-shirt</option>
-                                                                    <option value=2>Short</option>
-                                                                    <option value=3>Skirt</option>
-                                                                    <option value=4>Dress</option>
-                                                                    <option value=5>Pants</option>
-                                                                    <option value=6>Jacket</option>
-                                                                    <option value=7>Jeans</option>
-                                                                    <option value=8>Shirt</option>
-                                                                    <option value=9>Sweater</option>
-                                                                </select>
-                                                            </td>
-                                                            <td><input class="form-control" autofocus="" required=" "
-                                                                       name="supID"></td>
-                                                            <td><input class="form-control" autofocus="" required=" "
-                                                                       name="pName"></td>
-                                                            <td> <input class="form-control" autofocus="" required=" "
-                                                                        name="sellingPrice"></td>
-                                                            <td> <input class="form-control" autofocus="" required=" "
-                                                                        name="price"></td>
-                                                            <td> <input class="form-control" autofocus="" required=" "
-                                                                        name="describle"></td>
-                                                            <td> <input type="date" class="form-control" autofocus=""
-                                                                        required=" " name="pDate"></td>
-                                                            <td> <input type="text" class="form-control" autofocus=""
-                                                                        required=" " name="size"></td>
-                                                            <td> <input type="text" class="form-control" autofocus=""
-                                                                        required=" " name="material"></td>
-                                                            <td> <input type="text" class="form-control" autofocus=""
-                                                                        required=" " name="quantity"></td>
-                                                            <td><input type="text" class="form-control" autofocus=""
-                                                                       required=" " name="discount"></td>
-                                                            <td> <select name="gender">
-                                                                    <option value="Male">Male</option>
-                                                                    <option value="Female">Female</option>
-                                                                    <option value="Unisex">Unisex</option>
-                                                                </select> </td>
-                                                            <td>
-                                                                <input type="file" class="form-control" autofocus=""
-                                                                       required=" " name="img" multiple>
-                                                            </td>
-                                                            <td> <input type="submit" value="INSERT"></td>
-                                                        </tr>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xs-12">
+                                                                    <div class="input-group">
+                                                                        <input placeholder="Product's Name" class="form-control" autofocus="" required=" " name="pName">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xs-12">
+                                                                    <div class="input-group">
+                                                                        <input placeholder="Selling Price" class="form-control" autofocus="" required=" "
+                                                                               name="sellingPrice">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xs-12">
+                                                                    <div class="input-group">
+                                                                        <input placeholder="Price" class="form-control" autofocus="" required=" " name="price">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xs-12">
+                                                                    <div class="input-group">
+                                                                        <input placeholder="Describle" class="form-control" autofocus="" required=" " name="describle">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xs-12">
+                                                                    <div class="input-group">
+                                                                        <input placeholder="Date" type="date" class="form-control" autofocus="" required=" " name="pDate">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xs-12">
+                                                                    <div class="input-group">
+                                                                        <input placeholder="Size" type="text" class="form-control" autofocus="" required=" " name="size">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xs-12">
+                                                                    <div class="input-group">
+                                                                        <input placeholder="Material" type="text" class="form-control" autofocus=""
+                                                                               required=" " name="material">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xs-12">
+                                                                    <div class="input-group">
+                                                                        <input placeholder="Quantity" type="text" class="form-control" autofocus=""
+                                                                               required=" " name="quantity">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xs-12">
+                                                                    <div class="input-group">
+                                                                        <input placeholder="Discount" type="text" class="form-control" autofocus=""
+                                                                               required=" " name="discount">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xs-12">
+                                                                    <div class="input-group">
+                                                                        <select aria-placeholder="Gender" name="gender" class="form-control" autofocus="">
+                                                                            <option value="Male">Male</option>
+                                                                            <option value="Female">Female</option>
+                                                                            <option value="Unisex">Unisex</option>
+                                                                        </select> 
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xs-12">
+                                                                    <div class="input-group">
+                                                                        <input type="file" class="form-control" autofocus="" required=" " name="img" multiple>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-xs-12">
+                                                                    <div class="input-group">
+                                                                        <input type="submit" value="INSERT">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </form>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
                                         <div class="row">
                                             <div class="col-sm-12 col-md-5">
                                                 <div class="dataTables_info" id="dataTable_info" role="status"
