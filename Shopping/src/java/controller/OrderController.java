@@ -110,6 +110,8 @@ public class OrderController extends HttpServlet {
             // lấy id từng product
             String pId = pIds.nextElement();
             ProductsDAO pDao = new ProductsDAO();
+            if(pId.equals("conn"))
+                continue;
             Products p = pDao.getProduct(Integer.parseInt(pId));
             // lấy số lượng từ session
             int quantity = (int) session.getAttribute(pId);

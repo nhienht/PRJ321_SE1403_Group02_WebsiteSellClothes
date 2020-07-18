@@ -317,29 +317,22 @@
         </style>
     </head>
     <body>
-        <c:if test="${! empty param.logout}">
+      
             <%
-                if (Integer.parseInt(request.getParameter("logout")) == 1) {
-                    Cookie[] cookies = request.getCookies();
-                    //         for (Cookie cookie : cookies) {
-                    //           String cookieName = cookie.getName();
-                    //         if (cookieName.equals("user") || cookieName.equals("pass") || cookieName.equals("idCustomer")) {
-                    //           //   cookie.setValue("");
-                    //         cookie.setMaxAge(0);
-                    //       response.addCookie(cookie);
-                    // }
+               // if (Integer.parseInt(request.getParameter("logout")) == 1) {
+                 //   Cookie[] cookies = request.getCookies();
+                   // for (Cookie cookie : cookies) {
+                     //   String cookieName = cookie.getName();
+                       // if (cookieName.equals("user") || cookieName.equals("pass") || cookieName.equals("idCustomer")) {
+//                            cookie.setPath("");
+//                            cookie.setMaxAge(0);
+//                            cookie.setValue(null);
+//                            response.addCookie(cookie);
+                       // }
                     //}
-                    for (int i = 0; i < cookies.length; i++) {
-                        String cookieName = cookies[i].getName();
-                        if (cookieName.equals("user") || cookieName.equals("pass") || cookieName.equals("idCustomer")) {
-                            cookies[i].setMaxAge(0);
-                            response.addCookie(cookies[i]);
-
-                        }
-                    }
-                }
+               // }
             %>
-        </c:if>
+     
 
         <!--  <form action="">         
             User <input type="text" name="user" required=""> </br>
@@ -363,7 +356,8 @@
                     <input type="submit" class="fadeIn fourth" value="Log In" name="btnLogin">  
 
                     <div id="formFooter">
-                        <a class="btn btn-primary" href="signin.jsp" role="button" style="background-color: #6c757d">Registration</a>
+                         <button type="submit" class="btn btn-secondary" value="LoginAdmin" name="btnSignInPage">Register</button>
+                        <!--<button class="btn btn-primary" href="signin.jsp" role="button" style="background-color: #6c757d">Registration</a>-->
                         <button type="submit" class="btn btn-secondary" value="LoginAdmin" name="adminLogin">Admin Login</button>
                     </div>
                 </form>
