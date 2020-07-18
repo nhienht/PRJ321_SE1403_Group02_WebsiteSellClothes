@@ -114,7 +114,7 @@ public class ProductController extends HttpServlet {
             ImageDAO imgDao = new ImageDAO();
             try {
                 List<Part> fileParts = (List<Part>) request.getParts();
-                String pathOld = request.getServletContext().getRealPath("") + File.separator + DIR;
+                               String pathOld = request.getServletContext().getRealPath("") + File.separator + DIR;
                 //   String path = request.getServletContext().getRealPath("") + File.separator + DIR;
                // out.print("1");
                 for (Part filePart : fileParts) {
@@ -124,7 +124,9 @@ public class ProductController extends HttpServlet {
                         String fileName = filePart.getSubmittedFileName(); // 
                         // String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
                         boolean check = imgDao.insert(pID, fileName);
-                        if (!check) {
+                        if (!check) { System.out.println(pathOld + File.separator + fileName);
+
+                            
                             filePart.write(pathOld + File.separator + fileName);
                         }
 
