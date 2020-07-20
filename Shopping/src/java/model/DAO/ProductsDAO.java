@@ -247,5 +247,34 @@ public class ProductsDAO {
         }
         return null;
     }
+    public ResultSet getProductBySupplier(int supID){
+        try {
+            String sql = "select * from products where supID=?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, supID);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public ResultSet getProductByBrand(int brID){
+        try {
+            String sql = "select * from products where brID=?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, brID);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
 
 }

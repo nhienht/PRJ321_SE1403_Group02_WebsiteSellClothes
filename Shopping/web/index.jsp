@@ -14,4 +14,5 @@
     <body>
         <jsp:include page="home.jsp"/>
     </body>
+    
 </html>

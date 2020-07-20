@@ -175,7 +175,7 @@
                         <!--                             <img src="../../data/hihi.jpg" height="150px" width="150px" class="image" alt="Error"/>	-->
 
                         <c:forEach var="img" items="${i.rows}" begin="0" end="0">
-                            <a href="productDetail.jsp">
+                            <a href="productDetail.jsp?pID=${row.pID}">
                                 <img src="../../data/${img.imageName}" height="150px" width="150px" class="image" alt="Error"/>	
 
                             </a>
@@ -185,10 +185,10 @@
                             <c:out value="${row.pName}"/>                     
                         </div>
                         <div>
-                            Price:   <c:out value="${row.sellingPrice}" />
+                            Price:   <c:out value="${row.price}" />
                         </div>
                         <div class="overlay">
-                            <a href="./../../CartController?id=${row.pID}" class="btn btn-info btn-lg">
+                            <a href="./../../CartController?id=${row.pID}&quantity=1" class="btn btn-info btn-lg">
                                 
                                 <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
                             </a>
