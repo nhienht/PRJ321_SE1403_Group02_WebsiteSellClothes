@@ -13,11 +13,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
+        <!-- CSS only -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
               integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+        <!-- JS, Popper.js, and jQuery -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
                 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -27,7 +30,6 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
         <title>List Products </title>
         <style>
             html {
@@ -157,7 +159,49 @@
                     width: auto;
                 }
             }
+                .searchbar{
+                    margin-bottom: auto;
+                    margin-top: auto;
+                    height: 60px;
+                    background-color: #F5A9BC;
+                    border-radius: 30px;
+                    padding: 10px;
+                }
 
+                .search_input{
+                    color: white;
+                    border: 0;
+                    outline: 0;
+                    background: none;
+                    width: 0;
+                    caret-color:transparent;
+                    line-height: 40px;
+                    transition: width 0.4s linear;
+                }
+
+                .searchbar:hover > .search_input{
+                    padding: 0 10px;
+                    width: 450px;
+                    caret-color:red;
+                    transition: width 0.4s linear;
+                }
+
+                .searchbar:hover > .search_icon{
+                    background: white;
+                    color: #e74c3c;
+                }
+
+                .search_icon{
+                    height: 40px;
+                    width: 40px;
+                    float: right;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 50%;
+                    color:white;
+                    text-decoration:none;
+                }
             .sidebar {
                 width: 90px !important;
                 background-color: #F5A9BC;
@@ -197,7 +241,7 @@
             }
 
             .sidebar .nav-item .nav-link {
-                color:#212529;
+                color: #212529;
             }
 
             .sidebar .nav-item .nav-link:active,
@@ -276,49 +320,6 @@
                     display: none;
                 }
             }
-            .searchbar{
-                margin-bottom: auto;
-                margin-top: auto;
-                height: 60px;
-                background-color: #F5A9BC;
-                border-radius: 30px;
-                padding: 10px;
-            }
-
-            .search_input{
-                color: white;
-                border: 0;
-                outline: 0;
-                background: none;
-                width: 0;
-                caret-color:transparent;
-                line-height: 40px;
-                transition: width 0.4s linear;
-            }
-
-            .searchbar:hover > .search_input{
-                padding: 0 10px;
-                width: 450px;
-                caret-color:red;
-                transition: width 0.4s linear;
-            }
-
-            .searchbar:hover > .search_icon{
-                background: white;
-                color: #e74c3c;
-            }
-
-            .search_icon{
-                height: 40px;
-                width: 40px;
-                float: right;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border-radius: 50%;
-                color:white;
-                text-decoration:none;
-            }
 
             .sidebar.fixed-top {
                 top: 56px;
@@ -349,10 +350,11 @@
                     -webkit-column-count: 2;
                     column-count: 2;
                 }
+
                 .bg-dark {
-                    background-color: #343a40!important;
+                    background-color: #343a40 !important;
                 }
-            </style>
+        </style>
         </head>
 
 
