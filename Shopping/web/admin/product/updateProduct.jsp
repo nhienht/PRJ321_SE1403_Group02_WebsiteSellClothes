@@ -154,7 +154,49 @@
                     width: auto;
                 }
             }
+                .searchbar{
+                    margin-bottom: auto;
+                    margin-top: auto;
+                    height: 60px;
+                    background-color: #F5A9BC;
+                    border-radius: 30px;
+                    padding: 10px;
+                }
 
+                .search_input{
+                    color: white;
+                    border: 0;
+                    outline: 0;
+                    background: none;
+                    width: 0;
+                    caret-color:transparent;
+                    line-height: 40px;
+                    transition: width 0.4s linear;
+                }
+
+                .searchbar:hover > .search_input{
+                    padding: 0 10px;
+                    width: 450px;
+                    caret-color:red;
+                    transition: width 0.4s linear;
+                }
+
+                .searchbar:hover > .search_icon{
+                    background: white;
+                    color: #e74c3c;
+                }
+
+                .search_icon{
+                    height: 40px;
+                    width: 40px;
+                    float: right;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 50%;
+                    color:white;
+                    text-decoration:none;
+                }
             .sidebar {
                 width: 90px !important;
                 background-color: #F5A9BC;
@@ -434,21 +476,15 @@
                                 <div class="table-responsive">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                         <div class="row">
-                                            <div class="col-sm-12 col-md-6">
-                                                <div class="dataTables_length" id="dataTable_length"><label>Show <select
-                                                            name="dataTable_length" aria-controls="dataTable"
-                                                            class="custom-select custom-select-sm form-control form-control-sm">
-                                                            <option value="10">10</option>
-                                                            <option value="25">25</option>
-                                                            <option value="50">50</option>
-                                                            <option value="100">100</option>
-                                                        </select> entries</label></div>
+         <div class="container h-100">
+                                                <div class="d-flex justify-content-center h-100">
+                                                    <div class="searchbar">
+                                                        <input class="search_input" type="text" name="" placeholder="Search...">
+                                                        <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-12 col-md-6">
-                                                <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input
-                                                            type="search" class="form-control form-control-sm" placeholder=""
-                                                            aria-controls="dataTable"></label></div>
-                                            </div>
+                                        </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
