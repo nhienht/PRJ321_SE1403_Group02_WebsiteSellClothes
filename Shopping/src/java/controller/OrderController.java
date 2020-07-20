@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.util.Enumeration;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -98,31 +99,41 @@ public class OrderController extends HttpServlet {
         String phone = request.getParameter("phone");
         String note = request.getParameter("note");
         //double total = Double.parseDouble(session.getAttribute("totalPrice").toString());
-        double total = Double.parseDouble(getServletContext().getAttribute("total").toString());
+        double total = Double.parseDouble(request.getParameter("total"));
         BillDAO bDao = new BillDAO();
           bDao.addBill(Integer.parseInt(cID), "New", name, address, phone, note, total);
         int billID = bDao.getMaxBill();
         BillDetailDAO bdDao = new BillDetailDAO();
-        Enumeration<String> pIds = session.getAttributeNames();
-        int success = 1;  // tạo biến kiểm tra mua thành công hay không   
-        // đi đến từng sản phẩm, true nếu còn product trongg pIds
-        while (pIds.hasMoreElements()) {
-            // lấy id từng product
-            String pId = pIds.nextElement();
-            ProductsDAO pDao = new ProductsDAO();
-            if(pId.equals("conn"))
-                continue;
-            Products p = pDao.getProduct(Integer.parseInt(pId));
-            // lấy số lượng từ session
-            int quantity = (int) session.getAttribute(pId);
-
-            //insert bill detail, nếu thành công trả về 1, không thành công trả về 0
-            bdDao.addBillDetail(billID, Integer.parseInt(pId), quantity, quantity * p.getPrice());
-            //     success = 0;
-            //}
+           HashMap<Integer, Integer> listCart = new HashMap<Integer, Integer>();
+           listCart = (HashMap<Integer, Integer>) session.getAttribute("listCart");
+           ProductsDAO pDao = new ProductsDAO();
+           for(Integer i : listCart.keySet()){
+               int quantity = listCart.get(i);
+               Products p = pDao.getProduct(i);
+               bdDao.addBillDetail(billID, i, quantity, p.getPrice());
+           }
+           session.removeAttribute("listCart");
             response.sendRedirect("./customer/bill/billDetail.jsp");
-
-        }
+//        Enumeration<String> pIds = session.getAttributeNames();
+//        int success = 1;  // tạo biến kiểm tra mua thành công hay không   
+//        // đi đến từng sản phẩm, true nếu còn product trongg pIds
+//        while (pIds.hasMoreElements()) {
+//            // lấy id từng product
+//            String pId = pIds.nextElement();
+//            ProductsDAO pDao = new ProductsDAO();
+//            if(pId.equals("conn"))
+//                continue;
+//            Products p = pDao.getProduct(Integer.parseInt(pId));
+//            // lấy số lượng từ session
+//            int quantity = (int) session.getAttribute(pId);
+//
+//            //insert bill detail, nếu thành công trả về 1, không thành công trả về 0
+//            bdDao.addBillDetail(billID, Integer.parseInt(pId), quantity, quantity * p.getPrice());
+//            //     success = 0;
+//            //}
+//            response.sendRedirect("./customer/bill/billDetail.jsp");
+//
+//        }
     }
 
         /**
