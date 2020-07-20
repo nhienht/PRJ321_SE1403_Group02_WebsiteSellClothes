@@ -354,6 +354,11 @@
                 .bg-dark {
                     background-color: #343a40 !important;
                 }
+                .input-group{
+                    padding-bottom:  30px;
+                }
+              
+                
             </style>
         </head>
         <body>
@@ -385,7 +390,7 @@
         <body id="page-top" class="">
 
             <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-                <a class="navbar-brand mr-1 fas" href="#">
+                <a class="navbar-brand mr-1 fas" href="../../home.jsp">
                     <h3>Clothing</h3>
                 </a>
 
@@ -432,7 +437,7 @@
                     <li class="nav-item ">
                         <a class="nav-link" href="listbill.jsp">
                             <i class="fas fa-fw fa-user"></i>
-                            <span>List Bill</span></a>
+                            <span> Bill</span></a>
                     </li>
 
                     <li class="nav-item active">
@@ -489,86 +494,81 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table class="table table-bordered dataTable" id="dataTable" width="100%"
-                                                   cellspacing="0" role="grid" aria-describedby="dataTable_info"
-                                                   style="width: 100%;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Your Name </th>
-                                                        <th>  <label for="phone">Phone</label></th>
-                                                        <th>Street Address</th>
-                                                        <th>Bill Date</th>
-                                                        <th>Note</th>
-                                                        <th>Status</th>
-                                                        <th>Total</th>
-                                                        <th>Submit</th>
-                                                    </tr>
-                                                </thead>
 
-                                                <tbody>
-                                                <form action="./../../BillController" class="billing-form" method="post">
-                                                    <input type="hidden" value="<%= bID%>" name="bID"/>
-                                                    <input type="hidden" value="<%= cID%>" name="cID"/>
-                                                    <h3 class="mb-4 billing-heading">Billing Details</h3>
-                                                    <div class="row align-items-end">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
 
-                                                                <td>   <input type="text" class="form-control" placeholder="Your Name" name="customerName" value="<%= customerName%>">  </td>
-                                                            </div>
+                                    <form action="./../../BillController" class="billing-form" method="post">
+                                        <div class="contact-form">
+                                            <div class="row">
+                                                <input type="hidden" value="<%= bID%>" name="bID"/>
+                                                <input type="hidden" value="<%= cID%>" name="cID"/>
+                                                
+                                            
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <div>Customer Name </div>
+                                                        <div class="input-group">
+                                                            
+                                                           <input type="text" class="form-control" placeholder="Your Name" name="customerName" value="<%= customerName%>">  
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
+                                                    </div>
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <div>Phone</div>
+                                                        <div class="input-group">
 
-                                                                <td>  <input type="text" class="form-control" placeholder="Your Phone Number" name="phone" value="<%= phone%>">  </td>
-                                                            </div>
+                                                           <input type="text" class="form-control" placeholder="Your Phone Number" name="phone" value="<%= phone%>">  
                                                         </div>
-                                                        <div class="w-100"></div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
+                                                    </div>
 
-                                                                <td> <input type="text" class="form-control" placeholder="House Number and Street Name" name="address" value="<%= address%>"></td>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <div>Address</div>
+                                                        <div class="input-group">
 
-                                                                    <td><input type="date" class="form-control" placeholder="Date Of Bill" name="pDate" value="<%= bDate%>"></td>
-                                                                </div>
-                                                            </div>
-                                                            <div class="w-100"></div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-
-                                                                    <td>  <input type="text" class="form-control" placeholder="Your Note" name="note" value="<%= note%>"></td>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-
-                                                                    <td> <input type="text" class="form-control" placeholder="Status Of Bill" name="bStatus" value="<%= bStatus%>"></td>
-                                                                </div>
-                                                            </div>
-                                                            <div class="w-100"></div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-group" >
-
-                                                                    <td><input type="input" class="form-control" name="total" value="<%= total%>"></td>
-                                                                </div>
-                                                            </div>
-                                                            <div class="w-100"></div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-group" >
-                                                                    <td>  <input type="submit" class="form-control" name="btnUpdate" value="Update"></td>
-                                                                </div>
-                                                            </div>
+                                                         <input type="text" class="form-control" placeholder="House Number and Street Name" name="address" value="<%= address%>">
                                                         </div>
-                                                </form>
-                                                </tbody>
-                                            </table>
+                                                    </div>
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <div>Date</div>
+                                                        <div class="input-group">
+
+                                                            <input type="date" class="form-control" placeholder="Date Of Bill" name="pDate" value="<%= bDate%>">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <div>Note</div>
+                                                        <div class="input-group">
+
+                                                       <input type="text" class="form-control" placeholder="Your Note" name="note" value="<%= note%>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <div>Status</div>
+                                                        <div class="input-group">
+
+                                                            <input type="text" class="form-control" placeholder="Status Of Bill" name="bStatus" value="<%= bStatus%>">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-12 col-xs-12">
+                                                        <div>Total</div>
+                                                        <div class="input-group" >
+
+                                                            <input type="input" class="form-control" name="total" value="<%= total%>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12 col-xs-12">
+                                                        <div></div>
+                                                        <div class="input-group" >
+                                                            <input type="submit" class="form-control" name="btnUpdate" value="Update">
+                                                        </div>
+                                                    </div>
+                                         
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
+
+
+
+
                                     <div class="row">
                                         <div class="col-sm-12 col-md-5">
                                             <div class="dataTables_info" id="dataTable_info" role="status"
@@ -597,15 +597,16 @@
                     </div>
                 </div>
             </div>
-
         </div>
-        <!-- /#wrapper -->
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-    </body>
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+</body>
 
 </body>
 </html>

@@ -374,7 +374,7 @@
 
 
             <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-                <a class="navbar-brand mr-1 fas" href="#">
+                <a class="navbar-brand mr-1 fas" href="../../home.jsp">
                     <h3>Clothing</h3>
                 </a>
 

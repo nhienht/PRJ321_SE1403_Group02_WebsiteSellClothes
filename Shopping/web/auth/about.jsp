@@ -118,11 +118,11 @@
                         <a href="../home.jsp" class="nav-link ">Home</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="./customer/product/list.jsp" class="nav-link ">Products</a>
+                        <a href="../customer/product/list.jsp" class="nav-link ">Products</a>
 
                     </li>
                     <li class="nav-item">
-                        <a href="./auth/about.jsp" class="nav-link">About us</a>
+                        <a href="about.jsp" class="nav-link">About us</a>
                     </li>
                     <li class="nav-item">
                         <a href="contact.jsp" class="nav-link">Contact</a>
@@ -131,14 +131,14 @@
                     <c:if test = "${!isLogin}"> 
                         <li class="nav-item">
 
-                            <a href="./auth/signin.jsp" title="Login" class="nav-link" >
+                            <a href="signin.jsp" title="Login" class="nav-link" >
                                 Sign In
                             </a>
                         </li>
                     </c:if>
                     <c:if test = "${isLogin}"> 
                         <li class="nav-item">
-                            <a href="../auth/login.jsp?logout=1" title="Login" class="nav-link">
+                            <a href="login.jsp?logout=1" title="Login" class="nav-link">
                                 Logout
                             </a>
                         </li>

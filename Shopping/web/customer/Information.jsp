@@ -1,6 +1,3 @@
-
-copy dán tui i
-
 <%-- 
     Document   : Information
     Created on : Jul 13, 2020, 3:44:23 PM

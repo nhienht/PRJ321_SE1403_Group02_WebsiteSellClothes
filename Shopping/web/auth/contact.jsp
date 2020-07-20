@@ -132,7 +132,7 @@ p {
                         <c:if test = "${!isLogin}"> 
                         <li class="nav-item">
 
-                            <a href="./auth/signin.jsp" title="Login" class="nav-link" >
+                            <a href="signin.jsp" title="Login" class="nav-link" >
                                 Sign In
                             </a>
                         </li>
