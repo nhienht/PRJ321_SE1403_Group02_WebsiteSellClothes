@@ -29,51 +29,100 @@
         <link rel="stylesheet" href="Style/css/icomoon.css">
         <link rel="stylesheet" href="Style/css/style.css">
     </head>
-    <body class="goto-here">
-        <div class="py-1 bg-black">
-            <div class="container">
-                <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-                    <div class="col-lg-12 d-block">
-                        <div class="row d-flex">
-                            <div class="col-md pr-4 d-flex topper align-items-center">
-                                <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-                                <span class="text">+ 1235 2355 98</span>
-                            </div>
-                            <div class="col-md pr-4 d-flex topper align-items-center">
-                                <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-                                <span class="text">DND@gmail.com</span>
-                            </div>
-                            <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-                                <span class="text">3-5 Business days delivery &amp; Free Returns</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-            <div class="container">
-                <a class="navbar-brand" href="./../../home.jsp">Clothes Shop</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="oi oi-menu"></span> Menu
-                </button>
+    <style>
+         @import url('https://fonts.google.com/specimen/Balsamiq+Sans');
+            html ,body {
+                width: 100%;
+                height: 100%;
+                font-family: 'Balsamiq Sans';   
+                font-size: 17px;
+                color: #222;
+            }
+            .navbar{
+                background-color: #F5A9BC !important;
+            }
+            .navbar li a {
+                color: #f8f2f2!important ;
 
-                <div class="collapse navbar-collapse" id="ftco-nav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a href="./../../home.jsp" class="nav-link">Home</a></li>
-                        <li class="nav-item dropdown active">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catalog</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                <a class="dropdown-item" href="./../../home.jsp">Shop</a>
-                                <a class="dropdown-item" href="cart.jsp">Cart</a>
-                                <a class="dropdown-item" href="order.jsp">Checkout</a>
-                            </div>
+            }
+            .navbar li a:hover {
+                color: #000000 !important ;
+
+            }
+            .container-fluid
+            {
+                padding-top: 8em;
+            }
+
+
+            .overlay {
+                position: absolute; 
+                bottom: 0; 
+                background: rgb(0, 0, 0);
+                background: rgba(0, 0, 0, 0.5); /* Black see-through */
+                color: #f1f1f1; 
+                width: 100%;
+                transition: .5s ease;
+                opacity:0;
+                color: white;
+                font-size: 20px;
+                padding: 20px;
+                text-align: center;
+            }
+            .container-fluid:hover .overlay {
+                opacity: 1;
+            }
+            .nav-item{
+                padding-right: 20px;
+                font-size: 25px;
+            }
+            .fotter{
+                background-color: black;
+                color: white;
+            }
+    </style>
+    <body class="goto-here">
+        <jsp:include page="../../header/header.jsp" ></jsp:include>
+         <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
+
+             <a class="navbar-branch" href="../../index.jsp">
+                    <img src="./images/logo.jpg" height="80px" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto" style="padding-left: 600px">
+                        <li class="nav-item">
+                            <a href="../../home.jsp" class="nav-link ">Home</a>
                         </li>
-                        <li class="nav-item"><a href="./../../auth/about.jsp" class="nav-link">About</a></li>
-                        <li class="nav-item"><a href="./../../auth/contact.jsp" class="nav-link">Contact</a></li>
-                        <li class="nav-item cta cta-colored"><a href="cart.jsp" class="nav-link"><span class="icon-shopping_cart"></span></a></li>
-                    </ul>
-                </div>
+                        <li class="nav-item dropdown">
+                            <a href="../../customer/product/list.jsp" class="nav-link ">Products</a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a href="../../auth/about.jsp" class="nav-link">About us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../../auth/contact.jsp" class="nav-link">Contact</a>
+                        </li>
+
+                        <c:if test = "${!isLogin}"> 
+                        <li class="nav-item">
+
+                            <a href="../../auth/signin.jsp" title="Login" class="nav-link" >
+                                Sign In
+                            </a>
+                        </li>
+                    </c:if>
+                    <c:if test = "${isLogin}"> 
+                        <li class="nav-item">
+                            <a href="LogoutController"  title="Login" class="nav-link">
+                                Logout
+                            </a>                       
+                        </li>
+                    </c:if>
+                </ul>
             </div>
         </nav>
         <!-- END nav -->

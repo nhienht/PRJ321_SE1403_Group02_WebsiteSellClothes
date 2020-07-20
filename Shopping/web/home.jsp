@@ -105,48 +105,48 @@
         <jsp:include page="header/header.jsp" ></jsp:include>
 
 
-            <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
+                <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
-                <a class="navbar-branch" href="index.jsp">
-                    <img src="./images/logo.jpg" height="80px" alt="">
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto" style="padding-left: 600px">
-                        <li class="nav-item">
-                            <a href="./index.jsp" class="nav-link ">Home</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="./customer/product/list.jsp" class="nav-link ">Products</a>
+                    <a class="navbar-branch" href="index.jsp">
+                        <img src="./images/logo.jpg" height="80px" alt="">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto" style="padding-left: 600px">
+                            <li class="nav-item">
+                                <a href="./index.jsp" class="nav-link ">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="./customer/product/list.jsp" class="nav-link ">Products</a>
 
-                        </li>
-                        <li class="nav-item">
-                            <a href="./auth/about.jsp" class="nav-link">About us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="./auth/contact.jsp" class="nav-link">Contact</a>
-                        </li>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./auth/about.jsp" class="nav-link">About us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./auth/contact.jsp" class="nav-link">Contact</a>
+                            </li>
 
-                        <c:if test = "${!isLogin}"> 
-                        <li class="nav-item">
+                            <c:if test = "${!isLogin}"> 
+                            <li class="nav-item">
 
-                            <a href="./auth/signin.jsp" title="Login" class="nav-link" >
-                                Sign In
-                            </a>
-                        </li>
-                    </c:if>
-                    <c:if test = "${isLogin}"> 
-                        <li class="nav-item">
-                            <a href="LogoutController"  title="Login" class="nav-link">
-                                Logout
-                            </a>                       
-                        </li>
-                    </c:if>
-                </ul>
-            </div>
-        </nav>
+                                <a href="./auth/signin.jsp" title="Login" class="nav-link" >
+                                    Sign In
+                                </a>
+                            </li>
+                        </c:if>
+                        <c:if test = "${isLogin}"> 
+                            <li class="nav-item">
+                                <a href="LogoutController"  title="Login" class="nav-link">
+                                    Logout
+                                </a>                       
+                            </li>
+                        </c:if>
+                    </ul>
+                </div>
+            </nav>
 
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">

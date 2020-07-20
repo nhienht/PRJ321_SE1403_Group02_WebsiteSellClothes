@@ -1,9 +1,11 @@
+
+copy dán tui i
+
 <%-- 
     Document   : Information
     Created on : Jul 13, 2020, 3:44:23 PM
     Author     : Dat
 --%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@page import="model.entity.Customer"%>
@@ -28,11 +30,9 @@
             out.print(id);
             CustomerDAO cDao = new CustomerDAO();
             Customer c = cDao.getCustomer(id);
-
         %>
         <form action="./../ChangeInforCustomer" method="POST">
             <table>
-
 
                 <tr>
                     <td>Name</td>
@@ -66,7 +66,6 @@
                     <td> <a href="changeInfo.jsp">Change infor</a></td>
                     <td> <a href="changePassword.jsp">Change password</a></td>
                 </tr>
-
             </table>
         </form>
         <sql:setDataSource var="conn"
@@ -90,6 +89,5 @@
                 </tr>
             </c:forEach>
         </table>
-
     </body>
 </html>
