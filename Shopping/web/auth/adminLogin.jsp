@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login</title>
+        <title>Login Admin</title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -23,7 +23,7 @@
             }
 
             body {
-                background: url('../images/back.png') fixed;
+                background: url('images/back.png') fixed;
                 background-size: cover;
                 font-family: "Poppins", sans-serif;
                 height: 100vh;
@@ -319,17 +319,14 @@
             <div id="formContent">
 
                 <div class="fadeIn first">
-                    <img src="../images/logo.jpg"  id="icon" alt="User Icon" />
+                    <img src="images/logo.jpg"  id="icon" alt="User Icon" />
                 </div>
 
-                <form action="./../AccountController" method="POST">
+                <form action="AdminController" method="POST">
                     <input type="text" id="login" class="fadeIn second" name="user" placeholder="User Name">
                     <input type="password" id="password" class="fadeIn third" name="pass" placeholder="Password">
-                    <input type="submit" class="fadeIn fourth" value="Log In" name="btnLogin">  
-
-                    <div id="formFooter">
-                         <button type="submit" class="btn btn-secondary" value="LoginAdmin" name="btnSignInPage">Register</button>
-                       </div>
+                    <input type="submit" class="fadeIn fourth" value="Log In" name="adminLogin">  
+                    
                 </form>
 
 

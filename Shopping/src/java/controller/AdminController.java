@@ -8,25 +8,20 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
-import java.sql.Date;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import model.DAO.AdminDAO;
-import model.DAO.CustomerDAO;
-import model.entity.Customer;
 
 /**
  *
- * @author Dat
+ * @author NhienHT
  */
-@WebServlet(name = "Admin", urlPatterns = {"/Admin"})
-public class AccountController extends HttpServlet {
+@WebServlet(name = "AdminController", urlPatterns = {"/AdminController"})
+public class AdminController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,8 +37,15 @@ public class AccountController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            RequestDispatcher disp = request.getRequestDispatcher("./auth/adminLogin.jsp");
-            disp.forward(request, response);
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AdminController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AdminController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -73,46 +75,19 @@ public class AccountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-
-        Customer c = new Customer();
-        CustomerDAO cDao = new CustomerDAO();
-        if (request.getParameter("btnSignIn") != null) {
-            c.setcPassword(request.getParameter("cPassword"));
-            c.setcUsername(request.getParameter("cUsername"));
-            c.setcName(request.getParameter("cName"));
-            c.setPhonenumber(request.getParameter("cPhonenumber"));
-            c.setAddress(request.getParameter("address"));
-            Date birthday = Date.valueOf(request.getParameter("birthday"));
-            c.setBirthday(birthday);
-            c.setEmail(request.getParameter("email"));
-            c.setStatus(1);
-            c.setGender(request.getParameter("gender"));
-            cDao.insert(c);
-            HttpSession session = request.getSession();
-            session.setAttribute("checkLogin", true);
-            response.sendRedirect("./index.jsp");
-
-        } else if (request.getParameter("btnLogin") != null) {
-            // CustomerDAO cDao = new CustomerDAO();
+      //  processRequest(request, response);
+        if (request.getParameter("adminLogin") != null) {
+            AdminDAO aDao = new AdminDAO();
             String user = request.getParameter("user");
             String pass = request.getParameter("pass");
-            int id = cDao.login(user, pass);
-            if (id != -1) {
-                Cookie userCookie = new Cookie("user", user);
-                Cookie passCookie = new Cookie("pass", pass);
-                Cookie idCookie = new Cookie("idCustomer", String.valueOf(id));
-
-                userCookie.setMaxAge(60 * 60 * 24);
-                passCookie.setMaxAge(60 * 60 * 24);
-                idCookie.setMaxAge(60 * 60 * 24);
-
-                response.addCookie(userCookie);
-                response.addCookie(passCookie);
-                response.addCookie(idCookie);
-//                HttpSession session= request.getSession();
-// session.setAttribute("checkLogin", true);
-                response.sendRedirect("home.jsp");
+                   
+            boolean check = aDao.login(user, pass);
+            if (check) {
+                Cookie adminCookie = new Cookie("admin", user);              
+                adminCookie.setMaxAge(60 * 60 * 24);              
+                response.addCookie(adminCookie);      
+                response.sendRedirect("./admin/product/listproducts.jsp");
+             //   out.print("<script> alert('Login successful');</script>");
             } else {
 //                out.println("<script type=\"text/javascript\">");
 //                out.println("alert('User or password incorrect');");
@@ -121,8 +96,7 @@ public class AccountController extends HttpServlet {
                 response.sendRedirect("./auth/login.jsp");
 
             }
-        } 
-
+        }
     }
 
     /**

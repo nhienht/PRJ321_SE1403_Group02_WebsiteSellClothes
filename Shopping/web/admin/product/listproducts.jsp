@@ -407,7 +407,7 @@
             </nav>
 
             <div id="wrapper">
-                <ul class="sidebar navbar-nav">
+                 <ul class="sidebar navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="../product/listproducts.jsp">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -435,12 +435,8 @@
                         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                             <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
                             <a class="dropdown-item" href="../product/insertProduct.jsp">Insert Products</a>
-
                         </div>
                     </li>
-
-
-
                 </ul>
 
                 <div id="content-wrapper">
@@ -529,7 +525,7 @@
                                                                 //  System.out.println(rsImg.next());
                                                                 // while (rsImg.first()) {
                                                                 System.out.println(rsImg.getString("imageName"));
-                                                                out.print("<td><img src='../../data/" + rsImg.getString("imageName") + "' height='100px' width='100px' /></td>");
+                                                                out.print("<td><img src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' /></td>");
                                                                 //   break;
                                                                 ///  }
 

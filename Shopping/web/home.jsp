@@ -86,7 +86,7 @@
 
 
         </style>
-   
+
     </head>
 
     <body>
@@ -119,31 +119,36 @@
                         <li class="nav-item">
                             <a href="customer/product/cart.jsp" class="nav-link">Cart</a>
                         </li>
-   <li class="nav-item dropdown no-arrow  ">
-                        <a class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            <h3><i class="fas fa-user-circle fa-fw"></i></h3>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <!--<a class="dropdown-item" href="#">Logout</a>-->
-                        
-                    <%
-                        Cookie[] cookies = request.getCookies();
-                        if (cookies.length > 1) {
-                            for (Cookie cookie : cookies) {
-                                if (cookie.getName().equals("user")) {
-                                    out.print("<a class='nav-link' style='color: black' href='customer/Information.jsp'>" + cookie.getValue() + "</a>");
-                                    out.print("<a class='nav-link' style='color: black' href='LogoutController'>Logout</a>");
+                        <li class="nav-item dropdown no-arrow  ">
+                            <a class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <h3><i class="fas fa-user-circle fa-fw"></i></h3>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                <!--<a class="dropdown-item" href="#">Logout</a>-->
+
+                            <%
+                                Cookie[] cookies = request.getCookies();
+                                if (cookies.length > 1) {
+                                    for (Cookie cookie : cookies) {
+                                        if (cookie.getName().equals("user")) {
+                                            out.print("<a class='nav-link' style='color: black' href='customer/Information.jsp'>" + cookie.getValue() + "</a>");
+                                            out.print("<a class='nav-link' style='color: black' href='LogoutController'>Logout</a>");
+                                        } else if (cookie.getName().equals("admin")) {
+                                            response.sendRedirect("Admin");
+                                        } else {
+                                            out.print("<a class='nav-link' style='color: black' href='auth/login.jsp'>Login</a>");
+                                            out.print("<a class='nav-link' style='color: black' href='auth/signin.jsp'>Sigin</a>");
+                                        }
+                                    }
+                                } else {
+                                    out.print("<a class='nav-link' style='color: black' href='auth/login.jsp'>Login</a>");
+                                    out.print("<a class='nav-link' style='color: black' href='auth/signin.jsp'>Sigin</a>");
                                 }
-                            }
-                        } else {
-                            out.print("<a class='nav-link' style='color: black' href='auth/login.jsp'>Login</a>");
-                            out.print("<a class='nav-link' style='color: black' href='auth/signin.jsp'>Sigin</a>");
-                        }
-                    %>
-                    </div>
+                            %>
+                        </div>
                     </li>
-                   
+
                 </ul>
             </div>
         </nav>

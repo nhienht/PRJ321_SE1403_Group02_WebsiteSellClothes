@@ -176,7 +176,7 @@
 
                         <c:forEach var="img" items="${i.rows}" begin="0" end="0">
                             <a href="productDetail.jsp?pID=${row.pID}">
-                                <img src="../../data/${img.imageName}" height="150px" width="150px" class="image" alt="Error"/>	
+                                <img src="../../${img.imageName}" height="150px" width="150px" class="image" alt="Error"/>	
 
                             </a>
 
