@@ -14,13 +14,14 @@
 <html lang="en">
 
     <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <meta charset="UTF-8">
+        <!-- CSS only -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
               integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+        <!-- JS, Popper.js, and jQuery -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
                 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -29,11 +30,16 @@
         crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>c
 
         <title>Clothing </title>
         <style>
             @import url('https://fonts.google.com/specimen/Balsamiq+Sans');
+            .dropdown
+            {
+                float:  right;
+                padding-left: 20px;
+            }
             html ,body {
                 width: 100%;
                 height: 100%;
@@ -85,6 +91,8 @@
             }
 
 
+
+
         </style>
 
     </head>
@@ -119,12 +127,14 @@
                         <li class="nav-item">
                             <a href="customer/product/cart.jsp" class="nav-link">Cart</a>
                         </li>
+
+
                         <li class="nav-item dropdown no-arrow  ">
-                            <a class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                <h3><i class="fas fa-user-circle fa-fw"></i></h3>
+                            <a style="color: black;position:relative; top: -20px;" class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                               >
+                                <h3><i style="color: black;position:relative; top: -1px;" class="fas fa-user-circle fa-fw"></i></h3>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-"  >
                                 <!--<a class="dropdown-item" href="#">Logout</a>-->
 
                             <%
@@ -236,7 +246,7 @@
         </div>
         <div class="fotter">
             <div class="footer-copyright text-center py-3">
-                © 2020 1997 Clothing ®
+                ï¿½ 2020 1997 Clothing ï¿½
             </div>
         </div>
     </body>
