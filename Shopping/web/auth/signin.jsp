@@ -136,6 +136,7 @@
             </form> 
         </div> 
         <a href="login.jsp">LOGIN</a>
+        
         <script>
             var inputs = document.forms['register'].getElementsByTagName('input');
             var run_onchange = false;

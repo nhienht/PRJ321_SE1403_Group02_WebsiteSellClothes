@@ -358,7 +358,7 @@
         <body id="page-top" class="">
 
                <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-                <a class="navbar-brand mr-1 fas" href="#">
+                   <a class="navbar-brand mr-1 fas" href="../../home.jsp">
                     <h3>Clothing</h3>
                 </a>
 
@@ -402,9 +402,9 @@
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link" href="account.jsp">
+                        <a class="nav-link" href="../bill/listbill.jsp">
                             <i class="fas fa-fw fa-user"></i>
-                            <span>Account</span></a>
+                            <span>List Bill</span></a>
                     </li>
 
                     <li class="nav-item active">
