@@ -259,7 +259,7 @@
                                             out.print("<td>" + p.getPrice() + "</td>");
                                             out.print("<td>" + p.getDiscount() + "</td>");
                                             out.print("<td>" + quantity + "</td>");
-                                            total += (double) (p.getPrice() - p.getDiscount() * p.getPrice());
+                                            total += (double) quantity*(p.getPrice() - p.getDiscount() * p.getPrice()/100);
                                             out.print("<td><a href='?rm=" + i + "'>Remove</a></td>");
                                             out.print("</tr>");
 

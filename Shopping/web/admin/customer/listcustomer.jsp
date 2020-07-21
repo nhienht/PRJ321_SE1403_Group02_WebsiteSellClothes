@@ -473,12 +473,11 @@
                                                         <th>Email</th>
                                                         <th>Status</th>
                                                         <th>Gender</th>
-                                                        <th>Update</th>
+                                                        
+                                                        <th>Change Status</th>
                                                     </tr>
                                                 </thead>
-
                                                 <tbody>
-
                                                     <%
                                                         CustomerDAO cDao = new CustomerDAO();
                                                         ResultSet rs = cDao.getAll();
@@ -491,10 +490,15 @@
                                                             out.print("<td>" + rs.getString(6) + "</td>");
                                                             out.print("<td>" + rs.getDate(7) + "</td>");
                                                             out.print("<td>" + rs.getString(8) + "</td>");
-                                                            out.print("<td>" + rs.getString(9) + "</td>");
+                                                            if (rs.getInt("status") == 1) {
+                                                                    out.println("<td style='color:green; font-weight: bold;' >Valid</td> ");
+                                                                } else {
+                                                                    out.println("<td style='color:red;font-weight: bold; '>Invalid</td> ");
+                                                                }
                                                             out.print("<td>" + rs.getString(10) + "</td>");
                                                             //                            out.print("<td><a href='billDetail.jsp?id=" + rs.getInt("bID") + "'>Xem chi tiet hoa don</a></td>");
-                                                            out.print("<td><a href='updateCustomer.jsp?id=" + rs.getInt("cID") + "'>Update</a></td>");
+                                                         //   out.print("<td><a href='updateCustomer.jsp?id=" + rs.getInt("cID") + "'>Update</a></td>");
+                                                             out.print("<td><a href='../../Change?cID=" +rs.getInt(1) + "' + '>Change</a></td>");
                                                             out.print("</tr>");
                                                         }
                                                     %>

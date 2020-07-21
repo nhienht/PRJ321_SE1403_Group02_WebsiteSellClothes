@@ -98,7 +98,7 @@ public class CustomerDAO {
 
     public int ChangeStatus(int id, int status) {
         try {
-            String sql = "UPDATE `customer` SET `status`=? WHERE  `status`=?";
+            String sql = "UPDATE `customer` SET `status`=? WHERE  `cID`=?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, status);
             pst.setInt(2, id);

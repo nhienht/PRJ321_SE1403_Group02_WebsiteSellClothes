@@ -144,8 +144,7 @@
                                         if (cookie.getName().equals("user")) {
                                             out.print("<a class='nav-link' style='color: black' href='customer/Information.jsp'>" + cookie.getValue() + "</a>");
                                             out.print("<a class='nav-link' style='color: black' href='LogoutController'>Logout</a>");
-                                        } else if (cookie.getName().equals("admin")) {
-                                         //   RequestDispatcher disp = request.getRequestDispatcher("auth/adminLogin.jsp");
+                                        } else if (cookie.getName().equals("admin")) {                                      
                                           RequestDispatcher disp = request.getRequestDispatcher("admin/dashboard.jsp");
                                             disp.forward(request, response);
                                         }

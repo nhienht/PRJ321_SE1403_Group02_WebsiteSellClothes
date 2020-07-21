@@ -491,34 +491,17 @@
                                     </div>
                                     <tbody>
                                     <form action="../../ProductController" method="post">
+                                        <input value="<%= id%>" type="hidden" name="pID">
                                         <div class="contact-form">
                                             <div class="row">
                                                 <div class="col-sm-6 col-xs-12">
-                                                    <div>ID</div>
+                                                    <div>Product's name</div>
                                                     <div class="input-group">
-                                                        <input value="<%= id%>" type="text" name="pID" class="form-control"
-                                                               autofocus required="Please input ID">
+
+                                                        <input value="<%= pName%>" class="form-control" autofocus=""
+                                                               required=" " name="pName">
                                                     </div>
                                                 </div>
-
-                                                <div class="col-sm-6 col-xs-12">
-                                                    <div>Status</div>
-                                                    <div class="input-group">
-                                                        <input value="<%= status%>" type="text" name="status"
-                                                               class="form-control" autofocus required="Please input">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-6 col-xs-12">
-                                                    <div>Status</div>
-                                                    <div class="input-group">
-                                                        <input value="<%= brID%>" class="form-control" autofocus=""
-                                                               required=" " name="brID">
-                                                    </div>
-                                                </div>
-
-
-
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Type ID</div>
                                                     <div class="input-group">
@@ -535,8 +518,6 @@
                                                         </select>
                                                     </div>
                                                 </div>
-
-
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Supplier</div>
                                                     <div class="input-group">
@@ -545,18 +526,13 @@
                                                                required=" " name="supID">
                                                     </div>
                                                 </div>
-
-
                                                 <div class="col-sm-6 col-xs-12">
-                                                    <div>Product's name</div>
+                                                    <div>Brand</div>
                                                     <div class="input-group">
-
-                                                        <input value="<%= pName%>" class="form-control" autofocus=""
-                                                               required=" " name="pName">
+                                                        <input value="<%= brID%>" class="form-control" autofocus=""
+                                                               required=" " name="brID">
                                                     </div>
                                                 </div>
-
-
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Saleprice</div>
                                                     <div class="input-group">
@@ -565,7 +541,6 @@
                                                                required=" " name="sellingPrice">
                                                     </div>
                                                 </div>
-
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Price</div>
                                                     <div class="input-group">

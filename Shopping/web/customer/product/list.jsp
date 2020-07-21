@@ -172,11 +172,9 @@
                     </sql:query>	
 
                     <div class="col-xs-12 col-sm-6 col-md-3 boder bg-light">
-                        <!--                             <img src="../../data/hihi.jpg" height="150px" width="150px" class="image" alt="Error"/>	-->
-
                         <c:forEach var="img" items="${i.rows}" begin="0" end="0">
-                            <a href="productDetail.jsp?pID=${row.pID}">
-                                <img src="../../${img.imageName}" height="150px" width="150px" class="image" alt="Error"/>	
+                            <a href="productDetail.jsp?pID=${row.pID}" >
+                                <img src="../../${img.imageName}" height="300px" width="300px" class="image img-thumbnail" alt="Error"/>	
 
                             </a>
 

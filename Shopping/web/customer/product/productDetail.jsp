@@ -148,10 +148,10 @@
                                     <span class="badge purple mr-1"><%= p.gettID()%></span>
                                 </a>
                                 <p>Status</p>
-                                <c:if test="${quantity > 0}">
+                                <c:if test="${param.quantity > 0}">
                                     <span class="badge blue mr-1"> Còn hàng</span>     
                                 </c:if>
-                                <c:if test="${quantity==0}">
+                                <c:if test="${param.quantity==0}">
                                     <span class="badge blue mr-1"> Hết hàng</span>     
                                 </c:if>
                             </div>
@@ -191,14 +191,18 @@
                         <p><%= p.getDescrible()%> </p>
                     </div>
                 </div>
-                <div class="row wow fadeIn">
-                    <div class="col-lg-4 col-md-12 mb-4">
-                        <c:forEach var="img" items="${images.rows}">
-                            <img src="../../${img.imageName}" class="image"  height="150px" width="150px"  alt=""/>
-                        </c:forEach>
+                <div class="contact-form">
+                    <div class="row ">
+                        <div class="col-lg-4 col-sm-12">
+
+                            <c:forEach var="img" items="${images.rows}">
+                                <img src="../../${img.imageName}" class="image"  height="250px" width="250px"  alt=""/>
+                            </c:forEach>    
+                        </div>                     
                     </div>
 
-                </div></div>
+                </div>
+            </div>
         </main>
     </body>
 </html>
