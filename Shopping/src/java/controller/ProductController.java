@@ -114,23 +114,20 @@ public class ProductController extends HttpServlet {
             ImageDAO imgDao = new ImageDAO();
             try {
                 List<Part> fileParts = (List<Part>) request.getParts();
-                               String pathOld = request.getServletContext().getRealPath("") + File.separator + DIR;
+                String pathOld = request.getServletContext().getRealPath("") + File.separator + DIR;
                 //   String path = request.getServletContext().getRealPath("") + File.separator + DIR;
-               // out.print("1");
+                // out.print("1");
                 for (Part filePart : fileParts) {
-                   // out.print("2");
+                    // out.print("2");
                     if (filePart.getSubmittedFileName() != null) {
-                     //   out.print("3");
+                        //   out.print("3");
                         String fileName = filePart.getSubmittedFileName(); // 
                         // String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-                        boolean check = imgDao.insert(pID, fileName);
-                        if (!check) { System.out.println(pathOld + File.separator + fileName);
-
-                            
+                        boolean check = imgDao.insert(pID, DIR+ File.separator+ fileName);
+                        
+                            System.out.println(pathOld + File.separator + fileName);
                             filePart.write(pathOld + File.separator + fileName);
-                        }
-
-                    }
+                        }                  
                 }
             } catch (Exception ex) {
                 System.out.println(ex);
@@ -139,7 +136,7 @@ public class ProductController extends HttpServlet {
             }
         }
 
-          response.sendRedirect("./admin/product/listproducts.jsp");
+        response.sendRedirect("./admin/product/listproducts.jsp");
     }
 
     /**

@@ -470,7 +470,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                     <form action="./../../ProductController" method="POST" enctype='multipart/form-data'>
                                         <div class="contact-form">
@@ -479,7 +478,6 @@
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Status Product </div>
                                                     <div class="input-group">
-
                                                         <input placeholder="Status Product" type="text" name="status" class="form-control" autofocus
                                                                required="Please input">
                                                     </div>
@@ -503,6 +501,7 @@
                                                             <option value=7>Jeans</option>
                                                             <option value=8>Shirt</option>
                                                             <option value=9>Sweater</option>
+                                                            <option value="10">Other</option>
                                                         </select>
                                                     </div>
                                                 </div>

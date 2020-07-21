@@ -128,6 +128,7 @@
                             <a href="customer/product/cart.jsp" class="nav-link">Cart</a>
                         </li>
 
+
                         <li class="nav-item dropdown no-arrow  ">
                             <a style="color: black;position:relative; top: -20px;" class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
                                >
@@ -143,10 +144,12 @@
                                         if (cookie.getName().equals("user")) {
                                             out.print("<a class='nav-link' style='color: black' href='customer/Information.jsp'>" + cookie.getValue() + "</a>");
                                             out.print("<a class='nav-link' style='color: black' href='LogoutController'>Logout</a>");
-                                        }
+                                        } else if (cookie.getName().equals("admin")) {
+                                            response.sendRedirect("Admin");
+                                        } 
                                     }
                                 } else {
-                                    out.print("<a class='nav-link' class='color' style='color: black' href='auth/login.jsp'>Login</a>");
+                                    out.print("<a class='nav-link' style='color: black' href='auth/login.jsp'>Login</a>");
                                     out.print("<a class='nav-link' style='color: black' href='auth/signin.jsp'>Sigin</a>");
                                 }
                             %>
@@ -240,7 +243,7 @@
         </div>
         <div class="fotter">
             <div class="footer-copyright text-center py-3">
-                © 2020 1997 Clothing ®
+                ï¿½ 2020 1997 Clothing ï¿½
             </div>
         </div>
     </body>
