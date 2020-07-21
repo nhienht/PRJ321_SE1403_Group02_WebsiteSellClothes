@@ -8,7 +8,7 @@
 <html lang="en">
 
     <head>
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <meta charset="UTF-8">
         <!-- CSS only -->
@@ -256,7 +256,7 @@
                     font-size: 0.65rem;
                     display: block;
                 }
-                                .searchbar{
+                .searchbar{
                     margin-bottom: auto;
                     margin-top: auto;
                     height: 60px;
@@ -350,6 +350,9 @@
                 .bg-dark {
                     background-color: #343a40!important;
                 }
+                .input-group{
+                    padding-bottom: 30px;
+                }
             </style>
         </head>
 
@@ -357,8 +360,8 @@
 
         <body id="page-top" class="">
 
-               <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-                   <a class="navbar-brand mr-1 fas" href="../../home.jsp">
+            <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+                <a class="navbar-brand mr-1 fas" href="../../home.jsp">
                     <h3>Clothing</h3>
                 </a>
 
@@ -421,7 +424,7 @@
                         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                             <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
                             <a class="dropdown-item" href="../product/updateProduct.jsp">Update Products</a>
-                        
+
                         </div>
                     </li>
 
@@ -451,118 +454,170 @@
                                 <div class="table-responsive">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                         <div class="row">
-                                 >
-                                            <div class="col-sm-12 col-md-6">
-                                                <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input
-                                                            type="search" class="form-control form-control-sm" placeholder=""
-                                                            aria-controls="dataTable"></label></div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
-                                                       cellspacing="0" role="grid" aria-describedby="dataTable_info"
-                                                       style="width: 100%;">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Customer ID </th>
-                                                            <th>Password</th>
-                                                            <th>User Name</th>
-                                                            <th>Name</th>
-                                                            <th>Phone Number</th>
-                                                            <th>Address</th>
-                                                            <th>Birthday </th>
-                                                            <th>Email</th>
-                                                            <th>Status</th>
-                                                            <th>
-                                                              Gender
-                                                            </th>
-                                                            <th>Submit</th>
-
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody>
-                                                        <%
-                                                            int cID = 0;
-                                                            String cUsername = "";
-                                                            String cPassword = "";
-                                                            String cName = "";
-                                                            String phonenumber = "";
-                                                            String address = "";
-                                                            Date date = null;
-                                                            String email = "";
-                                                            int status = 0;
-                                                            String gender = "";
-
-                                                            if (request.getParameter("id") != null) {
-                                                                cID = Integer.parseInt(request.getParameter("id"));
-                                                                CustomerDAO cDao = new CustomerDAO();
-                                                                Customer c = cDao.getCustomer(cID);
-                                                                cUsername = c.getcUsername();
-                                                                cPassword = c.getcPassword();
-                                                                cName = c.getcName();
-                                                                phonenumber = c.getPhonenumber();
-                                                                address = c.getAddress();
-                                                                date = c.getBirthday();
-                                                                email = c.getEmail();
-                                                                status = c.getStatus();
-                                                                gender = c.getGender();
-                                                            }
-                                                        %>
-
-                                                    <form action="./../../CustomerController" method="POST">
-                                                        <tr>
-                                                            <td> <input type="text" value="<%= cID%>" name="cID" /></td>
-                                                            <td> <input type="text" value="<%= cPassword%>"
-                                                                        name="cPassword" /></td>
-
-                                                            <td> <input type="text" name="cUsername"
-                                                                        value="<%= cUsername%>"></td>
-                                                            <td> <input type="text" name="cName" value="<%= cName%>"></td>
-                                                            <td> <input type="text" name="phonenumber"
-                                                                        value="<%= phonenumber%>"></td>
-
-
-                                                            <td> <input type="text" name="address" value="<%= address%>">
-                                                            </td>
-                                                            <td><input type="date" name="birthday" value="<%= date%>"></td>
-                                                            <td> <input type="text" name="email" value="<%= email%>"></td>
-                                                            <td> <input type="text" name="status" value="<%= status%>"></td>
-                                                            <td>
-                                                                <select name="gender">
-                                                                    <option value="Male">Male</option>
-                                                                    <option value="Female">Female</option>
-                                                                    <option value="Other">Other</option>
-                                                                </select></td>
-
-                                                            <td><input type="submit" value="UPDATE" name="btnUpdate"></td>
-                                                        </tr>
-                                                    </form>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-5">
-                                                <div class="dataTables_info" id="dataTable_info" role="status"
-                                                     aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-7">
-                                                <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                    <ul class="pagination">
-                                                        <li class="paginate_button page-item previous disabled"
-                                                            id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                                   data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                        </li>
-                                                        <li class="paginate_button page-item active"><a href="#"
-                                                                                                        aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                        class="page-link">1</a></li>
-                                                        <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                            <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                               class="page-link">Next</a></li>
-                                                    </ul>
+                                            <div class="container h-100">
+                                                <div class="d-flex justify-content-center h-100">
+                                                    <div class="searchbar">
+                                                        <input class="search_input" type="text" name="" placeholder="Search...">
+                                                        <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                                                    </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+
+
+
+                                    <%
+                                        int cID = 0;
+                                        String cUsername = "";
+                                        String cPassword = "";
+                                        String cName = "";
+                                        String phonenumber = "";
+                                        String address = "";
+                                        Date date = null;
+                                        String email = "";
+                                        int status = 0;
+                                        String gender = "";
+
+                                        if (request.getParameter("id") != null) {
+                                            cID = Integer.parseInt(request.getParameter("id"));
+                                            CustomerDAO cDao = new CustomerDAO();
+                                            Customer c = cDao.getCustomer(cID);
+                                            cUsername = c.getcUsername();
+                                            cPassword = c.getcPassword();
+                                            cName = c.getcName();
+                                            phonenumber = c.getPhonenumber();
+                                            address = c.getAddress();
+                                            date = c.getBirthday();
+                                            email = c.getEmail();
+                                            status = c.getStatus();
+                                            gender = c.getGender();
+                                        }
+                                    %>
+
+                                    <form action="./../../CustomerController" class="billing-form"  method="POST">
+                                        <div class="contact-form" >
+                                            <div class="row" >
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>ID</div>
+                                                    <div class="input-group" >
+                                                        <input type="text" value="<%= cID%>" name="cID" />
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Password</div>
+                                                    <div class="input-group" >
+                                                        <input type="text" value="<%= cPassword%>"
+                                                               name="cPassword" />
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>User Name</div>
+                                                    <div class="input-group" >
+                                                        <input type="text" name="cUsername"value="<%= cUsername%>">
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Name</div>
+                                                    <div class="input-group" >
+                                                        <input type="text" name="cName" value="<%= cName%>">
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Phone Number</div>
+                                                    <div class="input-group" >
+                                                        <input type="text" name="phonenumber"value="<%= phonenumber%>">
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Address</div>
+                                                    <div class="input-group" >
+                                                        <input type="text" name="address" value="<%= address%>">
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Date</div>
+                                                    <div class="input-group" >
+                                                        <input type="date" name="birthday" value="<%= date%>">
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Email</div>
+                                                    <div class="input-group" >
+                                                        <input type="text" name="email" value="<%= email%>">
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Status</div>
+                                                    <div class="input-group" >
+                                                        <input type="text" name="status" value="<%= status%>">
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Gender</div>
+                                                    <div class="input-group" >
+                                                        <select name="gender">
+                                                            <option value="Male">Male</option>
+                                                            <option value="Female">Female</option>
+                                                            <option value="Other">Other</option>
+                                                        </select></td>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div> Submit</div>
+                                                    <div class="input-group" >
+                                                        <input type="submit" value="UPDATE" name="btnUpdate">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info" id="dataTable_info" role="status"
+                                                 aria-live="polite">Showing 1 to 1 of 1 entries</div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button page-item previous disabled"
+                                                        id="dataTable_previous"><a href="#" aria-controls="dataTable"
+                                                                               data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                                    </li>
+                                                    <li class="paginate_button page-item active"><a href="#"
+                                                                                                    aria-controls="dataTable" data-dt-idx="1" tabindex="0"
+                                                                                                    class="page-link">1</a></li>
+                                                    <li class="paginate_button page-item next disabled" id="dataTable_next">
+                                                        <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
+                                                           class="page-link">Next</a></li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -571,16 +626,17 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-            <!-- /#wrapper -->
 
-            <!-- Scroll to Top Button-->
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fas fa-angle-up"></i>
-            </a>
+        </div>
+        <!-- /#wrapper -->
 
-        </body>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+    </body>
 
 
-    </html>
+</html>

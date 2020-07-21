@@ -7,7 +7,7 @@
 <html lang="en">
 
     <head>
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <meta charset="UTF-8">
         <!-- CSS only -->
@@ -27,6 +27,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <style>
+            .input-group{
+                padding-bottom: 30px;
+            }
             html {
                 position: relative;
                 min-height: 100%;
@@ -154,49 +157,49 @@
                     width: auto;
                 }
             }
-                .searchbar{
-                    margin-bottom: auto;
-                    margin-top: auto;
-                    height: 60px;
-                    background-color: #F5A9BC;
-                    border-radius: 30px;
-                    padding: 10px;
-                }
+            .searchbar{
+                margin-bottom: auto;
+                margin-top: auto;
+                height: 60px;
+                background-color: #F5A9BC;
+                border-radius: 30px;
+                padding: 10px;
+            }
 
-                .search_input{
-                    color: white;
-                    border: 0;
-                    outline: 0;
-                    background: none;
-                    width: 0;
-                    caret-color:transparent;
-                    line-height: 40px;
-                    transition: width 0.4s linear;
-                }
+            .search_input{
+                color: white;
+                border: 0;
+                outline: 0;
+                background: none;
+                width: 0;
+                caret-color:transparent;
+                line-height: 40px;
+                transition: width 0.4s linear;
+            }
 
-                .searchbar:hover > .search_input{
-                    padding: 0 10px;
-                    width: 450px;
-                    caret-color:red;
-                    transition: width 0.4s linear;
-                }
+            .searchbar:hover > .search_input{
+                padding: 0 10px;
+                width: 450px;
+                caret-color:red;
+                transition: width 0.4s linear;
+            }
 
-                .searchbar:hover > .search_icon{
-                    background: white;
-                    color: #e74c3c;
-                }
+            .searchbar:hover > .search_icon{
+                background: white;
+                color: #e74c3c;
+            }
 
-                .search_icon{
-                    height: 40px;
-                    width: 40px;
-                    float: right;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 50%;
-                    color:white;
-                    text-decoration:none;
-                }
+            .search_icon{
+                height: 40px;
+                width: 40px;
+                float: right;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                color:white;
+                text-decoration:none;
+            }
             .sidebar {
                 width: 90px !important;
                 background-color: #F5A9BC;
@@ -349,7 +352,7 @@
                 .bg-dark {
                     background-color: #343a40 !important;
                 }
-        </style>
+            </style>
         </head>
 
         <%
@@ -446,7 +449,7 @@
                         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                             <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
                             <a class="dropdown-item" href="../product/updateProduct.jsp">Update Products</a>
-                        
+
                         </div>
                     </li>
 
@@ -476,7 +479,7 @@
                                 <div class="table-responsive">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                         <div class="row">
-         <div class="container h-100">
+                                            <div class="container h-100">
                                                 <div class="d-flex justify-content-center h-100">
                                                     <div class="searchbar">
                                                         <input class="search_input" type="text" name="" placeholder="Search...">
@@ -485,93 +488,181 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
-                                                       cellspacing="0" role="grid" aria-describedby="dataTable_info"
-                                                       style="width: 100%;">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>ID Products</th>
-                                                            <th>Status Product</th>
-                                                            <th>Brand Products</th>
-                                                            <th>Type Products</th>
-                                                            <th>Supplier </th>
-                                                            <th>Product's name</th>
-                                                            <th>Saleprice</th>
-                                                            <th>Price</th>
-                                                            <th>Describle</th>
-                                                            <th>Date</th>
-                                                            <th>Size </th>
-                                                            <th>Material</th>
-                                                            <th>Quantity</th>
-                                                            <th>Discount</th>
-                                                            <th>Gender</th>
-                                                            <th>Submit</th>
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody>
-                                                    <form action="../../ProductController" method="post">
-                                                        <tr>
-                                                            <td>  <input value="<%= id%>" type="text" name="pID" class="form-control" autofocus required="Please input ID" ></td>
-                                                            <td> <input value="<%= status%>" type="text" name="status" class="form-control" autofocus required="Please input" ></td>
-                                                            <td><input  value="<%= brID%>"class="form-control" autofocus="" required=" " name="brID" ></td>
-                                                            <td> <select name="tID" class="form-control" autofocus="">
-                                                                    <option  value=1>T-shirt</option>
-                                                                    <option value=2>Short</option>
-                                                                    <option  value=3>Skirt</option>
-                                                                    <option  value=4>Dress</option>
-                                                                    <option value=5>Pants</option>
-                                                                    <option  value=6>Jacket</option>
-                                                                    <option  value=7>Jeans</option>
-                                                                    <option value=8>Shirt</option>
-                                                                    <option  value=9>Sweater</option>
-                                                                </select>  </td>
-                                                            <td><input value="<%= supID%>" class="form-control" autofocus="" required=" " name="supID" ></td>
-                                                            <td><input value="<%= pName%>" class="form-control" autofocus="" required=" " name="pName" ></td>
-                                                            <td> <input value="<%= sellingPrice%>" class="form-control" autofocus="" required=" " name="sellingPrice" ></td>
-                                                            <td><input value="<%= price%>" class="form-control" autofocus="" required=" " name="price" ></td>
-                                                            <td><input value="<%= description%>" class="form-control" autofocus="" required=" " name="describle" ></td>
-                                                            <td><input value="<%= pDate%>" type="date"class="form-control" autofocus="" required=" " name="pDate" ></td>
-                                                            <td> <input value="<%= size%>"  type="text"class="form-control" autofocus="" required=" " name="size" ></td>
-                                                            <td>  <input value="<%= material%>" type="text"class="form-control" autofocus="" required=" " name="material" ></td>
-                                                            <td><input value="<%= quantity%>" type="text"class="form-control" autofocus="" required=" " name="quantity" ></td>
-                                                            <td><input value="<%= discount%>" type="text"class="form-control" autofocus="" required=" " name="discount" ></td>
-                                                            <td>    <select name="gender" value="<%= gender%>" >
-                                                                    <option value="Male">Male</option>
-                                                                    <option value="Female">Female</option>
-                                                                    <option value="Other">Other</option>
-                                                                </select></td>
-                                                            <td> <input type="submit" value="UPDATE" name="btnUpdate"></td>
-                                                        </tr>
-                                                    </form>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-5">
-                                                <div class="dataTables_info" id="dataTable_info" role="status"
-                                                     aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-7">
-                                                <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                    <ul class="pagination">
-                                                        <li class="paginate_button page-item previous disabled"
-                                                            id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                                   data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                        </li>
-                                                        <li class="paginate_button page-item active"><a href="#"
-                                                                                                        aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                        class="page-link">1</a></li>
-                                                        <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                            <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                               class="page-link">Next</a></li>
-                                                    </ul>
+                                    </div>
+                                    <tbody>
+                                    <form action="../../ProductController" method="post">
+                                        <div class="contact-form">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>ID</div>
+                                                    <div class="input-group">
+                                                        <input value="<%= id%>" type="text" name="pID" class="form-control"
+                                                               autofocus required="Please input ID">
+                                                    </div>
                                                 </div>
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Status</div>
+                                                    <div class="input-group">
+                                                        <input value="<%= status%>" type="text" name="status"
+                                                               class="form-control" autofocus required="Please input">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Status</div>
+                                                    <div class="input-group">
+                                                        <input value="<%= brID%>" class="form-control" autofocus=""
+                                                               required=" " name="brID">
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Type ID</div>
+                                                    <div class="input-group">
+                                                        <select name="tID" class="form-control" autofocus="">
+                                                            <option value=1>T-shirt</option>
+                                                            <option value=2>Short</option>
+                                                            <option value=3>Skirt</option>
+                                                            <option value=4>Dress</option>
+                                                            <option value=5>Pants</option>
+                                                            <option value=6>Jacket</option>
+                                                            <option value=7>Jeans</option>
+                                                            <option value=8>Shirt</option>
+                                                            <option value=9>Sweater</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Supplier</div>
+                                                    <div class="input-group">
+
+                                                        <input value="<%= supID%>" class="form-control" autofocus=""
+                                                               required=" " name="supID">
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Product's name</div>
+                                                    <div class="input-group">
+
+                                                        <input value="<%= pName%>" class="form-control" autofocus=""
+                                                               required=" " name="pName">
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Saleprice</div>
+                                                    <div class="input-group">
+
+                                                        <input value="<%= sellingPrice%>" class="form-control" autofocus=""
+                                                               required=" " name="sellingPrice">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Price</div>
+                                                    <div class="input-group">
+
+                                                        <input value="<%= price%>" class="form-control" autofocus=""
+                                                               required=" " name="price">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Description</div>
+                                                    <div class="input-group">
+
+                                                        <input value="<%= description%>" class="form-control" autofocus=""
+                                                               required=" " name="describle">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Date</div>
+                                                    <div class="input-group">
+                                                        <input value="<%= pDate%>" type="date" class="form-control"
+                                                               autofocus="" required=" " name="pDate">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Size</div>
+                                                    <div class="input-group">
+                                                        <input value="<%= size%>" type="text" class="form-control"
+                                                               autofocus="" required=" " name="size">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Material</div>
+                                                    <div class="input-group">
+                                                        <input value="<%= material%>" type="text" class="form-control"
+                                                               autofocus="" required=" " name="material">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Quantity</div>
+                                                    <div class="input-group">
+                                                        <input value="<%= quantity%>" type="text" class="form-control"
+                                                               autofocus="" required=" " name="quantity">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Discount</div>
+                                                    <div class="input-group">
+                                                        <input value="<%= discount%>" type="text" class="form-control"
+                                                               autofocus="" required=" " name="discount">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-xs-12">
+                                                    <div>Gender</div>
+                                                    <div class="input-group">
+                                                        <select name="gender" value="<%= gender%>">
+                                                            <option value="Male">Male</option>
+                                                            <option value="Female">Female</option>
+                                                            <option value="Other">Other</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12 col-xs-12">
+                                                    <div>Submit</div>
+                                                    <div class="input-group">
+                                                        <input type="submit" value="UPDATE" name="btnUpdate">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    </tbody>
+
+
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info" id="dataTable_info" role="status"
+                                                 aria-live="polite">Showing 1 to 1 of 1 entries</div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button page-item previous disabled"
+                                                        id="dataTable_previous"><a href="#" aria-controls="dataTable"
+                                                                               data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                                    </li>
+                                                    <li class="paginate_button page-item active"><a href="#"
+                                                                                                    aria-controls="dataTable" data-dt-idx="1" tabindex="0"
+                                                                                                    class="page-link">1</a></li>
+                                                    <li class="paginate_button page-item next disabled" id="dataTable_next">
+                                                        <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
+                                                           class="page-link">Next</a></li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -580,15 +671,16 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-            <!-- /#wrapper -->
 
-            <!-- Scroll to Top Button-->
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fas fa-angle-up"></i>
-            </a>
-        </body>
+        </div>
+        <!-- /#wrapper -->
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+    </body>
 
 
-    </html>
+</html>
