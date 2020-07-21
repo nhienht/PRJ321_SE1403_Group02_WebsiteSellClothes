@@ -19,7 +19,7 @@
     <body>
       
            
-        <div class=" row flexAlignCenter rowFlexMargin" style="background-color: #F5A9BC">
+        <div class=" row flexAlignCenter rowFlexMargin" style="background-color: #F5A9BC;">
                    
                     <div class="search-top-bar hidden-xs hidden-sm col-sm-12">
                         <div class="wpo-wrapper-search">
