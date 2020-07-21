@@ -145,8 +145,10 @@
                                             out.print("<a class='nav-link' style='color: black' href='customer/Information.jsp'>" + cookie.getValue() + "</a>");
                                             out.print("<a class='nav-link' style='color: black' href='LogoutController'>Logout</a>");
                                         } else if (cookie.getName().equals("admin")) {
-                                            response.sendRedirect("Admin");
-                                        } 
+                                         //   RequestDispatcher disp = request.getRequestDispatcher("auth/adminLogin.jsp");
+                                          RequestDispatcher disp = request.getRequestDispatcher("admin/dashboard.jsp");
+                                            disp.forward(request, response);
+                                        }
                                     }
                                 } else {
                                     out.print("<a class='nav-link' style='color: black' href='auth/login.jsp'>Login</a>");
@@ -159,7 +161,7 @@
                 </ul>
             </div>
         </nav>
-
+                      
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

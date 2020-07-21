@@ -315,6 +315,7 @@
         </style>
     </head>
     <body>
+       
         <div class="wrapper fadeInDown">
             <div id="formContent">
 
@@ -322,11 +323,11 @@
                     <img src="images/logo.jpg"  id="icon" alt="User Icon" />
                 </div>
 
-                <form action="../Admin" method="POST">
+                <form action="Admin" method="POST">
                     <input type="text" id="login" class="fadeIn second" name="user" placeholder="User Name">
                     <input type="password" id="password" class="fadeIn third" name="pass" placeholder="Password">
                     <input type="submit" class="fadeIn fourth" value="Log In" name="adminLogin">  
-                    
+
                 </form>
 
 

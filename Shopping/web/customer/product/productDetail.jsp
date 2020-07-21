@@ -137,8 +137,8 @@
             <div class="container dark-grey-text ">
                 <div class="row wow fadeIn">
                     <div class="col-md-6 mb-4">
-                        <c:forEach var="img" items="${images.rows}">
-                            <img src="../../data/${img.imageName}" class="img-fluid" alt=""/>
+                        <c:forEach var="img" items="${images.rows}" begin="0" end="0">
+                            <img src="../../${img.imageName}" class="img-fluid img-thumbnail" alt=""/>
                         </c:forEach>
                     </div>
                     <div class="col-md-6 mb-4">
@@ -194,7 +194,7 @@
                 <div class="row wow fadeIn">
                     <div class="col-lg-4 col-md-12 mb-4">
                         <c:forEach var="img" items="${images.rows}">
-                            <img src="../../data/${img.imageName}" class="img-fluid" alt=""/>
+                            <img src="../../${img.imageName}" class="image"  height="150px" width="150px"  alt=""/>
                         </c:forEach>
                     </div>
 
