@@ -4,6 +4,10 @@
     Author     : NhienHT
 --%>
 
+<%@page import="model.DAO.SupplierDAO"%>
+<%@page import="model.DAO.BrandDao"%>
+<%@page import="model.entity.Brand"%>
+<%@page import="model.DAO.TypeDAO"%>
 <%@page import="model.entity.Products"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
@@ -145,7 +149,12 @@
                         <div class="p-4">
                             <div class="mb-3">
                                 <a href="">
-                                    <span class="badge purple mr-1"><%= p.gettID()%></span>
+                                    <!--<span class="badge purple mr-1"><%= p.gettID()%></span>-->
+                                    <%
+                                        TypeDAO tDao = new TypeDAO();
+                                        String type = tDao.getType(p.gettID());
+                                    %>
+                                    <span class="badge" style="font-size: 20px">#<%=type%></span>
                                 </a>
                                 <p>Status</p>
                                 <c:if test="${param.quantity > 0}">
@@ -156,8 +165,16 @@
                                 </c:if>
                             </div>
                             <p>
-                                <span> Brand   <%= p.getBrID()%> </span>  
-                                <span>- Supplier   <%= p.getSupID()%> </span>        
+                                <%
+                                    BrandDao brDao = new BrandDao();
+                                    String brand = brDao.getBrand(p.getBrID());
+                                %>
+                                <span> Brand   <%= brand%> </span>  
+                                <%
+                                    SupplierDAO supDao = new SupplierDAO();
+                                    String sup = supDao.getSupplier(p.getSupID());
+                                %>
+                                <span>- Supplier   <%= sup%> </span>        
                             </p>
                             <p class="lead">
                                 <span>Price: <%= p.getPrice()%></span> 
@@ -168,8 +185,19 @@
                             <p>
                                 <span>Gender:   <%= p.getGender()%> </span>                              
                             </p>
-                            <p>
-                                <span>Size:   <%= p.getSize()%> </span>    
+                            <p> 
+                                <%
+                                    int size = p.getSize();
+                                    String s = "";
+                                    if(size == 0) s = "S";
+                                    else if (size == 1) s = "M";
+                                    else if (size == 1) s = "L";
+                                    else if (size == 1) s = "XL";
+                                    else s = "XXL";
+                                    
+                                    %>
+                                    
+                                <span>Size:   <%= s %> </span>    
                                 <span>- Quantity:   <%= p.getQuantity()%> </span>      
                             </p>                          
                             <p class="lead font-weight-bold"><%= p.getpName()%></p>

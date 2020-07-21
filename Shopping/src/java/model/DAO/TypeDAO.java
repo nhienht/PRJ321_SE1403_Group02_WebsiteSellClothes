@@ -28,12 +28,25 @@ public class TypeDAO {
              String sql = "Select * from type";
              PreparedStatement pst = conn.prepareStatement(sql);
              ResultSet rs = pst.executeQuery();
-             if(rs.next()){
-                 return rs;
-             }} catch (SQLException ex) {
+            return rs;
+             } catch (SQLException ex) {
              Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
          }         
          return null;
+    }
+    public String getType(int tID){
+        try{
+            String sql = "select * from type where tID=?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, tID);
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                return rs.getString(2);
+            }
+        } catch (SQLException ex) {
+             Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        return null;
     }
     
 }

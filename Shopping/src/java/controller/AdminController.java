@@ -84,7 +84,7 @@ public class AdminController extends HttpServlet {
              //   out.print("<script> alert('Login successful');</script>");
             } else {
              
-                response.sendRedirect("./auth/adminLogin.jsp");
+                response.sendRedirect("Admin");
 
             }
         }

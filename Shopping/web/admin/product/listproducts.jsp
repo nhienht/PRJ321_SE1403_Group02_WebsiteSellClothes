@@ -4,6 +4,9 @@
     Author     : 
 --%>
 
+<%@page import="model.DAO.SupplierDAO"%>
+<%@page import="model.DAO.BrandDao"%>
+<%@page import="model.DAO.TypeDAO"%>
 <%@page import="model.DAO.ImageDAO"%>
 <%@page import="model.DAO.ProductsDAO"%>
 <%@page import="java.sql.ResultSet"%>
@@ -381,7 +384,7 @@
                             <h3><i class="fas fa-user-circle fa-fw"></i></h3>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="../../AdminLogoutController">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -430,7 +433,7 @@
                             <li class="breadcrumb-item">
                                 <a href="index.jsp">Dashboard</a>
                             </li>
-                            <li class="breadcrumb-item active">Orders</li>
+                            <li class="breadcrumb-item active">Products</li>
 
                         </ol>
 
@@ -438,7 +441,7 @@
                         <div class="card mb-3">
                             <div class="card-header">
                                 <i class="fas fa-user"></i>
-                                List Orders</div>
+                                List Products</div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -495,14 +498,33 @@
                                                                 ImageDAO iDao = new ImageDAO();
                                                                 ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
                                                                 out.print("<td><img src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' /></td>");
-                                                                out.print("<td>" + rs.getInt("brID") + "</td>");
-                                                                out.print("<td>" + rs.getInt("tID") + "</td>");
-                                                                out.print("<td>" + rs.getInt("supID") + "</td>");
+                                                                BrandDao brDao = new BrandDao();
+                                                                String brand = brDao.getBrand(rs.getInt("brID"));
+                                                                out.print("<td>" + brand + "</td>");
+                                                                TypeDAO tDao = new TypeDAO();
+                                                                String type = tDao.getType(rs.getInt("tID"));
+                                                                out.print("<td>" + type + "</td>");
+                                                                SupplierDAO supDao = new SupplierDAO();
+                                                                String sup = supDao.getSupplier(rs.getInt("supID"));
+                                                                out.print("<td>" + sup + "</td>");
                                                                 out.print("<td>" + rs.getInt("sellingPrice") + "</td>");
                                                                 out.print("<td>" + rs.getInt("price") + "</td>");
                                                                 out.print("<td>" + rs.getString("describle") + "</td>");
                                                                 out.print("<td>" + rs.getDate("pDate") + "</td>");
-                                                                out.print("<td>" + rs.getInt("size") + "</td>");
+                                                                int size = rs.getInt("size");
+                                                                String s = "";
+                                                                if (size == 0) {
+                                                                    s = "S";
+                                                                } else if (size == 1) {
+                                                                    s = "M";
+                                                                } else if (size == 2) {
+                                                                    s = "L";
+                                                                } else if (size == 3) {
+                                                                    s = "XL";
+                                                                } else {
+                                                                    s = "XXL";
+                                                                }
+                                                                out.print("<td>" + s + "</td>");
                                                                 out.print("<td>" + rs.getString("material") + "</td>");
                                                                 out.print("<td>" + rs.getString("quantity") + "</td>");
                                                                 out.print("<td>" + rs.getString("discount") + "</td>");

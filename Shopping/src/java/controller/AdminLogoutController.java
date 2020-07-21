@@ -7,21 +7,19 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.DAO.BillDAO;
-import model.entity.Bill;
 
 /**
  *
- * @author 
+ * @author NhienHT
  */
-@WebServlet(name = "BillController", urlPatterns = {"/BillController"})
-public class BillController extends HttpServlet {
+@WebServlet(name = "AdminLogoutController", urlPatterns = {"/AdminLogoutController"})
+public class AdminLogoutController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,15 +35,10 @@ public class BillController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet BillController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet BillController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            Cookie adminCookie = new Cookie("admin", null);
+            adminCookie.setMaxAge(0);
+            response.addCookie(adminCookie);
+            response.sendRedirect("Admin");
         }
     }
 
@@ -61,8 +54,7 @@ public class BillController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //   processRequest(request, response);
-        
+        processRequest(request, response);
     }
 
     /**
@@ -76,25 +68,7 @@ public class BillController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // processRequest(request, response);
-        if (request.getParameter("btnUpdate") != null) {
-            Bill b = new Bill();
-            b.setbID(Integer.parseInt(request.getParameter("bID")));
-            b.setcID(Integer.parseInt(request.getParameter("cID")));
-          //  b.setbStatus(request.getParameter("bStatus"));
-            b.setCustomerName(request.getParameter("customerName"));
-            Date bDate = Date.valueOf(request.getParameter("pDate"));
-            b.setDate(bDate);
-            b.setPhone(request.getParameter("phone"));
-            b.setAddress(request.getParameter("address"));
-            b.setNote(request.getParameter("note"));
-            b.setTotal(Double.parseDouble(request.getParameter("total")));
-            BillDAO bDao = new BillDAO();
-            bDao.update(b);
-            
-        }
-        response.sendRedirect("./admin/bill/listbill.jsp");
-        
+        processRequest(request, response);
     }
 
     /**

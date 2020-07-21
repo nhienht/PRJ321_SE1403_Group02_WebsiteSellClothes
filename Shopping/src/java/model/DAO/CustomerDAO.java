@@ -5,6 +5,11 @@
  */
 package model.DAO;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -13,6 +18,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.entity.Customer;
+import sun.security.provider.MD5;
 
 /**
  *
@@ -45,7 +51,7 @@ public class CustomerDAO {
 
     public boolean insert(Customer c) {
         try {
-            String sql = "insert into customer(`cPassword`, `cUsername`, `cName`, `phonenumber`, `address`, `birthday`, `email`, `status`, `gender`) values (?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into customer(`cPassword`, `cUsername`, `cName`, `phonenumber`, `address`, `birthday`, `email`, `status`, `gender`) values (MD5(?),?,?,?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, c.getcPassword());
             pst.setString(2, c.getcUsername());
@@ -65,7 +71,7 @@ public class CustomerDAO {
 
     public int update(Customer c) {
         try {
-            String sql = "UPDATE `customer` SET `cPassword`=?,`cUsername`=?,`cName`=?,`phonenumber`=?,`address`=?,`birthday`=?,`email`=?,`status`=?,`gender`=? WHERE `cID`=?";
+            String sql = "UPDATE `customer` SET `cPassword`=MD5(?),`cUsername`=?,`cName`=?,`phonenumber`=?,`address`=?,`birthday`=?,`email`=?,`status`=?,`gender`=? WHERE `cID`=?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, c.getcPassword());
             pst.setString(2, c.getcUsername());
@@ -111,7 +117,7 @@ public class CustomerDAO {
 
     public int login(String user, String pass) {
         try {
-            String sql = "SELECT * FROM `customer` WHERE `cUsername`=? AND `cPassword`=?";
+            String sql = "SELECT * FROM `customer` WHERE `cUsername`=? AND `cPassword`=MD5(?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, user);
             pst.setString(2, pass);
@@ -162,9 +168,22 @@ public class CustomerDAO {
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, cID);
             ResultSet rs = pst.executeQuery();
+             // mã hóa MD5 
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] bytes = md.digest(oldPass.getBytes("UTF-8"));
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < bytes.length; i++) {
+                byte b = bytes[i];
+                String hex = Integer.toHexString((int) 0x00FF & b);
+                if (hex.length() == 1) {
+                    sb.append("0");
+                }
+                sb.append(hex);
+            }
+            String old = sb.toString();
             if (rs.next()) {
-                if (rs.getString(2).equals(oldPass)) {
-                    String sql2 = "UPDATE customer set cPassword=? where cID=?";
+                if (rs.getString(2).equalsIgnoreCase(old)) {
+                    String sql2 = "UPDATE customer set cPassword=md5(?) where cID=?";
                     PreparedStatement pst2 = conn.prepareStatement(sql2);
                     pst2.setString(1, newPass);
                     pst2.setInt(2, cID);
@@ -175,9 +194,27 @@ public class CustomerDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
     }
+     public int getMaxCustomer() {
+        try {
+            DBConnection db = new DBConnection();
+            String sql = "Select max(cID) as cID from customer";
 
+            PreparedStatement st = conn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("cID");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
 }
-

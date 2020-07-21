@@ -27,7 +27,7 @@ public class AdminDAO {
 
     public boolean login(String user, String pass) {
         try {
-            String sql = "SELECT * FROM `admin` WHERE `aUsername`=? AND `aPassword`=?";
+            String sql = "SELECT * FROM `admin` WHERE `aUsername`=? AND `aPassword`=MD5(?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, user);
             pst.setString(2, pass);
