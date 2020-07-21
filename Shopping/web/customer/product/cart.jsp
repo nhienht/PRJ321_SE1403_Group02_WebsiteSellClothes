@@ -28,6 +28,23 @@
         <link rel="stylesheet" href="Style/css/flaticon.css">
         <link rel="stylesheet" href="Style/css/icomoon.css">
         <link rel="stylesheet" href="Style/css/style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <meta charset="UTF-8">
+        <!-- CSS only -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+              integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+        <!-- JS, Popper.js, and jQuery -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+                integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
         <style>
             @import url('https://fonts.google.com/specimen/Balsamiq+Sans');
             html ,body {
@@ -89,62 +106,62 @@
         </style>
     </head>
     <style>
-         @import url('https://fonts.google.com/specimen/Balsamiq+Sans');
-            html ,body {
-                width: 100%;
-                height: 100%;
-                font-family: 'Balsamiq Sans';   
-                font-size: 17px;
-                color: #222;
-            }
-            .navbar{
-                background-color: #F5A9BC !important;
-            }
-            .navbar li a {
-                color: #f8f2f2!important ;
+        @import url('https://fonts.google.com/specimen/Balsamiq+Sans');
+        html ,body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Balsamiq Sans';   
+            font-size: 17px;
+            color: #222;
+        }
+        .navbar{
+            background-color: #F5A9BC !important;
+        }
+        .navbar li a {
+            color: #f8f2f2!important ;
 
-            }
-            .navbar li a:hover {
-                color: #000000 !important ;
+        }
+        .navbar li a:hover {
+            color: #000000 !important ;
 
-            }
-            .container-fluid
-            {
-                padding-top: 8em;
-            }
+        }
+        .container-fluid
+        {
+            padding-top: 8em;
+        }
 
 
-            .overlay {
-                position: absolute; 
-                bottom: 0; 
-                background: rgb(0, 0, 0);
-                background: rgba(0, 0, 0, 0.5); /* Black see-through */
-                color: #f1f1f1; 
-                width: 100%;
-                transition: .5s ease;
-                opacity:0;
-                color: white;
-                font-size: 20px;
-                padding: 20px;
-                text-align: center;
-            }
-            .container-fluid:hover .overlay {
-                opacity: 1;
-            }
-            .nav-item{
-                padding-right: 20px;
-                font-size: 25px;
-            }
-            .fotter{
-                background-color: black;
-                color: white;
-            }
+        .overlay {
+            position: absolute; 
+            bottom: 0; 
+            background: rgb(0, 0, 0);
+            background: rgba(0, 0, 0, 0.5); /* Black see-through */
+            color: #f1f1f1; 
+            width: 100%;
+            transition: .5s ease;
+            opacity:0;
+            color: white;
+            font-size: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+        .container-fluid:hover .overlay {
+            opacity: 1;
+        }
+        .nav-item{
+            padding-right: 20px;
+            font-size: 25px;
+        }
+        .fotter{
+            background-color: black;
+            color: white;
+        }
     </style>
     <body class="goto-here">
         <jsp:include page="../../header/header.jsp" ></jsp:include>
-         <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
+            <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
-             <a class="navbar-branch" href="../../index.jsp">
+                <a class="navbar-branch" href="../../index.jsp">
                     <img src="./images/logo.jpg" height="80px" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
@@ -165,22 +182,30 @@
                         <li class="nav-item">
                             <a href="../../auth/contact.jsp" class="nav-link">Contact</a>
                         </li>
-
-                        <c:if test = "${!isLogin}"> 
                         <li class="nav-item">
+                            <a href="cart.jsp" class="nav-link">Cart</a>
+                        </li>
 
-                            <a href="./auth/signin.jsp" title="Login" class="nav-link" >
-                                Sign In
+                        <li class="nav-item dropdown no-arrow  ">
+                            <a style="color: black;position:relative; top: -20px;" class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                               >
+                                <h3><i style="color: black;position:relative; top: -1px;" class="fas fa-user-circle fa-fw"></i></h3>
                             </a>
-                        </li>
-                    </c:if>
-                    <c:if test = "${isLogin}"> 
-                        <li class="nav-item">
-                            <a href="LogoutController"  title="Login" class="nav-link">
-                                Logout
-                            </a>                       
-                        </li>
-                    </c:if>
+                            <div class="dropdown-menu dropdown-menu-"  >                          
+                            <%
+                                Cookie[] cookies = request.getCookies();
+                                if (cookies.length > 1) {
+                                    for (Cookie cookie : cookies) {
+                                        if (cookie.getName().equals("user")) {
+                                            out.print("<a class='nav-link' style='color: black' href='../../customer/Information.jsp'>" + cookie.getValue() + "</a>");
+                                            out.print("<a class='nav-link' style='color: black' href='LogoutController'>Logout</a>");
+                                        }
+                                    }
+                                } else {
+                                    out.print("<a class='nav-link' class='color' style='color: black' href='../../auth/login.jsp'>Login</a>");
+                                    out.print("<a class='nav-link' style='color: black' href='../../auth/signin.jsp'>Sigin</a>");
+                                }
+                            %>
                 </ul>
             </div>
         </nav>
@@ -234,7 +259,7 @@
                                             out.print("<td>" + p.getPrice() + "</td>");
                                             out.print("<td>" + p.getDiscount() + "</td>");
                                             out.print("<td>" + quantity + "</td>");
-                                            total += (double)(p.getPrice() - p.getDiscount()*p.getPrice());
+                                            total += (double) (p.getPrice() - p.getDiscount() * p.getPrice());
                                             out.print("<td><a href='?rm=" + i + "'>Remove</a></td>");
                                             out.print("</tr>");
 
