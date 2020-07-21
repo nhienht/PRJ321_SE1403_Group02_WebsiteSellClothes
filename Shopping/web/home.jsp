@@ -245,7 +245,7 @@
         </div>
         <div class="fotter">
             <div class="footer-copyright text-center py-3">
-                ï¿½ 2020 1997 Clothing ï¿½
+                  © 2020 !997 Clothing ®
             </div>
         </div>
     </body>

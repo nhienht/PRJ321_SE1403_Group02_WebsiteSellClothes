@@ -97,6 +97,9 @@
             background-color: black;
             color: white;
         }
+        ul{
+            list-style: none;
+        }
     </style>
 
     <body>
@@ -126,9 +129,9 @@
                     <li class="nav-item">
                         <a href="contact.jsp" class="nav-link">Contact</a>
                     </li>
-                        <li class="nav-item">
-                            <a href="../customer/product/cart.jsp" class="nav-link">Cart</a>
-                        </li>
+                    <li class="nav-item">
+                        <a href="../customer/product/cart.jsp" class="nav-link">Cart</a>
+                    </li>
 
                     <li class="nav-item dropdown no-arrow  ">
                         <a style="color: black;position:relative; top: -20px;" class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
@@ -162,10 +165,8 @@
         <div class="container-fluid padding">
             <div class="row text-center padding">
                 <div class="col-xs-12 col-sm-6">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3925.7741918207425!2d105.7160356147447!3d10.279769692659709!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310a7ee3f9dbe29f%3A0x2fa63cb27232491f!2zQ2jhu6MgSG_DoCBUaMOgbmg!5e0!3m2!1sen!2s!4v1589561301072!5m2!1sen!2s"
-                        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
-                        tabindex="0"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.058115804464!2d105.72942691474229!3d10.012058492842899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a0882139720a77%3A0x3916a227d0b95a64!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgQ-G6p24gVGjGoQ!5e0!3m2!1sen!2s!4v1595307063984!5m2!1sen!2s" 
+                            width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                 </div>
                 <div class="col-xs-12 col-sm-6">
 
@@ -242,7 +243,7 @@
 
             <div class="fotter">
                 <div class="footer-copyright text-center py-3">
-                    © 2020 !997 Clothing ®
+                    © 2020 1997 Clothing ®
                 </div>
             </div>
         </div>
