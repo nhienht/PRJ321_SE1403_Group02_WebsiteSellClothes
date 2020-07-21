@@ -4,7 +4,12 @@
     Author     : NhienHT
 --%>
 
+<%@page import="model.entity.Customer"%>
+<%@page import="model.DAO.CustomerDAO"%>
+<%@page import="model.entity.Products"%>
+<%@page import="model.DAO.ProductsDAO"%>
 <%@page import="model.entity.Admin"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 
@@ -81,72 +86,67 @@
 
 
         </style>
-        <%
-          //  boolean isLogin;
-            // Admin ad = (Admin) session.getAttribute("checkLogin");
-//            if (ad != null) {
-//                isLogin = true;
-//
-//            } else {
-//                isLogin = false;
-//
-//            }
-//        Cookie[] cookies = request.getCookies();
-//        for(Cookie cookie :cookies){
-//            if(cookie.getName().equals("user") && cookie.getValue().equals("admin")){
-//               response.sendRedirect("./admin/product/listproducts.jsp");
-//            }
-//        }
-
-        %>
+   
     </head>
 
     <body>
         <jsp:include page="header/header.jsp" ></jsp:include>
 
 
-                <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
+            <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
-                    <a class="navbar-branch" href="index.jsp">
-                        <img src="./images/logo.jpg" height="80px" alt="">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarResponsive">
-                        <ul class="navbar-nav ml-auto" style="padding-left: 600px">
-                            <li class="nav-item">
-                                <a href="./index.jsp" class="nav-link ">Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="./customer/product/list.jsp" class="nav-link ">Products</a>
+                <a class="navbar-branch" href="index.jsp">
+                    <img src="./images/logo.jpg" height="80px" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto" style="padding-left: 600px">
+                        <li class="nav-item">
+                            <a href="./index.jsp" class="nav-link ">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="./customer/product/list.jsp" class="nav-link ">Products</a>
 
-                            </li>
-                            <li class="nav-item">
-                                <a href="./auth/about.jsp" class="nav-link">About us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="./auth/contact.jsp" class="nav-link">Contact</a>
-                            </li>
-
-                            <c:if test = "${!isLogin}"> 
-                            <li class="nav-item">
-
-                                <a href="./auth/signin.jsp" title="Login" class="nav-link" >
-                                    Sign In
-                                </a>
-                            </li>
-                        </c:if>
-                        <c:if test = "${isLogin}"> 
-                            <li class="nav-item">
-                                <a href="LogoutController"  title="Login" class="nav-link">
-                                    Logout
-                                </a>                       
-                            </li>
-                        </c:if>
-                    </ul>
-                </div>
-            </nav>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./auth/about.jsp" class="nav-link">About us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./auth/contact.jsp" class="nav-link">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="customer/product/cart.jsp" class="nav-link">Cart</a>
+                        </li>
+   <li class="nav-item dropdown no-arrow  ">
+                        <a class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <h3><i class="fas fa-user-circle fa-fw"></i></h3>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <!--<a class="dropdown-item" href="#">Logout</a>-->
+                        
+                    <%
+                        Cookie[] cookies = request.getCookies();
+                        if (cookies.length > 1) {
+                            for (Cookie cookie : cookies) {
+                                if (cookie.getName().equals("user")) {
+                                    out.print("<a class='nav-link' style='color: black' href='customer/Information.jsp'>" + cookie.getValue() + "</a>");
+                                    out.print("<a class='nav-link' style='color: black' href='LogoutController'>Logout</a>");
+                                }
+                            }
+                        } else {
+                            out.print("<a class='nav-link' style='color: black' href='auth/login.jsp'>Login</a>");
+                            out.print("<a class='nav-link' style='color: black' href='auth/signin.jsp'>Sigin</a>");
+                        }
+                    %>
+                    </div>
+                    </li>
+                   
+                </ul>
+            </div>
+        </nav>
 
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
