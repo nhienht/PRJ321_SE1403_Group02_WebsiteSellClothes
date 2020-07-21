@@ -146,10 +146,7 @@
                                             out.print("<a class='nav-link' style='color: black' href='LogoutController'>Logout</a>");
                                         } else if (cookie.getName().equals("admin")) {
                                             response.sendRedirect("Admin");
-                                        } else {
-                                            out.print("<a class='nav-link' style='color: black' href='auth/login.jsp'>Login</a>");
-                                            out.print("<a class='nav-link' style='color: black' href='auth/signin.jsp'>Sigin</a>");
-                                        }
+                                        } 
                                     }
                                 } else {
                                     out.print("<a class='nav-link' style='color: black' href='auth/login.jsp'>Login</a>");

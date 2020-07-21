@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.sql.Date;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -25,7 +24,7 @@ import model.entity.Customer;
  *
  * @author Dat
  */
-@WebServlet(name = "Admin", urlPatterns = {"/Admin"})
+@WebServlet(name = "AccountController", urlPatterns = {"/AccountController"})
 public class AccountController extends HttpServlet {
 
     /**
@@ -42,8 +41,15 @@ public class AccountController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            RequestDispatcher disp = request.getRequestDispatcher("./auth/adminLogin.jsp");
-            disp.forward(request, response);
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AccountController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AccountController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
