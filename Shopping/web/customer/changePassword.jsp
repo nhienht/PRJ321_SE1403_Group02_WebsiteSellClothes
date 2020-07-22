@@ -24,7 +24,7 @@
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Change Password</title>
         <style>
             body {
                 font-family: Arial, Helvetica, sans-serif;
@@ -132,23 +132,95 @@
                         </div>
 
 
-                        <form class="signup" action="./../ChangeInforCustomer" method="POST">
+                        <form class="signup" action="./../ChangeInforCustomer" method="POST" id="register" name="register">
                             <div class="form-group">
-                                <input class="form-control" type="password" name="Oldpass" required="">
+                                <input class="form-control" type="password" name="Oldpass" id="Oldpass" required="">
                             </div>
 
                             <div class="form-group"> 
-                                <input  class="form-control"  type="password" name="newPass" required="">
+                                <input  class="form-control"  type="password" name="newPass" id="newPass" required="">
                             </div>
 
                             <div class="form-group"> 
-                                <input class="form-control"  type="password" name="Cofirmpass" required=""> 
+                                <input class="form-control"  type="password" name="Cofirmpass" id="Cofirmpass" required=""> 
                             </div>
 
                             <input type="submit" value="Change Password" name="btnChangePass" class="btn btn-primary">
 
 
                         </form>
+                        <script>
+                            var inputs = document.forms['register'].getElementsByTagName('input');
+                            var run_onchange = false;
+                            function valid() {
+                                var errors = false;
+
+                                for (var i = 0; i < inputs.length; i++) {
+                                    var value = inputs[i].value;
+                                    var id = inputs[i].getAttribute('id');
+
+                                    // Tạo phần tử span lưu thông tin lỗi
+                                    var span = document.createElement('span');
+                                    // Nếu span đã tồn tại thì remove
+                                    var p = inputs[i].parentNode;
+                                    if (p.lastChild.nodeName == 'SPAN') {
+                                        p.removeChild(p.lastChild);
+                                    }
+
+                                    // Kiểm tra rỗng
+                                    if (value == '') {
+                                        span.innerHTML = 'Thông tin được yêu cầu';
+                                    } else {
+
+
+
+                                        if (id == 'newPass') {
+                                            if (value.length < 6) {
+                                                span.innerHTML = 'Password phải từ 6 ký tự';
+                                            }
+                                            var pass = value;
+                                        }
+                                        // Kiểm tra password nhập lại
+                                        if (id == 'Cofirmpass' && value != pass) {
+                                            span.innerHTML = 'Password nhập lại chưa đúng';
+                                        }
+
+                                    }
+
+                                    // Nếu có lỗi thì chèn span vào hồ sơ, chạy onchange, submit return false, highlight border
+                                    if (span.innerHTML != '') {
+                                        inputs[i].parentNode.appendChild(span);
+                                        errors = true;
+                                        run_onchange = true;
+                                        inputs[i].style.border = '1px solid #c6807b';
+                                        inputs[i].style.background = '#fffcf9';
+                                    }
+                                }// end for
+
+                                if (errors == false) {
+                                    alert('Đăng ký thành công');
+                                }
+                                return !errors;
+                            }// end valid()
+
+                            // Chạy hàm kiểm tra valid()
+                            var register = document.getElementById('btnChangePass');
+                            register.onclick = function () {
+                                return valid();
+                            }
+
+                            // Kiểm tra lỗi với sự kiện onchange -> gọi lại hàm valid()
+                            for (var i = 0; i < inputs.length; i++) {
+                                var id = inputs[i].getAttribute('id');
+                                inputs[i].onchange = function () {
+                                    if (run_onchange == true) {
+                                        this.style.border = '1px solid #999';
+                                        this.style.background = '#fff';
+                                        valid();
+                                    }
+                                }
+                            }// end for;
+                        </script>
                     </div>
                 </div>
             </div>

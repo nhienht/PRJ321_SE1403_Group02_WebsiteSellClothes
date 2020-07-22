@@ -406,7 +406,7 @@
             <div id="wrapper">
                 <ul class="sidebar navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="../product/listproducts.jsp">
+                        <a class="nav-link" href="../../admin/dashboard.jsp">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
