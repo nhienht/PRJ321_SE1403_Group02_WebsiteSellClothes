@@ -154,7 +154,7 @@
                            user="root" password=""
                            driver="com.mysql.jdbc.Driver"/>
         <sql:query var="p" dataSource="${conn}">	
-            SELECT * FROM products	
+            SELECT * FROM products where status =1
         </sql:query>	
 
         <sql:query dataSource="${conn}" var="i"	

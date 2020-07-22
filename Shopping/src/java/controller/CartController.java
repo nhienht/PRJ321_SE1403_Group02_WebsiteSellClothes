@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.DAO.ProductsDAO;
+import model.entity.Products;
 
 /**
  *
@@ -35,29 +37,29 @@ public class CartController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-             HttpSession session = request.getSession();
+            HttpSession session = request.getSession();
             int pID = Integer.parseInt(request.getParameter("id"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
-            if (session.getAttribute("listCart") == null) {
-                HashMap<Integer, Integer> listCart = new HashMap<Integer, Integer>();
-                listCart.put(pID, quantity);
-                session.setAttribute("listCart", listCart);
-            } else {
-                HashMap<Integer, Integer> listCart = new HashMap<Integer, Integer>();
-                listCart = (HashMap<Integer, Integer>) session.getAttribute("listCart");
-                if (listCart.containsKey(pID)) {
-                    int q = listCart.get(pID);
-                    q += quantity;
-                    listCart.put(pID, q);
-                    session.setAttribute("listCart", listCart);
-                } else {
+                if (session.getAttribute("listCart") == null) {
+                    HashMap<Integer, Integer> listCart = new HashMap<Integer, Integer>();
                     listCart.put(pID, quantity);
                     session.setAttribute("listCart", listCart);
-                }
+                } else {
+                    HashMap<Integer, Integer> listCart = new HashMap<Integer, Integer>();
+                    listCart = (HashMap<Integer, Integer>) session.getAttribute("listCart");
+                    if (listCart.containsKey(pID)) {
+                        int q = listCart.get(pID);
+                        q += quantity;
+                        listCart.put(pID, q);
+                        session.setAttribute("listCart", listCart);
+                    } else {
+                        listCart.put(pID, quantity);
+                        session.setAttribute("listCart", listCart);
+                    }
 
-            }
-            response.sendRedirect("./customer/product/cart.jsp");
-           
+                }
+                response.sendRedirect("./customer/product/cart.jsp");
+            
         }
     }
 
