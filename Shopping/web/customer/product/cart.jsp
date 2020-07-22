@@ -192,8 +192,7 @@
                                 <h3><i style="color: black;position:relative; top: -1px;" class="fas fa-user-circle fa-fw"></i></h3>
                             </a>
                             <div class="dropdown-menu dropdown-menu-"  >                          
-                            <%
-                                Cookie[] cookies = request.getCookies();
+                            <%                                Cookie[] cookies = request.getCookies();
                                 if (cookies.length > 1) {
                                     for (Cookie cookie : cookies) {
                                         if (cookie.getName().equals("user")) {
@@ -215,7 +214,7 @@
                 <div class="row no-gutters slider-text align-items-center justify-content-center">
                     <div class="col-md-9 ftco-animate text-center">
                         <p class="breadcrumbs"><span class="mr-2"><a href="./../../home.jsp">Home</a></span> <span>Cart</span></p>
-                        <h1 class="mb-0 bread">My Wishlist</h1>	
+                        <h1 class="mb-0 bread">My Cart</h1>	
                     </div>
                 </div>
             </div>
@@ -227,7 +226,6 @@
                     <div class="col-md-12 ftco-animate">
                         <div>
                             <p class="title">LIST CART<p>
-                            <table class="table">
 
                                 <%
                                     HashMap<Integer, Integer> listCart = (HashMap<Integer, Integer>) session.getAttribute("listCart");
@@ -236,7 +234,11 @@
                                     if (rm != null) {
                                         listCart.remove(Integer.parseInt(rm));
                                     }
-                                    if (listCart != null) {
+                                    if (listCart == null) {
+                                        out.print("<h2>You have no items in your shopping cart !</h2>");
+
+                                    } else {
+                                        out.print("<table class='table'>");
                                         out.print(" <thead class='thead-primary'>"
                                                 + " <tr class='text-center'>"
                                                 + "<th>No.</th>"
@@ -259,38 +261,31 @@
                                             out.print("<td>" + p.getPrice() + "</td>");
                                             out.print("<td>" + p.getDiscount() + "</td>");
                                             out.print("<td>" + quantity + "</td>");
-                                            total += (double) quantity*(p.getPrice() - p.getDiscount() * p.getPrice()/100);
+                                            total += (double) quantity * (p.getPrice() - p.getDiscount() * p.getPrice() / 100);
                                             out.print("<td><a href='?rm=" + i + "'>Remove</a></td>");
                                             out.print("</tr>");
-
+                                            out.print(" </table>");
                                         }
-                                    } else {
-                                        out.print("<h2>You have no items in your shopping cart !</h2>");
                                     }
                                 %>
-
-                            </table>
                         </div>
+                        <div class="row justify-content-start">
+                            <div class="col-6 col-sm-4 mt-5 col-lg-4"> 
+                                <p class="text-center"><a href="list.jsp" class="btn btn-primary py-3 px-4">Buy Continue</a></p>
+                            </div>
+                            <div class="col-6 col-sm-4 mt-5 cart-wrap ftco-animate col-lg-4 ">
+                                <span>
+                                    <p class="title">CART TOTAL</p>
+                                    <p class="price"><%= total%></p>
+                                </span>
+                            </div>
+                            <div class="col-6 col-sm-4 mt-5 col-lg-4">
+                                <p class="text-center"><a href="order.jsp?total=<%= total%>" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-
-
-
-                <div class="row justify-content-start">
-                    <div class="col-6 col-sm-4 mt-5 col-lg-4"> 
-                        <p class="text-center"><a href="list.jsp" class="btn btn-primary py-3 px-4">Buy Continue</a></p>
-                    </div>
-                    <div class="col-6 col-sm-4 mt-5 cart-wrap ftco-animate col-lg-4 ">
-                        <span>
-                            <p class="title">CART TOTAL</p>
-                            <p class="price"><%= total%></p>
-                        </span>
-                    </div>
-                    <div class="col-6 col-sm-4 mt-5 col-lg-4">
-                        <p class="text-center"><a href="order.jsp?total=<%= total%>" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
