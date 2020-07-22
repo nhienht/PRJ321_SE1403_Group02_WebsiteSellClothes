@@ -225,7 +225,7 @@
                                     <img class="logo-image" src="./images/logo.jpg" alt="">
                                 </li>
                                 <li class="Infor">
-                                    <span>Tân Long, Hòa Thành Lai Vung ??ng Tháp</span>
+                                    <span>FPT University, Nguyen Van Linh Street, Can Tho City</span>
                                 </li>
                                 <li>
                                     <span>077.659.8062</span>

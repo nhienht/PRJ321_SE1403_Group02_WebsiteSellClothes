@@ -26,7 +26,7 @@
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Update Customer</title>
         <style>
             html {
                 position: relative;
@@ -398,7 +398,7 @@
                 <!-- Sidebar -->
                 <ul class="sidebar navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="../product/listproducts.jsp">
+                        <a class="nav-link" href="../../admin/dashboard.jsp">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
