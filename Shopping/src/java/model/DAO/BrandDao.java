@@ -16,35 +16,36 @@ import java.util.logging.Logger;
  *
  * @author NhienHT
  */
-public class SupplierDAO {
-      private Connection conn;
+public class BrandDao {
+     private Connection conn;
 
-    public SupplierDAO() {
+    public BrandDao() {
         DBConnection db = new DBConnection();
         this.conn = db.getDBConnection();
     }
     public ResultSet getAll(){
          try {
-             String sql = "Select * from supplier";
+             String sql = "Select * from brand";
              PreparedStatement pst = conn.prepareStatement(sql);
              ResultSet rs = pst.executeQuery();
+             
                  return rs;
-             } catch (SQLException ex) {
-             Logger.getLogger(SupplierDAO.class.getName()).log(Level.SEVERE, null, ex);
+             }catch (SQLException ex) {
+             Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
          }         
          return null;
     }
-    public String getSupplier(int supID){
+    public String getBrand(int brID){
         try{
-            String sql = "select * from supplier where supID=?";
+            String sql = "select * from brand where brID=?";
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, supID);
+            pst.setInt(1, brID);
             ResultSet rs = pst.executeQuery();
             if(rs.next()){
                 return rs.getString(2);
             }
         } catch (SQLException ex) {
-             Logger.getLogger(SupplierDAO.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(BrandDao.class.getName()).log(Level.SEVERE, null, ex);
          }
         return null;
     }

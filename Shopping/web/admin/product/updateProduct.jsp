@@ -1,3 +1,9 @@
+<%@page import="java.util.Arrays"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.DAO.BrandDao"%>
+<%@page import="model.DAO.SupplierDAO"%>
+<%@page import="model.DAO.TypeDAO"%>
 <%@page import="java.util.Date"%>
 <%@page import="model.entity.Products"%>
 <%@page import="model.DAO.ImageDAO"%>
@@ -354,9 +360,14 @@
                 }
             </style>
         </head>
-
+        <%! int tID = 0;
+            int brID = 0;
+            int supID = 0;
+            int size = -1;
+        %>
         <%
-            int id = 0, status = 0, brID = 0, tID = 0, supID = 0, size = 0, quantity = 0;
+            int id = 0, status = 0;
+            int quantity = 0;
             String pName = "", description = "", material = "", gender = "";
             Double sellingPrice = 0.0, price = 0.0;
             float discount = 0;
@@ -410,7 +421,7 @@
                             <h3><i class="fas fa-user-circle fa-fw"></i></h3>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="../../AdminLogoutController">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -423,7 +434,7 @@
                 <!-- Sidebar -->
                 <ul class="sidebar navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="../../admin/dashboard.jsp">
+                        <a class="nav-link" href="../product/listproducts.jsp">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
@@ -435,7 +446,7 @@
                             <span>Account</span></a>
                     </li>
 
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="../customer/listcustomer.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Customer</span></a>
@@ -466,7 +477,7 @@
                             <li class="breadcrumb-item">
                                 <a href="index.jsp">Dashboard</a>
                             </li>
-                            <li class="breadcrumb-item active">Orders</li>
+                            <li class="breadcrumb-item active">Products</li>
 
                         </ol>
 
@@ -474,79 +485,15 @@
                         <div class="card mb-3">
                             <div class="card-header">
                                 <i class="fas fa-user"></i>
-                                List Orders</div>
+                                Update Bill</div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                        <div class="row">
-                                            <div class="container h-100">
-                                                <div class="d-flex justify-content-center h-100">
-                                                    <div class="searchbar">
-                                                        <input class="search_input" type="text" name="" placeholder="Search...">
-                                                        <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <tbody>
                                     <form action="../../ProductController" method="post">
+                                        <input value="<%= id%>" type="hidden" name="pID">
                                         <div class="contact-form">
                                             <div class="row">
-                                                <div class="col-sm-6 col-xs-12">
-                                                    <div>ID</div>
-                                                    <div class="input-group">
-                                                        <input value="<%= id%>" type="text" name="pID" class="form-control"
-                                                               autofocus required="Please input ID">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-6 col-xs-12">
-                                                    <div>Status</div>
-                                                    <div class="input-group">
-                                                        <input value="<%= status%>" type="text" name="status"
-                                                               class="form-control" autofocus required="Please input">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-6 col-xs-12">
-                                                    <div>Brand</div>
-                                                    <div class="input-group">
-                                                        <input value="<%= brID%>" class="form-control" autofocus=""
-                                                               required=" " name="brID">
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="col-sm-6 col-xs-12">
-                                                    <div>Type ID</div>
-                                                    <div class="input-group">
-                                                        <select name="tID" class="form-control" autofocus="">
-                                                            <option value=1>T-shirt</option>
-                                                            <option value=2>Short</option>
-                                                            <option value=3>Skirt</option>
-                                                            <option value=4>Dress</option>
-                                                            <option value=5>Pants</option>
-                                                            <option value=6>Jacket</option>
-                                                            <option value=7>Jeans</option>
-                                                            <option value=8>Shirt</option>
-                                                            <option value=9>Sweater</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="col-sm-6 col-xs-12">
-                                                    <div>Supplier</div>
-                                                    <div class="input-group">
-
-                                                        <input value="<%= supID%>" class="form-control" autofocus=""
-                                                               required=" " name="supID">
-                                                    </div>
-                                                </div>
-
-
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Product's name</div>
                                                     <div class="input-group">
@@ -555,8 +502,72 @@
                                                                required=" " name="pName">
                                                     </div>
                                                 </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Type</div>
+                                                    <div class="input-group">
+                                                        <select name="tID" class="form-control" autofocus="">
+                                                            <%
+                                                                TypeDAO tDao = new TypeDAO();
+                                                                ResultSet allType = tDao.getAll();
+                                                                while (allType.next()) {
+                                                                    System.out.println(tID);
+                                                                    System.out.println(allType.getInt(1));
+                                                                    if (tID == allType.getInt(1)) {
 
+                                                                        out.println("<option value=" + allType.getInt(1) + " selected>" + allType.getString(2) + "</option>");
+                                                                    } else {
+                                                                        out.println("<option value=" + allType.getInt(1) + ">" + allType.getString(2) + "</option>");
+                                                                    }
+                                                                }
+                                                            %>
 
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Supplier</div>
+                                                    <div class="input-group">
+                                                        <select name="supID" class="form-control" autofocus="">
+                                                            <%
+                                                                SupplierDAO supDao = new SupplierDAO();
+                                                                ResultSet allSup = supDao.getAll();
+                                                                while (allSup.next()) {
+                                                                    System.out.println(supID);
+                                                                    System.out.println(allSup.getInt(1));
+                                                                    if (supID == allSup.getInt(1)) {
+
+                                                                        out.println("<option value=" + allSup.getInt(1) + " selected>" + allSup.getString(2) + "</option>");
+                                                                    } else {
+                                                                        out.println("<option value=" + allSup.getInt(1) + ">" + allSup.getString(2) + "</option>");
+                                                                    }
+                                                                }
+                                                            %>
+<!--                                                        <input value="<%= supID%>" class="form-control" autofocus=""
+                                                         required=" " name="supID">-->
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Brand</div>
+                                                    <div class="input-group">
+                                                        <select name="brID" class="form-control" autofocus="">
+                                                            <%
+                                                                BrandDao brDao = new BrandDao();
+                                                                ResultSet allRrand = brDao.getAll();
+                                                                while (allRrand.next()) {
+                                                                    System.out.println(brID);
+                                                                    System.out.println(allRrand.getInt(1));
+                                                                    if (brID == allRrand.getInt(1)) {
+
+                                                                        out.println("<option value=" + allRrand.getInt(1) + " selected>" + allRrand.getString(2) + "</option>");
+                                                                    } else {
+                                                                        out.println("<option value=" + allRrand.getInt(1) + ">" + allRrand.getString(2) + "</option>");
+                                                                    }
+                                                                }
+                                                            %>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Saleprice</div>
                                                     <div class="input-group">
@@ -565,7 +576,6 @@
                                                                required=" " name="sellingPrice">
                                                     </div>
                                                 </div>
-
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Price</div>
                                                     <div class="input-group">
@@ -593,8 +603,23 @@
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Size</div>
                                                     <div class="input-group">
-                                                        <input value="<%= size%>" type="text" class="form-control"
-                                                               autofocus="" required=" " name="size">
+                                                        <select name="size" class="form-control" autofocus="">
+                                                            <%
+                                                                List<String> SIZE = Arrays.asList("S", "M", "L", "XL", "XXL");
+                                                                int i = 0;
+                                                                for (String s : SIZE) {
+                                                                    if (i == size) {
+                                                                        out.println("<option value=" + i + " selected>" + s + "</option>");
+                                                                    } else {
+                                                                        out.println("<option value=" + i + ">" + s + "</option>");
+                                                                    }
+                                                                    i++;
+                                                                }
+                                                            %>
+
+                                                        </select>
+<!--                                                        <input value="<%= size%>" type="text" class=    "form-control"
+                                                               autofocus="" required=" " name="size">-->
                                                     </div>
                                                 </div>
 

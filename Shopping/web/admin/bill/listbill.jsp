@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <meta charset="UTF-8">
         <!-- CSS only -->
@@ -159,49 +159,49 @@
                     width: auto;
                 }
             }
-                .searchbar{
-                    margin-bottom: auto;
-                    margin-top: auto;
-                    height: 60px;
-                    background-color: #F5A9BC;
-                    border-radius: 30px;
-                    padding: 10px;
-                }
+            .searchbar{
+                margin-bottom: auto;
+                margin-top: auto;
+                height: 60px;
+                background-color: #F5A9BC;
+                border-radius: 30px;
+                padding: 10px;
+            }
 
-                .search_input{
-                    color: white;
-                    border: 0;
-                    outline: 0;
-                    background: none;
-                    width: 0;
-                    caret-color:transparent;
-                    line-height: 40px;
-                    transition: width 0.4s linear;
-                }
+            .search_input{
+                color: white;
+                border: 0;
+                outline: 0;
+                background: none;
+                width: 0;
+                caret-color:transparent;
+                line-height: 40px;
+                transition: width 0.4s linear;
+            }
 
-                .searchbar:hover > .search_input{
-                    padding: 0 10px;
-                    width: 450px;
-                    caret-color:red;
-                    transition: width 0.4s linear;
-                }
+            .searchbar:hover > .search_input{
+                padding: 0 10px;
+                width: 450px;
+                caret-color:red;
+                transition: width 0.4s linear;
+            }
 
-                .searchbar:hover > .search_icon{
-                    background: white;
-                    color: #e74c3c;
-                }
+            .searchbar:hover > .search_icon{
+                background: white;
+                color: #e74c3c;
+            }
 
-                .search_icon{
-                    height: 40px;
-                    width: 40px;
-                    float: right;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 50%;
-                    color:white;
-                    text-decoration:none;
-                }
+            .search_icon{
+                height: 40px;
+                width: 40px;
+                float: right;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                color:white;
+                text-decoration:none;
+            }
             .sidebar {
                 width: 90px !important;
                 background-color: #F5A9BC;
@@ -354,7 +354,7 @@
                 .bg-dark {
                     background-color: #343a40 !important;
                 }
-        </style>
+            </style>
         </head>
 
 
@@ -389,7 +389,7 @@
                 <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
 
                 </form>
-          
+
                 <!-- Navbar -->
                 <ul class="navbar-nav ml-auto ml-md-0">
                     <li class="nav-item dropdown no-arrow mx-1"></li>
@@ -402,8 +402,7 @@
                             <h3><i class="fas fa-user-circle fa-fw"></i></h3>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">Login</a>
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="../../AdminLogoutController">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -456,7 +455,7 @@
                             <li class="breadcrumb-item">
                                 <a href="index.jsp">Dashboard</a>
                             </li>
-                            <li class="breadcrumb-item active">Orders</li>
+                            <li class="breadcrumb-item active">Bills</li>
 
                         </ol>
 
@@ -464,7 +463,7 @@
                         <div class="card mb-3">
                             <div class="card-header">
                                 <i class="fas fa-user"></i>
-                                List Orders</div>
+                                List Bills</div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -489,7 +488,7 @@
                                                         <tr>
                                                             <th><strong># ID Bill</strong></th>
                                                             <th><strong>Customer ID</strong></th>
-                                                            <th><strong>Status</strong></th>
+                                                            <th style="width: 100px"><strong>Status</strong></th>
                                                             <th><strong>Recipient's name</strong></th>
                                                             <th><strong>Date Of Purchase</strong></th>
                                                             <th><strong>Address</strong></th>
@@ -510,15 +509,21 @@
                                                                 out.print("<tr>");
                                                                 out.print("<td>" + rs.getInt(1) + "</td>");
                                                                 out.print("<td>" + rs.getInt(2) + "</td>");
-                                                                out.print("<td>" + rs.getString(3) + "</td>");
+                                                                if(rs.getString(3).equals("New")){
+                                                                     out.println("<td style='color:red; font-weight: bold;' >New</td> ");
+                                                                }else{
+                                                                    out.println("<td style='color:black; font-weight: bold;' >Delivered</td> ");
+                                                                }
                                                                 out.print("<td>" + rs.getString(4) + "</td>");
                                                                 out.print("<td>" + rs.getDate(5) + "</td>");
                                                                 out.print("<td>" + rs.getString(6) + "</td>");
                                                                 out.print("<td>" + rs.getString(7) + "</td>");
                                                                 out.print("<td>" + rs.getString(8) + "</td>");
                                                                 out.print("<td>" + rs.getDouble(9) + "</td>");
-                                                                out.print("<td><a href='billDetail.jsp?id=" + rs.getInt("bID") + "'>Xem chi tiet hoa don</a></td>");
-                                                                out.print("<td><a href='updateBill.jsp?id=" + rs.getInt("bID") + "'>Cap nhat</a></td>");
+                                                                out.print("<td><a href='billDetail.jsp?id=" + rs.getInt("bID") + "'>View Detail</a></td>");
+                                                                out.print("<td><a href='updateBill.jsp?id=" + rs.getInt("bID") + "'>Update</a></td>");
+                                                                out.print("<td><a href='../../Change?bID=" + rs.getString(1) + "'>Change</a></td>");
+
                                                                 out.print("</tr>");
                                                             }
                                                         %>

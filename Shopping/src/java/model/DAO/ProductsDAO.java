@@ -81,23 +81,23 @@ public class ProductsDAO {
 
     public int update(Products p) {
         try {
-            String sql = "update products set status=?, brID=?, tID=?, supID=?, pName=?, sellingPrice=?, price=?, describle=?, pDate=?, size=?, material=?, quantity = ?, discount=?, gender=? where pID=?";
+            String sql = "update products set brID=?, tID=?, supID=?, pName=?, sellingPrice=?, price=?, describle=?, pDate=?, size=?, material=?, quantity = ?, discount=?, gender=? where pID=?";
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, p.getSpID());
-            pst.setInt(2, p.getBrID());
-            pst.setInt(3, p.gettID());
-            pst.setInt(4, p.getSupID());
-            pst.setString(5, p.getpName());
-            pst.setDouble(6, p.getSellingPrice());
-            pst.setDouble(7, p.getPrice());
-            pst.setString(8, p.getDescrible());
-            pst.setDate(9, (Date) p.getpDate());
-            pst.setInt(10, p.getSize());
-            pst.setString(11, p.getMaterial());
-            pst.setInt(12, p.getQuantity());
-            pst.setFloat(13, p.getDiscount());
-            pst.setString(14, p.getGender());
-            pst.setInt(15, p.getpID());
+          
+            pst.setInt(1, p.getBrID());
+            pst.setInt(2, p.gettID());
+            pst.setInt(3, p.getSupID());
+            pst.setString(4, p.getpName());
+            pst.setDouble(5, p.getSellingPrice());
+            pst.setDouble(6, p.getPrice());
+            pst.setString(7, p.getDescrible());
+            pst.setDate(8, (Date) p.getpDate());
+            pst.setInt(9, p.getSize());
+            pst.setString(10, p.getMaterial());
+            pst.setInt(11, p.getQuantity());
+            pst.setFloat(12, p.getDiscount());
+            pst.setString(13, p.getGender());
+            pst.setInt(14, p.getpID());
             return pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -149,7 +149,7 @@ public class ProductsDAO {
 
     public int ChangeStatus(int id, int status) {
         try {
-            String sql = "UPDATE `products` SET `status`=? WHERE  `cID`=?";
+            String sql = "UPDATE `products` SET `status`=? WHERE  `pID`=?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, status);
             pst.setInt(2, id);

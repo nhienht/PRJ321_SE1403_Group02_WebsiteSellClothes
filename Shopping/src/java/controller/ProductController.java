@@ -85,7 +85,6 @@ public class ProductController extends HttpServlet {
             throws ServletException, IOException {
         //  processRequest(request, response);
         Products p = new Products();
-        p.setSpID(Integer.parseInt(request.getParameter("status")));
         p.setBrID(Integer.parseInt(request.getParameter("brID")));
         p.settID(Integer.parseInt(request.getParameter("tID")));
         p.setSupID(Integer.parseInt(request.getParameter("supID")));
@@ -123,11 +122,11 @@ public class ProductController extends HttpServlet {
                         //   out.print("3");
                         String fileName = filePart.getSubmittedFileName(); // 
                         // String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-                        boolean check = imgDao.insert(pID, DIR+ File.separator+ fileName);
-                        
-                            System.out.println(pathOld + File.separator + fileName);
-                            filePart.write(pathOld + File.separator + fileName);
-                        }                  
+                        boolean check = imgDao.insert(pID, DIR + File.separator + fileName);
+
+                        System.out.println(pathOld + File.separator + fileName);
+                        filePart.write(pathOld + File.separator + fileName);
+                    }
                 }
             } catch (Exception ex) {
                 System.out.println(ex);

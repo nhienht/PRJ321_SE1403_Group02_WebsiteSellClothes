@@ -381,7 +381,7 @@
                             <h3><i class="fas fa-user-circle fa-fw"></i></h3>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="../../AdminLogoutController">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -434,7 +434,8 @@
                             <li class="breadcrumb-item">
                                 <a href="../product/listproducts.jsp">Dashboard</a>
                             </li>
-                            <li class="breadcrumb-item active">Orders</li>
+                            <li class="breadcrumb-item active">Customers</li>
+                         
 
                         </ol>
 
@@ -442,7 +443,7 @@
                         <div class="card mb-3">
                             <div class="card-header">
                                 <i class="fas fa-user"></i>
-                                List Orders</div>
+                                List Customers</div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -473,12 +474,11 @@
                                                         <th>Email</th>
                                                         <th>Status</th>
                                                         <th>Gender</th>
-                                                        <th>Update</th>
+                                                        
+                                                        <th>Change Status</th>
                                                     </tr>
                                                 </thead>
-
                                                 <tbody>
-
                                                     <%
                                                         CustomerDAO cDao = new CustomerDAO();
                                                         ResultSet rs = cDao.getAll();
@@ -491,10 +491,15 @@
                                                             out.print("<td>" + rs.getString(6) + "</td>");
                                                             out.print("<td>" + rs.getDate(7) + "</td>");
                                                             out.print("<td>" + rs.getString(8) + "</td>");
-                                                            out.print("<td>" + rs.getString(9) + "</td>");
+                                                            if (rs.getInt("status") == 1) {
+                                                                    out.println("<td style='color:green; font-weight: bold;' >Valid</td> ");
+                                                                } else {
+                                                                    out.println("<td style='color:red;font-weight: bold; '>Invalid</td> ");
+                                                                }
                                                             out.print("<td>" + rs.getString(10) + "</td>");
                                                             //                            out.print("<td><a href='billDetail.jsp?id=" + rs.getInt("bID") + "'>Xem chi tiet hoa don</a></td>");
-                                                            out.print("<td><a href='updateCustomer.jsp?id=" + rs.getInt("cID") + "'>Update</a></td>");
+                                                         //   out.print("<td><a href='updateCustomer.jsp?id=" + rs.getInt("cID") + "'>Update</a></td>");
+                                                             out.print("<td><a href='../../Change?cID=" +rs.getInt(1) + "' + '>Change</a></td>");
                                                             out.print("</tr>");
                                                         }
                                                     %>

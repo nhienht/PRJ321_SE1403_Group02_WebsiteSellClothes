@@ -95,10 +95,17 @@ public class AccountController extends HttpServlet {
             c.setStatus(1);
             c.setGender(request.getParameter("gender"));
             cDao.insert(c);
-            HttpSession session = request.getSession();
-            session.setAttribute("checkLogin", true);
-            response.sendRedirect("./index.jsp");
+            int maxID = cDao.getMaxCustomer();
+             cDao.login(request.getParameter("cUsername"), request.getParameter("cPassword"));
+               Cookie userCookie = new Cookie("user", request.getParameter("cUsername"));
+                Cookie idCookie = new Cookie("idCustomer", String.valueOf(maxID));
 
+                userCookie.setMaxAge(60 * 60 * 24);
+                idCookie.setMaxAge(60 * 60 * 24);
+
+                response.addCookie(userCookie);
+                response.addCookie(idCookie);
+                response.sendRedirect("home.jsp");
         } else if (request.getParameter("btnLogin") != null) {
             // CustomerDAO cDao = new CustomerDAO();
             String user = request.getParameter("user");
@@ -106,18 +113,13 @@ public class AccountController extends HttpServlet {
             int id = cDao.login(user, pass);
             if (id != -1) {
                 Cookie userCookie = new Cookie("user", user);
-                Cookie passCookie = new Cookie("pass", pass);
                 Cookie idCookie = new Cookie("idCustomer", String.valueOf(id));
 
                 userCookie.setMaxAge(60 * 60 * 24);
-                passCookie.setMaxAge(60 * 60 * 24);
                 idCookie.setMaxAge(60 * 60 * 24);
 
                 response.addCookie(userCookie);
-                response.addCookie(passCookie);
                 response.addCookie(idCookie);
-//                HttpSession session= request.getSession();
-// session.setAttribute("checkLogin", true);
                 response.sendRedirect("home.jsp");
             } else {
 //                out.println("<script type=\"text/javascript\">");
@@ -127,7 +129,9 @@ public class AccountController extends HttpServlet {
                 response.sendRedirect("./auth/login.jsp");
 
             }
-        } 
+        } else if(request.getParameter("btnSignInPage") != null){
+            response.sendRedirect("./auth/signin.jsp");
+        }
 
     }
 

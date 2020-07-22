@@ -16,7 +16,7 @@ import model.entity.Bill;
 
 /**
  *
- * @author 
+ * @author
  */
 public class BillDAO {
 
@@ -63,7 +63,8 @@ public class BillDAO {
         }
         return 0;
     }
-    public ResultSet getAll(){
+
+    public ResultSet getAll() {
         try {
             String sql = "select * from bill";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -74,14 +75,14 @@ public class BillDAO {
         }
         return null;
     }
-    
-    public Bill getBill(int id){
+
+    public Bill getBill(int id) {
         try {
             String sql = "select * from bill where bID=?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 Bill b = new Bill(id, rs.getInt(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getDouble(9));
                 return b;
             }
@@ -90,19 +91,19 @@ public class BillDAO {
         }
         return null;
     }
-     public int update(Bill b) {
+
+    public int update(Bill b) {
         try {
-            String sql = "UPDATE `bill` SET `cID`=?,`bStatus`=?,`customerName`=?,`bDate`=?,`address`=?,`phone`=?,`note`=?,`total`=? WHERE bID=?";
+            String sql = "UPDATE `bill` SET `cID`=?,`customerName`=?,`bDate`=?,`address`=?,`phone`=?,`note`=?,`total`=? WHERE bID=?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, b.getcID());
-            pst.setString(2, b.getbStatus());
-            pst.setString(3, b.getCustomerName());
-            pst.setDate(4, java.sql.Date.valueOf(LocalDate.now()));
-            pst.setString(5, b.getAddress());
-            pst.setString(6, b.getPhone());
-            pst.setString(7, b.getNote());
-            pst.setDouble(8, b.getTotal());
-            pst.setInt(9, b.getbID());
+            pst.setString(2, b.getCustomerName());
+            pst.setDate(3, java.sql.Date.valueOf(LocalDate.now()));
+            pst.setString(4, b.getAddress());
+            pst.setString(5, b.getPhone());
+            pst.setString(6, b.getNote());
+            pst.setDouble(7, b.getTotal());
+            pst.setInt(8, b.getbID());
             return pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -121,7 +122,8 @@ public class BillDAO {
         }
         return 0;
     }
-    public int changeStatus(int bID , String newStatus){
+
+    public int changeStatus(int bID, String newStatus) {
         try {
             String sql = "UPDATE `bill` SET `bStatus`=? WHERE bID = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -133,7 +135,8 @@ public class BillDAO {
         }
         return 0;
     }
-    public ResultSet getBillbyCustomer(int cId){
+
+    public ResultSet getBillbyCustomer(int cId) {
         try {
             String sql = "select * from bill where cID =?";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -143,8 +146,7 @@ public class BillDAO {
             Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-        
-    }
-   
-}
 
+    }
+
+}

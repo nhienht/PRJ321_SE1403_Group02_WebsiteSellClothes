@@ -37,15 +37,15 @@ public class LogoutController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
            Cookie userCookie = new Cookie("user", null);
-                Cookie passCookie = new Cookie("pass", null);
+           //     Cookie passCookie = new Cookie("pass", null);
                 Cookie idCookie = new Cookie("idCustomer", null);
 
                 userCookie.setMaxAge(0);
-                passCookie.setMaxAge(0);
+             //   passCookie.setMaxAge(0);
                 idCookie.setMaxAge(0);
 
                 response.addCookie(userCookie);
-                response.addCookie(passCookie);
+             //   response.addCookie(passCookie);
                 response.addCookie(idCookie);
 //                RequestDispatcher requestDispatcher = request.getRequestDispatcher("./auth/login.jsp");
 //		requestDispatcher.forward(request, response);

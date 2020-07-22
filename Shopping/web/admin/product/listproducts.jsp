@@ -4,6 +4,9 @@
     Author     : 
 --%>
 
+<%@page import="model.DAO.SupplierDAO"%>
+<%@page import="model.DAO.BrandDao"%>
+<%@page import="model.DAO.TypeDAO"%>
 <%@page import="model.DAO.ImageDAO"%>
 <%@page import="model.DAO.ProductsDAO"%>
 <%@page import="java.sql.ResultSet"%>
@@ -49,6 +52,7 @@
                 width: 100%;
                 padding-top: 1rem;
                 padding-bottom: 80px;
+
             }
 
             body.fixed-nav #content-wrapper {
@@ -275,49 +279,49 @@
                     display: none;
                 }
             }
-                            .searchbar{
-                    margin-bottom: auto;
-                    margin-top: auto;
-                    height: 60px;
-                    background-color: #F5A9BC;
-                    border-radius: 30px;
-                    padding: 10px;
-                }
+            .searchbar{
+                margin-bottom: auto;
+                margin-top: auto;
+                height: 60px;
+                background-color: #F5A9BC;
+                border-radius: 30px;
+                padding: 10px;
+            }
 
-                .search_input{
-                    color: white;
-                    border: 0;
-                    outline: 0;
-                    background: none;
-                    width: 0;
-                    caret-color:transparent;
-                    line-height: 40px;
-                    transition: width 0.4s linear;
-                }
+            .search_input{
+                color: white;
+                border: 0;
+                outline: 0;
+                background: none;
+                width: 0;
+                caret-color:transparent;
+                line-height: 40px;
+                transition: width 0.4s linear;
+            }
 
-                .searchbar:hover > .search_input{
-                    padding: 0 10px;
-                    width: 450px;
-                    caret-color:red;
-                    transition: width 0.4s linear;
-                }
+            .searchbar:hover > .search_input{
+                padding: 0 10px;
+                width: 450px;
+                caret-color:red;
+                transition: width 0.4s linear;
+            }
 
-                .searchbar:hover > .search_icon{
-                    background: white;
-                    color: #e74c3c;
-                }
+            .searchbar:hover > .search_icon{
+                background: white;
+                color: #e74c3c;
+            }
 
-                .search_icon{
-                    height: 40px;
-                    width: 40px;
-                    float: right;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 50%;
-                    color:white;
-                    text-decoration:none;
-                }
+            .search_icon{
+                height: 40px;
+                width: 40px;
+                float: right;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                color:white;
+                text-decoration:none;
+            }
 
             .sidebar.fixed-top {
                 top: 56px;
@@ -353,26 +357,7 @@
                 }
             </style>
         </head>
-
-
-
-        <%
-            if (request.getParameter("id") != null) {
-                int pId = Integer.parseInt(request.getParameter("id"));
-                ProductsDAO pDao = new ProductsDAO();
-                int kq = pDao.delete(pId);
-                if (kq > 0) {
-                    out.println("<script> alert('Xoa thanh cong');</script>");
-                } else {
-                    out.println("<script>alert('Xoa that bai');</script>");
-                }
-                out.println("<script>location.href='listproducts.jsp';</script>");
-            }
-        %>
-
         <body id="page-top" class="">
-
-
             <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
                 <a class="navbar-brand mr-1 fas" href="../../home.jsp">
                     <h3>Clothing</h3>
@@ -399,7 +384,7 @@
                             <h3><i class="fas fa-user-circle fa-fw"></i></h3>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="../../AdminLogoutController">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -407,7 +392,7 @@
             </nav>
 
             <div id="wrapper">
-                 <ul class="sidebar navbar-nav">
+                <ul class="sidebar navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="../dashboard.jsp">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -448,7 +433,7 @@
                             <li class="breadcrumb-item">
                                 <a href="index.jsp">Dashboard</a>
                             </li>
-                            <li class="breadcrumb-item active">Orders</li>
+                            <li class="breadcrumb-item active">Products</li>
 
                         </ol>
 
@@ -456,7 +441,7 @@
                         <div class="card mb-3">
                             <div class="card-header">
                                 <i class="fas fa-user"></i>
-                                List Orders</div>
+                                List Products</div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -480,21 +465,23 @@
                                                     <thead>
                                                         <tr>
                                                             <th>ID Products</th>
-                                                            <th>Status Product</th>
+                                                            <th>Product's name</th>
+                                                            <th>Image</th>
                                                             <th>Brand Products</th>
                                                             <th>Type Products</th>
                                                             <th>Supplier </th>
-                                                            <th>Product's name</th>
                                                             <th>Saleprice</th>
                                                             <th>Price</th>
                                                             <th>Describle</th>
                                                             <th>Date</th>
                                                             <th>Size </th>
                                                             <th>Material</th>
+                                                            <th>Quantity</th>
+                                                            <th>Discount</th>
+                                                            <th>Gender</th>                                                         
+                                                            <th>Status Product</th>
                                                             <th>Update</th>
-                                                            <th>Clothing</th>
-                                                            <th>Image</th>
-                                                            <th>Gender</th>
+                                                            <th>Change Status</th>
                                                         </tr>
                                                     </thead>
 
@@ -507,30 +494,49 @@
 
                                                                 out.print("<tr>");
                                                                 out.print("<td>" + rs.getInt("pID") + "</td>");
-                                                                out.print("<td>" + rs.getInt("status") + "</td>");
-                                                                out.print("<td>" + rs.getInt("brID") + "</td>");
-                                                                out.print("<td>" + rs.getInt("tID") + "</td>");
-                                                                out.print("<td>" + rs.getInt("supID") + "</td>");
                                                                 out.print("<td>" + rs.getString("pName") + "</td>");
+                                                                ImageDAO iDao = new ImageDAO();
+                                                                ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
+                                                                out.print("<td><img src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' /></td>");
+                                                                BrandDao brDao = new BrandDao();
+                                                                String brand = brDao.getBrand(rs.getInt("brID"));
+                                                                out.print("<td>" + brand + "</td>");
+                                                                TypeDAO tDao = new TypeDAO();
+                                                                String type = tDao.getType(rs.getInt("tID"));
+                                                                out.print("<td>" + type + "</td>");
+                                                                SupplierDAO supDao = new SupplierDAO();
+                                                                String sup = supDao.getSupplier(rs.getInt("supID"));
+                                                                out.print("<td>" + sup + "</td>");
                                                                 out.print("<td>" + rs.getInt("sellingPrice") + "</td>");
                                                                 out.print("<td>" + rs.getInt("price") + "</td>");
                                                                 out.print("<td>" + rs.getString("describle") + "</td>");
                                                                 out.print("<td>" + rs.getDate("pDate") + "</td>");
-                                                                out.print("<td>" + rs.getInt("size") + "</td>");
+                                                                int size = rs.getInt("size");
+                                                                String s = "";
+                                                                if (size == 0) {
+                                                                    s = "S";
+                                                                } else if (size == 1) {
+                                                                    s = "M";
+                                                                } else if (size == 2) {
+                                                                    s = "L";
+                                                                } else if (size == 3) {
+                                                                    s = "XL";
+                                                                } else {
+                                                                    s = "XXL";
+                                                                }
+                                                                out.print("<td>" + s + "</td>");
                                                                 out.print("<td>" + rs.getString("material") + "</td>");
+                                                                out.print("<td>" + rs.getString("quantity") + "</td>");
+                                                                out.print("<td>" + rs.getString("discount") + "</td>");
                                                                 out.print("<td>" + rs.getString("gender") + "</td>");
-                                                                ImageDAO iDao = new ImageDAO();
-                                                                ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
-                                                                System.out.println(rsImg.getString("imageName"));
-                                                                //  System.out.println(rsImg.next());
-                                                                // while (rsImg.first()) {
-                                                                System.out.println(rsImg.getString("imageName"));
-                                                                out.print("<td><img src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' /></td>");
-                                                                //   break;
-                                                                ///  }
 
+                                                                if (rs.getInt("status") == 1) {
+                                                                    out.println("<td style='color:green; font-weight: bold;' >Valid</td> ");
+                                                                } else {
+                                                                    out.println("<td style='color:red;font-weight: bold; '>Invalid</td> ");
+                                                                }
                                                                 out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'>Update</a></td>");
-                                                                out.print("<td><a href='?id=" + rs.getInt("pID") + "'>Delete</a></td>");
+                                                                out.print("<td><a href='../../Change?pID=" + rs.getInt("pID") + "' + '>Change</a></td>");
 
                                                                 out.print("</tr>");
                                                             }

@@ -357,8 +357,8 @@
                 .input-group{
                     padding-bottom:  30px;
                 }
-              
-                
+
+
             </style>
         </head>
         <body>
@@ -415,7 +415,7 @@
                             <h3><i class="fas fa-user-circle fa-fw"></i></h3>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="../../AdminLogoutController">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -440,7 +440,7 @@
                             <span> Bill</span></a>
                     </li>
 
-                    <li class="nav-item active">
+                    <li class="nav-item ">
                         <a class="nav-link" href="../customer/listcustomer.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Customer</span></a>
@@ -471,7 +471,7 @@
                             <li class="breadcrumb-item">
                                 <a href="index.jsp">Dashboard</a>
                             </li>
-                            <li class="breadcrumb-item active">Orders</li>
+                            <li class="breadcrumb-item active">Bills</li>
 
                         </ol>
 
@@ -479,118 +479,78 @@
                         <div class="card mb-3">
                             <div class="card-header">
                                 <i class="fas fa-user"></i>
-                                List Orders</div>
+                                Update Bill</div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                        <div class="row">
-                                            <div class="container h-100">
-                                                <div class="d-flex justify-content-center h-100">
-                                                    <div class="searchbar">
-                                                        <input class="search_input" type="text" name="" placeholder="Search...">
-                                                        <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
                                     <form action="./../../BillController" class="billing-form" method="post">
                                         <div class="contact-form">
                                             <div class="row">
                                                 <input type="hidden" value="<%= bID%>" name="bID"/>
                                                 <input type="hidden" value="<%= cID%>" name="cID"/>
-                                                
-                                            
-                                                    <div class="col-sm-6 col-xs-12">
-                                                        <div>Customer Name </div>
-                                                        <div class="input-group">
-                                                            
-                                                           <input type="text" class="form-control" placeholder="Your Name" name="customerName" value="<%= customerName%>">  
-                                                        </div>
+
+
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Customer Name </div>
+                                                    <div class="input-group">
+
+                                                        <input type="text" class="form-control" placeholder="Your Name" name="customerName" value="<%= customerName%>">  
                                                     </div>
-                                                    <div class="col-sm-6 col-xs-12">
-                                                        <div>Phone</div>
-                                                        <div class="input-group">
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Phone</div>
+                                                    <div class="input-group">
 
-                                                           <input type="text" class="form-control" placeholder="Your Phone Number" name="phone" value="<%= phone%>">  
-                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="Your Phone Number" name="phone" value="<%= phone%>">  
                                                     </div>
+                                                </div>
 
-                                                    <div class="col-sm-6 col-xs-12">
-                                                        <div>Address</div>
-                                                        <div class="input-group">
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Address</div>
+                                                    <div class="input-group">
 
-                                                         <input type="text" class="form-control" placeholder="House Number and Street Name" name="address" value="<%= address%>">
-                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="House Number and Street Name" name="address" value="<%= address%>">
                                                     </div>
-                                                    <div class="col-sm-6 col-xs-12">
-                                                        <div>Date</div>
-                                                        <div class="input-group">
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Date</div>
+                                                    <div class="input-group">
 
-                                                            <input type="date" class="form-control" placeholder="Date Of Bill" name="pDate" value="<%= bDate%>">
-                                                        </div>
+                                                        <input type="date" class="form-control" placeholder="Date Of Bill" name="pDate" value="<%= bDate%>">
                                                     </div>
+                                                </div>
 
-                                                    <div class="col-sm-6 col-xs-12">
-                                                        <div>Note</div>
-                                                        <div class="input-group">
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Note</div>
+                                                    <div class="input-group">
 
-                                                       <input type="text" class="form-control" placeholder="Your Note" name="note" value="<%= note%>">
-                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="Your Note" name="note" value="<%= note%>">
                                                     </div>
-                                                    <div class="col-sm-6 col-xs-12">
-                                                        <div>Status</div>
-                                                        <div class="input-group">
+                                                </div>
+<!--                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Status</div>
+                                                    <div class="input-group">
 
-                                                            <input type="text" class="form-control" placeholder="Status Of Bill" name="bStatus" value="<%= bStatus%>">
-                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="Status Of Bill" name="bStatus" value="<%= bStatus%>">
                                                     </div>
+                                                </div>-->
 
-                                                    <div class="col-sm-12 col-xs-12">
-                                                        <div>Total</div>
-                                                        <div class="input-group" >
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Total</div>
+                                                    <div class="input-group" >
 
-                                                            <input type="input" class="form-control" name="total" value="<%= total%>">
-                                                        </div>
+                                                        <input type="input" class="form-control" name="total" value="<%= total%>">
                                                     </div>
-                                                    <div class="col-sm-12 col-xs-12">
-                                                        <div></div>
-                                                        <div class="input-group" >
-                                                            <input type="submit" class="form-control" name="btnUpdate" value="Update">
-                                                        </div>
+                                                </div>
+                                                <div class="col-sm-12 col-xs-12">
+                                                    <div></div>
+                                                    <div class="input-group" >
+                                                        <input type="submit" class="form-control btn-info" name="btnUpdate" value="Update">
                                                     </div>
-                                         
+                                                </div>
+
                                             </div>
                                         </div>
                                     </form>
-
-
-
-
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="dataTable_info" role="status"
-                                                 aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled"
-                                                        id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                               data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item active"><a href="#"
-                                                                                                    aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                    class="page-link">1</a></li>
-                                                    <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                        <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                           class="page-link">Next</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

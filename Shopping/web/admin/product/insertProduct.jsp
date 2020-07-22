@@ -1,3 +1,7 @@
+<%@page import="model.DAO.BrandDao"%>
+<%@page import="model.DAO.SupplierDAO"%>
+<%@page import="model.DAO.TypeDAO"%>
+<%@page import="model.DAO.TypeDAO"%>
 <%@page import="model.DAO.ImageDAO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="model.DAO.ProductsDAO"%>
@@ -396,7 +400,7 @@
                             <h3><i class="fas fa-user-circle fa-fw"></i></h3>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="../../AdminLogoutController">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -448,7 +452,7 @@
                             <li class="breadcrumb-item">
                                 <a href="index.jsp">Dashboard</a>
                             </li>
-                            <li class="breadcrumb-item active">Orders</li>
+                            <li class="breadcrumb-item active">Products</li>
 
                         </ol>
 
@@ -456,52 +460,58 @@
                         <div class="card mb-3">
                             <div class="card-header">
                                 <i class="fas fa-user"></i>
-                                List Orders</div>
+                                Insert Products</div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                        <div class="row">
-                                            <div class="container h-100">
-                                                <div class="d-flex justify-content-center h-100">
-                                                    <div class="searchbar">
-                                                        <input class="search_input" type="text" name="" placeholder="Search...">
-                                                        <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <form action="./../../ProductController" method="POST" enctype='multipart/form-data'>
                                         <div class="contact-form">
                                             <div class="row">
-
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Product's Name</div>
+                                                    <div class="input-group">
+                                                        <input placeholder="Product's Name" class="form-control" autofocus="" required=" " name="pName">
+                                                    </div>
+                                                </div>
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Status Product </div>
                                                     <div class="input-group">
-                                                        <input placeholder="Status Product" type="text" name="status" class="form-control" autofocus
-                                                               required="Please input">
+                                                        <!--                                                        <input placeholder="Status Product" type="text" name="status" class="form-control" autofocus
+                                                                                                                       required="Please input">-->
+                                                        <select name="status" class="form-control" autofocus="">
+                                                            <option value="1">Valid</option>
+                                                            <option value="0">Invalid</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Brand ID</div>
                                                     <div class="input-group">
-                                                        <td> <input placeholder="Brand ID" class="form-control" autofocus="" required=" " name="brID"></td>
+                                                        <select name="brID" class="form-control" autofocus="">
+                                                            <%
+                                                                BrandDao brDao = new BrandDao();
+                                                                ResultSet allRrand = brDao.getAll();
+                                                                while (allRrand.next()) {
+                                                                    out.println("<option value=" + allRrand.getInt(1) + ">" + allRrand.getString(2) + "</option>");
+                                                                }
+                                                            %>
+                                                        </select>
+                                                        <!--<td> <input placeholder="Brand ID" class="form-control" autofocus="" required=" " name="brID"></td>-->
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Type Product </div>
                                                     <div class="input-group">
                                                         <select aria-placeholder="Type Product" name="tID" class="form-control" autofocus="">
-                                                            <option value=1>T-shirt</option>
-                                                            <option value=2>Short</option>
-                                                            <option value=3>Skirt</option>
-                                                            <option value=4>Dress</option>
-                                                            <option value=5>Pants</option>
-                                                            <option value=6>Jacket</option>
-                                                            <option value=7>Jeans</option>
-                                                            <option value=8>Shirt</option>
-                                                            <option value=9>Sweater</option>
-                                                            <option value="10">Other</option>
+
+                                                            <%
+                                                                TypeDAO tDao = new TypeDAO();
+                                                                ResultSet allType = tDao.getAll();
+                                                                while (allType.next()) {
+                                                                    out.println("<option value=" + allType.getInt(1) + ">" + allType.getString(2) + "</option>");
+                                                                }
+                                                            %>
+
                                                         </select>
                                                     </div>
                                                 </div>
@@ -509,16 +519,18 @@
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Supplier ID</div>
                                                     <div class="input-group">
-                                                        <input placeholder="Supplier ID" class="form-control" autofocus="" required=" " name="supID">
+                                                        <select name="supID" class="form-control" autofocus="">
+                                                            <%
+                                                                SupplierDAO supDao = new SupplierDAO();
+                                                                ResultSet allSup = supDao.getAll();
+                                                                while (allSup.next()) {
+                                                                    out.println("<option value=" + allSup.getInt(1) + ">" + allSup.getString(2) + "</option>");
+                                                                }
+                                                            %>
+                                                        </select>
+                                                    </div>
+                                                </div>
 
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6 col-xs-12">
-                                                    <div>Product's Name</div>
-                                                    <div class="input-group">
-                                                        <input placeholder="Product's Name" class="form-control" autofocus="" required=" " name="pName">
-                                                    </div>
-                                                </div>
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Selling Price</div>
                                                     <div class="input-group">
@@ -547,7 +559,14 @@
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Size</div>
                                                     <div class="input-group">
-                                                        <input placeholder="Size" type="text" class="form-control" autofocus="" required=" " name="size">
+                                                        <select name="size" class="form-control" autofocus="">
+                                                            <option value="0">S</option>
+                                                            <option value="1">M</option>
+                                                            <option value="2">L</option>
+                                                            <option value="3">XL</option>
+                                                            <option value="4">XXL</option>
+
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-12">
