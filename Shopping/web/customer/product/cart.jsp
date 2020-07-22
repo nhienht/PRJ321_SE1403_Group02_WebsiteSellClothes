@@ -156,6 +156,13 @@
             background-color: black;
             color: white;
         }
+        .table .thead-primary tr th {
+            padding: 20px 10px;
+            color: #fff !important;
+            border: 1px solid !important;
+            text-align: center;
+        }  
+        
     </style>
     <body class="goto-here">
         <jsp:include page="../../header/header.jsp" ></jsp:include>
@@ -227,7 +234,7 @@
                     <div class="col-md-12 ftco-animate">
                         <div>
                             <p class="title">LIST CART<p>
-                            <table class="table">
+                            <table class="table" style="text: center;">
 
                                 <%
                                     HashMap<Integer, Integer> listCart = (HashMap<Integer, Integer>) session.getAttribute("listCart");
@@ -239,12 +246,12 @@
                                     if (listCart != null) {
                                         out.print(" <thead class='thead-primary'>"
                                                 + " <tr class='text-center'>"
-                                                + "<th>No.</th>"
+                                                + " <th>No.</th>"
                                                 + " <th>Product</th>"
                                                 + " <th>Price</th>"
                                                 + " <th>Discount</th>"
                                                 + " <th>Quantity</th>"
-                                                + "<th></th>"
+                                                + "<th>Remove</th>"
                                                 + "</tr>"
                                                 + "   </thead>"
                                         );
@@ -259,7 +266,7 @@
                                             out.print("<td>" + p.getPrice() + "</td>");
                                             out.print("<td>" + p.getDiscount() + "</td>");
                                             out.print("<td>" + quantity + "</td>");
-                                            total += (double) quantity*(p.getPrice() - p.getDiscount() * p.getPrice()/100);
+                                            total += (double) quantity * (p.getPrice() - p.getDiscount() * p.getPrice() / 100);
                                             out.print("<td><a href='?rm=" + i + "'>Remove</a></td>");
                                             out.print("</tr>");
 
