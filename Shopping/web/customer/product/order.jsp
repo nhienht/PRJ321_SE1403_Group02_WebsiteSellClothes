@@ -12,6 +12,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+              integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        
         <link rel="stylesheet" href="Style/css/open-iconic-bootstrap.min.css">
         <link rel="stylesheet" href="Style/css/animate.css">
         <link rel="stylesheet" href="Style/css/owl.carousel.min.css">
@@ -24,79 +29,63 @@
         <link rel="stylesheet" href="Style/css/flaticon.css">
         <link rel="stylesheet" href="Style/css/icomoon.css">
         <link rel="stylesheet" href="Style/css/style.css">
-        <style>
-            @import url('https://fonts.google.com/specimen/Balsamiq+Sans');
-            html ,body {
-                width: 100%;
-                height: 100%;
-                font-family: 'Balsamiq Sans';   
-                font-size: 17px;
-                color: #222;
-            }
-            .navbar{
-                background-color: #F5A9BC !important;
-            }
-            .navbar li a {
-                color: #f8f2f2!important ;
+    <style>
+        @import url('https://fonts.google.com/specimen/Balsamiq+Sans');
+        html ,body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Balsamiq Sans';   
+            font-size: 17px;
+            color: #222;
+        }
+        .navbar{
+            background-color: #F5A9BC !important;
+        }
+        .navbar li a {
+            color: #f8f2f2!important ;
 
-            }
-            .navbar li a:hover {
-                color: #000000 !important ;
+        }
+        .navbar li a:hover {
+            color: #000000 !important ;
 
-            }
-            .container-fluid
-            {
-                padding-top: 8em;
-            }
+        }
+        .container-fluid
+        {
+            padding-top: 8em;
+        }
 
 
-            .overlay {
-                position: absolute; 
-                bottom: 0; 
-                background: rgb(0, 0, 0);
-                background: rgba(0, 0, 0, 0.5); /* Black see-through */
-                color: #f1f1f1; 
-                width: 100%;
-                transition: .5s ease;
-                opacity:0;
-                color: white;
-                font-size: 20px;
-                padding: 20px;
-                text-align: center;
-            }
-            .container-fluid:hover .overlay {
-                opacity: 1;
-            }
-            .nav-item{
-                padding-right: 20px;
-                font-size: 25px;
-            }
-            .fotter{
-                background-color: black;
-                color: white;
-            }
-             .title{
-                font-size: 25px;
-                text-align: center;
-            }
-            .price{
-                font-size: 20px;
-                text-align: center;
-                color: #000;
-                font: bold;
-
-            }
-
-        </style>
-
-    </head>
+        .overlay {
+            position: absolute; 
+            bottom: 0; 
+            background: rgb(0, 0, 0);
+            background: rgba(0, 0, 0, 0.5); /* Black see-through */
+            color: #f1f1f1; 
+            width: 100%;
+            transition: .5s ease;
+            opacity:0;
+            color: white;
+            font-size: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+        .container-fluid:hover .overlay {
+            opacity: 1;
+        }
+        .nav-item{
+            padding-right: 20px;
+            font-size: 25px;
+        }
+        .fotter{
+            background-color: black;
+            color: white;
+        }
+    </style>
     <body class="goto-here">
         <jsp:include page="../../header/header.jsp" ></jsp:include>
-
-
             <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
-                <a class="navbar-branch" href="index.jsp">
+                <a class="navbar-branch" href="../../index.jsp">
                     <img src="./images/logo.jpg" height="80px" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
@@ -105,38 +94,54 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto" style="padding-left: 600px">
                         <li class="nav-item">
-                            <a href="./index.jsp" class="nav-link ">Home</a>
+                            <a href="../../home.jsp" class="nav-link ">Home</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a href="./customer/product/list.jsp" class="nav-link ">Products</a>
+                            <a href="../../customer/product/list.jsp" class="nav-link ">Products</a>
 
                         </li>
                         <li class="nav-item">
-                            <a href="./auth/about.jsp" class="nav-link">About us</a>
+                            <a href="../../auth/about.jsp" class="nav-link">About us</a>
                         </li>
                         <li class="nav-item">
-                            <a href="./auth/contact.jsp" class="nav-link">Contact</a>
+                            <a href="../../auth/contact.jsp" class="nav-link">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="cart.jsp" class="nav-link">Cart</a>
                         </li>
 
-                        <c:if test = "${!isLogin}"> 
-                        <li class="nav-item">
-
-                            <a href="./auth/signin.jsp" title="Login" class="nav-link" >
-                                Sign In
+                            <li class="nav-item dropdown no-arrow  ">
+                            <a style="color: black;position:relative; top: -20px;" class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                               >
+                                <h3><i style="color: black;position:relative; top: -1px;" class="fas fa-user-circle fa-fw"></i></h3>
                             </a>
-                        </li>
-                    </c:if>
-                    <c:if test = "${isLogin}"> 
-                        <li class="nav-item">
-                            <a href="LogoutController"  title="Login" class="nav-link">
-                                Logout
-                            </a>                       
-                        </li>
-                    </c:if>
+                            <div class="dropdown-menu dropdown-menu- bg-dark text-white "  >
+                                <!--<a class="dropdown-item" href="#">Logout</a>-->
+
+                            <%
+                                Cookie[] cookies = request.getCookies();
+                                if (cookies.length > 1) {
+                                    for (Cookie cookie : cookies) {
+                                        if (cookie.getName().equals("user")) {
+                                            out.print("<a class='nav-link dropdown-item bg-dark' style='color: white; font-size:20px;' href='../../customer/Information.jsp'>" + cookie.getValue() + "</a>");
+                                            out.print("<a class='nav-link dropdown-item bg-dark' style='color: white; font-size:20px;' href='../../LogoutController'>Logout</a>");
+                                        } else if (cookie.getName().equals("admin")) {                                      
+                                          RequestDispatcher disp = request.getRequestDispatcher("admin/dashboard.jsp");
+                                            disp.forward(request, response);
+                                        }
+                                    }
+                                } else {
+                                    out.print("<a class='nav-link' style='color: black' href='../../auth/login.jsp'>Login</a>");
+                                    out.print("<a class='nav-link' style='color: black' href='../../auth/signin.jsp'>Sigin</a>");
+                                }
+                            %>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </nav>
 
+   
         <div class="hero-wrap hero-bread" style="background-image: url('Style/images/bg_6.jpg');">
             <div class="container">
                 <div class="row no-gutters slider-text align-items-center justify-content-center">
