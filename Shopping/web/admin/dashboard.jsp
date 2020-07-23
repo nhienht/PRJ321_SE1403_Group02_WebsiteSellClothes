@@ -366,7 +366,7 @@
         <body id="page-top" class="">
 
             <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-                <a class="navbar-brand mr-1 fas" href="../home.jsp">
+                <a class="navbar-brand mr-1 fas" href="../admin/dashboard.jsp">
                     <h3>Clothing</h3>
                 </a>
 
@@ -391,7 +391,7 @@
                             <h3><i class="fas fa-user-circle fa-fw"></i></h3>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="../AdminLogoutController">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -403,7 +403,7 @@
 
                 <!-- Sidebar -->
                 <ul class="sidebar navbar-nav">
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="dashboard.jsp">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Dashboard</span>
@@ -416,7 +416,7 @@
                             <span> Bill</span></a>
                     </li>
 
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="customer/listcustomer.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Customer</span></a>
@@ -429,7 +429,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                             <a class="dropdown-item" href="product/listproducts.jsp">List Products</a>
-                            <a class="dropdown-item" href="product/updateProduct.jsp">Update Products</a>
+                            <a class="dropdown-item" href="product/insertProduct.jsp">Insert Products</a>
 
                         </div>
                     </li>

@@ -133,7 +133,7 @@
                     id = Integer.parseInt(c.getValue());
                 }
             }
-            out.print(id);
+           
             CustomerDAO cDao = new CustomerDAO();
             Customer c = cDao.getCustomer(id);
 

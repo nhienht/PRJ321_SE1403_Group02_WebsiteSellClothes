@@ -14,10 +14,12 @@
     </head>
     <body>
                 
-        <form action="../../ImageController">
-              <input  type="file"class="form-control" autofocus="" required=" " name="img" multiple >
-               <input type="submit" value="INSERT">
-        </form>
+        <script>
+           
+        alert('Thank you for your purchase.\n Return to home page');
+       location='../../index.jsp';
+        </script>
+        </script>
         
    
     </body>

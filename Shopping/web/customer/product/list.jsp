@@ -17,6 +17,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
               integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -87,68 +89,74 @@
     </head>
     <%
         boolean isLogin = false;
-        // Admin ad = (Admin) session.getAttribute("checkLogin");
-//            if (ad != null) {
-//                isLogin = true;
-//
-//            } else {
-//                isLogin = false;
-//
-//            }
         Cookie[] cookies = request.getCookies();
         for(Cookie cookie: cookies){
             if(cookie.getName().equals("idCustomer") && !cookie.getValue().equals("0")){
                 isLogin = true;
             }
         }
-
     %>
     <body>
 
-        <%@include file="../../header/header.jsp" %>
+       <jsp:include page="../../header/header.jsp" ></jsp:include>
+            <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
-        <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top" style="">
-
-            <a class="navbar-branch" href="../../home.jsp">
-                <img src="./images/logo.jpg" height="80px" alt="">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto" style="padding-left: 600px">
-                    <li class="nav-item">
-                        <a href="./../../index.jsp" class="nav-link ">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="list.jsp" class="nav-link ">Products</a>
-
-                    </li>
-                    <li class="nav-item">
-                        <a href="../../auth/about.jsp" class="nav-link">About us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="../../auth/contact.jsp" class="nav-link">Contact</a>
-                    </li>
-
-                    <c:if test = "${!isLogin}"> 
+                <a class="navbar-branch" href="../../index.jsp">
+                    <img src="./images/logo.jpg" height="80px" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto" style="padding-left: 600px">
                         <li class="nav-item">
+                            <a href="../../index.jsp" class="nav-link ">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="./list.jsp" class="nav-link ">Products</a>
 
-                            <a href="../../auth/signin.jsp" title="Login" class="nav-link" >
-                                Sign In
-                            </a>
                         </li>
-                    </c:if>
-                    <c:if test = "${isLogin}"> 
                         <li class="nav-item">
-                            <a href="./auth/login.jsp?logout=1" title="Login" class="nav-link">
-                                Logout
-                            </a>
+                            <a href="../../auth/about.jsp" class="nav-link">About us</a>
                         </li>
-                    </c:if>
+                        <li class="nav-item">
+                            <a href="../../auth/contact.jsp" class="nav-link">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="cart.jsp" class="nav-link">Cart</a>
+                        </li>
+                        <li class="nav-item dropdown no-arrow  ">
+                            <a style="color: black;position:relative; top: -20px;" class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                               >
+                                <h3><i style="color: black;position:relative; top: -1px;" class="fas fa-user-circle fa-fw"></i></h3>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu- bg-dark text-white "  >
+                                <!--<a class="dropdown-item" href="#">Logout</a>-->
+
+                            <%
+                               
+                                if (cookies.length > 1) {
+                                    for (Cookie cookie : cookies) {
+                                        if (cookie.getName().equals("user")) {
+                                            out.print("<a class='nav-link dropdown-item bg-dark' style='color: white; font-size:20px;' href='../../customer/Information.jsp'>" + cookie.getValue() + "</a>");
+                                            out.print("<a class='nav-link dropdown-item bg-dark' style='color: white; font-size:20px;' href='../../LogoutController'>Logout</a>");
+                                        } else if (cookie.getName().equals("admin")) {                                      
+                                          RequestDispatcher disp = request.getRequestDispatcher("admin/dashboard.jsp");
+                                            disp.forward(request, response);
+                                        }
+                                    }
+                                } else {
+                                    out.print("<a class='nav-link' style='color: black' href='../../auth/login.jsp'>Login</a>");
+                                    out.print("<a class='nav-link' style='color: black' href='../../auth/signin.jsp'>Sigin</a>");
+                                }
+                            %>
+                        </div>
+                    </li>
+
                 </ul>
             </div>
         </nav>
+  
         <sql:setDataSource var="conn" scope="session"
                            url="jdbc:mysql://localhost/prj321"
                            user="root" password=""
@@ -171,20 +179,26 @@
                         <sql:param value="${row.pID}"/>	
                     </sql:query>	
 
-                    <div class="col-xs-12 col-sm-6 col-md-3 boder bg-light">
+                    <div class="col-xs-12 col-sm-6 col-md-3 boder bg-light ">
+                        <div>
+                        <div >
+                            <p class="text text-primary">
+                                <c:out value="${row.pName}"/> 
+                            </p>                   
+                        </div>
+                        <div>
+                            Price:   <c:out value="${row.price}" />
+                        </div>    
+                        </div>
                         <c:forEach var="img" items="${i.rows}" begin="0" end="0">
-                            <a href="productDetail.jsp?pID=${row.pID}" >
-                                <img src="../../${img.imageName}" height="300px" width="300px" class="image img-thumbnail" alt="Error"/>	
+                            <a  href="productDetail.jsp?pID=${row.pID}" >
+                                <img src="../../${img.imageName}" height="100%" width="100%" class="image img-thumbnail" alt="Error"/>	
 
                             </a>
 
                         </c:forEach>
-                        <div >
-                            <c:out value="${row.pName}"/>                     
-                        </div>
-                        <div>
-                            Price:   <c:out value="${row.price}" />
-                        </div>
+                        
+                        
                         <div class="overlay">
                             <a href="./../../CartController?id=${row.pID}&quantity=1" class="btn btn-info btn-lg">
                                 

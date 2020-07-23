@@ -4,6 +4,8 @@
     Author     : NhienHT
 --%>
 
+<%@page import="model.entity.Bill"%>
+<%@page import="model.DAO.BillDAO"%>
 <%@page import="model.entity.Products"%>
 <%@page import="model.DAO.ProductsDAO"%>
 <%@page import="model.DAO.BillDetailDAO"%>
@@ -22,26 +24,29 @@
                 <th>ten san pham</th>
                 <th>so luong mua</th>
                 <th>gia</th>
-                <th>tong tien</th>
-
+            </tr>
                 <%
 
                     BillDetailDAO bdDao = new BillDetailDAO();
-                    System.out.println(request.getParameter("id"));
                     ResultSet rs = bdDao.getBillDetail(Integer.parseInt(request.getParameter("id")));
-                    //out.print(request.getParameter("id"));
+                    BillDAO bDao = new BillDAO();
+                    Bill b = bDao.getBill(Integer.parseInt(request.getParameter("id")));
+                    
                     ProductsDAO pDao = new ProductsDAO();
-
+                    
+                    double total = 0;
+                    
                     while (rs.next()) {
-                        
-                        out.print(rs.getInt(1));
-                        out.print(rs.getInt(2));
-                        out.print(rs.getInt(3));
-                        out.print(rs.getInt(4));
-
+                      Products p = pDao.getProduct(rs.getInt(2));
+                     out.print("<tr>");
+                     out.print("<td>"+p.getpName()+"</td>");
+                     out.print("<td>"+rs.getInt(3)+"</td>");
+                     out.print("<td>"+rs.getInt(4)+"</td>");
+                     out.print(" </tr>");                    
                     }
                 %>
-            </tr>
         </table>
+        <p>Total : <%= b.getTotal() %></p>
+        <a href="listbill.jsp">BACK</a>
     </body>
 </html>

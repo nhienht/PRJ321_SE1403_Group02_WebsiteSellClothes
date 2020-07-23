@@ -389,6 +389,7 @@
             %>
         <body id="page-top" class="">
 
+           
             <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
                 <a class="navbar-brand mr-1 fas" href="../../home.jsp">
                     <h3>Clothing</h3>
@@ -423,24 +424,21 @@
             </nav>
 
             <div id="wrapper">
-
-
-                <!-- Sidebar -->
                 <ul class="sidebar navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="../../admin/dashboard.jsp">
+                        <a class="nav-link" href="../dashboard.jsp">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
 
-                    <li class="nav-item ">
-                        <a class="nav-link" href="listbill.jsp">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../bill/listbill.jsp">
                             <i class="fas fa-fw fa-user"></i>
-                            <span> Bill</span></a>
+                            <span>Bill</span></a>
                     </li>
 
-                    <li class="nav-item ">
+                    <li class="nav-item">
                         <a class="nav-link" href="../customer/listcustomer.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Customer</span></a>
@@ -453,7 +451,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                             <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
-                            <a class="dropdown-item" href="../product/updateProduct.jsp">Update Products</a>
+                            <a class="dropdown-item" href="../product/insertProduct.jsp">Insert Products</a>
 
                         </div>
                     </li>
@@ -461,6 +459,7 @@
 
 
                 </ul>
+
 
                 <div id="content-wrapper">
 

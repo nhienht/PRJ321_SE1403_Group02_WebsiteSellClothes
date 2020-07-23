@@ -9,12 +9,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
-import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -84,7 +84,17 @@ public class ProductController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //  processRequest(request, response);
+        Cookie[] cookies = request.getCookies();
+        int aID = 0;
+        if (cookies.length >= 1) {
+            for (Cookie c : cookies) {
+                if (c.getName().equals("admin")) {
+                    aID = Integer.parseInt(c.getValue());
+                }
+            }
+        }
         Products p = new Products();
+       
         p.setBrID(Integer.parseInt(request.getParameter("brID")));
         p.settID(Integer.parseInt(request.getParameter("tID")));
         p.setSupID(Integer.parseInt(request.getParameter("supID")));
@@ -100,6 +110,7 @@ public class ProductController extends HttpServlet {
         p.setQuantity(Integer.parseInt(request.getParameter("quantity")));
         p.setDiscount(Float.parseFloat(request.getParameter("discount")));
         p.setGender(request.getParameter("gender"));
+        p.setaID(aID);
         String DIR = "data";
         ProductsDAO pDao = new ProductsDAO();
         if (request.getParameter("btnUpdate") != null) {
@@ -108,6 +119,7 @@ public class ProductController extends HttpServlet {
             pDao.update(p);
 
         } else {
+             p.setStatus(Integer.parseInt(request.getParameter("status")));
             pDao.insert(p);
             int pID = pDao.getMax();
             ImageDAO imgDao = new ImageDAO();
@@ -134,7 +146,6 @@ public class ProductController extends HttpServlet {
 
             }
         }
-
         response.sendRedirect("./admin/product/listproducts.jsp");
     }
 

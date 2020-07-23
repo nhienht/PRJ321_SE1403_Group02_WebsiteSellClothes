@@ -459,7 +459,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                             <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
-                            <a class="dropdown-item" href="../product/updateProduct.jsp">Update Products</a>
+                            <a class="dropdown-item" href="../product/insertProduct.jsp">Insert Products</a>
 
                         </div>
                     </li>

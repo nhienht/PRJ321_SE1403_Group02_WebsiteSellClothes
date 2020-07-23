@@ -355,6 +355,9 @@
                 .bg-dark {
                     background-color: #343a40!important;
                 }
+                .zoom:hover{
+                    transform: scale(3);
+                }
             </style>
         </head>
         <body id="page-top" class="">
@@ -464,8 +467,8 @@
                                                        style="width: 100%;">
                                                     <thead>
                                                         <tr>
-                                                            <th>ID Products</th>
-                                                            <th>Product's name</th>
+                                                            <th style="width: 20px">ID</th>
+                                                            <th style="width: 40px">Product's name</th>
                                                             <th>Image</th>
                                                             <th>Brand Products</th>
                                                             <th>Type Products</th>
@@ -497,7 +500,11 @@
                                                                 out.print("<td>" + rs.getString("pName") + "</td>");
                                                                 ImageDAO iDao = new ImageDAO();
                                                                 ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
-                                                                out.print("<td><img src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' /></td>");
+                                                                out.print("<td>");
+                                                                while(rsImg.next()){
+                                                                      out.print("<img class='zoom' src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' />");
+                                                                }
+                                                              out.print("</td>");
                                                                 BrandDao brDao = new BrandDao();
                                                                 String brand = brDao.getBrand(rs.getInt("brID"));
                                                                 out.print("<td>" + brand + "</td>");

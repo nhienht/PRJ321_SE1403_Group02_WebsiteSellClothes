@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.sql.Date;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -80,7 +81,6 @@ public class AccountController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-
         Customer c = new Customer();
         CustomerDAO cDao = new CustomerDAO();
         if (request.getParameter("btnSignIn") != null) {
@@ -105,7 +105,12 @@ public class AccountController extends HttpServlet {
 
                 response.addCookie(userCookie);
                 response.addCookie(idCookie);
-                response.sendRedirect("home.jsp");
+                //response.sendRedirect("home.jsp");
+                 if (request.getParameter("returnURL") != null) {
+                    response.sendRedirect(request.getParameter("returnURL"));
+                } else {
+                    response.sendRedirect("./index.jsp");
+                }
         } else if (request.getParameter("btnLogin") != null) {
             // CustomerDAO cDao = new CustomerDAO();
             String user = request.getParameter("user");
@@ -120,7 +125,12 @@ public class AccountController extends HttpServlet {
 
                 response.addCookie(userCookie);
                 response.addCookie(idCookie);
-                response.sendRedirect("home.jsp");
+                 if (request.getParameter("returnURL") != null) {
+                    response.sendRedirect(request.getParameter("returnURL"));
+                } else {
+                    response.sendRedirect("./index.jsp");
+                }
+               // response.sendRedirect("home.jsp");
             } else {
 //                out.println("<script type=\"text/javascript\">");
 //                out.println("alert('User or password incorrect');");

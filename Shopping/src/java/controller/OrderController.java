@@ -101,19 +101,20 @@ public class OrderController extends HttpServlet {
         //double total = Double.parseDouble(session.getAttribute("totalPrice").toString());
         double total = Double.parseDouble(request.getParameter("total"));
         BillDAO bDao = new BillDAO();
-          bDao.addBill(Integer.parseInt(cID), "New", name, address, phone, note, total);
+        bDao.addBill(Integer.parseInt(cID), "New", name, address, phone, note, total);
         int billID = bDao.getMaxBill();
         BillDetailDAO bdDao = new BillDetailDAO();
-           HashMap<Integer, Integer> listCart = new HashMap<Integer, Integer>();
-           listCart = (HashMap<Integer, Integer>) session.getAttribute("listCart");
-           ProductsDAO pDao = new ProductsDAO();
-           for(Integer i : listCart.keySet()){
-               int quantity = listCart.get(i);
-               Products p = pDao.getProduct(i);
-               bdDao.addBillDetail(billID, i, quantity, p.getPrice());
-           }
-           session.removeAttribute("listCart");
-            response.sendRedirect("./customer/bill/billDetail.jsp");
+        HashMap<Integer, Integer> listCart = new HashMap<Integer, Integer>();
+        listCart = (HashMap<Integer, Integer>) session.getAttribute("listCart");
+        ProductsDAO pDao = new ProductsDAO();
+        for (Integer i : listCart.keySet()) {
+            int quantity = listCart.get(i);
+            Products p = pDao.getProduct(i);
+            bdDao.addBillDetail(billID, i, quantity, p.getPrice());
+        }
+        session.removeAttribute("listCart");
+
+        response.sendRedirect("./customer/bill/billDetail.jsp");
 //        Enumeration<String> pIds = session.getAttributeNames();
 //        int success = 1;  // tạo biến kiểm tra mua thành công hay không   
 //        // đi đến từng sản phẩm, true nếu còn product trongg pIds
@@ -136,16 +137,14 @@ public class OrderController extends HttpServlet {
 //        }
     }
 
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
-        }// </editor-fold>
+    }// </editor-fold>
 
-    }
+}

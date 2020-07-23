@@ -25,7 +25,7 @@ public class AdminDAO {
         this.conn = dbConnect.getDBConnection();
     }
 
-    public boolean login(String user, String pass) {
+    public int login(String user, String pass) {
         try {
             String sql = "SELECT * FROM `admin` WHERE `aUsername`=? AND `aPassword`=MD5(?)";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -33,13 +33,13 @@ public class AdminDAO {
             pst.setString(2, pass);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                return true;
+                return rs.getInt(1);
             } else {
-                return false;
+                return -1;
             }
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return -1;
     }
 }

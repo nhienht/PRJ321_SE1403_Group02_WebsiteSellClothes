@@ -418,7 +418,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-item ">
+                    <li class="nav-item active">
                         <a class="nav-link" href="../bill/listbill.jsp">
                             <i class="fas fa-fw fa-user"></i>
                             <span>Bill</span></a>
@@ -429,7 +429,7 @@
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Customer</span></a>
                     </li>
-                    <li class="nav-item dropdown active">
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="../product/listproducts.jsp" id="pagesDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-fw fa-box-open"></i>

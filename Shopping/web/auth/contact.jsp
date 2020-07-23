@@ -101,14 +101,11 @@
             list-style: none;
         }
     </style>
-
     <body>
-
-
         <%@include file="../header/header.jsp" %>
         <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
-            <a class="navbar-branch" href="index.jsp">
+            <a class="navbar-branch" href="../index.jsp">
                 <img src="../images/logo.jpg" height="80px" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
@@ -175,9 +172,7 @@
                             <strong>Contact</strong>
                             <hr width="30%" size="10px" align="center" />
                             <p>Address</p>
-
                             <strong>FPT University, Nguyen Van Linh Street, Can Tho City</strong>
-
                         </li>
                         <li>
                             <p>Email</p>

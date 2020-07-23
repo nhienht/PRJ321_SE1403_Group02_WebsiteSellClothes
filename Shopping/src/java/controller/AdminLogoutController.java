@@ -38,7 +38,7 @@ public class AdminLogoutController extends HttpServlet {
             Cookie adminCookie = new Cookie("admin", null);
             adminCookie.setMaxAge(0);
             response.addCookie(adminCookie);
-            response.sendRedirect("Admin");
+            response.sendRedirect("./auth/login.jsp");
         }
     }
 

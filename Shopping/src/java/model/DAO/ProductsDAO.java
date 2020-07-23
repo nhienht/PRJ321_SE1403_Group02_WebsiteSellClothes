@@ -46,7 +46,7 @@ public class ProductsDAO {
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                Products p = new Products(id, rs.getInt("status"), rs.getInt("brID"), rs.getInt("tID"), rs.getInt("supID"), rs.getString("pName"), rs.getDouble("sellingPrice"), rs.getDouble("price"), rs.getString("describle"), rs.getDate("pDate"), rs.getInt("size"), rs.getString("material"), rs.getInt("quantity"), rs.getFloat("discount"), rs.getString("gender"));
+                Products p = new Products(id, rs.getInt("status"), rs.getInt("brID"), rs.getInt("tID"), rs.getInt("supID"), rs.getString("pName"), rs.getDouble("sellingPrice"), rs.getDouble("price"), rs.getString("describle"), rs.getDate("pDate"), rs.getInt("size"), rs.getString("material"), rs.getInt("quantity"), rs.getFloat("discount"), rs.getString("gender"), rs.getInt("aID"));
                 return p;
             }
         } catch (SQLException ex) {
@@ -56,7 +56,7 @@ public class ProductsDAO {
 
     public boolean insert(Products p) {
         try {
-            String sql = "insert into products (`status`, `brID`, `tID`, `supID`, `pName`, `sellingPrice`, `price`, `describle`, `pDate`, `size`, `material`, `quantity`, `discount`, gender) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO `products`(`status`, `brID`, `tID`, `supID`, `pName`, `sellingPrice`, `price`, `describle`, `pDate`, `size`, `material`, `quantity`, `discount`, `gender`, `aID`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, p.getSpID());
             pst.setInt(2, p.getBrID());
@@ -72,6 +72,8 @@ public class ProductsDAO {
             pst.setInt(12, p.getQuantity());
             pst.setFloat(13, p.getDiscount());
             pst.setString(14, p.getGender());
+            pst.setInt(15, p.getaID());
+            
             return pst.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,7 +83,7 @@ public class ProductsDAO {
 
     public int update(Products p) {
         try {
-            String sql = "update products set brID=?, tID=?, supID=?, pName=?, sellingPrice=?, price=?, describle=?, pDate=?, size=?, material=?, quantity = ?, discount=?, gender=? where pID=?";
+            String sql = "update products set brID=?, tID=?, supID=?, pName=?, sellingPrice=?, price=?, describle=?, pDate=?, size=?, material=?, quantity = ?, discount=?, gender=?, aID=? where pID=?";
             PreparedStatement pst = conn.prepareStatement(sql);
           
             pst.setInt(1, p.getBrID());
@@ -97,7 +99,8 @@ public class ProductsDAO {
             pst.setInt(11, p.getQuantity());
             pst.setFloat(12, p.getDiscount());
             pst.setString(13, p.getGender());
-            pst.setInt(14, p.getpID());
+            pst.setInt(14, p.getaID());
+            pst.setInt(15, p.getpID());
             return pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);

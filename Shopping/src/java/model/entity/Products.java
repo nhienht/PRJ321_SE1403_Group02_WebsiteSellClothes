@@ -28,11 +28,12 @@ public class Products {
     private int quantity;
     private float discount;
     private String gender;
+    private int aID;
 
     public Products() {
     }
 
-    public Products(int pID, int status, int brID, int tID, int supID, String pName, double sellingPrice, double price, String describle, Date pDate, int size, String material, int quantity, float discount, String gender) {
+    public Products(int pID, int status, int brID, int tID, int supID, String pName, double sellingPrice, double price, String describle, Date pDate, int size, String material, int quantity, float discount, String gender, int aID) {
         this.pID = pID;
         this.status = status;
         this.brID = brID;
@@ -48,6 +49,7 @@ public class Products {
         this.quantity = quantity;
         this.discount = discount;
         this.gender = gender;
+        this.aID = aID;
     }
 
     
@@ -170,6 +172,23 @@ public class Products {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getaID() {
+        return aID;
+    }
+
+    public void setaID(int aID) {
+        this.aID = aID;
+    }
+    
     
     
 

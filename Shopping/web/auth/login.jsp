@@ -315,6 +315,13 @@
         </style>
     </head>
     <body>
+        <%
+               String url = ""; 
+        if(request.getParameter("returnURL") != null){
+           url = "?returnURL=" + request.getParameter("returnURL");
+          
+        }
+            %>
         <div class="wrapper fadeInDown">
             <div id="formContent">
 
@@ -322,7 +329,7 @@
                     <img src="../images/logo.jpg"  id="icon" alt="User Icon" />
                 </div>
 
-                <form action="../AccountController" method="POST">
+                <form action="../AccountController<%=url%>" method="POST">
                     <input type="text" id="login" class="fadeIn second" name="user" placeholder="User Name">
                     <input type="password" id="password" class="fadeIn third" name="pass" placeholder="Password">
                     <input type="submit" class="fadeIn fourth" value="Log In" name="btnLogin">  
