@@ -1,10 +1,15 @@
-<%@page import="model.DAO.CustomerDAO"%>
-<%@page import="model.DAO.ImageDAO"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="model.DAO.ProductsDAO"%>
-<!DOCTYPE html>
-<html lang="en">
+<%-- 
+    Document   : updateBill
+    Created on : Jul 9, 2020, 5:12:09 PM
+    Author     : NhienHT
+--%>
 
+<%@page import="model.entity.Bill"%>
+<%@page import="model.DAO.BillDAO"%>
+<%@page import="java.sql.Date"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -24,7 +29,8 @@
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>List Customer</title>
+        <title>Update Bill</title>
+
         <style>
             html {
                 position: relative;
@@ -153,7 +159,49 @@
                     width: auto;
                 }
             }
+            .searchbar{
+                margin-bottom: auto;
+                margin-top: auto;
+                height: 60px;
+                background-color: #F5A9BC;
+                border-radius: 30px;
+                padding: 10px;
+            }
 
+            .search_input{
+                color: white;
+                border: 0;
+                outline: 0;
+                background: none;
+                width: 0;
+                caret-color:transparent;
+                line-height: 40px;
+                transition: width 0.4s linear;
+            }
+
+            .searchbar:hover > .search_input{
+                padding: 0 10px;
+                width: 450px;
+                caret-color:red;
+                transition: width 0.4s linear;
+            }
+
+            .searchbar:hover > .search_icon{
+                background: white;
+                color: #e74c3c;
+            }
+
+            .search_icon{
+                height: 40px;
+                width: 40px;
+                float: right;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                color:white;
+                text-decoration:none;
+            }
             .sidebar {
                 width: 90px !important;
                 background-color: #F5A9BC;
@@ -193,7 +241,7 @@
             }
 
             .sidebar .nav-item .nav-link {
-                color:#212529;
+                color: #212529;
             }
 
             .sidebar .nav-item .nav-link:active,
@@ -302,61 +350,23 @@
                     -webkit-column-count: 2;
                     column-count: 2;
                 }
+
                 .bg-dark {
-                    background-color: #343a40!important;
+                    background-color: #343a40 !important;
                 }
-                                .searchbar{
-                    margin-bottom: auto;
-                    margin-top: auto;
-                    height: 60px;
-                    background-color: #F5A9BC;
-                    border-radius: 30px;
-                    padding: 10px;
+                .input-group{
+                    padding-bottom:  30px;
                 }
 
-                .search_input{
-                    color: white;
-                    border: 0;
-                    outline: 0;
-                    background: none;
-                    width: 0;
-                    caret-color:transparent;
-                    line-height: 40px;
-                    transition: width 0.4s linear;
-                }
 
-                .searchbar:hover > .search_input{
-                    padding: 0 10px;
-                    width: 450px;
-                    caret-color:red;
-                    transition: width 0.4s linear;
-                }
-
-                .searchbar:hover > .search_icon{
-                    background: white;
-                    color: #e74c3c;
-                }
-
-                .search_icon{
-                    height: 40px;
-                    width: 40px;
-                    float: right;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 50%;
-                    color:white;
-                    text-decoration:none;
-                }
             </style>
         </head>
-
-
+        <body>
 
         <body id="page-top" class="">
 
             <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-                <a class="navbar-brand mr-1 fas" href="../../home.jsp">
+                <a class="navbar-brand mr-1 fas" href="../admin/dashboard.jsp">
                     <h3>Clothing</h3>
                 </a>
 
@@ -381,7 +391,7 @@
                             <h3><i class="fas fa-user-circle fa-fw"></i></h3>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="../../AdminLogoutController">Logout</a>
+                            <a class="dropdown-item" href="./AdminLogoutController">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -389,39 +399,42 @@
             </nav>
 
             <div id="wrapper">
+
+
+                <!-- Sidebar -->
                 <ul class="sidebar navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../../dashboard.jsp">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="dashboard.jsp">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link" href="../bill/listbill.jsp">
+                        <a class="nav-link" href="admin/bill/listbill.jsp">
                             <i class="fas fa-fw fa-user"></i>
-                            <span>Bill</span></a>
+                            <span> Bill</span></a>
                     </li>
 
-                    <li class="nav-item active"  >
-                        <a class="nav-link" href="../customer/listcustomer.jsp">
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin/customer/listcustomer.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Customer</span></a>
                     </li>
-                    <li class="nav-item dropdown ">
-                        <a class="nav-link dropdown-toggle" href="../product/listproducts.jsp" id="pagesDropdown" role="button" data-toggle="dropdown"
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="admin/product/listproducts.jsp" id="pagesDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-fw fa-box-open"></i>
                             <span>Product</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                            <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
-                            <a class="dropdown-item" href="../product/insertProduct.jsp">Insert Products</a>
+                            <a class="dropdown-item" href="admin/product/listproducts.jsp">List Products</a>
+                            <a class="dropdown-item" href="admin/product/insertProduct.jsp">Insert Products</a>
 
                         </div>
                     </li>
                     <li class="nav-item">
-                         <a class="nav-link" href="../comment/listcomment.jsp">
+                        <a class="nav-link" href="admin/comment/listcomment.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Comment</span></a>
                     </li>
@@ -437,10 +450,9 @@
                         <!-- Breadcrumbs-->
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="../product/listproducts.jsp">Dashboard</a>
+                                <a href="dashboard.jsp">Dashboard</a>
                             </li>
-                            <li class="breadcrumb-item active">Customers</li>
-                         
+                            <li class="breadcrumb-item active">Orders</li>
 
                         </ol>
 
@@ -448,117 +460,87 @@
                         <div class="card mb-3">
                             <div class="card-header">
                                 <i class="fas fa-user"></i>
-                                List Customers</div>
+                                List Orders</div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                        <div class="row">
-                                            <div class="container h-100">
-                                                <div class="d-flex justify-content-center h-100">
-                                                    <div class="searchbar">
-                                                        <input class="search_input" type="text" name="" placeholder="Search...">
-                                                        <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                    
+                                    
+                                    <h1 style="text-align: center"> 1997 Clothing </h1>
+
+
+                                    <div class="textabouts">
+                                        <div class="container-fluid padding">
+                                            <div class="row text-ceter padding">
+                                                <div class="col-xs-12">
+                                                    <p class="text-abouts" style="font-weight: 600;">
+                                                        Taken over by a solid, vintage palette, the T-shirts are adorned with planet and rocket graphics
+                                                        as
+                                                        well as retro fonts. Zodiac signs are stitched all over the shirts, which can then be found on
+                                                        the
+                                                        inner lining of the hooded coats. </p>
+                                                    <br> </br>
+
+                                                    <p style="font-weight: 600;">The label has an unorthodox approach towards the design of the
+                                                        retro-futuristic patterns
+                                                        throughout
+                                                        the clothing collection. </p>
+                                                    <br> </br>
+                                                    <p style="font-weight: 600;"> The traditional checkered pattern, the skewed fabric of the chest
+                                                        pockets disrupts the orderly,
+                                                        modernized tartan motif of the long-sleeved shirt, while orange tilted rectangles of various
+                                                        sizes
+                                                        aligned throughout the button-down, short-sleeved shirt create an illusory effect.Baseball
+                                                        jackets also contribute to the space-travel theme, featuring a symmetrical, off white
+                                                        explosion graphic which contrasts with the calm, turquoise base color.
+                                                    <p>
+                                                        <br>
+                                                        </br>
+                                                    <p style="font-weight: 600;">
+                                                        Matching with the heavily-printed tops, rolled-up, stone-washed jeans round off the
+                                                        ?50s-inspired
+                                                        look.
+
+                                                        Have a flick through the lookbook and together see the our great products bring to you.
+                                                    </p>
+
+                                                    <div class="col-xs-12 boder bg-light">
+                                                        <span class="image1">
+                                                            <img class="image" src="../images/about2.jpg" alt="" style="width:100%">
+                                                        </span>
+                                                    </div>
+                                                    <br></br>
+                                                    <div class="col-xs-12 boder bg-light">
+                                                        <span class="image1">
+                                                            <img class="image" src="../images/about4.jpg" alt="" style="width:100% " style="padding: 50px">
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table class="table table-bordered dataTable" id="dataTable" width="100%"
-                                                   cellspacing="0" role="grid" aria-describedby="dataTable_info"
-                                                   style="width: 100%;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID Customer</th>
-                                                        <th>User Name</th>
-                                                        <th>Name</th>
-                                                        <th>Phone</th>
-                                                        <th>Address</th>
-                                                        <th>Birthday</th>
-                                                        <th>Email</th>
-                                                        <th>Status</th>
-                                                        <th>Gender</th>
-                                                        
-                                                        <th>Change Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <%
-                                                        CustomerDAO cDao = new CustomerDAO();
-                                                        ResultSet rs = cDao.getAll();
-                                                        while (rs.next()) {
-                                                            out.print("<tr>");
-                                                            out.print("<td>" + rs.getInt(1) + "</td>");
-                                                            out.print("<td>" + rs.getString(3) + "</td>");
-                                                            out.print("<td>" + rs.getString(4) + "</td>");
-                                                            out.print("<td>" + rs.getString(5) + "</td>");
-                                                            out.print("<td>" + rs.getString(6) + "</td>");
-                                                            out.print("<td>" + rs.getDate(7) + "</td>");
-                                                            out.print("<td>" + rs.getString(8) + "</td>");
-                                                            if (rs.getInt("status") == 1) {
-                                                                    out.println("<td style='color:green; font-weight: bold;' >Valid</td> ");
-                                                                } else {
-                                                                    out.println("<td style='color:red;font-weight: bold; '>Invalid</td> ");
-                                                                }
-                                                            out.print("<td>" + rs.getString(10) + "</td>");
-                                                            //                            out.print("<td><a href='billDetail.jsp?id=" + rs.getInt("bID") + "'>Xem chi tiet hoa don</a></td>");
-                                                         //   out.print("<td><a href='updateCustomer.jsp?id=" + rs.getInt("cID") + "'>Update</a></td>");
-                                                             out.print("<td><a href='../../Change?cID=" +rs.getInt(1) + "' + '>Change</a></td>");
-                                                            out.print("</tr>");
-                                                        }
-                                                    %>
-                                                </tbody>
-                                            </table>
+                                    <div class="fotter">
+                                        <div class="footer-copyright text-center py-3">
+                                            © 2020 1997 Clothing ®
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="dataTable_info" role="status"
-                                                 aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled"
-                                                        id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                               data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item active"><a href="#"
-                                                                                                    aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                    class="page-link">1</a></li>
-                                                    <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                        <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                           class="page-link">Next</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-        <!-- /#wrapper -->
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+    </div>
+    <!-- /#wrapper -->
 
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+</body>
 
-
-
-
-
-
-
-
-
-    </body>
-
-
+</body>
 </html>

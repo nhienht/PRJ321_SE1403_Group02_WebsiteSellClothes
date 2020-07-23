@@ -427,6 +427,11 @@
 
                         </div>
                     </li>
+                    <li class="nav-item">
+                         <a class="nav-link" href="../comment/listcomment.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>List Comment</span></a>
+                    </li>
 
 
 
@@ -439,7 +444,7 @@
                         <!-- Breadcrumbs-->
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="index.jsp">Dashboard</a>
+                                <a href="../../dashboard.jsp">Dashboard</a>
                             </li>
                             <li class="breadcrumb-item active"></li>
 

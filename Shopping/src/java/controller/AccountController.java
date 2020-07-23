@@ -136,7 +136,7 @@ public class AccountController extends HttpServlet {
 //                out.println("alert('User or password incorrect');");
 //                out.println("location='login.jsp';");
 //                out.println("</script>");
-                response.sendRedirect("./auth/login.jsp");
+                response.sendRedirect("./auth/login.jsp?message=fail");
 
             }
         } else if(request.getParameter("btnSignInPage") != null){

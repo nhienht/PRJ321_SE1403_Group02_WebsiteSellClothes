@@ -137,7 +137,7 @@
                                             out.print("<a class='nav-link dropdown-item bg-dark' style='color: white; font-size:20px;' href='customer/Information.jsp'>" + cookie.getValue() + "</a>");
                                             out.print("<a class='nav-link dropdown-item bg-dark' style='color: white; font-size:20px;' href='LogoutController'>Logout</a>");
                                         } else if (cookie.getName().equals("admin")) {                                      
-                                          RequestDispatcher disp = request.getRequestDispatcher("admin/dashboard.jsp");
+                                          RequestDispatcher disp = request.getRequestDispatcher("dashboard.jsp");
                                             disp.forward(request, response);
                                         }
                                     }

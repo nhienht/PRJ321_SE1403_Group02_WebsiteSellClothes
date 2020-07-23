@@ -14,6 +14,7 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      
         <style>
 
             /* BASIC */
@@ -316,12 +317,11 @@
     </head>
     <body>
         <%
-               String url = ""; 
-        if(request.getParameter("returnURL") != null){
-           url = "?returnURL=" + request.getParameter("returnURL");
-          
-        }
-            %>
+            String url = "";
+            if (request.getParameter("returnURL") != null) {
+                url = "?returnURL=" + request.getParameter("returnURL");
+            }
+        %>
         <div class="wrapper fadeInDown">
             <div id="formContent">
 
@@ -335,8 +335,8 @@
                     <input type="submit" class="fadeIn fourth" value="Log In" name="btnLogin">  
 
                     <div id="formFooter">
-                         <button type="submit" class="btn btn-secondary" value="LoginAdmin" name="btnSignInPage">Register</button>
-                       </div>
+                        <button type="submit" class="btn btn-secondary" value="LoginAdmin" name="btnSignInPage">Register</button>
+                    </div>
                 </form>
 
 

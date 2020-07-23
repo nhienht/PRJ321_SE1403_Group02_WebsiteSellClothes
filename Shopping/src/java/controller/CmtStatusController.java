@@ -7,22 +7,20 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.DAO.AdminDAO;
+import model.DAO.CommentDAO;
+import model.entity.Comment;
 
 /**
  *
  * @author NhienHT
  */
-@WebServlet(name = "Admin", urlPatterns = {"/Admin"})
-public class AdminController extends HttpServlet {
+@WebServlet(name = "CmtStatusController", urlPatterns = {"/CmtStatusController"})
+public class CmtStatusController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,8 +36,18 @@ public class AdminController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            RequestDispatcher disp = request.getRequestDispatcher("./auth/adminLogin.jsp");
-            disp.forward(request, response);
+            CommentDAO cmtDao = new CommentDAO();
+            Comment c = new Comment();
+            if(request.getParameter("cmtID")!= null){
+                int cmtID = Integer.parseInt(request.getParameter("cmtID"));
+               c = cmtDao.getComment(cmtID);
+               if(c.getStatus() == 1){
+                   cmtDao.changeStatus(cmtID, 0);
+               }else{
+                     cmtDao.changeStatus(cmtID, 1);
+               }
+            }
+            response.sendRedirect("./admin/comment/listcomment.jsp");
         }
     }
 
@@ -69,23 +77,7 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      //  processRequest(request, response);
-        if (request.getParameter("adminLogin") != null) {
-            AdminDAO aDao = new AdminDAO();
-            String user = request.getParameter("user");
-            String pass = request.getParameter("pass");
-                   
-            int aID = aDao.login(user, pass);
-            if (aID>0) {
-                Cookie adminCookie = new Cookie("admin", aID+"");              
-                adminCookie.setMaxAge(60 * 60 * 24);              
-                response.addCookie(adminCookie);      
-                response.sendRedirect("./dashboard.jsp");
-             //   out.print("<script> alert('Login successful');</script>");
-            } else {
-                response.sendRedirect("Admin");
-            }
-        }
+        processRequest(request, response);
     }
 
     /**
