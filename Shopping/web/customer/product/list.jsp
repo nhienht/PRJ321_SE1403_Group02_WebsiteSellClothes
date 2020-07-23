@@ -182,7 +182,7 @@
                     <div class="col-xs-12 col-sm-6 col-md-3 boder bg-light ">
                         <div>
                         <div >
-                            <p class="text text-primary">
+                            <p class="text text-primary" style="font-size: 23px; font: bold">
                                 <c:out value="${row.pName}"/> 
                             </p>                   
                         </div>
@@ -192,7 +192,7 @@
                         </div>
                         <c:forEach var="img" items="${i.rows}" begin="0" end="0">
                             <a  href="productDetail.jsp?pID=${row.pID}" >
-                                <img src="../../${img.imageName}" height="100%" width="100%" class="image img-thumbnail" alt="Error"/>	
+                                <img src="../../${img.imageName}" height="90%" width="90%" alt="Error"/>	
 
                             </a>
 

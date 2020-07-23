@@ -272,9 +272,10 @@
                                             total += (double) quantity * (p.getPrice() - p.getDiscount() * p.getPrice() / 100);
                                             out.print("<td><a href='?rm=" + i + "'>Remove</a></td>");
                                             out.print("</tr>");
-                                            out.print(" </table>");
-                                        }
+                                                                                    }
                                     }
+                                    out.print(" </table>");
+
                                 %>
                         </div>
                         <div class="row justify-content-start">
