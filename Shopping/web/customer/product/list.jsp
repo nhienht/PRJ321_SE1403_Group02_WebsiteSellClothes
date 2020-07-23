@@ -17,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
-                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
               integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -30,6 +30,11 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+              integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  
+        
 
         <title>Clothing </title>
         <style>
@@ -65,13 +70,17 @@
                 background: rgba(0, 0, 0, 0.5); /* Black see-through */
                 color: #f1f1f1; 
                 width: 100%;
+
                 transition: .5s ease;
                 opacity:0;
                 color: white;
                 font-size: 20px;
-                padding: 20px;
+                padding-right: 15px;
+                padding-left : 15px;
                 text-align: center;
+
             }
+
             .container-fluid:hover .overlay {
                 opacity: 1;
             }
@@ -83,6 +92,10 @@
                 background-color: black;
                 color: white;
             }
+            .img-thumbnail{
+                width: 65%;
+            }
+
 
 
         </style> 
@@ -90,15 +103,15 @@
     <%
         boolean isLogin = false;
         Cookie[] cookies = request.getCookies();
-        for(Cookie cookie: cookies){
-            if(cookie.getName().equals("idCustomer") && !cookie.getValue().equals("0")){
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("idCustomer") && !cookie.getValue().equals("0")) {
                 isLogin = true;
             }
         }
     %>
     <body>
 
-       <jsp:include page="../../header/header.jsp" ></jsp:include>
+        <jsp:include page="../../header/header.jsp" ></jsp:include>
             <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
                 <a class="navbar-branch" href="../../index.jsp">
@@ -134,14 +147,13 @@
                                 <!--<a class="dropdown-item" href="#">Logout</a>-->
 
                             <%
-                               
                                 if (cookies.length > 1) {
                                     for (Cookie cookie : cookies) {
                                         if (cookie.getName().equals("user")) {
                                             out.print("<a class='nav-link dropdown-item bg-dark' style='color: white; font-size:20px;' href='../../customer/Information.jsp'>" + cookie.getValue() + "</a>");
                                             out.print("<a class='nav-link dropdown-item bg-dark' style='color: white; font-size:20px;' href='../../LogoutController'>Logout</a>");
-                                        } else if (cookie.getName().equals("admin")) {                                      
-                                          RequestDispatcher disp = request.getRequestDispatcher("admin/dashboard.jsp");
+                                        } else if (cookie.getName().equals("admin")) {
+                                            RequestDispatcher disp = request.getRequestDispatcher("admin/dashboard.jsp");
                                             disp.forward(request, response);
                                         }
                                     }
@@ -156,62 +168,90 @@
                 </ul>
             </div>
         </nav>
-  
-        <sql:setDataSource var="conn" scope="session"
-                           url="jdbc:mysql://localhost/prj321"
-                           user="root" password=""
-                           driver="com.mysql.jdbc.Driver"/>
-        <sql:query var="p" dataSource="${conn}">	
-            SELECT * FROM products where status =1
-        </sql:query>	
 
-        <sql:query dataSource="${conn}" var="i"	
-                   sql="select * from image where pID=?">		
-            <sql:param value="${row.pID}"/>	
-        </sql:query>
-
-        <div class="container-fluid padding">
-            <div class="row text-center padding">   
-                <c:forEach var="row" items="${p.rows}">	
-                    <sql:query dataSource="${conn}" var="i"	
-                               sql="select * from image where pID=?">	
-
-                        <sql:param value="${row.pID}"/>	
-                    </sql:query>	
-
-                    <div class="col-xs-12 col-sm-6 col-md-3 boder bg-light ">
-                        <div>
-                        <div >
-                            <p class="text text-primary">
-                                <c:out value="${row.pName}"/> 
-                            </p>                   
-                        </div>
-                        <div>
-                            Price:   <c:out value="${row.price}" />
-                        </div>    
-                        </div>
-                        <c:forEach var="img" items="${i.rows}" begin="0" end="0">
-                            <a  href="productDetail.jsp?pID=${row.pID}" >
-                                <img src="../../${img.imageName}" height="100%" width="100%" class="image img-thumbnail" alt="Error"/>	
-
-                            </a>
-
-                        </c:forEach>
-                        
-                        
-                        <div class="overlay">
-                            <a href="./../../CartController?id=${row.pID}&quantity=1" class="btn btn-info btn-lg">
-                                
-                                <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
-                            </a>
-                        </div>
-                    </div>  
-
-
-
-                </c:forEach>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="../../images/Capture.PNG" class="d-block w-100" alt="..." >
+                </div>
+                <div class="carousel-item">
+                    <img src="./images/pic3.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="./images/pic22.jpg" class="d-block w-100" alt="...">
+                </div>
             </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
+
+            <sql:setDataSource var="conn" scope="session"
+                               url="jdbc:mysql://localhost/prj321"
+                               user="root" password=""
+                               driver="com.mysql.jdbc.Driver"/>
+            <sql:query var="p" dataSource="${conn}">	
+                SELECT * FROM products where status =1
+            </sql:query>	
+
+            <sql:query dataSource="${conn}" var="i"	
+                       sql="select * from image where pID=?">		
+                <sql:param value="${row.pID}"/>	
+            </sql:query>
+
+            <div class="container-fluid padding">
+                <div class="row text-center padding">   
+                    <c:forEach var="row" items="${p.rows}">	
+                        <sql:query dataSource="${conn}" var="i"	
+                                   sql="select * from image where pID=?">	
+
+                            <sql:param value="${row.pID}"/>	
+                        </sql:query>	
+
+                        <div  class="col-xs-12 col-sm-6 col-md-4 boder bg-light ">
+                            <div>
+                                <div >
+                                    <p class="text text-primary">
+                                        <c:out value="${row.pName}"/> 
+                                    </p>                   
+                                </div>
+                                <div>
+                                    Price:   <c:out value="${row.price}" />
+                                </div>    
+                            </div>
+                            <c:forEach var="img" items="${i.rows}" begin="0" end="0">
+                                <a  href="productDetail.jsp?pID=${row.pID}" >
+                                    <img src="../../${img.imageName}" height="100%" width="100%" class="image img-thumbnail" alt="Error"/>	
+
+                                </a>
+
+                            </c:forEach>
+
+
+                            <div class="overlay" >
+                                <a href="./../../CartController?id=${row.pID}&quantity=1" class="btn btn-info btn-lg">
+
+                                    <span class="glyphicon glyphicon-shopping-cart" height="80%" width="80%" class="image img-thumbnail" alt="Error"></span> Shopping Cart
+                                </a>
+                            </div>
+                        </div>  
+
+
+
+
+                    </c:forEach>
+                </div>
+            </div>
 
     </body>
 </html>

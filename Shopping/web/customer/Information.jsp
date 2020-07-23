@@ -243,6 +243,6 @@
             <sql:query var="bill" dataSource="${conn}" sql="select * from bill where cID=?">
                 <sql:param value="<%= id%>" />
             </sql:query>
-
+        </div>
     </body>
 </html>
