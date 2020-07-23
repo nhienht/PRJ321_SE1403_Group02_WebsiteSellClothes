@@ -20,17 +20,35 @@
 <!DOCTYPE html>
 <html>
     <head>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        
-        <style> @import url('https://fonts.google.com/specimen/Balsamiq+Sans');
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+              integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+                integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+              integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+        <style> 
+            @import url('https://fonts.google.com/specimen/Balsamiq+Sans');
+
             .dropdown
             {
                 float:  right;
@@ -89,15 +107,29 @@
                 padding-left:  30px;
 
             }
-             .zoom:hover{
-                    transform: scale(1.5);
-                }
+            .zoom:hover{
+                transform: scale(1.5);
+            }
+            .image {
+                transition: all 1s ease;
+                -webkit-transition: all 1s ease;
+                -moz-transition: all 1s ease;
+                -o-transition: all 1s ease;
+            }
+
+            .image:hover {
+                transform: scale(3,3);
+                -webkit-transform: scale(3,3);
+                -moz-transform: scale(3,3);
+                -o-transform: scale(3,3);
+                -ms-transform: scale(3,3);
+            }
 
         </style>
 
     </head>
-     <body>
-         <jsp:include page="../../header/header.jsp" ></jsp:include>
+    <body>
+        <jsp:include page="../../header/header.jsp" ></jsp:include>
             <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
                 <a class="navbar-branch" href="../../index.jsp">
@@ -139,8 +171,8 @@
                                         if (cookie.getName().equals("user")) {
                                             out.print("<a class='nav-link dropdown-item bg-dark' style='color: white; font-size:20px;' href='../../customer/Information.jsp'>" + cookie.getValue() + "</a>");
                                             out.print("<a class='nav-link dropdown-item bg-dark' style='color: white; font-size:20px;' href='../../LogoutController'>Logout</a>");
-                                        } else if (cookie.getName().equals("admin")) {                                      
-                                          RequestDispatcher disp = request.getRequestDispatcher("admin/dashboard.jsp");
+                                        } else if (cookie.getName().equals("admin")) {
+                                            RequestDispatcher disp = request.getRequestDispatcher("admin/dashboard.jsp");
                                             disp.forward(request, response);
                                         }
                                     }
@@ -155,7 +187,7 @@
                 </ul>
             </div>
         </nav>
-  
+
         <%
             int pID = Integer.parseInt(request.getParameter("pID"));
             ProductsDAO pDao = new ProductsDAO();
@@ -254,99 +286,97 @@
 
                         </div>
                     </div>
-                </div>           
-                <hr>
-                <div class="row d-flex justify-content-center wow fadeIn">
-                    <div class="col-md-6 text-center">
-                        <h4 class="my-4 h4">Describle</h4>
-                        <p><%= p.getDescrible()%> </p>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <div class="row ">
-                        <div class=" row col-lg-4 col-sm-12">
-                          
-                            <c:forEach var="img" items="${images.rows}">
-                                <div  class="row" height="150px" width="150px">
-                                     <img class="zoom" src="../../${img.imageName}" class="image" height="100%" width="100%"    alt=""/>
-                                   
-                                </div>
-                               
-                            </c:forEach>   
-                              
-                        </div>                     
-                    </div>
+                    <div class="container-fluid padding" style="position: relative; top: -125px; left: 25px">
+                        <div class="row text-center padding"> 
+                            <div  class="col-xs-4 col-sm-4 col-md-4 boder bg-light ">
 
-                </div>
+                                <c:forEach var="img" items="${images.rows}">
 
-                <hr>
+                                    <img   src="../../${img.imageName}" height="80px" width="80px" class="image img-thumbnail" alt="Error"/>
 
-                <div class="row d-flex justify-content-center wow fadeIn">
-                    <div class="col-md-6 text-center">
-                        <h4 class="my-4 h3">Comment</h4>                   
-                    </div>
-                </div>           
-                <%
-                    CommentDAO cDao = new CommentDAO();
-                    ResultSet rs = cDao.getCommentbyProduct(pID);
-
-                    if (rs == null) {
-                        out.print("Product don't have any comment !");
-                    } else {
-                        while (rs.next()) {
-                            int cID = rs.getInt(3);
-                            CustomerDAO cus = new CustomerDAO();
-                            cus.getCustomer(cID);
-                            String name = cus.getCustomer(cID).getcUsername();
-
-
-                %>
-                <div class="col-sm-12  mb-4">
-                    <div class="row">
-                        <div class="">
-                            <p style="font-size: 28px" ><%= name%></p>
-                        </div>
-                        <div class="w3-padding w3-xlarge col-md-6">
-                            <%
-                                
-                                for (Cookie c : cookies) {
-                                    if (c.getName().equals("idCustomer") && Integer.parseInt(c.getValue()) == cID) {
-                                        out.print("<a class='material-icons' name='Del' href='../../CommentController?cmtID="+rs.getInt(1)+"&pID="+pID+"'>  delete  </a>");
-                                    }
-                                }
-                            %>
-                        </div>
-                    </div>
-                    <div class="panel-body px-2">
-                        <%= rs.getString(4)%>
-                    </div>
-
-                </div>
-                <% }
-                    }%>
-                <div>
-                    <form action="../../CommentController" method="POST">
-                        <input type="hidden" value="<%= pID%>" name="pID"/>
-                        <div class="col-sm-12">                      
-                            <div class="panel-heading">
-                                <strong style="font-size: 22px" >Your comment</strong>
+                                </c:forEach>   
                             </div>
-                            <div class="panel-body px-4">
-                                <textarea style="height: 100px; width: 100%" name="message" ></textarea>
-                            </div>   
-                            <div class="panel-body px-4 ">
-                                <input type="submit" value="Send" name="btnComment"/> 
-                            </div> 
+                        </div>  
+                    </div>
+                </div>    
 
-                    </form>
+            </div>
 
+            <div class="row d-flex justify-content-center wow fadeIn">
+                <div class="col-md-6 text-center">
+                    <h4 class="my-4 h4">Describle</h4>
+                    <p><%= p.getDescrible()%> </p>
                 </div>
             </div>
-        </div>
-        <div>
-            <br>
 
+            <hr>
+
+            <div class="row d-flex justify-content-center wow fadeIn">
+                <div class="col-md-6 text-center">
+                    <h4 class="my-4 h3">Comment</h4>                   
+                </div>
+            </div>           
+            <%
+                CommentDAO cDao = new CommentDAO();
+                ResultSet rs = cDao.getCommentbyProduct(pID);
+
+                if (rs == null) {
+                    out.print("Product don't have any comment !");
+                } else {
+                    while (rs.next()) {
+                        int cID = rs.getInt(3);
+                        CustomerDAO cus = new CustomerDAO();
+                        cus.getCustomer(cID);
+                        String name = cus.getCustomer(cID).getcUsername();
+
+
+            %>
+            <div class="col-sm-12  mb-4">
+                <div class="row">
+                    <div class="">
+                        <p style="font-size: 28px" ><%= name%></p>
+                    </div>
+                    <div class="w3-padding w3-xlarge col-md-6">
+                        <%
+
+                            for (Cookie c : cookies) {
+                                if (c.getName().equals("idCustomer") && Integer.parseInt(c.getValue()) == cID) {
+                                    out.print("<a class='material-icons' name='Del' href='../../CommentController?cmtID=" + rs.getInt(1) + "&pID=" + pID + "'>  delete  </a>");
+                                }
+                            }
+                        %>
+                    </div>
+                </div>
+                <div class="panel-body px-2">
+                    <%= rs.getString(4)%>
+                </div>
+
+            </div>
+            <% }
+                }%>
+            <div>
+                <form action="../../CommentController" method="POST">
+                    <input type="hidden" value="<%= pID%>" name="pID"/>
+                    <div class="col-sm-12">                      
+                        <div class="panel-heading">
+                            <strong style="font-size: 22px" >Your comment</strong>
+                        </div>
+                        <div class="panel-body px-4">
+                            <textarea style="height: 100px; width: 100%" name="message" ></textarea>
+                        </div>   
+                        <div class="panel-body px-4 ">
+                            <input type="submit" value="Send" name="btnComment"/> 
+                        </div> 
+
+                </form>
+
+            </div>
         </div>
-    </main>
+    </div>
+    <div>
+        <br>
+
+    </div>
+</main>
 </body>
 </html>
