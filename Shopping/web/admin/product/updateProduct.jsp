@@ -434,7 +434,7 @@
                 <!-- Sidebar -->
                 <ul class="sidebar navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="../product/listproducts.jsp">
+                        <a class="nav-link" href="../../dashboard.jsp">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
@@ -462,6 +462,11 @@
                             <a class="dropdown-item" href="../product/insertProduct.jsp">Insert Products</a>
 
                         </div>
+                    </li>
+                    <li class="nav-item">
+                         <a class="nav-link" href="../comment/listcomment.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>List Comment</span></a>
                     </li>
 
 

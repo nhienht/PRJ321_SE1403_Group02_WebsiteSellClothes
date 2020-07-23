@@ -356,7 +356,7 @@
                     background-color: #343a40!important;
                 }
                 .zoom:hover{
-                    transform: scale(3);
+                    transform: scale(1.5);
                 }
             </style>
         </head>
@@ -425,6 +425,11 @@
                             <a class="dropdown-item" href="../product/insertProduct.jsp">Insert Products</a>
                         </div>
                     </li>
+                    <li class="nav-item">
+                         <a class="nav-link" href="../comment/listcomment.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>List Comment</span></a>
+                    </li>
                 </ul>
 
                 <div id="content-wrapper">
@@ -434,7 +439,7 @@
                         <!-- Breadcrumbs-->
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="index.jsp">Dashboard</a>
+                                <a href="../../dashboard.jsp">Dashboard</a>
                             </li>
                             <li class="breadcrumb-item active">Products</li>
 
@@ -502,7 +507,7 @@
                                                                 ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
                                                                 out.print("<td>");
                                                                 while(rsImg.next()){
-                                                                      out.print("<img class='zoom' src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' />");
+                                                                      out.print("<a href='../../" + rsImg.getString("imageName")+"'> <img class='zoom' src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' /></a>");
                                                                 }
                                                               out.print("</td>");
                                                                 BrandDao brDao = new BrandDao();

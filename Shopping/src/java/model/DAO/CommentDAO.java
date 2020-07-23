@@ -36,6 +36,21 @@ public class CommentDAO {
         }
         return null;
     }
+    public Comment getComment(int cmtID){
+        try {
+            String sql = "Select * from comment where cmtID = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, cmtID);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                Comment c = new Comment(cmtID, rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getDate(5), rs.getInt(6));
+                return c;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public ResultSet getCommentbyProduct(int pID){
           try {
             String sql = "select * from comment where pID=?";
@@ -70,6 +85,18 @@ public class CommentDAO {
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, cmtID);
             return pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public int changeStatus(int cmtID, int newStatus){
+        try {
+            String sql = "update comment set status = ? where cmtID=?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, newStatus);
+            pst.setInt(2, cmtID);
+           return pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
