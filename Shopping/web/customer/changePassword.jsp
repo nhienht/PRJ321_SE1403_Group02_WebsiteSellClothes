@@ -132,14 +132,16 @@
                         </div>
 
 
-                        <form class="signup" action="./../ChangeInforCustomer" method="POST" id="register" name="register">
+                        <form class="signup" action="./../ChangeInforCustomer" method="POST" onSubmit = "return checkPassword(this)" id="register" name="register">
                             <div class="form-group">
                                 <input class="form-control" type="password" name="Oldpass" id="Oldpass" required="">
                             </div>
 
                             <div class="form-group"> 
                                 <input  class="form-control"  type="password" name="newPass" id="newPass" required="">
+
                             </div>
+                            <div> <input style="" type="checkbox" onclick="myFunction()"></div>
 
                             <div class="form-group"> 
                                 <input class="form-control"  type="password" name="Cofirmpass" id="Cofirmpass" required=""> 
@@ -149,77 +151,42 @@
 
 
                         </form>
+
                         <script>
-                            var inputs = document.forms['register'].getElementsByTagName('input');
-                            var run_onchange = false;
-                            function valid() {
-                                var errors = false;
-
-                                for (var i = 0; i < inputs.length; i++) {
-                                    var value = inputs[i].value;
-                                    var id = inputs[i].getAttribute('id');
-
-                                    // Tạo phần tử span lưu thông tin lỗi
-                                    var span = document.createElement('span');
-                                    // Nếu span đã tồn tại thì remove
-                                    var p = inputs[i].parentNode;
-                                    if (p.lastChild.nodeName == 'SPAN') {
-                                        p.removeChild(p.lastChild);
-                                    }
-
-                                    // Kiểm tra rỗng
-                                    if (value == '') {
-                                        span.innerHTML = 'Thông tin được yêu cầu';
-                                    } else {
-
-
-
-                                        if (id == 'newPass') {
-                                            if (value.length < 6) {
-                                                span.innerHTML = 'Password phải từ 6 ký tự';
-                                            }
-                                            var pass = value;
-                                        }
-                                        // Kiểm tra password nhập lại
-                                        if (id == 'Cofirmpass' && value != pass) {
-                                            span.innerHTML = 'Password nhập lại chưa đúng';
-                                        }
-
-                                    }
-
-                                    // Nếu có lỗi thì chèn span vào hồ sơ, chạy onchange, submit return false, highlight border
-                                    if (span.innerHTML != '') {
-                                        inputs[i].parentNode.appendChild(span);
-                                        errors = true;
-                                        run_onchange = true;
-                                        inputs[i].style.border = '1px solid #c6807b';
-                                        inputs[i].style.background = '#fffcf9';
-                                    }
-                                }// end for
-
-                                if (errors == false) {
-                                    alert('Đăng ký thành công');
+                            function myFunction() {
+                                var x = document.getElementById("newPass");
+                                if (x.type === "password") {
+                                    x.type = "text";
+                                } else {
+                                    x.type = "password";
                                 }
-                                return !errors;
-                            }// end valid()
-
-                            // Chạy hàm kiểm tra valid()
-                            var register = document.getElementById('btnChangePass');
-                            register.onclick = function () {
-                                return valid();
                             }
+                        </script>
+                        <script>
+                            function checkPassword(form) {
+                                password1 = form.newPass.value;
+                                password2 = form.Cofirmpass.value;
 
-                            // Kiểm tra lỗi với sự kiện onchange -> gọi lại hàm valid()
-                            for (var i = 0; i < inputs.length; i++) {
-                                var id = inputs[i].getAttribute('id');
-                                inputs[i].onchange = function () {
-                                    if (run_onchange == true) {
-                                        this.style.border = '1px solid #999';
-                                        this.style.background = '#fff';
-                                        valid();
-                                    }
+                                // If password not entered 
+                                if (password1 == '')
+                                    alert("Please enter Password");
+
+                                // If confirm password not entered 
+                                else if (password2 == '')
+                                    alert("Please enter confirm password");
+
+                                // If Not same return False.     
+                                else if (password1 != password2) {
+                                    alert("\nPassword did not match: Please try again...")
+                                    return false;
                                 }
-                            }// end for;
+
+                                // If same return True. 
+                                else {
+                                    alert("Change password succcessful")
+                                    return true;
+                                }
+                            }
                         </script>
                     </div>
                 </div>

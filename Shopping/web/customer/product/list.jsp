@@ -17,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
-                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
               integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -83,22 +83,35 @@
                 background-color: black;
                 color: white;
             }
+            img {
+                transition: all 1s ease;
+                -webkit-transition: all 1s ease;
+                -moz-transition: all 1s ease;
+                -o-transition: all 1s ease;
+            }
 
+            img:hover {
+                transform: scale(1.2,1.2);
+                -webkit-transform: scale(1.2,1.2);
+                -moz-transform: scale(1.2,1.2);
+                -o-transform: scale(1.2,1,2);
+                -ms-transform: scale(1.2,1.2);
+            }
 
         </style> 
     </head>
     <%
         boolean isLogin = false;
         Cookie[] cookies = request.getCookies();
-        for(Cookie cookie: cookies){
-            if(cookie.getName().equals("idCustomer") && !cookie.getValue().equals("0")){
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("idCustomer") && !cookie.getValue().equals("0")) {
                 isLogin = true;
             }
         }
     %>
     <body>
 
-       <jsp:include page="../../header/header.jsp" ></jsp:include>
+        <jsp:include page="../../header/header.jsp" ></jsp:include>
             <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
                 <a class="navbar-branch" href="../../index.jsp">
@@ -134,14 +147,13 @@
                                 <!--<a class="dropdown-item" href="#">Logout</a>-->
 
                             <%
-                               
                                 if (cookies.length > 1) {
                                     for (Cookie cookie : cookies) {
                                         if (cookie.getName().equals("user")) {
                                             out.print("<a class='nav-link dropdown-item bg-dark' style='color: white; font-size:20px;' href='../../customer/Information.jsp'>" + cookie.getValue() + "</a>");
                                             out.print("<a class='nav-link dropdown-item bg-dark' style='color: white; font-size:20px;' href='../../LogoutController'>Logout</a>");
-                                        } else if (cookie.getName().equals("admin")) {                                      
-                                          RequestDispatcher disp = request.getRequestDispatcher("admin/dashboard.jsp");
+                                        } else if (cookie.getName().equals("admin")) {
+                                            RequestDispatcher disp = request.getRequestDispatcher("admin/dashboard.jsp");
                                             disp.forward(request, response);
                                         }
                                     }
@@ -156,7 +168,7 @@
                 </ul>
             </div>
         </nav>
-  
+
         <sql:setDataSource var="conn" scope="session"
                            url="jdbc:mysql://localhost/prj321"
                            user="root" password=""
@@ -181,14 +193,14 @@
 
                     <div class="col-xs-12 col-sm-6 col-md-3 boder bg-light ">
                         <div>
-                        <div >
-                            <p class="text text-primary" style="font-size: 23px; font: bold">
-                                <c:out value="${row.pName}"/> 
-                            </p>                   
-                        </div>
-                        <div>
-                            Price:   <c:out value="${row.price}" />
-                        </div>    
+                            <div >
+                                <p class="text text-primary" style="font-size: 23px; font: bold">
+                                    <c:out value="${row.pName}"/> 
+                                </p>                   
+                            </div>
+                            <div>
+                                Price:   <c:out value="${row.price}" />
+                            </div>    
                         </div>
                         <c:forEach var="img" items="${i.rows}" begin="0" end="0">
                             <a  href="productDetail.jsp?pID=${row.pID}" >
@@ -197,11 +209,11 @@
                             </a>
 
                         </c:forEach>
-                        
-                        
+
+
                         <div class="overlay">
                             <a href="./../../CartController?id=${row.pID}&quantity=1" class="btn btn-info btn-lg">
-                                
+
                                 <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
                             </a>
                         </div>

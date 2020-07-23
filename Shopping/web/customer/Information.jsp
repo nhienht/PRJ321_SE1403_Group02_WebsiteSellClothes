@@ -42,8 +42,10 @@
     </head>
     <style>
         body {
-            background-color: #F5A9BC;
+
             background-size: cover;
+            height: 100%;
+            background-color: #F5A9BC;
         }
 
         *[role="form"] {
@@ -79,9 +81,7 @@
             min-height: 100%;
         }
 
-        body {
-            height: 100%;
-        }
+
 
         #wrapper {
             display: -webkit-box;
@@ -115,146 +115,150 @@
             }
 
 
-        }
-        body{
-            background-color: #F5A9BC;
-        }
 
-        a{
+            a{
 
-            text-decoration: none;
-            color: #000;
-        }
-        .input-group{
-            padding-bottom: 30px;
-        }
-        #p{
-            font-size: 25px;
-            padding: 5px
-        }
-
-    </style>
-    <body>
-        <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-            <a class="navbar-brand mr-1 fas" href="../home.jsp">
-                <h3>Shopping</h3>
-            </a>
-
-            <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-                <i class="fas fa-bars"></i>
-            </button>
-
-            <!-- Navbar Search -->
-            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-
-            </form>
-
-            <!-- Navbar -->
-            <ul class="navbar-nav ml-auto ml-md-0">
-                <li class="nav-item dropdown no-arrow mx-1"></li>
-                <li class="nav-item dropdown no-arrow mx-1"></li>
-
-                <!-- LOGOUT-->
-
-            </ul>
-
-        </nav>
-        <%
-            Cookie[] cookies = request.getCookies();
-            int id = 0;
-            for (Cookie c : cookies) {
-                if (c.getName().equals("idCustomer")) {
-                    id = Integer.parseInt(c.getValue());
-                }
+                text-decoration: none;
+                color: #000;
             }
-            CustomerDAO cDao = new CustomerDAO();
-            Customer c = cDao.getCustomer(id);
-            BillDAO bDao = new BillDAO();
-            ResultSet bill = bDao.getBillbyCustomer(id);
-        %>
+            .input-group{
+                padding-bottom: 30px;
+            }
+            #p{
+                font-size: 25px;
+                padding: 5px
+            }
+            .table-danger td{
+                background: #D8D8D8;
+                border-radius: 7px;
+            }
+            button:hover{
+                opacity: 0.7;
 
-        <h1 style="text-align: center"> Information </h1>
-        <div class="container">
-            <form action="./../ChangeInforCustomer" method="POST">
-                <table class="col-sm-10 table table-bordered table-danger table-hover">
-                    <tr>
-                        <td>Full name</td>
-                        <td class="text"><%= c.getcName()%></td>
-                    </tr>
-                    <tr>
-                        <td>User name</td>
-                        <td><%= c.getcUsername()%></td>
-                    </tr>
-                    <tr>
-                        <td>Phone</td>
-                        <td><%= c.getPhonenumber()%></td>
-                    </tr>
-                    <tr>
-                        <td>Address</td>
-                        <td><%= c.getAddress()%> </td>
-                    </tr>   
-                    <tr>
-                        <td>BirthDay</td>
-                        <td> <%= c.getBirthday()%> </td>
-                    </tr>   
-                    <tr>
-                        <td>Email</td>
-                        <td>  <%= c.getEmail()%>  </td>
-                    </tr> 
-                    <tr>
-                        <td>Gender</td>
-                        <td>  <%= c.getGender()%> </td>
-                    </tr> 
-                </table>
-        <div class="row">
-            <button type="button" class="btn btn-outline-danger mr-md-3"><a target="_blank" href="changeInfo.jsp">Change Information</a></button>   
-            <button type="button" class="btn btn-outline-danger mr-md-3"><a target="_blank" href="changePassword.jsp">Change password</a></button> 
-        </div>
-    </form> 
-    <hr>
+            }
 
-    <h1 style="text-align: center"> List bill </h1>
-    <div>
-        <table class="table table-hover border-primary">
-            <tr>
-                <th>No.</th>
-                <th>Receiver</th> 
-                <th>Date of purchase</th>
-                <th>Address</th>
-                <th>Phone</th>
-                <th>Status</th>
-                <th>List product</th>
-                <th>Total</th>
-                <th>Note</th>
-            </tr>
+        </style>
+        <body>
+            <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+                <a class="navbar-brand mr-1 fas" href="../home.jsp">
+                    <h3>Shopping</h3>
+                </a>
+
+                <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Navbar Search -->
+                <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+
+                </form>
+
+                <!-- Navbar -->
+                <ul class="navbar-nav ml-auto ml-md-0">
+                    <li class="nav-item dropdown no-arrow mx-1"></li>
+                    <li class="nav-item dropdown no-arrow mx-1"></li>
+
+                    <!-- LOGOUT-->
+
+                </ul>
+
+            </nav>
             <%
-                int i = 1;
-                while (bill.next()) {
-                    out.print("<tr>");
-                    out.print("<td> " + i++ + "</td>");
-                    out.print("<td> " + bill.getString(4) + "</td>");
-                    out.print("<td> " + bill.getDate(5) + "</td>");
-                    out.print("<td> " + bill.getString(6) + "</td>");
-                    out.print("<td> " + bill.getString(7) + "</td>");
-                    out.print("<td> " + bill.getString(3) + "</td>");
-                    out.print("<td>");
-                    BillDetailDAO bdDao = new BillDetailDAO();
-                    ResultSet billDetail = bdDao.getBillDetail(bill.getInt(1));
-                    ProductsDAO pDao = new ProductsDAO();
-                    while (billDetail.next()) {
-                        Products p = pDao.getProduct(billDetail.getInt(2));
-                        out.print("<p> - " + p.getpName() + "<b> #SL:" + billDetail.getInt(3) + "</b>" + "</p>");
-
+                Cookie[] cookies = request.getCookies();
+                int id = 0;
+                for (Cookie c : cookies) {
+                    if (c.getName().equals("idCustomer")) {
+                        id = Integer.parseInt(c.getValue());
                     }
-                    out.print("</td>");
-                    out.print("<td> " + bill.getString(9) + "</td>");
-                    out.print("<td> " + bill.getString(8) + "</td>");
-                    out.print("</tr>");
                 }
+                CustomerDAO cDao = new CustomerDAO();
+                Customer c = cDao.getCustomer(id);
+                BillDAO bDao = new BillDAO();
+                ResultSet bill = bDao.getBillbyCustomer(id);
             %>
-        </table>
 
-    </div>
+            <h1 style="text-align: center"> Information </h1>
+            <div class="container">
+                <form action="./../ChangeInforCustomer" method="POST">
+                    <table class="col-sm-10 table table-bordered table-danger table-hover">
+                        <tr>
+                            <td>Full name</td>
+                            <td class="text"><%= c.getcName()%></td>
+                        </tr>
+                        <tr>
+                            <td>User name</td>
+                            <td><%= c.getcUsername()%></td>
+                        </tr>
+                        <tr>
+                            <td>Phone</td>
+                            <td><%= c.getPhonenumber()%></td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td><%= c.getAddress()%> </td>
+                        </tr>   
+                        <tr>
+                            <td>BirthDay</td>
+                            <td> <%= c.getBirthday()%> </td>
+                        </tr>   
+                        <tr>
+                            <td>Email</td>
+                            <td>  <%= c.getEmail()%>  </td>
+                        </tr> 
+                        <tr>
+                            <td>Gender</td>
+                            <td>  <%= c.getGender()%> </td>
+                        </tr> 
+                    </table>
+                    <div class="row" style="position: relative ; left: 12px;" >
+                        <button style=" background: #f2f2f2; " type="button" class="btn btn-outline-danger mr-md-3"><a style="text-decoration: none" target="_blank" href="changeInfo.jsp">Change Information</a></button>   
+                        <button style=" background: #f2f2f2;" type="button" class="btn btn-outline-danger mr-md-3"><a style="text-decoration: none" target="_blank" href="changePassword.jsp">Change password</a></button> 
+                    </div>
+                </form> 
+                <hr>
 
-</body>
-</html>
+                <h1 style="text-align: center"> List bill </h1>
+                <div>
+                    <table class="table table-hover border-primary">
+                        <tr>
+                            <th>No.</th>
+                            <th>Receiver</th> 
+                            <th>Date of purchase</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                            <th>List product</th>
+                            <th>Total</th>
+                            <th>Note</th>
+                        </tr>
+                        <%
+                            int i = 1;
+                            while (bill.next()) {
+                                out.print("<tr>");
+                                out.print("<td> " + i++ + "</td>");
+                                out.print("<td> " + bill.getString(4) + "</td>");
+                                out.print("<td> " + bill.getDate(5) + "</td>");
+                                out.print("<td> " + bill.getString(6) + "</td>");
+                                out.print("<td> " + bill.getString(7) + "</td>");
+                                out.print("<td> " + bill.getString(3) + "</td>");
+                                out.print("<td>");
+                                BillDetailDAO bdDao = new BillDetailDAO();
+                                ResultSet billDetail = bdDao.getBillDetail(bill.getInt(1));
+                                ProductsDAO pDao = new ProductsDAO();
+                                while (billDetail.next()) {
+                                    Products p = pDao.getProduct(billDetail.getInt(2));
+                                    out.print("<p> - " + p.getpName() + "<b> #SL:" + billDetail.getInt(3) + "</b>" + "</p>");
+
+                                }
+                                out.print("</td>");
+                                out.print("<td> " + bill.getString(9) + "</td>");
+                                out.print("<td> " + bill.getString(8) + "</td>");
+                                out.print("</tr>");
+                            }
+                        %>
+                    </table>
+
+                </div>
+
+        </body>
+    </html>

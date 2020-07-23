@@ -353,6 +353,10 @@
                 .input-group{
                     padding-bottom: 30px;
                 }
+                .submit:hover{
+                    background-color: #D8D8D8;
+                    opacity: 0.7;
+                }
             </style>
         </head>
 
@@ -501,7 +505,7 @@
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>ID</div>
                                                     <div class="input-group" >
-                                                        <input type="text" value="<%= cID%>" name="cID" />
+                                                        <input class="form-control" type="text" value="<%= cID%>" name="cID" />
                                                     </div>
                                                 </div>
 
@@ -510,7 +514,7 @@
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Password</div>
                                                     <div class="input-group" >
-                                                        <input type="text" value="<%= cPassword%>"
+                                                        <input class="form-control" type="text" value="<%= cPassword%>"
                                                                name="cPassword" />
                                                     </div>
                                                 </div>
@@ -520,7 +524,7 @@
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>User Name</div>
                                                     <div class="input-group" >
-                                                        <input type="text" name="cUsername"value="<%= cUsername%>">
+                                                        <input class="form-control" type="text" name="cUsername"value="<%= cUsername%>">
                                                     </div>
                                                 </div>
 
@@ -529,7 +533,7 @@
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Name</div>
                                                     <div class="input-group" >
-                                                        <input type="text" name="cName" value="<%= cName%>">
+                                                        <input class="form-control" type="text" name="cName" value="<%= cName%>">
                                                     </div>
                                                 </div>
 
@@ -538,7 +542,7 @@
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Phone Number</div>
                                                     <div class="input-group" >
-                                                        <input type="text" name="phonenumber"value="<%= phonenumber%>">
+                                                        <input class="form-control" type="text" name="phonenumber"value="<%= phonenumber%>">
                                                     </div>
                                                 </div>
 
@@ -547,7 +551,7 @@
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Address</div>
                                                     <div class="input-group" >
-                                                        <input type="text" name="address" value="<%= address%>">
+                                                        <input class="form-control" type="text" name="address" value="<%= address%>">
                                                     </div>
 
                                                 </div>
@@ -556,7 +560,7 @@
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Date</div>
                                                     <div class="input-group" >
-                                                        <input type="date" name="birthday" value="<%= date%>">
+                                                        <input class="form-control" type="date" name="birthday" value="<%= date%>">
                                                     </div>
 
                                                 </div>
@@ -564,7 +568,7 @@
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Email</div>
                                                     <div class="input-group" >
-                                                        <input type="text" name="email" value="<%= email%>">
+                                                        <input class="form-control" type="text" name="email" value="<%= email%>">
                                                     </div>
 
                                                 </div>
@@ -572,7 +576,7 @@
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Status</div>
                                                     <div class="input-group" >
-                                                        <input type="text" name="status" value="<%= status%>">
+                                                        <input class="form-control" type="text" name="status" value="<%= status%>">
                                                     </div>
 
                                                 </div>
@@ -581,7 +585,7 @@
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Gender</div>
                                                     <div class="input-group" >
-                                                        <select name="gender">
+                                                        <select class="form-control" name="gender">
                                                             <option value="Male">Male</option>
                                                             <option value="Female">Female</option>
                                                             <option value="Other">Other</option>
@@ -592,7 +596,7 @@
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div> Submit</div>
                                                     <div class="input-group" >
-                                                        <input type="submit" value="UPDATE" name="btnUpdate">
+                                                        <input class="form-control submit"  type="submit" value="UPDATE" name="btnUpdate">
                                                     </div>
                                                 </div>
                                             </div>
@@ -628,15 +632,15 @@
                 </div>
             </div>
 
-        </div>
-        <!-- /#wrapper -->
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+            <!-- /#wrapper -->
 
-    </body>
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
+
+        </body>
 
 
-</html>
+    </html>
