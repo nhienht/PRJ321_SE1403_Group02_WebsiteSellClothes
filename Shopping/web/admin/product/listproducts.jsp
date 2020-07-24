@@ -485,9 +485,9 @@
                                         </div>
 
                                     </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
+<!--                                        <div class="row">
+                                            <div class="col-sm-12">-->
+<!--                                               <table class="table table-bordered dataTable" id="dataTable" width="100%"
                                                        cellspacing="0" role="grid" aria-describedby="dataTable_info"
                                                        style="width: 100%;">
                                                     <thead>
@@ -574,11 +574,13 @@
                                                             }
                                                         %>
                                                     </tbody>
+                                               </table>-->
+                                                    
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <%
-                                             //   ProductsDAO pDao = new ProductsDAO();
-                                               // ResultSet rs = null;
+//                                                ProductsDAO pDao = new ProductsDAO();
+//                                                ResultSet rs = null;
                                                 TypeDAO tDao = new TypeDAO();
                                                 SupplierDAO supDao = new SupplierDAO();
                                                 BrandDao brDao = new BrandDao();
@@ -639,7 +641,8 @@
                                                                     <th>Quantity sold</th>
                                                                     <th>Quantity</th>
                                                                 </tr>
-                                                                <%    HashMap<Integer, Integer> top = pDao.getTop10();
+                                                                <%  
+                                                                    HashMap<Integer, Integer> top = pDao.getTop10();
                                                                     int i = 0;
 
                                                                     for (Map.Entry<Integer, Integer> entry : top.entrySet()) {
