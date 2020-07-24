@@ -97,30 +97,6 @@
                 -o-transform: scale(1.2,1,2);
                 -ms-transform: scale(1.2,1.2);
             }
-            .dropright{
-                position: relative;
-                left: -400px;
-
-            }
-            .dropdown-toggle 
-            {
-                background-color: #F5A9BC;
-            }
-            .button{
-                background-color: #F5A9BC;
-
-            }
-            .all{
-                color: #000000;
-
-            }
-            .dropdown-toggle:hover
-            {
-                opacity: 0.7;
-            }
-            .button:hover{
-                opacity: 0.7;
-            }
 
         </style> 
     </head>
@@ -163,7 +139,7 @@
                             <a href="cart.jsp" class="nav-link">Cart</a>
                         </li>
                         <li class="nav-item dropdown no-arrow  ">
-                            <a style="color: black;position:relative; top: -8px;" class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                            <a style="color: black;position:relative; top: -20px;" class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
                                >
                                 <h3><i style="color: black;position:relative; top: -1px;" class="fas fa-user-circle fa-fw"></i></h3>
                             </a>
