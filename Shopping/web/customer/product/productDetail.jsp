@@ -278,7 +278,7 @@
                             <p class="lead font-weight-bold"  style='font-size:35px; color: darkred' ><%= p.getpName()%></p>
                             <form class="d-flex justify-content-left" action="../../CartController"> 
                                 <input type="hidden" value="${param.pID}" name="id"/>
-                                <input type="number" value="1" aria-label="Search" class="form-control" name="quantity" min="0" max="<%=p.getSize()%>" style="width: 100px">
+                                <input type="number" value="1" aria-label="Search" class="form-control" name="quantity" min="0" max="<%=p.getQuantity()%>" style="width: 100px">
                                 <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
                                 </button>
 
