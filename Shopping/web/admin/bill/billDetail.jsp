@@ -499,7 +499,7 @@
                                                     <tbody>
                                                         <%
 
-                                                            BillDetailDAO bdDao = new BillDetailDAO();
+                                                            BillDetailDAO bdDao = new BillDetailDAO(); // goi class billdetail dao
                                                             ResultSet rs = bdDao.getBillDetail(Integer.parseInt(request.getParameter("id")));
                                                             BillDAO bDao = new BillDAO();
                                                             Bill b = bDao.getBill(Integer.parseInt(request.getParameter("id")));
@@ -517,14 +517,14 @@
                                                                 out.print("<td>" + i++ + "</td>");
                                                                 out.print("<td>" + p.getpName() + "</td>");
                                                                 out.print("<td>");
-                                                                while (rsImg.next()) {
-                                                                    out.print("<img class='zoom' src='../../" + rsImg.getString("imageName") + "' height='200px' width='200px' />");
+                                                                while (rsImg.next()) { // cho vong lap de hien in ra tu data
+                                                                    out.print("<img class='zoom' src='../../" + rsImg.getString("imageName") + "' height='200px' width='200px' />");//hien thi hinh anh
                                                                     break;
                                                                 }
                                                                 out.print("</td>");
 
-                                                                out.print("<td>" + rs.getInt(3) + "</td>");
-                                                                out.print("<td>" + rs.getInt(4) + "</td>");
+                                                                out.print("<td>" + rs.getInt(3) + "</td>"); // ley gia tri cua cot 3 
+                                                                out.print("<td>" + rs.getInt(4) + "</td>"); // lay gia tri cot 4
                                                                 out.print(" </tr>");
                                                             }
                                                         %>

@@ -373,8 +373,8 @@
                 String phone = "";
                 String note = "";
                 double total = 0;
-                if (request.getParameter("id") != null) {
-                    bID = Integer.parseInt(request.getParameter("id"));
+                if (request.getParameter("id") != null) { // neu ma id khong rong co nghi la co bill
+                    bID = Integer.parseInt(request.getParameter("id")); // ep kieu id va get cac thong tin cua bill
                     BillDAO bDao = new BillDAO();
                     Bill b = bDao.getBill(bID);
                     cID = b.getcID();
@@ -389,7 +389,7 @@
             %>
         <body id="page-top" class="">
 
-           
+
             <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
                 <a class="navbar-brand mr-1 fas" href="../../home.jsp">
                     <h3>Clothing</h3>
@@ -456,7 +456,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                         <a class="nav-link" href="../comment/listcomment.jsp">
+                        <a class="nav-link" href="../comment/listcomment.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Comment</span></a>
                     </li>
@@ -530,13 +530,13 @@
                                                         <input type="text" class="form-control" placeholder="Your Note" name="note" value="<%= note%>">
                                                     </div>
                                                 </div>
-<!--                                                <div class="col-sm-6 col-xs-12">
-                                                    <div>Status</div>
-                                                    <div class="input-group">
-
-                                                        <input type="text" class="form-control" placeholder="Status Of Bill" name="bStatus" value="<%= bStatus%>">
-                                                    </div>
-                                                </div>-->
+                                                <!--                                                <div class="col-sm-6 col-xs-12">
+                                                                                                    <div>Status</div>
+                                                                                                    <div class="input-group">
+                                                
+                                                                                                        <input type="text" class="form-control" placeholder="Status Of Bill" name="bStatus" value="<%= bStatus%>">
+                                                                                                    </div>
+                                                                                                </div>-->
 
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Total</div>

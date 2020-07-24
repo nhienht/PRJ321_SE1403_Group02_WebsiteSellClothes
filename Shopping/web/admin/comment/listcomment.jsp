@@ -314,7 +314,7 @@
                 .bg-dark {
                     background-color: #343a40!important;
                 }
-                                .searchbar{
+                .searchbar{
                     margin-bottom: auto;
                     margin-top: auto;
                     height: 60px;
@@ -430,7 +430,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                         <a class="nav-link" href="../comment/listcomment.jsp">
+                        <a class="nav-link" href="../comment/listcomment.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Comment</span></a>
                     </li>
@@ -449,7 +449,7 @@
                                 <a href="../product/listproducts.jsp">Dashboard</a>
                             </li>
                             <li class="breadcrumb-item active">Customers</li>
-                         
+
 
                         </ol>
 
@@ -490,26 +490,26 @@
                                                 </thead>
                                                 <tbody>
                                                     <%
-                                                       CommentDAO cmt = new CommentDAO();
-                                                       CustomerDAO cDao = new CustomerDAO();
-                                                       ProductsDAO pDao = new ProductsDAO();
-                                                       ResultSet rs = cmt.getAll();
-                                                        while (rs.next()) {
+                                                        CommentDAO cmt = new CommentDAO(); // goi class cmt ?ao
+                                                        CustomerDAO cDao = new CustomerDAO(); // goi class customer dao
+                                                        ProductsDAO pDao = new ProductsDAO(); // goi class pdao
+                                                        ResultSet rs = cmt.getAll();
+                                                        while (rs.next()) { // cho vong lap ?e show ra cac ket qua 
                                                             out.print("<tr>");
                                                             out.print("<td>" + rs.getInt(1) + "</td>");
                                                             Customer c = cDao.getCustomer(rs.getInt(2));
-                                                             out.print("<td>" + c.getcName() + "</td>");
+                                                            out.print("<td>" + c.getcName() + "</td>");
                                                             Products p = pDao.getProduct(rs.getInt(2));
                                                             out.print("<td>" + p.getpName() + "</td>");
-                                                            
+
                                                             out.print("<td>" + rs.getString(4) + "</td>");
                                                             out.print("<td>" + rs.getDate(5) + "</td>");
-                                                            if(rs.getInt(6) == 1 ){
+                                                            if (rs.getInt(6) == 1) {
                                                                 out.print("<td style='color:green;font-weight: bold;'>Show</td>");
-                                                            }else{
-                                                                 out.print("<td style='color:black; font-weight: bold;'>Hideen</td>");
+                                                            } else {
+                                                                out.print("<td style='color:black; font-weight: bold;'>Hideen</td>");
                                                             }
-                                                              out.print("<td><a href='../../CmtStatusController?cmtID="+rs.getInt(1)+"'>Change Status</a></td>");
+                                                            out.print("<td><a href='../../CmtStatusController?cmtID=" + rs.getInt(1) + "'>Change Status</a></td>"); // truyen id de chuyen sang change stt cmt do 
                                                         }
                                                     %>
                                                 </tbody>

@@ -305,7 +305,7 @@
                 .bg-dark {
                     background-color: #343a40!important;
                 }
-                                .searchbar{
+                .searchbar{
                     margin-bottom: auto;
                     margin-top: auto;
                     height: 60px;
@@ -421,7 +421,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                         <a class="nav-link" href="../comment/listcomment.jsp">
+                        <a class="nav-link" href="../comment/listcomment.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Comment</span></a>
                     </li>
@@ -440,7 +440,7 @@
                                 <a href="../product/listproducts.jsp">Dashboard</a>
                             </li>
                             <li class="breadcrumb-item active">Customers</li>
-                         
+
 
                         </ol>
 
@@ -479,15 +479,15 @@
                                                         <th>Email</th>
                                                         <th>Status</th>
                                                         <th>Gender</th>
-                                                        
+
                                                         <th>Change Status</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <%
-                                                        CustomerDAO cDao = new CustomerDAO();
-                                                        ResultSet rs = cDao.getAll();
-                                                        while (rs.next()) {
+                                                        CustomerDAO cDao = new CustomerDAO(); // goi class customerdao
+                                                        ResultSet rs = cDao.getAll(); // get select all
+                                                        while (rs.next()) { // dua vong lap thuc hien show ra cac ket qua
                                                             out.print("<tr>");
                                                             out.print("<td>" + rs.getInt(1) + "</td>");
                                                             out.print("<td>" + rs.getString(3) + "</td>");
@@ -497,14 +497,14 @@
                                                             out.print("<td>" + rs.getDate(7) + "</td>");
                                                             out.print("<td>" + rs.getString(8) + "</td>");
                                                             if (rs.getInt("status") == 1) {
-                                                                    out.println("<td style='color:green; font-weight: bold;' >Valid</td> ");
-                                                                } else {
-                                                                    out.println("<td style='color:red;font-weight: bold; '>Invalid</td> ");
-                                                                }
+                                                                out.println("<td style='color:green; font-weight: bold;' >Valid</td> ");
+                                                            } else {
+                                                                out.println("<td style='color:red;font-weight: bold; '>Invalid</td> ");
+                                                            }
                                                             out.print("<td>" + rs.getString(10) + "</td>");
                                                             //                            out.print("<td><a href='billDetail.jsp?id=" + rs.getInt("bID") + "'>Xem chi tiet hoa don</a></td>");
-                                                         //   out.print("<td><a href='updateCustomer.jsp?id=" + rs.getInt("cID") + "'>Update</a></td>");
-                                                             out.print("<td><a href='../../Change?cID=" +rs.getInt(1) + "' + '>Change</a></td>");
+                                                            //   out.print("<td><a href='updateCustomer.jsp?id=" + rs.getInt("cID") + "'>Update</a></td>");
+                                                            out.print("<td><a href='../../Change?cID=" + rs.getInt(1) + "' + '>Change</a></td>"); // dua id cua customer de thuc hien viec change stt customer do
                                                             out.print("</tr>");
                                                         }
                                                     %>

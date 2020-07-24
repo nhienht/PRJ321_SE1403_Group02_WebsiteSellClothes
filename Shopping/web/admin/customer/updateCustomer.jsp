@@ -432,7 +432,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                         <a class="nav-link" href="../comment/listcomment.jsp">
+                        <a class="nav-link" href="../comment/listcomment.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Comment</span></a>
                     </li>
@@ -488,11 +488,11 @@
                                         int status = 0;
                                         String gender = "";
 
-                                        if (request.getParameter("id") != null) {
-                                            cID = Integer.parseInt(request.getParameter("id"));
-                                            CustomerDAO cDao = new CustomerDAO();
-                                            Customer c = cDao.getCustomer(cID);
-                                            cUsername = c.getcUsername();
+                                        if (request.getParameter("id") != null) { // neu id ma khong null
+                                            cID = Integer.parseInt(request.getParameter("id")); // ep kieu int
+                                            CustomerDAO cDao = new CustomerDAO(); //goi customerdao
+                                            Customer c = cDao.getCustomer(cID); // get id cua customer
+                                            cUsername = c.getcUsername(); // get ac thông tin cua customer
                                             cPassword = c.getcPassword();
                                             cName = c.getcName();
                                             phonenumber = c.getPhonenumber();

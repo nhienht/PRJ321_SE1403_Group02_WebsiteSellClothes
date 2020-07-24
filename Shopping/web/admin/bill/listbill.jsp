@@ -360,16 +360,16 @@
 
 
         <%
-            if (request.getParameter("id") != null) {
-                int pId = Integer.parseInt(request.getParameter("id"));
+            if (request.getParameter("id") != null) { // neu da co id
+                int pId = Integer.parseInt(request.getParameter("id")); // ep kieu id va get gia tri id
                 ProductsDAO pDao = new ProductsDAO();
-                int kq = pDao.delete(pId);
+                int kq = pDao.delete(pId); // goi de delete
                 if (kq > 0) {
-                    out.println("<script> alert('Xoa thanh cong');</script>");
+                    out.println("<script> alert('Xoa thanh cong');</script>"); // xoa thanh cong
                 } else {
-                    out.println("<script>alert('Xoa that bai');</script>");
+                    out.println("<script>alert('Xoa that bai');</script>"); // xoa that bai
                 }
-                out.println("<script>location.href='listproducts.jsp';</script>");
+                out.println("<script>location.href='listproducts.jsp';</script>"); // chuyen den trang listproduct
             }
         %>
 
@@ -441,8 +441,8 @@
 
                         </div>
                     </li>
-                     <li class="nav-item">
-                         <a class="nav-link" href="../comment/listcomment.jsp">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../comment/listcomment.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Comment</span></a>
                     </li>
@@ -509,14 +509,14 @@
                                                     <tbody>
                                                         <%
                                                             BillDAO bDao = new BillDAO();
-                                                            ResultSet rs = bDao.getAll();
+                                                            ResultSet rs = bDao.getAll(); // show ra cac ket qua
                                                             while (rs.next()) {
                                                                 out.print("<tr>");
                                                                 out.print("<td>" + rs.getInt(1) + "</td>");
                                                                 out.print("<td>" + rs.getInt(2) + "</td>");
-                                                                if(rs.getString(3).equals("New")){
-                                                                     out.println("<td style='color:red; font-weight: bold;' >New</td> ");
-                                                                }else{
+                                                                if (rs.getString(3).equals("New")) {
+                                                                    out.println("<td style='color:red; font-weight: bold;' >New</td> ");
+                                                                } else {
                                                                     out.println("<td style='color:black; font-weight: bold;' >Delivered</td> ");
                                                                 }
                                                                 out.print("<td>" + rs.getString(4) + "</td>");
@@ -525,9 +525,9 @@
                                                                 out.print("<td>" + rs.getString(7) + "</td>");
                                                                 out.print("<td>" + rs.getString(8) + "</td>");
                                                                 out.print("<td>" + rs.getDouble(9) + "</td>");
-                                                                out.print("<td><a href='billDetail.jsp?id=" + rs.getInt("bID") + "'>View Detail</a></td>");
-                                                                out.print("<td><a href='updateBill.jsp?id=" + rs.getInt("bID") + "'>Update</a></td>");
-                                                                out.print("<td><a href='../../Change?bID=" + rs.getString(1) + "'>Change</a></td>");
+                                                                out.print("<td><a href='billDetail.jsp?id=" + rs.getInt("bID") + "'>View Detail</a></td>"); // lay id de chuyen sang bill detail
+                                                                out.print("<td><a href='updateBill.jsp?id=" + rs.getInt("bID") + "'>Update</a></td>"); // lay id bill de thuc hien viec update
+                                                                out.print("<td><a href='../../Change?bID=" + rs.getString(1) + "'>Change</a></td>"); // lay bill id de thuc hien change
 
                                                                 out.print("</tr>");
                                                             }

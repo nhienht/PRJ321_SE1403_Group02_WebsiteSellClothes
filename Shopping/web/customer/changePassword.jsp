@@ -151,7 +151,7 @@
 
 
                         </form>
-
+                        <%-- scipt thuc hien show password --%>
                         <script>
                             function myFunction() {
                                 var x = document.getElementById("newPass");
@@ -162,6 +162,7 @@
                                 }
                             }
                         </script>
+                        <%-- Bat loi password --%> 
                         <script>
                             function checkPassword(form) {
                                 password1 = form.newPass.value;
