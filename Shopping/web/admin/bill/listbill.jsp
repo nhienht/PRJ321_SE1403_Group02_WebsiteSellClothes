@@ -4,9 +4,6 @@
     Author     : 
 --%>
 
-<%@page import="model.entity.Products"%>
-<%@page import="model.entity.Bill"%>
-<%@page import="model.DAO.BillDetailDAO"%>
 <%@page import="model.DAO.BillDAO"%>
 <%@page import="model.DAO.ImageDAO"%>
 <%@page import="model.DAO.ProductsDAO"%>
@@ -412,9 +409,6 @@
 
             </nav>
 
-
-
-
             <div id="wrapper">
                 <ul class="sidebar navbar-nav">
                     <li class="nav-item">
@@ -447,8 +441,8 @@
 
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../comment/listcomment.jsp">
+                     <li class="nav-item">
+                         <a class="nav-link" href="../comment/listcomment.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Comment</span></a>
                     </li>
@@ -469,10 +463,6 @@
                             <li class="breadcrumb-item active">Bills</li>
 
                         </ol>
-
-
-
-
 
                         <!-- DataTables Example -->
                         <div class="card mb-3">
@@ -524,9 +514,9 @@
                                                                 out.print("<tr>");
                                                                 out.print("<td>" + rs.getInt(1) + "</td>");
                                                                 out.print("<td>" + rs.getInt(2) + "</td>");
-                                                                if (rs.getString(3).equals("New")) {
-                                                                    out.println("<td style='color:red; font-weight: bold;' >New</td> ");
-                                                                } else {
+                                                                if(rs.getString(3).equals("New")){
+                                                                     out.println("<td style='color:red; font-weight: bold;' >New</td> ");
+                                                                }else{
                                                                     out.println("<td style='color:black; font-weight: bold;' >Delivered</td> ");
                                                                 }
                                                                 out.print("<td>" + rs.getString(4) + "</td>");
@@ -547,8 +537,6 @@
                                                 </table>
                                             </div>
                                         </div>
-
-
                                         <div class="row">
                                             <div class="col-sm-12 col-md-5">
                                                 <div class="dataTables_info" id="dataTable_info" role="status"
@@ -579,22 +567,12 @@
                 </div>
 
             </div>
+            <!-- /#wrapper -->
 
-            <!DOCTYPE html>
-
-
-
-
-
-
-
-
-        <!-- /#wrapper -->
-
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
 
 
 
@@ -605,8 +583,8 @@
 
 
 
-    </body>
+        </body>
 
 
-</html>
+    </html>
 
