@@ -86,6 +86,11 @@ public class AccountController extends HttpServlet {
         if (request.getParameter("btnSignIn") != null) {
             c.setcPassword(request.getParameter("cPassword"));
             c.setcUsername(request.getParameter("cUsername"));
+            boolean check = cDao.checkUser(c.getcUsername());
+            if(!check){
+                String mes = "Register is not success ! User's is exit !";
+              response.sendRedirect("./auth/login.jsp?message="+mes);   
+            }
             c.setcName(request.getParameter("cName"));
             c.setPhonenumber(request.getParameter("cPhonenumber"));
             c.setAddress(request.getParameter("address"));
@@ -136,7 +141,8 @@ public class AccountController extends HttpServlet {
 //                out.println("alert('User or password incorrect');");
 //                out.println("location='login.jsp';");
 //                out.println("</script>");
-                response.sendRedirect("./auth/login.jsp?message=fail");
+                String mes = " Your username or password incorrect!";
+                response.sendRedirect("./auth/login.jsp?message="+mes);
 
             }
         } else if(request.getParameter("btnSignInPage") != null){
