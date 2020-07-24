@@ -444,6 +444,11 @@
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Comment</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../supplier/supplierlist.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Supplier</span></a>
+                    </li>
 
 
                 </ul>

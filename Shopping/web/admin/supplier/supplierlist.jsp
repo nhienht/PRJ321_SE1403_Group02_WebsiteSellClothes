@@ -1,3 +1,13 @@
+<%-- 
+    Document   : listcomment
+    Created on : Jul 23, 2020, 4:25:58 PM
+    Author     : NhienHT
+--%>
+
+<%@page import="model.DAO.SupplierDAO"%>
+<%@page import="model.entity.Customer"%>
+<%@page import="model.entity.Products"%>
+<%@page import="model.DAO.CommentDAO"%>
 <%@page import="model.DAO.CustomerDAO"%>
 <%@page import="model.DAO.ImageDAO"%>
 <%@page import="java.sql.ResultSet"%>
@@ -403,7 +413,7 @@
                             <span>Bill</span></a>
                     </li>
 
-                    <li class="nav-item active"  >
+                    <li class="nav-item "  >
                         <a class="nav-link" href="../customer/listcustomer.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Customer</span></a>
@@ -451,9 +461,15 @@
 
                         <!-- DataTables Example -->
                         <div class="card mb-3">
-                            <div class="card-header">
-                                <i class="fas fa-user"></i>
-                                List Customers</div>
+                            <div class="card-header row">
+                                <div class="col"> <i class=" fas fa-user"></i>
+                                List Supplier</div>
+                               
+                                <div class="col">
+                                <a href="insertsupplier.jsp">Add new supplier</a>
+                            </div>
+                            </div>
+                           
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -466,42 +482,26 @@
                                                    style="width: 100%;">
                                                 <thead>
                                                     <tr>
-                                                        <th>ID Customer</th>
-                                                        <th>User Name</th>
-                                                        <th>Name</th>
-                                                        <th>Phone</th>
+                                                        <th>ID Supplier</th>
+                                                        <th>Supplier Name</th>
+                                                        <th>Phone number</th>
                                                         <th>Address</th>
-                                                        <th>Birthday</th>
-                                                        <th>Email</th>
-                                                        <th>Status</th>
-                                                        <th>Gender</th>
-
-                                                        <th>Change Status</th>
+                                                        <th>Emaail</th>
+                                                      
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <%
-                                                        CustomerDAO cDao = new CustomerDAO(); // goi class customerdao
-                                                        ResultSet rs = cDao.getAll(); // get select all
-                                                        while (rs.next()) { // dua vong lap thuc hien show ra cac ket qua
+                                                      SupplierDAO supDao = new SupplierDAO();
+                                                        ResultSet rs = supDao.getAll();
+                                                        while (rs.next()) { // cho vong lap ?e show ra cac ket qua 
                                                             out.print("<tr>");
                                                             out.print("<td>" + rs.getInt(1) + "</td>");
-                                                            out.print("<td>" + rs.getString(3) + "</td>");
-                                                            out.print("<td>" + rs.getString(4) + "</td>");
-                                                            out.print("<td>" + rs.getString(5) + "</td>");
-                                                            out.print("<td>" + rs.getString(6) + "</td>");
-                                                            out.print("<td>" + rs.getDate(7) + "</td>");
-                                                            out.print("<td>" + rs.getString(8) + "</td>");
-                                                            if (rs.getInt("status") == 1) {
-                                                                out.println("<td style='color:green; font-weight: bold;' >Valid</td> ");
-                                                            } else {
-                                                                out.println("<td style='color:red;font-weight: bold; '>Invalid</td> ");
-                                                            }
-                                                            out.print("<td>" + rs.getString(10) + "</td>");
-                                                            //                            out.print("<td><a href='billDetail.jsp?id=" + rs.getInt("bID") + "'>Xem chi tiet hoa don</a></td>");
-                                                            //   out.print("<td><a href='updateCustomer.jsp?id=" + rs.getInt("cID") + "'>Update</a></td>");
-                                                            out.print("<td><a href='../../Change?cID=" + rs.getInt(1) + "' + '>Change</a></td>"); // dua id cua customer de thuc hien viec change stt customer do
-                                                            out.print("</tr>");
+                                                            out.print("<td>" + rs.getString(2) + "</td>");
+                                                             out.print("<td>" + rs.getString(3) + "</td>");
+                                                              out.print("<td>" + rs.getString(4) + "</td>");
+                                                               out.print("<td>" + rs.getString(5) + "</td>");
+                                                                out.print("</tr>");
                                                         }
                                                     %>
                                                 </tbody>

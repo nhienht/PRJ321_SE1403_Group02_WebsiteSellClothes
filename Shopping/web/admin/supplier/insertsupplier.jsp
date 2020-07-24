@@ -1,4 +1,7 @@
-<%@page import="model.DAO.CustomerDAO"%>
+<%@page import="model.DAO.BrandDao"%>
+<%@page import="model.DAO.SupplierDAO"%>
+<%@page import="model.DAO.TypeDAO"%>
+<%@page import="model.DAO.TypeDAO"%>
 <%@page import="model.DAO.ImageDAO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="model.DAO.ProductsDAO"%>
@@ -24,8 +27,19 @@
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>List Customer</title>
+
+        <title>Document</title>
         <style>
+            .form-control-borderless {
+                border: none;
+
+            }
+
+            .form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+                border: none;
+                outline: none;
+                box-shadow: none;
+            }
             html {
                 position: relative;
                 min-height: 100%;
@@ -33,6 +47,7 @@
 
             body {
                 height: 100%;
+                background-color: #D8D8D8;
             }
 
             #wrapper {
@@ -193,7 +208,7 @@
             }
 
             .sidebar .nav-item .nav-link {
-                color:#212529;
+                color: #212529;
             }
 
             .sidebar .nav-item .nav-link:active,
@@ -302,8 +317,12 @@
                     -webkit-column-count: 2;
                     column-count: 2;
                 }
+
                 .bg-dark {
-                    background-color: #343a40!important;
+                    background-color: #343a40 !important;
+                }
+                .input-group{
+                    padding-bottom:  30px;
                 }
                 .searchbar{
                     margin-bottom: auto;
@@ -403,12 +422,12 @@
                             <span>Bill</span></a>
                     </li>
 
-                    <li class="nav-item active"  >
+                    <li class="nav-item"  >
                         <a class="nav-link" href="../customer/listcustomer.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Customer</span></a>
                     </li>
-                    <li class="nav-item dropdown ">
+                    <li class="nav-item dropdown active ">
                         <a class="nav-link dropdown-toggle" href="../product/listproducts.jsp" id="pagesDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-fw fa-box-open"></i>
@@ -432,9 +451,7 @@
                     </li>
 
 
-
                 </ul>
-
                 <div id="content-wrapper">
 
                     <div class="container-fluid">
@@ -442,10 +459,9 @@
                         <!-- Breadcrumbs-->
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="../product/listproducts.jsp">Dashboard</a>
+                                <a href="index.jsp">Dashboard</a>
                             </li>
-                            <li class="breadcrumb-item active">Customers</li>
-
+                            <li class="breadcrumb-item active">Products</li>
 
                         </ol>
 
@@ -453,83 +469,30 @@
                         <div class="card mb-3">
                             <div class="card-header">
                                 <i class="fas fa-user"></i>
-                                List Customers</div>
+                                Insert Products</div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                       
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table class="table table-bordered dataTable" id="dataTable" width="100%"
-                                                   cellspacing="0" role="grid" aria-describedby="dataTable_info"
-                                                   style="width: 100%;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID Customer</th>
-                                                        <th>User Name</th>
-                                                        <th>Name</th>
-                                                        <th>Phone</th>
-                                                        <th>Address</th>
-                                                        <th>Birthday</th>
-                                                        <th>Email</th>
-                                                        <th>Status</th>
-                                                        <th>Gender</th>
 
-                                                        <th>Change Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <%
-                                                        CustomerDAO cDao = new CustomerDAO(); // goi class customerdao
-                                                        ResultSet rs = cDao.getAll(); // get select all
-                                                        while (rs.next()) { // dua vong lap thuc hien show ra cac ket qua
-                                                            out.print("<tr>");
-                                                            out.print("<td>" + rs.getInt(1) + "</td>");
-                                                            out.print("<td>" + rs.getString(3) + "</td>");
-                                                            out.print("<td>" + rs.getString(4) + "</td>");
-                                                            out.print("<td>" + rs.getString(5) + "</td>");
-                                                            out.print("<td>" + rs.getString(6) + "</td>");
-                                                            out.print("<td>" + rs.getDate(7) + "</td>");
-                                                            out.print("<td>" + rs.getString(8) + "</td>");
-                                                            if (rs.getInt("status") == 1) {
-                                                                out.println("<td style='color:green; font-weight: bold;' >Valid</td> ");
-                                                            } else {
-                                                                out.println("<td style='color:red;font-weight: bold; '>Invalid</td> ");
-                                                            }
-                                                            out.print("<td>" + rs.getString(10) + "</td>");
-                                                            //                            out.print("<td><a href='billDetail.jsp?id=" + rs.getInt("bID") + "'>Xem chi tiet hoa don</a></td>");
-                                                            //   out.print("<td><a href='updateCustomer.jsp?id=" + rs.getInt("cID") + "'>Update</a></td>");
-                                                            out.print("<td><a href='../../Change?cID=" + rs.getInt(1) + "' + '>Change</a></td>"); // dua id cua customer de thuc hien viec change stt customer do
-                                                            out.print("</tr>");
-                                                        }
-                                                    %>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="dataTable_info" role="status"
-                                                 aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled"
-                                                        id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                               data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item active"><a href="#"
-                                                                                                    aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                    class="page-link">1</a></li>
-                                                    <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                        <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                           class="page-link">Next</a></li>
-                                                </ul>
+                                    <form action="" method="POST" enctype='multipart/form-data'>
+                                        <div class="contact-form">
+                                            <div class="row">
+                                            
+                                                <div class="col-sm-12 col-xs-12">
+                                                    <div>Supplier Name</div>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" autofocus="" required=" " name="supName" >
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div> Insert</div>
+                                                    <div class="input-group">
+                                                        <input  type="submit" value="INSERT">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
+                                   
                                 </div>
                             </div>
                         </div>
