@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.entity.Products;
+import model.unit.Sort;
 
 /**
  *
@@ -254,14 +255,12 @@ public class ProductsDAO {
         return null;
     }
 
-
     /**
      * Function to get Product when quantity > 0
      *
      * @return
      */
-    
-    public ResultSet getProductConHang(){
+    public ResultSet getProductConHang() {
         try {
             String sql = "select * from product where quantity > 0";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -274,7 +273,6 @@ public class ProductsDAO {
         }
         return null;
     }
-
 
     /**
      * Function to get Product when quantity = 0
@@ -338,6 +336,7 @@ public class ProductsDAO {
         }
         return null;
     }
+
     /**
      * Function to get Product by Supplier
      *
@@ -359,7 +358,6 @@ public class ProductsDAO {
         return null;
     }
 
-
     /**
      * Function to get Product by brand
      *
@@ -379,5 +377,50 @@ public class ProductsDAO {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    /**
+     * search products
+     *
+     * @param word
+     * @return
+     */
+    public ResultSet search(String word) {
+        try {
+            String sql = "SELECT * FROM  products WHERE status =1 and pName like '%" + word + "%' "
+                    + " ORDER BY pID ASC";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();//excute query
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+    public HashMap<Integer,Integer> getTop10() {
+        HashMap<Integer, Integer> products = new HashMap<>();
+        
+        try {
+            BillDetailDAO bdDao = new BillDetailDAO();
+            ResultSet rs = bdDao.getBillDetail();
+            
+            while(rs.next()) {
+                int key = rs.getInt("pID");
+                int quantity = rs.getInt("quantity");
+                
+                if(products.get(key) == null) {
+                    products.put(key, quantity);
+                } else {
+                    quantity += products.get(key);
+                    products.put(key, quantity);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Sort sort = new Sort();
+        HashMap<Integer, Integer> newList = sort.sortHashMapByValues(products);
+        return newList;
     }
 }

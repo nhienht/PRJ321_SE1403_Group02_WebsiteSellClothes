@@ -70,5 +70,15 @@ public class BillDetailDAO {
         }
         return null;
     }
+     public ResultSet getBillDetail(){
+        try{
+            String sql = "select * from billdetail";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            return pst.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(BillDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
 }

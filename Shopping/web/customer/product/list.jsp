@@ -5,6 +5,10 @@
 --%>
 
 
+<%@page import="model.DAO.TypeDAO"%>
+<%@page import="model.DAO.SupplierDAO"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="model.DAO.BrandDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
@@ -54,7 +58,7 @@
             }
             .container-fluid
             {
-                padding-top: 8em;
+                padding-top: 4em;
             }
 
 
@@ -173,16 +177,135 @@
                            url="jdbc:mysql://localhost/prj321"
                            user="root" password=""
                            driver="com.mysql.jdbc.Driver"/>
-        <sql:query var="p" dataSource="${conn}">	
-            SELECT * FROM products where status =1
+        <%if (request.getParameter("type") != null && request.getParameter("value") != null) {
+                String sql = " select * from products where status= ?";
+                String type = request.getParameter("type");
+
+                if (type.equals("gender")) {
+                    String value = request.getParameter("value");
+                    sql = "select * from products where gender=? AND status = 1";
+                } else {
+                    int value = Integer.parseInt(request.getParameter("value"));
+                    if (type.equals("type")) {
+                        sql = "select * from products where tID=? AND status = 1";
+                    } else if (type.equals("brand")) {
+                        sql = "select * from products where brID=? AND status = 1";
+                    } else if (type.equals("supplier")) {
+                        sql = "select * from products where supID=? AND status = 1";
+                    } else if (type.equals("size")) {
+                        sql = "select * from products where size=? AND status = 1";
+                    }
+                }
+
+        %>
+
+        <sql:query var="p" dataSource="${conn}" sql="<%=sql%>">
+
+            <sql:param value="${param.value}"/>
         </sql:query>	
+        <%} else {%>
+        <sql:query var="p" dataSource="${conn}">
+            select * from products where status = 1
+
+        </sql:query>
+        <%}%>
 
         <sql:query dataSource="${conn}" var="i"	
                    sql="select * from image where pID=?">		
             <sql:param value="${row.pID}"/>	
         </sql:query>
+        <div class=" row container">
+            <div class="col col-sm-6 col-md-2">
+                <button class="btn btn-light btn-lg" type="button"><a href="list.jsp">All Products</a></button>
 
-        <div class="container-fluid padding">
+
+            </div>
+            <div class="col dropright col-sm-6 col-md-3 ">
+                <button class="btn  dropdown-toggle btn-light btn-lg" type="button" data-toggle="dropdown">Filter by
+
+                </button>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-submenu">
+                        <a class="test" tabindex="-1" href="#">Type<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <%
+                                TypeDAO tDao = new TypeDAO();
+                                ResultSet allType = tDao.getAll();
+                                while (allType.next()) {
+                                    out.println("  <li><a tabindex='-1' href='list.jsp?type=type&value=" + allType.getString(1) + "'> " + allType.getString(2) + "</a></li>");
+                                }
+                            %>
+                            <li class="dropdown-submenu">
+
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a class="test" tabindex="-1" href="#">Brand<span class="caret"></span></a>
+                        <ul class="dropdown-menu dropright ">
+                            <%
+                                BrandDao brDao = new BrandDao();
+                                ResultSet allBrand = brDao.getAll();
+                                while (allBrand.next()) {
+                                    out.println("  <li><a tabindex='-1' href='list.jsp?type=brand&value=" + allBrand.getString(1) + "'> " + allBrand.getString(2) + "</a></li>");
+                                }
+                            %>
+                            <li class="dropdown-submenu">
+
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a class="test" tabindex="-1" href="#">Supplier<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <%
+                                SupplierDAO supDao = new SupplierDAO();
+                                ResultSet allSup = supDao.getAll();
+                                while (allSup.next()) {
+                                    out.println("  <li><a tabindex='-1' href='list.jsp?type=supppier&value=" + allSup.getString(1) + "'> " + allSup.getString(2) + "</a></li>");
+                                }
+                            %>
+                            <li class="dropdown-submenu">
+
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a class="test" tabindex="-1" href="#">Size<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <%
+                                out.println("<li><a tabindex='-1' href='?type=size&value=0'>S</a></li>");
+                                out.println("<li><a tabindex='-1' href='?type=size&value=1'>M</a></li>");
+                                out.println("<li><a tabindex='-1' href='?type=size&value=2'>L</a></li>");
+                                out.println("<li><a tabindex='-1' href='?type=size&value=3'>XL</a></li>");
+                                out.println("<li><a tabindex='-1' href='?type=size&value=4'>XXL</a></li>");
+                            %>
+                            <li class="dropdown-submenu">
+
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a class="test" tabindex="-1" href="#">Gender<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <%
+                                out.println("<li><a tabindex='-1' href='?type=gender&value=Male'>Male</a></li>");
+                                out.println("<li><a tabindex='-1' href='?type=gender&value=Female'>Female</a></li>");
+                                out.println("<li><a tabindex='-1' href='?type=gender&value=Unisex'>Unisex</a></li>");
+                            %>
+                            <li class="dropdown-submenu">
+
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+                            
+                            
+
+
+        <div class="container-fluid mt-0">
             <div class="row text-center padding">   
                 <c:forEach var="row" items="${p.rows}">	
                     <sql:query dataSource="${conn}" var="i"	
@@ -226,4 +349,13 @@
         </div>
 
     </body>
+    <script>
+        $(document).ready(function () {
+            $('.dropdown-submenu a.test').on("click", function (e) {
+                $(this).next('ul').toggle();
+                e.stopPropagation();
+                e.preventDefault();
+            });
+        });
+    </script>
 </html>

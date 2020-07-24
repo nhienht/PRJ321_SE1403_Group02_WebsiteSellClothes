@@ -4,6 +4,9 @@
     Author     : 
 --%>
 
+<%@page import="model.entity.Products"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="model.DAO.SupplierDAO"%>
 <%@page import="model.DAO.BrandDao"%>
 <%@page import="model.DAO.TypeDAO"%>
@@ -426,7 +429,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                         <a class="nav-link" href="../comment/listcomment.jsp">
+                        <a class="nav-link" href="../comment/listcomment.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Comment</span></a>
                     </li>
@@ -453,20 +456,72 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
                                         <div class="row">                                     
                                             <div class="col-sm-12 col-md-6">
-                                                <div class="container h-100">
-                                                    <div class="d-flex justify-content-center h-100">
-                                                        <div class="searchbar">
-                                                            <input class="search_input" type="text" name="" placeholder="Search...">
-                                                            <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                                                <form class="d-flex justify-content-center h-100 search-form" action="">
+                                                    <input class="searchbar  w-100" type="text" name="word" placeholder="search">
+                                                    <input type="submit" name="find" class="btn btn-outline-primary "  value="FIND">
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        
+                                            <div class="col-sm-12">
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                    Best sale 
+                                                </button>
+                                                
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <table class="table table-responsive table-hover" >
+                                                                    <tr>
+                                                                        <th>ID Product's</th>
+                                                                        <th>Name Product's</th>
+                                                                        <th>Price</th>
+                                                                        <th>Quantity sold</th>
+                                                                        <th>Quantity</th>
+                                                                    </tr>
+                                                                    <%
+                                                                         ProductsDAO pDao = new ProductsDAO();
+                                                                        HashMap<Integer, Integer> top = pDao.getTop10();
+                                                                        int i = 0;
+
+                                                                        for (Map.Entry<Integer, Integer> entry : top.entrySet()) {
+                                                                            i++;
+                                                                            if (i < 10) {
+                                                                                out.print("<tr>");
+                                                                                out.print("<td>" + entry.getKey() + "</td>");
+                                                                                Products p = pDao.getProduct(entry.getKey());
+                                                                                out.print("<td>" + p.getpName() + "</td>");
+                                                                                out.print("<td>" + p.getPrice() + "</td>");
+                                                                                out.print("<td>" + entry.getValue() + "</td>");
+                                                                                out.print("<td>" + p.getQuantity() + "</td>");
+                                                                                out.print("</tr>");
+                                                                            } else {
+                                                                                break;
+                                                                            }
+                                                                        }
+                                                                    %>
+                                                                </table>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
                                                 <table class="table table-bordered dataTable" id="dataTable" width="100%"
                                                        cellspacing="0" role="grid" aria-describedby="dataTable_info"
                                                        style="width: 100%;">
@@ -496,8 +551,15 @@
                                                     <tbody>
 
                                                         <%
-                                                            ProductsDAO pDao = new ProductsDAO();
-                                                            ResultSet rs = pDao.getAll();
+                                                           
+                                                            ResultSet rs = null;
+                                                            if (request.getParameter("find") != null) {
+                                                                String word = request.getParameter("word");
+                                                                rs = pDao.search(word);
+                                                            } else {
+
+                                                                rs = pDao.getAll();
+                                                            }
                                                             while (rs.next()) {
 
                                                                 out.print("<tr>");
@@ -506,10 +568,10 @@
                                                                 ImageDAO iDao = new ImageDAO();
                                                                 ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
                                                                 out.print("<td>");
-                                                                while(rsImg.next()){
-                                                                      out.print("<a href='../../" + rsImg.getString("imageName")+"'> <img class='zoom' src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' /></a>");
+                                                                while (rsImg.next()) {
+                                                                    out.print("<a href='../../" + rsImg.getString("imageName") + "'> <img class='zoom' src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' /></a>");
                                                                 }
-                                                              out.print("</td>");
+                                                                out.print("</td>");
                                                                 BrandDao brDao = new BrandDao();
                                                                 String brand = brDao.getBrand(rs.getInt("brID"));
                                                                 out.print("<td>" + brand + "</td>");
@@ -558,6 +620,8 @@
                                                 </table>
                                             </div>
                                         </div>
+
+
                                         <div class="row">
                                             <div class="col-sm-12 col-md-5">
                                                 <div class="dataTables_info" id="dataTable_info" role="status"
