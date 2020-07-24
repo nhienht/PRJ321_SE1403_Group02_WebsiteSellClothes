@@ -10,31 +10,61 @@ package model.entity;
  * @author NhienHT
  */
 public class Type {
-    private int tID;
-    private String tName;
 
+    private int tID;//declare type ID
+    private String tName;//declare Type Name
+
+    /**
+     *
+     */
     public Type() {
     }
 
+    /**
+     * Constructor for Type
+     *
+     * @param tID
+     * @param tName
+     */
     public Type(int tID, String tName) {
         this.tID = tID;
         this.tName = tName;
     }
 
+    /**
+     * gettID
+     *
+     * @return
+     */
     public int gettID() {
         return tID;
     }
 
+    /**
+     * settID
+     *
+     * @param tID
+     */
     public void settID(int tID) {
         this.tID = tID;
     }
 
+    /**
+     * gettName
+     *
+     * @return
+     */
     public String gettName() {
         return tName;
     }
 
+    /**
+     * settName
+     *
+     * @param tName
+     */
     public void settName(String tName) {
         this.tName = tName;
     }
-    
+
 }
