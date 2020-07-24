@@ -40,11 +40,11 @@ public class CommentController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             int cmtID = Integer.parseInt(request.getParameter("cmtID"));
- int pID = Integer.parseInt(request.getParameter("pID"));
+            int pID = Integer.parseInt(request.getParameter("pID"));
             CommentDAO cDao = new CommentDAO();
-           cDao.delete(cmtID);
-           response.sendRedirect("./customer/product/productDetail.jsp?pID="+ pID);
-           
+            cDao.delete(cmtID);
+            response.sendRedirect("./customer/product/productDetail.jsp?pID=" + pID);
+
         }
     }
 
@@ -78,16 +78,16 @@ public class CommentController extends HttpServlet {
         Cookie[] cookies = request.getCookies();
         int id = 0;
         boolean check = false;
-        for (Cookie c : cookies) {
+        for (Cookie c : cookies) { // kiem tra xem co user dang nhap
             if (c.getName().equals("user")) {
                 check = true;
             } else if (c.getName().equals("idCustomer")) {
                 id = Integer.parseInt(c.getValue());
             }
         }
-        String pID = request.getParameter("pID");
+        String pID = request.getParameter("pID"); // get id san pham
         //System.out.println(request.getParameter("pID"));
-        String message = request.getParameter("message");
+        String message = request.getParameter("message"); // get message user da cmt vao
         if (check) {
             Comment c = new Comment();
             c.setcID(id);
@@ -95,13 +95,13 @@ public class CommentController extends HttpServlet {
             c.setpID(Integer.parseInt(pID));
             c.setCmtMessage(message);
             CommentDAO cDao = new CommentDAO();
-            check = cDao.insert(c);
-            response.sendRedirect("./customer/product/productDetail.jsp?pID=" + pID);
+            check = cDao.insert(c); // thuc hien viec insert cmt co nghia la viec cmt
+            response.sendRedirect("./customer/product/productDetail.jsp?pID=" + pID); // chuyen den trang chi tiết san pham
 
         } else {
-            String url = "./auth/login.jsp?returnURL=/Shopping/customer/product/productDetail.jsp?pID=" + pID;
+            String url = "./auth/login.jsp?returnURL=/Shopping/customer/product/productDetail.jsp?pID=" + pID; // chuyen den trang chi tiet san pham
 
-            response.sendRedirect(url);
+            response.sendRedirect(url);// chuyen den trang chi tiet san pham
         }
     }
 

@@ -70,20 +70,20 @@ public class AdminController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       //  processRequest(request, response);
-        if (request.getParameter("adminLogin") != null) {
+        if (request.getParameter("adminLogin") != null) { // neu da nhan nut admin login
             AdminDAO aDao = new AdminDAO();
-            String user = request.getParameter("user");
+            String user = request.getParameter("user"); // get username va password
             String pass = request.getParameter("pass");
                    
             int aID = aDao.login(user, pass);
             if (aID>0) {
-                Cookie adminCookie = new Cookie("admin", aID+"");              
+                Cookie adminCookie = new Cookie("admin", aID+"");    // luu id admin set time 24h           
                 adminCookie.setMaxAge(60 * 60 * 24);              
                 response.addCookie(adminCookie);      
-                response.sendRedirect("./dashboard.jsp");
+                response.sendRedirect("./dashboard.jsp"); // tra den trang dashboard
              //   out.print("<script> alert('Login successful');</script>");
             } else {
-                response.sendRedirect("Admin");
+                response.sendRedirect("Admin"); // tra den duong dan admin
             }
         }
     }

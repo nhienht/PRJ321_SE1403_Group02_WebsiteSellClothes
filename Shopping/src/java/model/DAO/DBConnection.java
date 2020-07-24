@@ -16,20 +16,29 @@ import java.util.logging.Logger;
  * @author Dat
  */
 public class DBConnection {
-   private Connection conn;
-    public DBConnection(){
+
+    private Connection conn;//Declare Connection
+
+    /**
+     * Connection to connect with database
+     */
+    public DBConnection() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/prj321", "root", "");
+            Class.forName("com.mysql.jdbc.Driver");//Declare Driver
+            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/prj321", "root", "");//Declare url database
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public Connection getDBConnection(){
-        return this.conn;
-    }    
-}
 
+    /**
+     * Function to get Connection
+     *
+     * @return
+     */
+    public Connection getDBConnection() {
+        return this.conn;
+    }
+}

@@ -83,41 +83,41 @@ public class AccountController extends HttpServlet {
         //processRequest(request, response);
         Customer c = new Customer();
         CustomerDAO cDao = new CustomerDAO();
-        if (request.getParameter("btnSignIn") != null) {
-            c.setcPassword(request.getParameter("cPassword"));
-            c.setcUsername(request.getParameter("cUsername"));
-            c.setcName(request.getParameter("cName"));
-            c.setPhonenumber(request.getParameter("cPhonenumber"));
-            c.setAddress(request.getParameter("address"));
-            Date birthday = Date.valueOf(request.getParameter("birthday"));
+        if (request.getParameter("btnSignIn") != null) { // neu da nhan vao nut bnt
+            c.setcPassword(request.getParameter("cPassword")); // getPassword
+            c.setcUsername(request.getParameter("cUsername")); // gte username
+            c.setcName(request.getParameter("cName")); // get Name
+            c.setPhonenumber(request.getParameter("cPhonenumber")); // get cPhonenumber
+            c.setAddress(request.getParameter("address")); // get address
+            Date birthday = Date.valueOf(request.getParameter("birthday")); // get birthday
             c.setBirthday(birthday);
-            c.setEmail(request.getParameter("email"));
+            c.setEmail(request.getParameter("email")); // get email
             c.setStatus(1);
-            c.setGender(request.getParameter("gender"));
-            cDao.insert(c);
-            int maxID = cDao.getMaxCustomer();
-             cDao.login(request.getParameter("cUsername"), request.getParameter("cPassword"));
-               Cookie userCookie = new Cookie("user", request.getParameter("cUsername"));
-                Cookie idCookie = new Cookie("idCustomer", String.valueOf(maxID));
+            c.setGender(request.getParameter("gender")); // get gender
+            cDao.insert(c); // thuc hien goi insert de insert customer
+            int maxID = cDao.getMaxCustomer(); // get maxcustomer
+            cDao.login(request.getParameter("cUsername"), request.getParameter("cPassword"));
+            Cookie userCookie = new Cookie("user", request.getParameter("cUsername")); // tao cookie de luu id dang nhap
+            Cookie idCookie = new Cookie("idCustomer", String.valueOf(maxID));
 
-                userCookie.setMaxAge(60 * 60 * 24);
-                idCookie.setMaxAge(60 * 60 * 24);
+            userCookie.setMaxAge(60 * 60 * 24); // set time 24h
+            idCookie.setMaxAge(60 * 60 * 24);
 
-                response.addCookie(userCookie);
-                response.addCookie(idCookie);
-                //response.sendRedirect("home.jsp");
-                 if (request.getParameter("returnURL") != null) {
-                    response.sendRedirect(request.getParameter("returnURL"));
-                } else {
-                    response.sendRedirect("./index.jsp");
-                }
-        } else if (request.getParameter("btnLogin") != null) {
+            response.addCookie(userCookie);
+            response.addCookie(idCookie);
+            //response.sendRedirect("home.jsp");
+            if (request.getParameter("returnURL") != null) { // neu  returnURL ma khong rong
+                response.sendRedirect(request.getParameter("returnURL")); // thi chuyen sang
+            } else {
+                response.sendRedirect("./index.jsp");  // neu rong thi chuyen sang index.jsp
+            }
+        } else if (request.getParameter("btnLogin") != null) { // neu dan nhan nut login
             // CustomerDAO cDao = new CustomerDAO();
-            String user = request.getParameter("user");
+            String user = request.getParameter("user"); // get uername va password
             String pass = request.getParameter("pass");
             int id = cDao.login(user, pass);
             if (id != -1) {
-                Cookie userCookie = new Cookie("user", user);
+                Cookie userCookie = new Cookie("user", user); // tao cookie luu id username
                 Cookie idCookie = new Cookie("idCustomer", String.valueOf(id));
 
                 userCookie.setMaxAge(60 * 60 * 24);
@@ -125,12 +125,12 @@ public class AccountController extends HttpServlet {
 
                 response.addCookie(userCookie);
                 response.addCookie(idCookie);
-                 if (request.getParameter("returnURL") != null) {
+                if (request.getParameter("returnURL") != null) {
                     response.sendRedirect(request.getParameter("returnURL"));
                 } else {
-                    response.sendRedirect("./index.jsp");
+                    response.sendRedirect("./index.jsp"); // chuyen den trang index
                 }
-               // response.sendRedirect("home.jsp");
+                // response.sendRedirect("home.jsp");
             } else {
 //                out.println("<script type=\"text/javascript\">");
 //                out.println("alert('User or password incorrect');");
@@ -139,8 +139,8 @@ public class AccountController extends HttpServlet {
                   String mes = "Register is not success ! User's is exit !";
               response.sendRedirect("./auth/login.jsp?message="+mes);   
             }
-        } else if(request.getParameter("btnSignInPage") != null){
-            response.sendRedirect("./auth/signin.jsp");
+        } else if (request.getParameter("btnSignInPage") != null) {
+            response.sendRedirect("./auth/signin.jsp"); // chuyen den trang dang ky
         }
 
     }

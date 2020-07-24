@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.entity.Image;
 
 /**
  *
@@ -19,20 +18,30 @@ import model.entity.Image;
  */
 public class ImageDAO {
 
-    private Connection conn;
+    private Connection conn;//Declare Connection
 
+    /**
+     * Constructor Image
+     */
     public ImageDAO() {
-        DBConnection db = new DBConnection();
-        this.conn = db.getDBConnection();
+        DBConnection db = new DBConnection();//new Connection
+        this.conn = db.getDBConnection();//get Connection
     }
 
+    /**
+     * Function to insert new Image
+     *
+     * @param pID
+     * @param path
+     * @return
+     */
     public boolean insert(int pID, String path) {
         try {
-            String sql = "INSERT INTO `image`(`pID`, `imageName`) VALUES (?,?)";
+            String sql = "INSERT INTO `image`(`pID`, `imageName`) VALUES (?,?)";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, pID);
-            pst.setString(2, path);
-            return pst.execute();
+            pst.setInt(1, pID);//set pID for sql query
+            pst.setString(2, path);//set path for sql query
+            return pst.execute();//excute query
         } catch (SQLException ex) {
             Logger.getLogger(ImageDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -40,15 +49,21 @@ public class ImageDAO {
 
     }
 
+    /**
+     * Function to get Image
+     *
+     * @param pID
+     * @return
+     */
     public ResultSet getImage(int pID) {
         try {
-            String sql = "select * from image where pID = ?";
+            String sql = "select * from image where pID = ?";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, pID);
-            ResultSet rs = pst.executeQuery();
-            
-                return rs;
-            
+            pst.setInt(1, pID);//set pID for sql query
+            ResultSet rs = pst.executeQuery();//excute query
+
+            return rs;//return iamge
+
         } catch (SQLException ex) {
             Logger.getLogger(ImageDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

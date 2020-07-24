@@ -17,35 +17,52 @@ import java.util.logging.Logger;
  * @author NhienHT
  */
 public class SupplierDAO {
-      private Connection conn;
 
+    private Connection conn;//Declare Connection
+
+    /**
+     * Constructor Supplier
+     */
     public SupplierDAO() {
-        DBConnection db = new DBConnection();
-        this.conn = db.getDBConnection();
+        DBConnection db = new DBConnection();//new Connection
+        this.conn = db.getDBConnection();//get Connection
     }
-    public ResultSet getAll(){
-         try {
-             String sql = "Select * from supplier";
-             PreparedStatement pst = conn.prepareStatement(sql);
-             ResultSet rs = pst.executeQuery();
-                 return rs;
-             } catch (SQLException ex) {
-             Logger.getLogger(SupplierDAO.class.getName()).log(Level.SEVERE, null, ex);
-         }         
-         return null;
-    }
-    public String getSupplier(int supID){
-        try{
-            String sql = "select * from supplier where supID=?";
+
+    /**
+     * Function to get get all Supplier
+     *
+     * @return
+     */
+    public ResultSet getAll() {
+        try {
+            String sql = "Select * from supplier";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, supID);
-            ResultSet rs = pst.executeQuery();
-            if(rs.next()){
-                return rs.getString(2);
+            ResultSet rs = pst.executeQuery();//excute query
+            return rs;//return Supplier
+        } catch (SQLException ex) {
+            Logger.getLogger(SupplierDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    /**
+     * Function to get SUpplier by sup ID
+     *
+     * @param supID
+     * @return
+     */
+    public String getSupplier(int supID) {
+        try {
+            String sql = "select * from supplier where supID=?";//declare sql query
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, supID);//set supID for sql query
+            ResultSet rs = pst.executeQuery();//excute query
+            if (rs.next()) {
+                return rs.getString(2);//reuturn Supplier
             }
         } catch (SQLException ex) {
-             Logger.getLogger(SupplierDAO.class.getName()).log(Level.SEVERE, null, ex);
-         }
+            Logger.getLogger(SupplierDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 }

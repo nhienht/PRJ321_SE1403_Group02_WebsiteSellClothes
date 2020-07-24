@@ -493,10 +493,10 @@
                                                     <div class="input-group">
                                                         <select name="brID" class="form-control" autofocus="">
                                                             <%
-                                                                BrandDao brDao = new BrandDao();
-                                                                ResultSet allRrand = brDao.getAll();
+                                                                BrandDao brDao = new BrandDao(); // goi class Bran?ao
+                                                                ResultSet allRrand = brDao.getAll(); // gte all brand
                                                                 while (allRrand.next()) {
-                                                                    out.println("<option value=" + allRrand.getInt(1) + ">" + allRrand.getString(2) + "</option>");
+                                                                    out.println("<option value=" + allRrand.getInt(1) + ">" + allRrand.getString(2) + "</option>"); // get id cua brand
                                                                 }
                                                             %>
                                                         </select>
@@ -509,8 +509,8 @@
                                                         <select aria-placeholder="Type Product" name="tID" class="form-control" autofocus="">
 
                                                             <%
-                                                                TypeDAO tDao = new TypeDAO();
-                                                                ResultSet allType = tDao.getAll();
+                                                                TypeDAO tDao = new TypeDAO(); // goi class type
+                                                                ResultSet allType = tDao.getAll(); // thuc hien get ALLTYPE
                                                                 while (allType.next()) {
                                                                     out.println("<option value=" + allType.getInt(1) + ">" + allType.getString(2) + "</option>");
                                                                 }
@@ -525,10 +525,10 @@
                                                     <div class="input-group">
                                                         <select name="supID" class="form-control" autofocus="">
                                                             <%
-                                                                SupplierDAO supDao = new SupplierDAO();
+                                                                SupplierDAO supDao = new SupplierDAO(); // goi class
                                                                 ResultSet allSup = supDao.getAll();
-                                                                while (allSup.next()) {
-                                                                    out.println("<option value=" + allSup.getInt(1) + ">" + allSup.getString(2) + "</option>");
+                                                                while (allSup.next()) { // thuc hien get all
+                                                                    out.println("<option value=" + allSup.getInt(1) + ">" + allSup.getString(2) + "</option>"); // lay id cua sup
                                                                 }
                                                             %>
                                                         </select>

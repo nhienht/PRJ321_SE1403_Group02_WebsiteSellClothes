@@ -2,7 +2,7 @@
 <html lang="en">
 
     <head>
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <meta charset="UTF-8">
         <!-- CSS only -->
@@ -100,7 +100,7 @@
     </head>
 
     <body>
-        <%@include file="../header/header.jsp" %>
+
         <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
             <a class="navbar-branch" href="index.jsp">
@@ -141,13 +141,13 @@
                                 Cookie[] cookies = request.getCookies();
                                 if (cookies.length > 1) {
                                     for (Cookie cookie : cookies) {
-                                        if (cookie.getName().equals("user")) {
-                                            out.print("<a class='nav-link' style='color: black' href='../customer/Information.jsp'>" + cookie.getValue() + "</a>");
+                                        if (cookie.getName().equals("user")) { // neu user dang nhap
+                                            out.print("<a class='nav-link' style='color: black' href='../customer/Information.jsp'>" + cookie.getValue() + "</a>"); // chuyen vao trang infor user
                                             out.print("<a class='nav-link' style='color: black' href='LogoutController'>Logout</a>");
                                         }
                                     }
                                 } else {
-                                    out.print("<a class='nav-link' class='color' style='color: black' href='login.jsp'>Login</a>");
+                                    out.print("<a class='nav-link' class='color' style='color: black' href='login.jsp'>Login</a>"); // neu user chua dang nhap
                                     out.print("<a class='nav-link' style='color: black' href='signin.jsp'>Sigin</a>");
                                 }
                             %>

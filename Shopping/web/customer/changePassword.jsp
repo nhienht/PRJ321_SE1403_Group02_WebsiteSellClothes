@@ -141,7 +141,7 @@
                                 <input  class="form-control"  type="password" name="newPass" id="newPass" required="">
 
                             </div>
-                            <div> <input style="" type="checkbox" onclick="myFunction()"></div>
+                            <div style="position: relative; left: -150px;"> <input style="" type="checkbox" onclick="myFunction()"></div>
 
                             <div class="form-group"> 
                                 <input class="form-control"  type="password" name="Cofirmpass" id="Cofirmpass" required=""> 
@@ -151,7 +151,7 @@
 
 
                         </form>
-
+                        <%-- scipt thuc hien show password --%>
                         <script>
                             function myFunction() {
                                 var x = document.getElementById("newPass");
@@ -162,6 +162,7 @@
                                 }
                             }
                         </script>
+                        <%-- Bat loi password --%> 
                         <script>
                             function checkPassword(form) {
                                 password1 = form.newPass.value;
@@ -177,13 +178,13 @@
 
                                 // If Not same return False.     
                                 else if (password1 != password2) {
-                                    alert("\nPassword did not match: Please try again...")
+                                    alert("\nPassword did not match: Please try again...");
                                     return false;
                                 }
 
                                 // If same return True. 
                                 else {
-                                    alert("Change password succcessful")
+                                    alert("Change password succcessful");
                                     return true;
                                 }
                             }
