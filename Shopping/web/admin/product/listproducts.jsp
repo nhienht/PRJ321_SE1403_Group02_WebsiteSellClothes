@@ -360,6 +360,7 @@
                 }
             </style>
         </head>
+
         <body id="page-top" class="">
             <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
                 <a class="navbar-brand mr-1 fas" href="../../home.jsp">
@@ -426,7 +427,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                         <a class="nav-link" href="../comment/listcomment.jsp">
+                        <a class="nav-link" href="../comment/listcomment.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Comment</span></a>
                     </li>
@@ -506,10 +507,10 @@
                                                                 ImageDAO iDao = new ImageDAO();
                                                                 ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
                                                                 out.print("<td>");
-                                                                while(rsImg.next()){
-                                                                      out.print("<a href='../../" + rsImg.getString("imageName")+"'> <img class='zoom' src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' /></a>");
+                                                                while (rsImg.next()) {
+                                                                    out.print("<a href='../../" + rsImg.getString("imageName") + "'> <img class='zoom' src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' /></a>");
                                                                 }
-                                                              out.print("</td>");
+                                                                out.print("</td>");
                                                                 BrandDao brDao = new BrandDao();
                                                                 String brand = brDao.getBrand(rs.getInt("brID"));
                                                                 out.print("<td>" + brand + "</td>");

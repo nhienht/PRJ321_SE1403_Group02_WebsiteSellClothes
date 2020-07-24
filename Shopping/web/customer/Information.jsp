@@ -136,32 +136,95 @@
                 opacity: 0.7;
 
             }
+            .dropdown
+            {
+                float:  right;
+                padding-left: 20px;
+            }
+            html ,body {
+                width: 100%;
+                height: 100%;
+                font-family: 'Balsamiq Sans';   
+                font-size: 17px;
+                color: #222;
+            }
+            .navbar{
+                background-color: #F5A9BC !important;
+            }
+            .navbar li a {
+                color: #f8f2f2!important ;
+
+            }
+            .navbar li a:hover {
+                color: #000000 !important ;
+
+            }
+            .container-fluid
+            {
+                padding-top: 8em;
+            }
+
+
+            .overlay {
+                position: absolute; 
+                bottom: 0; 
+                background: rgb(0, 0, 0);
+                background: rgba(0, 0, 0, 0.5); /* Black see-through */
+                color: #f1f1f1; 
+                width: 100%;
+                transition: .5s ease;
+                opacity:0;
+                color: white;
+                font-size: 20px;
+                padding: 20px;
+                text-align: center;
+            }
+            .container-fluid:hover .overlay {
+                opacity: 1;
+            }
+            .nav-item{
+                padding-right: 20px;
+                font-size: 25px;
+            }
+            .fotter{
+                background-color: black;
+                color: white;
+            }
 
         </style>
         <body>
-            <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-                <a class="navbar-brand mr-1 fas" href="../home.jsp">
-                    <h3>Shopping</h3>
+            <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
+
+                <a class="navbar-branch" href="index.jsp">
+                    <img src="../images/logo.jpg" height="80px" alt="">
                 </a>
-
-                <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-                    <i class="fas fa-bars"></i>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto" style="padding-left: 600px">
+                        <li class="nav-item">
+                            <a href="../home.jsp" class="nav-link ">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="../customer/product/list.jsp" class="nav-link ">Products</a>
 
-                <!-- Navbar Search -->
-                <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                        </li>
+                        <li class="nav-item">
+                            <a href="../auth/about.jsp" class="nav-link">About us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../auth/contact.jsp" class="nav-link">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../customer/product/cart.jsp" class="nav-link">Cart</a>
+                        </li>
 
-                </form>
 
-                <!-- Navbar -->
-                <ul class="navbar-nav ml-auto ml-md-0">
-                    <li class="nav-item dropdown no-arrow mx-1"></li>
-                    <li class="nav-item dropdown no-arrow mx-1"></li>
 
-                    <!-- LOGOUT-->
 
-                </ul>
-
+                    </ul>
+                </div>
             </nav>
             <%
                 Cookie[] cookies = request.getCookies();

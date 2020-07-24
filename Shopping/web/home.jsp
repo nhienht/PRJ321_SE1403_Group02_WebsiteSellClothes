@@ -161,13 +161,13 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="./images/Capture.PNG" class="d-block w-100" alt="..." >
+                    <img src="./images/bia2.jpg" class="d-block w-100" alt="..." >
                 </div>
                 <div class="carousel-item">
-                    <img src="./images/pic3.png" class="d-block w-100" alt="...">
+                    <img src="./images/bia01.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="./images/pic22.jpg" class="d-block w-100" alt="...">
+                    <img src="./images/bia3.jsp" class="d-block w-100" alt="...">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -236,7 +236,7 @@
         </div>
         <div class="fotter">
             <div class="footer-copyright text-center py-3">
-                  © 2020 !997 Clothing ®
+                  © 2020 1997 Clothing ®
             </div>
         </div>
     </body>

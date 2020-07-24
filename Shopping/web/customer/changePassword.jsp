@@ -141,8 +141,11 @@
                                 <input  class="form-control"  type="password" name="newPass" id="newPass" required="">
 
                             </div>
-                            <div> <input style="" type="checkbox" onclick="myFunction()"></div>
+                            <div class="input-group" style="position: relative; left: -150px; top: -5px;"> 
 
+                                <input style="" type="checkbox" onclick="myFunction()">
+                            </div>
+                            <div>Show password </div>
                             <div class="form-group"> 
                                 <input class="form-control"  type="password" name="Cofirmpass" id="Cofirmpass" required=""> 
                             </div>
@@ -169,14 +172,23 @@
 
                                 // If password not entered 
                                 if (password1 == '')
-                                    alert("Please enter Password");
+                                {
+                                    alert("Please enter Password , password must be more than 6 and can not empty");
+                                    return  false;
+                                }
 
                                 // If confirm password not entered 
                                 else if (password2 == '')
+                                {
                                     alert("Please enter confirm password");
+                                    return  false;
+                                }
 
                                 // If Not same return False.     
-                                else if (password1 != password2) {
+                                else if (password1.length < 6) {
+                                    alert("Password must be more than 6");
+                                    return  false;
+                                } else if (password1 != password2) {
                                     alert("\nPassword did not match: Please try again...")
                                     return false;
                                 }
