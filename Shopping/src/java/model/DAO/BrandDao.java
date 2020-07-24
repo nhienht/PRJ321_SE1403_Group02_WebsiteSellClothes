@@ -28,6 +28,7 @@ public class BrandDao {
         this.conn = db.getDBConnection();//get Connection
     }
 
+
     /**
      * Function to get all brand
      *

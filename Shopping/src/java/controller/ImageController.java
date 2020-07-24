@@ -36,15 +36,15 @@ public class ImageController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            ImageDAO iDao = new ImageDAO();
-            String[] path = request.getParameterValues("img");
+            ImageDAO iDao = new ImageDAO(); // goi class img
+            String[] path = request.getParameterValues("img"); // thuc hien get img
             out.println(path.length);
-            for (int i = 0 ; i <= path.length ; i++){
+            for (int i = 0; i <= path.length; i++) { // chay het do dai cua cac img 
                 out.println(path[i]);
-                iDao.insert(1, path[i]);
-                
+                iDao.insert(1, path[i]); //sau do add ca image vao
+
             }
-            response.sendRedirect("./admin/bill/img.jsp");
+            response.sendRedirect("./admin/bill/img.jsp"); // chuyen den trang img.jsp
         }
     }
 
@@ -74,8 +74,8 @@ public class ImageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // processRequest(request, response);
-     
+        // processRequest(request, response);
+
     }
 
     /**

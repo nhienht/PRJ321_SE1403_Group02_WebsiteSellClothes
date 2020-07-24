@@ -5,10 +5,6 @@
 --%>
 
 
-<%@page import="model.DAO.SupplierDAO"%>
-<%@page import="model.DAO.BrandDao"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="model.DAO.TypeDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
@@ -19,9 +15,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
@@ -174,134 +168,20 @@
                 </ul>
             </div>
         </nav>
+
         <sql:setDataSource var="conn" scope="session"
                            url="jdbc:mysql://localhost/prj321"
                            user="root" password=""
                            driver="com.mysql.jdbc.Driver"/>
-        <%if (request.getParameter("type") != null && request.getParameter("value") != null) {
-                String sql = " select * from products where status= ?";
-                String type = request.getParameter("type");
-
-                if (type.equals("gender")) {
-                    String value = request.getParameter("value");
-                    sql = "select * from products where gender=? AND status = 1";
-                } else {
-                    int value = Integer.parseInt(request.getParameter("value"));
-                    if (type.equals("type")) {
-                        sql = "select * from products where tID=? AND status = 1";
-                    } else if (type.equals("brand")) {
-                        sql = "select * from products where brID=? AND status = 1";
-                    } else if (type.equals("supplier")) {
-                        sql = "select * from products where supID=? AND status = 1";
-                    } else if (type.equals("size")) {
-                        sql = "select * from products where size=? AND status = 1";
-                    }
-                }
-
-        %>
-
-        <sql:query var="p" dataSource="${conn}" sql="<%=sql%>">
-
-            <sql:param value="${param.value}"/>
+        <sql:query var="p" dataSource="${conn}">	
+            SELECT * FROM products where status =1
         </sql:query>	
-        <%} else {%>
-        <sql:query var="p" dataSource="${conn}">
-            select * from products where status =1
-
-        </sql:query>
-        <%}%>
 
         <sql:query dataSource="${conn}" var="i"	
                    sql="select * from image where pID=?">		
             <sql:param value="${row.pID}"/>	
         </sql:query>
-        <div class=" row container">
-            <div class="col">
-                <button class="btn" type="button"><a href="list.jsp">All Products</a></button>
 
-
-            </div>
-            <div class="col dropright">
-                <button class="btn  dropdown-toggle" type="button" data-toggle="dropdown">Filter by
-
-                </button>
-                <ul class="dropdown-menu">
-                    <li class="dropdown-submenu">
-                        <a class="test" tabindex="-1" href="#">Type<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <%
-                                TypeDAO tDao = new TypeDAO();
-                                ResultSet allType = tDao.getAll();
-                                while (allType.next()) {
-                                    out.println("  <li><a tabindex='-1' href='list.jsp?type=type&value=" + allType.getString(1) + "'> " + allType.getString(2) + "</a></li>");
-                                }
-                            %>
-                            <li class="dropdown-submenu">
-
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-submenu">
-                        <a class="test" tabindex="-1" href="#">Brand<span class="caret"></span></a>
-                        <ul class="dropdown-menu dropright ">
-                            <%
-                                BrandDao brDao = new BrandDao();
-                                ResultSet allBrand = brDao.getAll();
-                                while (allBrand.next()) {
-                                    out.println("  <li><a tabindex='-1' href='list.jsp?type=brand&value=" + allBrand.getString(1) + "'> " + allBrand.getString(2) + "</a></li>");
-                                }
-                            %>
-                            <li class="dropdown-submenu">
-
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-submenu">
-                        <a class="test" tabindex="-1" href="#">Supplier<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <%
-                                SupplierDAO supDao = new SupplierDAO();
-                                ResultSet allSup = supDao.getAll();
-                                while (allSup.next()) {
-                                    out.println("  <li><a tabindex='-1' href='list.jsp?type=supppier&value=" + allSup.getString(1) + "'> " + allSup.getString(2) + "</a></li>");
-                                }
-                            %>
-                            <li class="dropdown-submenu">
-
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-submenu">
-                        <a class="test" tabindex="-1" href="#">Size<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <%
-                                out.println("<li><a tabindex='-1' href='?type=size&value=0'>S</a></li>");
-                                out.println("<li><a tabindex='-1' href='?type=size&value=1'>M</a></li>");
-                                out.println("<li><a tabindex='-1' href='?type=size&value=2'>L</a></li>");
-                                out.println("<li><a tabindex='-1' href='?type=size&value=3'>XL</a></li>");
-                                out.println("<li><a tabindex='-1' href='?type=size&value=4'>XXL</a></li>");
-                            %>
-                            <li class="dropdown-submenu">
-
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-submenu">
-                        <a class="test" tabindex="-1" href="#">Gender<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <%
-                                out.println("<li><a tabindex='-1' href='?type=gender&value=Male'>Male</a></li>");
-                                out.println("<li><a tabindex='-1' href='?type=gender&value=Female'>Female</a></li>");
-                                out.println("<li><a tabindex='-1' href='?type=gender&value=Unisex'>Unisex</a></li>");
-                            %>
-                            <li class="dropdown-submenu">
-
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
         <div class="container-fluid padding">
             <div class="row text-center padding">   
                 <c:forEach var="row" items="${p.rows}">	
@@ -311,7 +191,7 @@
                         <sql:param value="${row.pID}"/>	
                     </sql:query>	
 
-                    <div class="col-xs-12 col-sm-6 col-md-4 boder bg-light ">
+                    <div class="col-xs-12 col-sm-6 col-md-3 boder bg-light ">
                         <div>
                             <div >
                                 <p class="text text-primary" style="font-size: 23px; font: bold">
@@ -346,13 +226,4 @@
         </div>
 
     </body>
-    <script>
-        $(document).ready(function () {
-            $('.dropdown-submenu a.test').on("click", function (e) {
-                $(this).next('ul').toggle();
-                e.stopPropagation();
-                e.preventDefault();
-            });
-        });
-    </script>
 </html>

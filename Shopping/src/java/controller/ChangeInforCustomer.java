@@ -79,8 +79,8 @@ public class ChangeInforCustomer extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //  processRequest(request, response);
-        if (request.getParameter("btnChange") != null) {
-            Customer c = new Customer();
+        if (request.getParameter("btnChange") != null) { // neu button change da duoc nhan
+            Customer c = new Customer(); // goi class customer  va get cac paramater ve =
             c.setcID(Integer.parseInt(request.getParameter("txtID")));
             c.setcUsername(request.getParameter("txtUser"));
             c.setcPassword(request.getParameter("txtPassword"));
@@ -92,30 +92,30 @@ public class ChangeInforCustomer extends HttpServlet {
             c.setStatus(Integer.parseInt(request.getParameter("txtStatus")));
             Date date = Date.valueOf(request.getParameter("txtBirthday"));
             c.setBirthday(date);
-            CustomerDAO cDao = new CustomerDAO();
-            int check = cDao.update(c);
+            CustomerDAO cDao = new CustomerDAO(); // goi class customerDao de thuc hien cong viec can thiet
+            int check = cDao.update(c); // thuc hien viec update customer 
             if (check != 0) {
-                response.sendRedirect("./customer/Information.jsp");
+                response.sendRedirect("./customer/Information.jsp"); // chuyen sang page Information
             }
         } else {//if(request.getParameter("btnChangePass") != null){
             Cookie[] cookies = request.getCookies();
             int id = 0;
             for (Cookie c : cookies) {
-                if (c.getName().equals("idCustomer")) {
+                if (c.getName().equals("idCustomer")) { // lay id customer de luu lai trong cookie
                     id = Integer.parseInt(c.getValue());
                 }
             }
-            String oldPass = request.getParameter("Oldpass");
+            String oldPass = request.getParameter("Oldpass"); // lay Oldpass va newPass user đa nhap vao
             String newPass = request.getParameter("newPass");
-            CustomerDAO cDao = new CustomerDAO();
+            CustomerDAO cDao = new CustomerDAO(); // goi class customer dao de thuc hien check pass
             int check = cDao.changePass(id, oldPass, newPass);
             System.out.println(check);
             if (check == -1) {
-                response.sendRedirect("./customer/changePassword.jsp");
+                response.sendRedirect("./customer/changePassword.jsp"); // neu neu la -1 co nghia sai thi nhay lai trang cu
             } else if (check == 0) {
-                response.sendRedirect("./customer/changePassword.jsp");
+                response.sendRedirect("./customer/changePassword.jsp"); // neu sai thi nhay lai trang cu
             } else {
-                response.sendRedirect("./customer/Information.jsp");
+                response.sendRedirect("./customer/Information.jsp"); // dung thi nhay ve trang information
             }
 
         }

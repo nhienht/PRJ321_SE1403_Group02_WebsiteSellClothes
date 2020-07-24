@@ -36,21 +36,21 @@ public class LogoutController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           Cookie userCookie = new Cookie("user", null);
-           //     Cookie passCookie = new Cookie("pass", null);
-                Cookie idCookie = new Cookie("idCustomer", null);
+            Cookie userCookie = new Cookie("user", null);
+            //     Cookie passCookie = new Cookie("pass", null);
+            Cookie idCookie = new Cookie("idCustomer", null); //neu ma khong co customer dang nhap
 
-                userCookie.setMaxAge(0);
-             //   passCookie.setMaxAge(0);
-                idCookie.setMaxAge(0);
+            userCookie.setMaxAge(0); // thi set cookie ve 0
+            //   passCookie.setMaxAge(0);
+            idCookie.setMaxAge(0); // thi set cookie ve 0
 
-                response.addCookie(userCookie);
-             //   response.addCookie(passCookie);
-                response.addCookie(idCookie);
+            response.addCookie(userCookie);
+            //   response.addCookie(passCookie);
+            response.addCookie(idCookie);
 //                RequestDispatcher requestDispatcher = request.getRequestDispatcher("./auth/login.jsp");
 //		requestDispatcher.forward(request, response);
-response.sendRedirect("./auth/login.jsp");
-                
+            response.sendRedirect("./auth/login.jsp"); // chuyen den trang login.jsp
+
         }
     }
 
@@ -67,7 +67,7 @@ response.sendRedirect("./auth/login.jsp");
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
+
     }
 
     /**
@@ -81,8 +81,8 @@ response.sendRedirect("./auth/login.jsp");
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // processRequest(request, response);
-     
+        // processRequest(request, response);
+
     }
 
     /**

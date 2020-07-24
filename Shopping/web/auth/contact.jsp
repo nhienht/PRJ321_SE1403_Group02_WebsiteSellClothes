@@ -102,7 +102,7 @@
         }
     </style>
     <body>
-        <%@include file="../header/header.jsp" %>
+      
         <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
             <a class="navbar-branch" href="../index.jsp">
@@ -144,7 +144,7 @@
                                     for (Cookie cookie : cookies) {
                                         if (cookie.getName().equals("user")) {
                                             out.print("<a class='nav-link' style='color: black' href='../customer/Information.jsp'>" + cookie.getValue() + "</a>");
-                                            out.print("<a class='nav-link' style='color: black' href='../LogoutController'>Logout</a>");
+                                            out.print("<a class='nav-link' style='color: black' href='LogoutController'>Logout</a>");
                                         }
                                     }
                                 } else {

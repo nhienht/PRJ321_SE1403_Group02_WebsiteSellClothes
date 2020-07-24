@@ -141,11 +141,8 @@
                                 <input  class="form-control"  type="password" name="newPass" id="newPass" required="">
 
                             </div>
-                            <div class="input-group" style="position: relative; left: -150px; top: -5px;"> 
+                            <div style="position: relative; left: -150px;"> <input style="" type="checkbox" onclick="myFunction()"></div>
 
-                                <input style="" type="checkbox" onclick="myFunction()">
-                            </div>
-                            <div>Show password </div>
                             <div class="form-group"> 
                                 <input class="form-control"  type="password" name="Cofirmpass" id="Cofirmpass" required=""> 
                             </div>
@@ -172,30 +169,21 @@
 
                                 // If password not entered 
                                 if (password1 == '')
-                                {
-                                    alert("Please enter Password , password must be more than 6 and can not empty");
-                                    return  false;
-                                }
+                                    alert("Please enter Password");
 
                                 // If confirm password not entered 
                                 else if (password2 == '')
-                                {
                                     alert("Please enter confirm password");
-                                    return  false;
-                                }
 
                                 // If Not same return False.     
-                                else if (password1.length < 6) {
-                                    alert("Password must be more than 6");
-                                    return  false;
-                                } else if (password1 != password2) {
-                                    alert("\nPassword did not match: Please try again...")
+                                else if (password1 != password2) {
+                                    alert("\nPassword did not match: Please try again...");
                                     return false;
                                 }
 
                                 // If same return True. 
                                 else {
-                                    alert("Change password succcessful")
+                                    alert("Change password succcessful");
                                     return true;
                                 }
                             }

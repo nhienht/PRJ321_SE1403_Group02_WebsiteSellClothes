@@ -54,8 +54,6 @@ public class ProductController extends HttpServlet {
             out.println("<h1>Servlet AdminController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-            ProductsDAO p = new ProductsDAO();
-           // p.bestsales();
         }
     }
 
@@ -95,11 +93,11 @@ public class ProductController extends HttpServlet {
                 }
             }
         }
-        Products p = new Products();
-       
-        p.setBrID(Integer.parseInt(request.getParameter("brID")));
-        p.settID(Integer.parseInt(request.getParameter("tID")));
-        p.setSupID(Integer.parseInt(request.getParameter("supID")));
+        Products p = new Products(); // goi class products
+        // thuc hien get cac thong tin ma user dan nhap vao o the input
+        p.setBrID(Integer.parseInt(request.getParameter("brID"))); //get brId ma user da nhap vao 
+        p.settID(Integer.parseInt(request.getParameter("tID"))); // get tId ma user da nhap vao
+        p.setSupID(Integer.parseInt(request.getParameter("supID"))); // get id ma user da nhap vao
         p.setpName(request.getParameter("pName"));
         p.setSellingPrice(Double.parseDouble(request.getParameter("sellingPrice")));
         p.setPrice(Double.parseDouble(request.getParameter("price")));
@@ -115,14 +113,14 @@ public class ProductController extends HttpServlet {
         p.setaID(aID);
         String DIR = "data";
         ProductsDAO pDao = new ProductsDAO();
-        if (request.getParameter("btnUpdate") != null) {
+        if (request.getParameter("btnUpdate") != null) { // neu user da nhan vao nut btnUpdate thu thuc hien viec update san pham
             int pID = Integer.parseInt(request.getParameter("pID"));
             p.setpID(pID);
             pDao.update(p);
 
         } else {
-             p.setStatus(Integer.parseInt(request.getParameter("status")));
-            pDao.insert(p);
+            p.setStatus(Integer.parseInt(request.getParameter("status")));
+            pDao.insert(p); // neu thong thi thuc hien insert san pham
             int pID = pDao.getMax();
             ImageDAO imgDao = new ImageDAO();
             try {
@@ -148,7 +146,7 @@ public class ProductController extends HttpServlet {
 
             }
         }
-        response.sendRedirect("./admin/product/listproducts.jsp");
+        response.sendRedirect("./admin/product/listproducts.jsp");// chuyen den trang listproduct
     }
 
     /**

@@ -85,12 +85,12 @@ public class OrderController extends HttpServlet {
         // processRequest(request, response);
         //String id = request.getAttribute("customerId").toString();
         String cID = "";
-        if (request.getParameter("btnOrder") != null) {
+        if (request.getParameter("btnOrder") != null) { // neu ma bntoder da duoc nhan
             Cookie[] cookie = request.getCookies();
             for (Cookie c : cookie) {
                 String cName = c.getName();
-                if (cName.equals("idCustomer")) {
-                    cID = c.getValue();
+                if (cName.equals("idCustomer")) { // neu ma ten khach hang cung la id customer
+                    cID = c.getValue(); // thi luu cac gia tri order 
                 }
             }
         }
@@ -99,22 +99,22 @@ public class OrderController extends HttpServlet {
         String phone = request.getParameter("phone");
         String note = request.getParameter("note");
         //double total = Double.parseDouble(session.getAttribute("totalPrice").toString());
-        double total = Double.parseDouble(request.getParameter("total"));
+        double total = Double.parseDouble(request.getParameter("total")); // lay cac thong tin
         BillDAO bDao = new BillDAO();
-        bDao.addBill(Integer.parseInt(cID), "New", name, address, phone, note, total);
+        bDao.addBill(Integer.parseInt(cID), "New", name, address, phone, note, total); // thuc hien add cac thong tin vao bill
         int billID = bDao.getMaxBill();
         BillDetailDAO bdDao = new BillDetailDAO();
         HashMap<Integer, Integer> listCart = new HashMap<Integer, Integer>();
         listCart = (HashMap<Integer, Integer>) session.getAttribute("listCart");
         ProductsDAO pDao = new ProductsDAO();
         for (Integer i : listCart.keySet()) {
-            int quantity = listCart.get(i);
-            Products p = pDao.getProduct(i);
-            bdDao.addBillDetail(billID, i, quantity, p.getPrice());
+            int quantity = listCart.get(i); // lay so luong
+            Products p = pDao.getProduct(i); // get ac product
+            bdDao.addBillDetail(billID, i, quantity, p.getPrice()); //add cac thong tin
         }
-        session.removeAttribute("listCart");
+        session.removeAttribute("listCart");  // remove listcarrt
 
-        response.sendRedirect("./customer/bill/billDetail.jsp");
+        response.sendRedirect("./customer/bill/billDetail.jsp"); // chuyen den trang chi tiet bill
 //        Enumeration<String> pIds = session.getAttributeNames();
 //        int success = 1;  // tạo biến kiểm tra mua thành công hay không   
 //        // đi đến từng sản phẩm, true nếu còn product trongg pIds

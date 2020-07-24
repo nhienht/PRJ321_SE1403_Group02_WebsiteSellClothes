@@ -71,19 +71,4 @@ public class BillDetailDAO {
         return null;
     }
 
-    /**
-     * Function to get bill detail
-     *
-     * @return
-     */
-    public ResultSet getBillDetail() {
-        try {
-            String sql = "select * from billdetail";//Declare sql query
-            PreparedStatement pst = conn.prepareStatement(sql);
-            return pst.executeQuery();//excute query
-        } catch (SQLException ex) {
-            Logger.getLogger(BillDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
 }

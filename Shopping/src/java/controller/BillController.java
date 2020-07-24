@@ -18,7 +18,7 @@ import model.entity.Bill;
 
 /**
  *
- * @author 
+ * @author
  */
 @WebServlet(name = "BillController", urlPatterns = {"/BillController"})
 public class BillController extends HttpServlet {
@@ -40,7 +40,7 @@ public class BillController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BillController</title>");            
+            out.println("<title>Servlet BillController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet BillController at " + request.getContextPath() + "</h1>");
@@ -62,7 +62,7 @@ public class BillController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //   processRequest(request, response);
-        
+
     }
 
     /**
@@ -77,11 +77,11 @@ public class BillController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // processRequest(request, response);
-        if (request.getParameter("btnUpdate") != null) {
-            Bill b = new Bill();
-            b.setbID(Integer.parseInt(request.getParameter("bID")));
+        if (request.getParameter("btnUpdate") != null) {  // neu da nhan vao nut btnUpdate
+            Bill b = new Bill(); // goi class Bill 
+            b.setbID(Integer.parseInt(request.getParameter("bID"))); // get cac thong tin cua bill
             b.setcID(Integer.parseInt(request.getParameter("cID")));
-          //  b.setbStatus(request.getParameter("bStatus"));
+            //  b.setbStatus(request.getParameter("bStatus"));
             b.setCustomerName(request.getParameter("customerName"));
             Date bDate = Date.valueOf(request.getParameter("pDate"));
             b.setDate(bDate);
@@ -90,11 +90,11 @@ public class BillController extends HttpServlet {
             b.setNote(request.getParameter("note"));
             b.setTotal(Double.parseDouble(request.getParameter("total")));
             BillDAO bDao = new BillDAO();
-            bDao.update(b);
-            
+            bDao.update(b); // thhuc hien update bill
+
         }
-        response.sendRedirect("./admin/bill/listbill.jsp");
-        
+        response.sendRedirect("./admin/bill/listbill.jsp"); // chuyen den trang danh sach bill
+
     }
 
     /**
