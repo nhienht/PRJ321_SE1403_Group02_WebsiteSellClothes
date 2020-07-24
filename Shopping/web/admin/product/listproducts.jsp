@@ -4,6 +4,9 @@
     Author     : 
 --%>
 
+<%@page import="model.entity.Products"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="model.DAO.SupplierDAO"%>
 <%@page import="model.DAO.BrandDao"%>
 <%@page import="model.DAO.TypeDAO"%>
@@ -339,6 +342,20 @@
                 -webkit-transform: rotate(15deg);
                 transform: rotate(15deg);
             }
+            #btn{
+
+                border-radius: 4px;
+                background-color: white;
+                color: black;
+                border: 2px solid #F5A9BC;
+                padding: 10px;
+                font-size: 25px;   
+
+
+
+
+
+            }
 
             @media (min-width: 576px) {
                 .card-columns {
@@ -358,7 +375,6 @@
                 .zoom:hover{
                     transform: scale(1.5);
                 }
-<<<<<<< HEAD
             }
         </style>
     </head>
@@ -649,228 +665,186 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-=======
-            </style>
-        </head>
-        <body id="page-top" class="">
-            <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-                <a class="navbar-brand mr-1 fas" href="../../home.jsp">
-                    <h3>Clothing</h3>
-                </a>
-
-                <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-                    <i class="fas fa-bars"></i>
-                </button>
-
-                <!-- Navbar Search -->
-                <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-
-                </form>
-
-                <!-- Navbar -->
-                <ul class="navbar-nav ml-auto ml-md-0">
-                    <li class="nav-item dropdown no-arrow mx-1"></li>
-                    <li class="nav-item dropdown no-arrow mx-1"></li>
-
-                    <!-- LOGOUT-->
-                    <li class="nav-item dropdown no-arrow  ">
-                        <a class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            <h3><i class="fas fa-user-circle fa-fw"></i></h3>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="../../AdminLogoutController">Logout</a>
-                        </div>
-                    </li>
-                </ul>
-
-            </nav>
-
-            <div id="wrapper">
-                <ul class="sidebar navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../dashboard.jsp">
-                            <i class="fas fa-fw fa-tachometer-alt"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item ">
-                        <a class="nav-link" href="../bill/listbill.jsp">
-                            <i class="fas fa-fw fa-user"></i>
-                            <span>Bill</span></a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="../customer/listcustomer.jsp">
-                            <i class="fas fa-fw fa-book"></i>
-                            <span>List Customer</span></a>
-                    </li>
-                    <li class="nav-item dropdown active">
-                        <a class="nav-link dropdown-toggle" href="../product/listproducts.jsp" id="pagesDropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-fw fa-box-open"></i>
-                            <span>Product</span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                            <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
-                            <a class="dropdown-item" href="../product/insertProduct.jsp">Insert Products</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                         <a class="nav-link" href="../comment/listcomment.jsp">
-                            <i class="fas fa-fw fa-book"></i>
-                            <span>List Comment</span></a>
-                    </li>
-                </ul>
-
-                <div id="content-wrapper">
-
-                    <div class="container-fluid">
-
-                        <!-- Breadcrumbs-->
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="../../dashboard.jsp">Dashboard</a>
-                            </li>
-                            <li class="breadcrumb-item active">Products</li>
-
-                        </ol>
-
-                        <!-- DataTables Example -->
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <i class="fas fa-user"></i>
-                                List Products</div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                        <div class="row">                                     
-                                            <div class="col-sm-12 col-md-6">
-                                                <div class="container h-100">
-                                                    <div class="d-flex justify-content-center h-100">
-                                                        <div class="searchbar">
-                                                            <input class="search_input" type="text" name="" placeholder="Search...">
-                                                            <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
->>>>>>> parent of 983ac65... phan loai, best sale
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
-                                                       cellspacing="0" role="grid" aria-describedby="dataTable_info"
-                                                       style="width: 100%;">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width: 20px">ID</th>
-                                                            <th style="width: 40px">Product's name</th>
-                                                            <th>Image</th>
-                                                            <th>Brand Products</th>
-                                                            <th>Type Products</th>
-                                                            <th>Supplier </th>
-                                                            <th>Saleprice</th>
-                                                            <th>Price</th>
-                                                            <th>Describle</th>
-                                                            <th>Date</th>
-                                                            <th>Size </th>
-                                                            <th>Material</th>
-                                                            <th>Quantity</th>
-                                                            <th>Discount</th>
-                                                            <th>Gender</th>                                                         
-                                                            <th>Status Product</th>
-                                                            <th>Update</th>
-                                                            <th>Change Status</th>
-                                                        </tr>
-                                                    </thead>
+                                            <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                                   cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                                   style="width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 20px">ID</th>
+                                                        <th style="width: 40px">Product's name</th>
+                                                        <th>Image</th>
+                                                        <th>Brand Products
+                                                            <div class="btn-group" role="group">
+                                                                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                </button>
+                                                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                                    <%                                                                ResultSet allRrand = brDao.getAll();
+                                                                        while (allRrand.next()) {
+                                                                            out.println("<a class='dropdown-item' href='?type=brand&value=" + allRrand.getInt(1) + "' >" + allRrand.getString(2) + "</a>");
+                                                                        }
+                                                                    %>
+                                                                </div>
+                                                        </th>
+                                                        <th> Type Products
+                                                            <div class="btn-group" role="group">
+                                                                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                </button>
+                                                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                                    <%                                                                        ResultSet allType = tDao.getAll();
+                                                                        while (allType.next()) {
+                                                                            out.println("<a class='dropdown-item' href='?type=type&value=" + allType.getInt(1) + "' >" + allType.getString(2) + "</a>");
+                                                                        }
+                                                                    %>
 
-                                                    <tbody>
+                                                                </div>
+                                                            </div>
+                                                        </th>
+                                                        <th>Supplier
+                                                            <div class="btn-group" role="group">
+                                                                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                </button>
+                                                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                                    <%
+                                                                        ResultSet allSup = supDao.getAll();
+                                                                        while (allSup.next()) {
+                                                                            out.println("<a class='dropdown-item' href='?type=supplier&value=" + allSup.getInt(1) + "' >" + allSup.getString(2) + "</a>");
+                                                                        }
+                                                                    %>
+                                                                </div>
+                                                        </th>
+                                                        <th>Saleprice</th>
+                                                        <th>Price</th>
+                                                        <th>Describle</th>
+                                                        <th>Date</th>
+                                                        <th>Size 
+                                                            <div class="btn-group" role="group">
+                                                                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                </button>
+                                                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                                    <%
+                                                                        out.println("<a class='dropdown-item' href='?type=size&value=0'>S</a>");
+                                                                        out.println("<a class='dropdown-item' href='?type=size&value=1'>M</a>");
+                                                                        out.println("<a class='dropdown-item' href='?type=size&value=2'>L</a>");
+                                                                        out.println("<a class='dropdown-item' href='?type=size&value=3'>XL</a>");
+                                                                        out.println("<a class='dropdown-item' href='?type=size&value=4'>XXL</a>");
+                                                                    %>
+                                                                </div>
+                                                        </th>
+                                                        <th>Material</th>
+                                                        <th>Quantity</th>
+                                                        <th>Discount</th>
+                                                        <th>Gender
+                                                            <div class="btn-group" role="group"> 
+                                                                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                </button>
+                                                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                                    <%
+                                                                        out.println("<a class='dropdown-item' href='?type=gender&value=Male'>Male</a>");
+                                                                        out.println("<a class='dropdown-item' href='?type=gender&value=Female'>Female</a>");
+                                                                        out.println("<a class='dropdown-item' href='?type=gender&value=Unisex'>Unisex</a>");
+                                                                    %>
+                                                                </div>
 
-                                                        <%
-                                                            ProductsDAO pDao = new ProductsDAO();
-                                                            ResultSet rs = pDao.getAll();
-                                                            while (rs.next()) {
+                                                        </th>                                                         
+                                                        <th>Status Product
+                                                            <div class="btn-group" role="group">
+                                                                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                </button>
+                                                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                                    <%                                                                        out.println("<a class='dropdown-item' href='?type=status&value=0'>Invalid</a>");
+                                                                        out.println("<a class='dropdown-item' href='?type=status&value=1'>Valid</a>");
+                                                                    %>
+                                                                </div>
+                                                        </th>
+                                                        <th>Update</th>
+                                                        <th>Change Status</th>
+                                                    </tr>
+                                                </thead>
 
-                                                                out.print("<tr>");
-                                                                out.print("<td>" + rs.getInt("pID") + "</td>");
-                                                                out.print("<td>" + rs.getString("pName") + "</td>");
-                                                                ImageDAO iDao = new ImageDAO();
-                                                                ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
-                                                                out.print("<td>");
-                                                                while(rsImg.next()){
-                                                                      out.print("<a href='../../" + rsImg.getString("imageName")+"'> <img class='zoom' src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' /></a>");
-                                                                }
-                                                              out.print("</td>");
-                                                                BrandDao brDao = new BrandDao();
-                                                                String brand = brDao.getBrand(rs.getInt("brID"));
-                                                                out.print("<td>" + brand + "</td>");
-                                                                TypeDAO tDao = new TypeDAO();
-                                                                String type = tDao.getType(rs.getInt("tID"));
-                                                                out.print("<td>" + type + "</td>");
-                                                                SupplierDAO supDao = new SupplierDAO();
-                                                                String sup = supDao.getSupplier(rs.getInt("supID"));
-                                                                out.print("<td>" + sup + "</td>");
-                                                                out.print("<td>" + rs.getInt("sellingPrice") + "</td>");
-                                                                out.print("<td>" + rs.getInt("price") + "</td>");
-                                                                out.print("<td>" + rs.getString("describle") + "</td>");
-                                                                out.print("<td>" + rs.getDate("pDate") + "</td>");
-                                                                int size = rs.getInt("size");
-                                                                String s = "";
-                                                                if (size == 0) {
-                                                                    s = "S";
-                                                                } else if (size == 1) {
-                                                                    s = "M";
-                                                                } else if (size == 2) {
-                                                                    s = "L";
-                                                                } else if (size == 3) {
-                                                                    s = "XL";
-                                                                } else {
-                                                                    s = "XXL";
-                                                                }
-                                                                out.print("<td>" + s + "</td>");
-                                                                out.print("<td>" + rs.getString("material") + "</td>");
-                                                                out.print("<td>" + rs.getString("quantity") + "</td>");
-                                                                out.print("<td>" + rs.getString("discount") + "</td>");
-                                                                out.print("<td>" + rs.getString("gender") + "</td>");
+                                                <tbody>
 
-                                                                if (rs.getInt("status") == 1) {
-                                                                    out.println("<td style='color:green; font-weight: bold;' >Valid</td> ");
-                                                                } else {
-                                                                    out.println("<td style='color:red;font-weight: bold; '>Invalid</td> ");
-                                                                }
-                                                                out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'>Update</a></td>");
-                                                                out.print("<td><a href='../../Change?pID=" + rs.getInt("pID") + "' + '>Change</a></td>");
+                                                    <%
+                                                        while (rs.next()) {
 
-                                                                out.print("</tr>");
+                                                            out.print("<tr>");
+                                                            out.print("<td>" + rs.getInt("pID") + "</td>");
+                                                            out.print("<td>" + rs.getString("pName") + "</td>");
+                                                            ImageDAO iDao = new ImageDAO();
+                                                            ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
+                                                            out.print("<td>");
+                                                            while (rsImg.next()) {
+                                                                out.print("<a href='../../" + rsImg.getString("imageName") + "'> <img class='zoom' src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' /></a>");
                                                             }
-                                                        %>
-                                                    </tbody>
+                                                            out.print("</td>");
+                                                            String brand = brDao.getBrand(rs.getInt("brID"));
+                                                            out.print("<td>" + brand + "</td>");
+                                                            String type = tDao.getType(rs.getInt("tID"));
+                                                            out.print("<td>" + type + "</td>");
+                                                            String sup = supDao.getSupplier(rs.getInt("supID"));
+                                                            out.print("<td>" + sup + "</td>");
+                                                            out.print("<td>" + rs.getInt("sellingPrice") + "</td>");
+                                                            out.print("<td>" + rs.getInt("price") + "</td>");
+                                                            out.print("<td>" + rs.getString("describle") + "</td>");
+                                                            out.print("<td>" + rs.getDate("pDate") + "</td>");
+                                                            int size = rs.getInt("size");
+                                                            String s = "";
+                                                            if (size == 0) {
+                                                                s = "S";
+                                                            } else if (size == 1) {
+                                                                s = "M";
+                                                            } else if (size == 2) {
+                                                                s = "L";
+                                                            } else if (size == 3) {
+                                                                s = "XL";
+                                                            } else {
+                                                                s = "XXL";
+                                                            }
+                                                            out.print("<td>" + s + "</td>");
+                                                            out.print("<td>" + rs.getString("material") + "</td>");
+                                                            out.print("<td>" + rs.getString("quantity") + "</td>");
+                                                            out.print("<td>" + rs.getString("discount") + "</td>");
+                                                            out.print("<td>" + rs.getString("gender") + "</td>");
 
-                                                </table>
-                                            </div>
+                                                            if (rs.getInt("status") == 1) {
+                                                                out.println("<td style='color:green; font-weight: bold;' >Valid</td> ");
+                                                            } else {
+                                                                out.println("<td style='color:red;font-weight: bold; '>Invalid</td> ");
+                                                            }
+                                                            out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'>Update</a></td>");
+                                                            out.print("<td><a href='../../Change?pID=" + rs.getInt("pID") + "' + '>Change</a></td>");
+
+                                                            out.print("</tr>");
+                                                        }
+
+                                                    %>
+                                                </tbody>
+
+                                            </table>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-5">
-                                                <div class="dataTables_info" id="dataTable_info" role="status"
-                                                     aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-7">
-                                                <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                    <ul class="pagination">
-                                                        <li class="paginate_button page-item previous disabled"
-                                                            id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                                   data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                        </li>
-                                                        <li class="paginate_button page-item active"><a href="#"
-                                                                                                        aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                        class="page-link">1</a></li>
-                                                        <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                            <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                               class="page-link">Next</a></li>
-                                                    </ul>
-                                                </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info" id="dataTable_info" role="status"
+                                                 aria-live="polite">Showing 1 to 1 of 1 entries</div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button page-item previous disabled"
+                                                        id="dataTable_previous"><a href="#" aria-controls="dataTable"
+                                                                               data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                                    </li>
+                                                    <li class="paginate_button page-item active"><a href="#"
+                                                                                                    aria-controls="dataTable" data-dt-idx="1" tabindex="0"
+                                                                                                    class="page-link">1</a></li>
+                                                    <li class="paginate_button page-item next disabled" id="dataTable_next">
+                                                        <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
+                                                           class="page-link">Next</a></li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -879,26 +853,27 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-            <!-- /#wrapper -->
 
-            <!-- Scroll to Top Button-->
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fas fa-angle-up"></i>
-            </a>
+        </div>
+        <!-- /#wrapper -->
 
-
-
-
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
 
 
 
 
 
-        </body>
 
 
-    </html>
+
+
+    </body>
+
+
+</html>
 
