@@ -577,8 +577,8 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <%
-                                                ProductsDAO pDao = new ProductsDAO();
-                                                ResultSet rs = null;
+                                             //   ProductsDAO pDao = new ProductsDAO();
+                                               // ResultSet rs = null;
                                                 TypeDAO tDao = new TypeDAO();
                                                 SupplierDAO supDao = new SupplierDAO();
                                                 BrandDao brDao = new BrandDao();
