@@ -54,8 +54,6 @@ public class ProductController extends HttpServlet {
             out.println("<h1>Servlet AdminController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-            ProductsDAO p = new ProductsDAO();
-           // p.bestsales();
         }
     }
 

@@ -28,6 +28,7 @@ public class BrandDao {
              String sql = "Select * from brand";
              PreparedStatement pst = conn.prepareStatement(sql);
              ResultSet rs = pst.executeQuery();
+             
                  return rs;
              }catch (SQLException ex) {
              Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);

@@ -10,13 +10,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.entity.Products;
-import model.unit.Sort;
 
 /**
  *
@@ -77,7 +73,7 @@ public class ProductsDAO {
             pst.setFloat(13, p.getDiscount());
             pst.setString(14, p.getGender());
             pst.setInt(15, p.getaID());
-
+            
             return pst.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -89,7 +85,7 @@ public class ProductsDAO {
         try {
             String sql = "update products set brID=?, tID=?, supID=?, pName=?, sellingPrice=?, price=?, describle=?, pDate=?, size=?, material=?, quantity = ?, discount=?, gender=?, aID=? where pID=?";
             PreparedStatement pst = conn.prepareStatement(sql);
-
+          
             pst.setInt(1, p.getBrID());
             pst.setInt(2, p.gettID());
             pst.setInt(3, p.getSupID());
@@ -194,8 +190,8 @@ public class ProductsDAO {
         }
         return null;
     }
-
-    public ResultSet getProductConHang() {
+    
+    public ResultSet getProductConHang(){
         try {
             String sql = "select * from product where quantity > 0";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -209,7 +205,7 @@ public class ProductsDAO {
         return null;
     }
 
-    public ResultSet getProductHetHang() {
+    public ResultSet getProductHetHang(){
         try {
             String sql = "select * from product where quantity = 0";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -254,8 +250,7 @@ public class ProductsDAO {
         }
         return null;
     }
-
-    public ResultSet getProductBySupplier(int supID) {
+    public ResultSet getProductBySupplier(int supID){
         try {
             String sql = "select * from products where supID=?";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -269,8 +264,7 @@ public class ProductsDAO {
         }
         return null;
     }
-
-    public ResultSet getProductByBrand(int brID) {
+    public ResultSet getProductByBrand(int brID){
         try {
             String sql = "select * from products where brID=?";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -284,67 +278,6 @@ public class ProductsDAO {
         }
         return null;
     }
-
-     public ResultSet getProductByGendee(String gender) {
-        try {
-            String sql = "select * from products where gender=?";
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, gender);
-            ResultSet rs = pst.executeQuery();
-           return rs;
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    } 
-     
-    public ResultSet getProductwithST(String type, int id) {
-        try {
-            String sql = null;
-            if (type.equals("type")) {
-                sql = "select * from products where tID=?";
-            } else if (type.equals("supplier")) {
-                sql = "select * from products where supID=?";
-            } else if (type.equals("brand")) {
-                sql = "select * from products where brID=?";
-            } else if (type.equals("size")) {
-                sql = "select * from products where size=?";
-            } else if (type.equals("status")) {
-                sql = "select * from products where status=?";          
-            }
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, id);
-            ResultSet rs = pst.executeQuery();
-            return rs;
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
     
-    public HashMap<Integer,Integer> getTop10() {
-        HashMap<Integer, Integer> products = new HashMap<>();
-        
-        try {
-            BillDetailDAO bdDao = new BillDetailDAO();
-            ResultSet rs = bdDao.getBillDetail();
-            
-            while(rs.next()) {
-                int key = rs.getInt("pID");
-                int quantity = rs.getInt("quantity");
-                
-                if(products.get(key) == null) {
-                    products.put(key, quantity);
-                } else {
-                    quantity += products.get(key);
-                    products.put(key, quantity);
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Sort sort = new Sort();
-        HashMap<Integer, Integer> newList = sort.sortHashMapByValues(products);
-        return newList;
-    }
+    
 }
