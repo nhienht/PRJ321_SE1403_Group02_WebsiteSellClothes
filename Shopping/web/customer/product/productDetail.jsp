@@ -4,7 +4,6 @@
     Author     : NhienHT
 --%>
 
-<%@page import="java.sql.Date"%>
 <%@page import="model.DAO.CustomerDAO"%>
 <%@page import="model.DAO.CommentDAO"%>
 <%@page import="model.DAO.SupplierDAO"%>
@@ -279,7 +278,7 @@
                             <p class="lead font-weight-bold"  style='font-size:35px; color: darkred' ><%= p.getpName()%></p>
                             <form class="d-flex justify-content-left" action="../../CartController"> 
                                 <input type="hidden" value="${param.pID}" name="id"/>
-                                <input type="number" value="1" aria-label="Search" class="form-control" name="quantity" min="0" max="<%=p.getQuantity()%>" style="width: 100px">
+                                <input type="number" value="1" aria-label="Search" class="form-control" name="quantity" min="0" max="<%=p.getSize()%>" style="width: 100px">
                                 <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
                                 </button>
 
@@ -301,11 +300,12 @@
                     </div>
                 </div>    
 
-          
+            </div>
+
             <div class="row d-flex justify-content-center wow fadeIn">
-                <div class="col-md-10 text-center">
-                    <h4 class="my-4 h2 text-wrap">Describle</h4>
-                    <p style="font-size: 20px" class="tab-content"><%= p.getDescrible()%> </p>
+                <div class="col-md-6 text-center">
+                    <h4 class="my-4 h4">Describle</h4>
+                    <p><%= p.getDescrible()%> </p>
                 </div>
             </div>
 
@@ -313,7 +313,7 @@
 
             <div class="row d-flex justify-content-center wow fadeIn">
                 <div class="col-md-6 text-center">
-                    <h4 class="my-4 h2 text-wrap">Comment</h4>                   
+                    <h4 class="my-4 h3">Comment</h4>                   
                 </div>
             </div>           
             <%
@@ -321,22 +321,20 @@
                 ResultSet rs = cDao.getCommentbyProduct(pID);
 
                 if (rs == null) {
-                    out.print("<h2>Product don't have any comment !</h2>");
+                    out.print("Product don't have any comment !");
                 } else {
                     while (rs.next()) {
                         int cID = rs.getInt(3);
                         CustomerDAO cus = new CustomerDAO();
                         cus.getCustomer(cID);
                         String name = cus.getCustomer(cID).getcUsername();
-                        
 
 
             %>
             <div class="col-sm-12  mb-4">
                 <div class="row">
                     <div class="">
-                        <p style="font-size: 28px; font-weight: bold; color: #0062cc" class="text-capitalize" ><%= name%></p>
-                        <p> <%=rs.getDate(5) %></p>
+                        <p style="font-size: 28px" ><%= name%></p>
                     </div>
                     <div class="w3-padding w3-xlarge col-md-6">
                         <%
@@ -349,10 +347,9 @@
                         %>
                     </div>
                 </div>
-                <div class="panel-body px-4  ">
-                    <h4> <%= rs.getString(4)%></h4>
+                <div class="panel-body px-2">
+                    <%= rs.getString(4)%>
                 </div>
-              
 
             </div>
             <% }
@@ -362,7 +359,7 @@
                     <input type="hidden" value="<%= pID%>" name="pID"/>
                     <div class="col-sm-12">                      
                         <div class="panel-heading">
-                            <strong style="font-size: 25px" >Your comment</strong>
+                            <strong style="font-size: 22px" >Your comment</strong>
                         </div>
                         <div class="panel-body px-4">
                             <textarea style="height: 100px; width: 100%" name="message" ></textarea>
@@ -376,8 +373,6 @@
             </div>
         </div>
     </div>
-                      </div>
-
     <div>
         <br>
 
