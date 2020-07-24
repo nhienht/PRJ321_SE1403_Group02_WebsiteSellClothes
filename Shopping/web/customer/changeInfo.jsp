@@ -130,7 +130,7 @@
         }
 
         body {
-            background-color: #F5A9BC fixed;
+            background-color: #F5A9BC; fixed;
             background-size: cover;
             font-family: "Poppins", sans-serif;
             height: 100vh;
