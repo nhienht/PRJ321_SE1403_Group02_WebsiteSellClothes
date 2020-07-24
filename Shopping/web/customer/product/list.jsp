@@ -311,7 +311,7 @@
                         <sql:param value="${row.pID}"/>	
                     </sql:query>	
 
-                    <div class="col-xs-12 col-sm-6 col-md-3 boder bg-light ">
+                    <div class="col-xs-12 col-sm-6 col-md-4 boder bg-light ">
                         <div>
                             <div >
                                 <p class="text text-primary" style="font-size: 23px; font: bold">

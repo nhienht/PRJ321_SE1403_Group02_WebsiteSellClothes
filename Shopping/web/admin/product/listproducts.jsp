@@ -478,12 +478,102 @@
                                                     <div class="searchbar">
                                                         <input class="search_input" type="text" name="" placeholder="Search...">
                                                         <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
+                                    </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                                       cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                                       style="width: 100%;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 20px">ID</th>
+                                                            <th style="width: 40px">Product's name</th>
+                                                            <th>Image</th>
+                                                            <th>Brand Products</th>
+                                                            <th>Type Products</th>
+                                                            <th>Supplier </th>
+                                                            <th>Saleprice</th>
+                                                            <th>Price</th>
+                                                            <th>Describle</th>
+                                                            <th>Date</th>
+                                                            <th>Size </th>
+                                                            <th>Material</th>
+                                                            <th>Quantity</th>
+                                                            <th>Discount</th>
+                                                            <th>Gender</th>                                                         
+                                                            <th>Status Product</th>
+                                                            <th>Update</th>
+                                                            <th>Change Status</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+
+                                                        <%
+                                                            ProductsDAO pDao = new ProductsDAO();
+                                                            ResultSet rs = pDao.getAll();
+                                                            while (rs.next()) {
+
+                                                                out.print("<tr>");
+                                                                out.print("<td>" + rs.getInt("pID") + "</td>");
+                                                                out.print("<td>" + rs.getString("pName") + "</td>");
+                                                                ImageDAO iDao = new ImageDAO();
+                                                                ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
+                                                                out.print("<td>");
+                                                                while (rsImg.next()) {
+                                                                    out.print("<a href='../../" + rsImg.getString("imageName") + "'> <img class='zoom' src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' /></a>");
+                                                                }
+                                                                out.print("</td>");
+                                                                BrandDao brDao = new BrandDao();
+                                                                String brand = brDao.getBrand(rs.getInt("brID"));
+                                                                out.print("<td>" + brand + "</td>");
+                                                                TypeDAO tDao = new TypeDAO();
+                                                                String type = tDao.getType(rs.getInt("tID"));
+                                                                out.print("<td>" + type + "</td>");
+                                                                SupplierDAO supDao = new SupplierDAO();
+                                                                String sup = supDao.getSupplier(rs.getInt("supID"));
+                                                                out.print("<td>" + sup + "</td>");
+                                                                out.print("<td>" + rs.getInt("sellingPrice") + "</td>");
+                                                                out.print("<td>" + rs.getInt("price") + "</td>");
+                                                                out.print("<td>" + rs.getString("describle") + "</td>");
+                                                                out.print("<td>" + rs.getDate("pDate") + "</td>");
+                                                                int size = rs.getInt("size");
+                                                                String s = "";
+                                                                if (size == 0) {
+                                                                    s = "S";
+                                                                } else if (size == 1) {
+                                                                    s = "M";
+                                                                } else if (size == 2) {
+                                                                    s = "L";
+                                                                } else if (size == 3) {
+                                                                    s = "XL";
+                                                                } else {
+                                                                    s = "XXL";
+                                                                }
+                                                                out.print("<td>" + s + "</td>");
+                                                                out.print("<td>" + rs.getString("material") + "</td>");
+                                                                out.print("<td>" + rs.getString("quantity") + "</td>");
+                                                                out.print("<td>" + rs.getString("discount") + "</td>");
+                                                                out.print("<td>" + rs.getString("gender") + "</td>");
+
+                                                                if (rs.getInt("status") == 1) {
+                                                                    out.println("<td style='color:green; font-weight: bold;' >Valid</td> ");
+                                                                } else {
+                                                                    out.println("<td style='color:red;font-weight: bold; '>Invalid</td> ");
+                                                                }
+                                                                out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'>Update</a></td>");
+                                                                out.print("<td><a href='../../Change?pID=" + rs.getInt("pID") + "' + '>Change</a></td>");
+
+                                                                out.print("</tr>");
+                                                            }
+                                                        %>
+                                                    </tbody>
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <%
