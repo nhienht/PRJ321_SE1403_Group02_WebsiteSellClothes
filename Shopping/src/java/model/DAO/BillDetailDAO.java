@@ -63,7 +63,7 @@ public class BillDetailDAO {
             String sql = "SELECT * FROM `billdetail` WHERE bID=?";//Declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, id);//set bId for sql query
-            ResultSet rs = pst.executeQuery();//ResultSet to store date
+            ResultSet rs = pst.executeQuery();//ResultSet to store date 
             return rs;//return bill detail
         } catch (SQLException ex) {
             Logger.getLogger(BillDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
