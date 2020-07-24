@@ -167,7 +167,7 @@
                     <img src="./images/bia01.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="./images/bia3.jpg" class="d-block w-100" alt="...">
+                    <img src="./images/bia3.jsp" class="d-block w-100" alt="...">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
