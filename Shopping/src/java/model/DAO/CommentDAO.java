@@ -19,40 +19,58 @@ import model.entity.Comment;
  * @author NhienHT
  */
 public class CommentDAO {
-    private Connection conn;
 
+    private Connection conn;//Declare Connection
+
+    /**
+     * Constructor Comment
+     */
     public CommentDAO() {
-        DBConnection db = new DBConnection();
-        this.conn = db.getDBConnection();
+        DBConnection db = new DBConnection();//new Connection
+        this.conn = db.getDBConnection();//get Connection
     }
-    public ResultSet getAll(){
+
+    /**
+     * Function to get all comment
+     *
+     * @return
+     */
+    public ResultSet getAll() {
         try {
-            String sql = "select * from comment";
+            String sql = "select * from comment";//declare sql query 
             PreparedStatement pst = conn.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            return rs;
+            ResultSet rs = pst.executeQuery();//excute query
+            return rs;//return comment
         } catch (SQLException ex) {
             Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    public Comment getComment(int cmtID){
+
+    /**
+     * Function to get all comment
+     *
+     * @param cmtID
+     * @return
+     */
+    public Comment getComment(int cmtID) {
         try {
-            String sql = "Select * from comment where cmtID = ?";
+            String sql = "Select * from comment where cmtID = ?";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, cmtID);
-            ResultSet rs = pst.executeQuery();
-            while(rs.next()){
+            pst.setInt(1, cmtID);//set cmtID for sql query
+            ResultSet rs = pst.executeQuery();//excute query
+            while (rs.next()) {
                 Comment c = new Comment(cmtID, rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getDate(5), rs.getInt(6));
-                return c;
+                return c;//return comment
             }
         } catch (SQLException ex) {
             Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    public ResultSet getCommentbyProduct(int pID){
-          try {
+
+    public ResultSet getCommentbyProduct(int pID) {
+        try {
             String sql = "select * from comment where pID=?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, pID);
@@ -63,23 +81,25 @@ public class CommentDAO {
         }
         return null;
     }
-    public boolean insert(Comment c){
+
+    public boolean insert(Comment c) {
         try {
-            String sql="INSERT INTO `comment`(`pID`, `cID`, `cmtMessage`, `cmtDate`, `status`) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO `comment`(`pID`, `cID`, `cmtMessage`, `cmtDate`, `status`) VALUES (?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, c.getpID());
             pst.setInt(2, c.getcID());
             pst.setString(3, c.getCmtMessage());
-           pst.setDate(4, java.sql.Date.valueOf(LocalDate.now()));
+            pst.setDate(4, java.sql.Date.valueOf(LocalDate.now()));
             pst.setInt(5, 0);
-           return pst.execute();
+            return pst.execute();
         } catch (SQLException ex) {
             Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
-        
+
     }
-    public int delete(int cmtID){
+
+    public int delete(int cmtID) {
         try {
             String sql = "DELETE FROM `comment` WHERE cmtID=?";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -90,17 +110,18 @@ public class CommentDAO {
         }
         return 0;
     }
-    public int changeStatus(int cmtID, int newStatus){
+
+    public int changeStatus(int cmtID, int newStatus) {
         try {
             String sql = "update comment set status = ? where cmtID=?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, newStatus);
             pst.setInt(2, cmtID);
-           return pst.executeUpdate();
+            return pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
     }
-    
+
 }
