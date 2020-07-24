@@ -24,114 +24,152 @@ import model.unit.Sort;
  */
 public class ProductsDAO {
 
-    private Connection conn;
+    private Connection conn;//Declare Connection
 
+    /**
+     * Constructor Product
+     */
     public ProductsDAO() {
-        DBConnection db = new DBConnection();
-        this.conn = db.getDBConnection();
+        DBConnection db = new DBConnection();//new Connection
+        this.conn = db.getDBConnection();//get Connection
     }
 
+    /**
+     * Function to get all product
+     *
+     * @return
+     */
     public ResultSet getAll() {
         try {
-            String sql = "select * from products";
+            String sql = "select * from products";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            return rs;
+            ResultSet rs = pst.executeQuery();//excute query
+            return rs;//return products
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
+    /**
+     * Function to get products by id
+     *
+     * @param id
+     * @return
+     */
     public Products getProduct(int id) {
-        String sql = "Select * from products where pId=? ";
+        String sql = "Select * from products where pId=? ";//declare sql query
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, id);
-            ResultSet rs = pst.executeQuery();
+            pst.setInt(1, id);//set pId for sql query
+            ResultSet rs = pst.executeQuery();//excute query
             if (rs.next()) {
                 Products p = new Products(id, rs.getInt("status"), rs.getInt("brID"), rs.getInt("tID"), rs.getInt("supID"), rs.getString("pName"), rs.getDouble("sellingPrice"), rs.getDouble("price"), rs.getString("describle"), rs.getDate("pDate"), rs.getInt("size"), rs.getString("material"), rs.getInt("quantity"), rs.getFloat("discount"), rs.getString("gender"), rs.getInt("aID"));
-                return p;
+                return p;//return products
             }
         } catch (SQLException ex) {
         }
         return null;
     }
 
+    /**
+     * Function to insert new product
+     *
+     * @param p
+     * @return
+     */
     public boolean insert(Products p) {
         try {
-            String sql = "INSERT INTO `products`(`status`, `brID`, `tID`, `supID`, `pName`, `sellingPrice`, `price`, `describle`, `pDate`, `size`, `material`, `quantity`, `discount`, `gender`, `aID`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO `products`(`status`, `brID`, `tID`, `supID`, `pName`, `sellingPrice`, `price`, `describle`, `pDate`, `size`, `material`, `quantity`, `discount`, `gender`, `aID`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, p.getSpID());
-            pst.setInt(2, p.getBrID());
-            pst.setInt(3, p.gettID());
-            pst.setInt(4, p.getSupID());
-            pst.setString(5, p.getpName());
-            pst.setDouble(6, p.getSellingPrice());
-            pst.setDouble(7, p.getPrice());
-            pst.setString(8, p.getDescrible());
-            pst.setDate(9, (Date) p.getpDate());
-            pst.setInt(10, p.getSize());
-            pst.setString(11, p.getMaterial());
-            pst.setInt(12, p.getQuantity());
-            pst.setFloat(13, p.getDiscount());
-            pst.setString(14, p.getGender());
-            pst.setInt(15, p.getaID());
+            pst.setInt(1, p.getSpID());//set spID for sql query 
+            pst.setInt(2, p.getBrID());//set brID for sql query
+            pst.setInt(3, p.gettID());//set tID for sql query
+            pst.setInt(4, p.getSupID());//set SupID for sql query
+            pst.setString(5, p.getpName());//set pName for sql query
+            pst.setDouble(6, p.getSellingPrice());//set sellingPrice for sql query
+            pst.setDouble(7, p.getPrice());//set price for sql query
+            pst.setString(8, p.getDescrible());//set describe for sql query
+            pst.setDate(9, (Date) p.getpDate());//set Date for sql query
+            pst.setInt(10, p.getSize());//set size for sql query
+            pst.setString(11, p.getMaterial());//set material for sql query
+            pst.setInt(12, p.getQuantity());//set quantity for sql query
+            pst.setFloat(13, p.getDiscount());//set discount for sql query
+            pst.setString(14, p.getGender());//set gender for sql query
+            pst.setInt(15, p.getaID());//set aID for sql query
 
-            return pst.execute();
+            return pst.execute();//excute query
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
+    /**
+     * Function to update product
+     *
+     * @param p
+     * @return
+     */
     public int update(Products p) {
         try {
-            String sql = "update products set brID=?, tID=?, supID=?, pName=?, sellingPrice=?, price=?, describle=?, pDate=?, size=?, material=?, quantity = ?, discount=?, gender=?, aID=? where pID=?";
+            String sql = "update products set brID=?, tID=?, supID=?, pName=?, sellingPrice=?, price=?, describle=?, pDate=?, size=?, material=?, quantity = ?, discount=?, gender=?, aID=? where pID=?";//Declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
 
-            pst.setInt(1, p.getBrID());
-            pst.setInt(2, p.gettID());
-            pst.setInt(3, p.getSupID());
-            pst.setString(4, p.getpName());
-            pst.setDouble(5, p.getSellingPrice());
-            pst.setDouble(6, p.getPrice());
-            pst.setString(7, p.getDescrible());
-            pst.setDate(8, (Date) p.getpDate());
-            pst.setInt(9, p.getSize());
-            pst.setString(10, p.getMaterial());
-            pst.setInt(11, p.getQuantity());
-            pst.setFloat(12, p.getDiscount());
-            pst.setString(13, p.getGender());
-            pst.setInt(14, p.getaID());
-            pst.setInt(15, p.getpID());
-            return pst.executeUpdate();
+            pst.setInt(1, p.getBrID());//set brID for sql query
+            pst.setInt(2, p.gettID());//set tID for sql query
+            pst.setInt(3, p.getSupID());//set SupID for sql query
+            pst.setString(4, p.getpName());//set pName for sql query
+            pst.setDouble(5, p.getSellingPrice());//set sellingprice for sql query
+            pst.setDouble(6, p.getPrice());//set price for sql query
+            pst.setString(7, p.getDescrible());//set describe for sql query
+            pst.setDate(8, (Date) p.getpDate());//set date for sql query
+            pst.setInt(9, p.getSize());//set size for sql query
+            pst.setString(10, p.getMaterial());//set material for sql query
+            pst.setInt(11, p.getQuantity());//set quantity for sql query
+            pst.setFloat(12, p.getDiscount());//set discount for sql query
+            pst.setString(13, p.getGender());//set gender for sql query
+            pst.setInt(14, p.getaID());//set aID for sql query
+            pst.setInt(15, p.getpID());//set pID for sql query
+            return pst.executeUpdate();//excute query
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return -1;
     }
 
+    /**
+     * Function to delete Products
+     *
+     * @param id
+     * @return
+     */
     public int delete(int id) {
         try {
-            String sql = "delete from products where pID=?";
+            String sql = "delete from products where pID=?";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, id);
-            return pst.executeUpdate();
+            pst.setInt(1, id);//set pID for sql query
+            return pst.executeUpdate();//excute query
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
     }
 
+    /**
+     * Function to get quantity
+     *
+     * @param pID
+     * @return
+     */
     public int getQuantity(int pID) {
         try {
-            String sql = "Select quantity from products where pID = ?";
+            String sql = "Select quantity from products where pID = ?";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, pID);
-            ResultSet rs = pst.executeQuery();
+            pst.setInt(1, pID);//set pID for sql query
+            ResultSet rs = pst.executeQuery();//excute query
             if (rs.next()) {
-                return rs.getInt("quantity");
+                return rs.getInt("quantity");//return quantity
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -139,55 +177,80 @@ public class ProductsDAO {
         return 0;
     }
 
+    /**
+     * Function to update quantity
+     *
+     * @param pID
+     * @param quantity
+     */
     public void updateQuantity(int pID, int quantity) {
-        int nowQuantity = this.getQuantity(pID);
+        int nowQuantity = this.getQuantity(pID);//get quantity now
         if (nowQuantity > 0) {
-            String sql = "Update products set quantity=? where pID=?";
+            String sql = "Update products set quantity=? where pID=?";//declare sql query
             try {
                 PreparedStatement st = conn.prepareStatement(sql);
-                st.setInt(1, nowQuantity - quantity);
-                st.setInt(2, pID);
-                st.executeUpdate();
+                st.setInt(1, nowQuantity - quantity);//set quantity for sql query
+                st.setInt(2, pID);//set pID for sql query
+                st.executeUpdate();//excute query
             } catch (SQLException ex) {
                 Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
+    /**
+     * Function to change status
+     *
+     * @param id
+     * @param status
+     * @return
+     */
     public int ChangeStatus(int id, int status) {
         try {
-            String sql = "UPDATE `products` SET `status`=? WHERE  `pID`=?";
+            String sql = "UPDATE `products` SET `status`=? WHERE  `pID`=?";//Declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, status);
-            pst.setInt(2, id);
-            return pst.executeUpdate();
+            pst.setInt(1, status);//set status for sql query
+            pst.setInt(2, id);//set pID for sql query
+            return pst.executeUpdate();//excute query
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
     }
 
+    /**
+     * Function to get Product by Type
+     *
+     * @param id
+     * @return
+     */
     public ResultSet getProductByType(int id) {
 
         try {
-            String sql = "Select * from products where tID = ?";
+            String sql = "Select * from products where tID = ?";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, id);
-            return pst.executeQuery();
+            pst.setInt(1, id);//set tID for sql query
+            return pst.executeQuery();//excute query
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
+    /**
+     * Function to get Product by Status
+     *
+     * @param status
+     * @return
+     */
     public ResultSet getProductByStatus(int status) {
         try {
-            String sql = "select * from products where status=?";
+            String sql = "select * from products where status=?";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, status);
-            ResultSet rs = pst.executeQuery();
+            pst.setInt(1, status);//set status for sql query
+            ResultSet rs = pst.executeQuery();//rs to store date
             if (rs.next()) {
-                return rs;
+                return rs;//return products
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -195,13 +258,18 @@ public class ProductsDAO {
         return null;
     }
 
+    /**
+     * Function to get Product when quantity > 0
+     *
+     * @return
+     */
     public ResultSet getProductConHang() {
         try {
-            String sql = "select * from product where quantity > 0";
+            String sql = "select * from product where quantity > 0";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
+            ResultSet rs = pst.executeQuery();//excute query
             if (rs.next()) {
-                return rs;
+                return rs;//return Products
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -209,13 +277,18 @@ public class ProductsDAO {
         return null;
     }
 
+    /**
+     * Function to get Product when quantity = 0
+     *
+     * @return
+     */
     public ResultSet getProductHetHang() {
         try {
-            String sql = "select * from product where quantity = 0";
+            String sql = "select * from product where quantity = 0";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
+            ResultSet rs = pst.executeQuery();//excute query
             if (rs.next()) {
-                return rs;
+                return rs;//return Product
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -223,14 +296,19 @@ public class ProductsDAO {
         return null;
     }
 
+    /**
+     * Function to get Max products
+     *
+     * @return
+     */
     public int getMax() {
         try {
 
-            String sql = "Select max(pID) as pID from products";
+            String sql = "Select max(pID) as pID from products";//declare sql query
             PreparedStatement st = conn.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
+            ResultSet rs = st.executeQuery();//excute query
             if (rs.next()) {
-                return rs.getInt("pID");
+                return rs.getInt("pID");//return max product
             }
 
         } catch (SQLException ex) {
@@ -239,15 +317,22 @@ public class ProductsDAO {
         return 0;
     }
 
+    /**
+     * Function to get product by price
+     *
+     * @param startPrice
+     * @param endPrice
+     * @return
+     */
     public ResultSet getProductbyPrice(double startPrice, double endPrice) {
         try {
-            String sql = "SELECT * FROM `products` WHERE price > ? and price < ?";
+            String sql = "SELECT * FROM `products` WHERE price > ? and price < ?";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setDouble(1, startPrice);
-            pst.setDouble(2, endPrice);
-            ResultSet rs = pst.executeQuery();
+            pst.setDouble(1, startPrice);//set startPrice for sql query
+            pst.setDouble(2, endPrice);//set endPrice for sql query
+            ResultSet rs = pst.executeQuery();//excute query
             if (rs.next()) {
-                return rs;
+                return rs;//return Products
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -255,14 +340,20 @@ public class ProductsDAO {
         return null;
     }
 
+    /**
+     * Function to get Product by Supplier
+     *
+     * @param supID
+     * @return
+     */
     public ResultSet getProductBySupplier(int supID) {
         try {
-            String sql = "select * from products where supID=?";
+            String sql = "select * from products where supID=?";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, supID);
-            ResultSet rs = pst.executeQuery();
+            pst.setInt(1, supID);//set supID for sql query
+            ResultSet rs = pst.executeQuery();//excute
             if (rs.next()) {
-                return rs;
+                return rs;//return Products
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -270,14 +361,20 @@ public class ProductsDAO {
         return null;
     }
 
+    /**
+     * Function to get Product by brand
+     *
+     * @param brID
+     * @return
+     */
     public ResultSet getProductByBrand(int brID) {
         try {
-            String sql = "select * from products where brID=?";
+            String sql = "select * from products where brID=?";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, brID);
-            ResultSet rs = pst.executeQuery();
+            pst.setInt(1, brID);//set brID for sql query
+            ResultSet rs = pst.executeQuery();//excute query
             if (rs.next()) {
-                return rs;
+                return rs;//return Products
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -285,55 +382,73 @@ public class ProductsDAO {
         return null;
     }
 
-     public ResultSet getProductByGendee(String gender) {
+    /**
+     * Function to get Product by Gender
+     *
+     * @param gender
+     * @return
+     */
+    public ResultSet getProductByGendee(String gender) {
         try {
-            String sql = "select * from products where gender=?";
+            String sql = "select * from products where gender=?";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, gender);
-            ResultSet rs = pst.executeQuery();
-           return rs;
+            pst.setString(1, gender);//set gender for sql query
+            ResultSet rs = pst.executeQuery();//excute
+            return rs;//return Products
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    } 
-     
+    }
+
+    /**
+     * Function to get Product
+     *
+     * @param type
+     * @param id
+     * @return
+     */
     public ResultSet getProductwithST(String type, int id) {
         try {
             String sql = null;
             if (type.equals("type")) {
-                sql = "select * from products where tID=?";
+                sql = "select * from products where tID=?";//declare sql query
             } else if (type.equals("supplier")) {
-                sql = "select * from products where supID=?";
+                sql = "select * from products where supID=?";//declare sql query
             } else if (type.equals("brand")) {
-                sql = "select * from products where brID=?";
+                sql = "select * from products where brID=?";//declare sql query
             } else if (type.equals("size")) {
-                sql = "select * from products where size=?";
+                sql = "select * from products where size=?";//declare sql query
             } else if (type.equals("status")) {
-                sql = "select * from products where status=?";          
+                sql = "select * from products where status=?";//declare sql query     
             }
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, id);
-            ResultSet rs = pst.executeQuery();
-            return rs;
+            pst.setInt(1, id);//set id for sql query
+            ResultSet rs = pst.executeQuery();//rs to store data
+            return rs;//return Products
         } catch (SQLException ex) {
             Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    
-    public HashMap<Integer,Integer> getTop10() {
-        HashMap<Integer, Integer> products = new HashMap<>();
-        
+
+    /**
+     * HashMap to get Top 10
+     *
+     * @return
+     */
+    public HashMap<Integer, Integer> getTop10() {
+        HashMap<Integer, Integer> products = new HashMap<>();//declare HashMap
+
         try {
             BillDetailDAO bdDao = new BillDetailDAO();
             ResultSet rs = bdDao.getBillDetail();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {//get Products
                 int key = rs.getInt("pID");
                 int quantity = rs.getInt("quantity");
-                
-                if(products.get(key) == null) {
+
+                if (products.get(key) == null) {
                     products.put(key, quantity);
                 } else {
                     quantity += products.get(key);

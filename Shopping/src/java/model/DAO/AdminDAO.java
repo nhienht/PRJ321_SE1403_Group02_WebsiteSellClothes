@@ -18,22 +18,32 @@ import java.util.logging.Logger;
  */
 public class AdminDAO {
 
-    Connection conn;
+    Connection conn;//declare Connection
 
+    /**
+     * Constructor AdminDAO
+     */
     public AdminDAO() {
-        DBConnection dbConnect = new DBConnection();
-        this.conn = dbConnect.getDBConnection();
+        DBConnection dbConnect = new DBConnection();//new Connection
+        this.conn = dbConnect.getDBConnection();//get Connection
     }
 
+    /**
+     * Function use to login for admin
+     *
+     * @param user
+     * @param pass
+     * @return
+     */
     public int login(String user, String pass) {
         try {
-            String sql = "SELECT * FROM `admin` WHERE `aUsername`=? AND `aPassword`=MD5(?)";
+            String sql = "SELECT * FROM `admin` WHERE `aUsername`=? AND `aPassword`=MD5(?)";//Declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, user);
-            pst.setString(2, pass);
-            ResultSet rs = pst.executeQuery();
+            pst.setString(1, user);//set aUsername for sql query
+            pst.setString(2, pass);//set aPassword for sql query
+            ResultSet rs = pst.executeQuery();//ResultSet use to store data
             if (rs.next()) {
-                return rs.getInt(1);
+                return rs.getInt(1);//return username
             } else {
                 return -1;
             }
