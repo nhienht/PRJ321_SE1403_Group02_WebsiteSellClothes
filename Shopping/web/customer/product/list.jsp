@@ -170,8 +170,8 @@
         </nav>
 
         <sql:setDataSource var="conn" scope="session"
-                           url="jdbc:mysql://node229405-env-4208310.j.layershift.co.uk/prj321"
-                           user="root" password="FFSart64747"
+                           url="jdbc:mysql://localhost/prj321"
+                           user="root" password=""
                            driver="com.mysql.jdbc.Driver"/>
         <sql:query var="p" dataSource="${conn}">	
             SELECT * FROM products where status =1
