@@ -35,10 +35,10 @@ public class AdminLogoutController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            Cookie adminCookie = new Cookie("admin", null);
-            adminCookie.setMaxAge(0);
+            Cookie adminCookie = new Cookie("admin", null); // neu admin ma khong tim thay
+            adminCookie.setMaxAge(0); // set time la 0
             response.addCookie(adminCookie);
-            response.sendRedirect("./auth/login.jsp");
+            response.sendRedirect("./auth/login.jsp"); // cho chay lai trang login dang nhap
         }
     }
 

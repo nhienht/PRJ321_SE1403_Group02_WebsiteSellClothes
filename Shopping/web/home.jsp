@@ -92,7 +92,7 @@
         </style>
     </head>
     <body>
-        <jsp:include page="header/header.jsp" ></jsp:include>
+
             <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
                 <a class="navbar-branch" href="index.jsp">

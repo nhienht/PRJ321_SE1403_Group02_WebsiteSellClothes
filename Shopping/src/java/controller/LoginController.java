@@ -40,10 +40,10 @@ public class LoginController extends HttpServlet {
             HttpSession session = request.getSession();
             HashMap<Integer, Integer> listCart = new HashMap<Integer, Integer>();
             listCart = (HashMap<Integer, Integer>) session.getAttribute("listCart");
-            if (listCart == null) {
-                response.sendRedirect("customer/product/cart.jsp");
+            if (listCart == null) { // neu ma listcarrt == null
+                response.sendRedirect("customer/product/cart.jsp"); // thi chuyen den trang cart.jsp
             } else {
-                double total = Double.parseDouble(request.getParameter("total"));
+                double total = Double.parseDouble(request.getParameter("total")); // get total price
                 Cookie[] cookies = request.getCookies();
                 boolean check = false;
                 for (Cookie c : cookies) {
@@ -52,7 +52,7 @@ public class LoginController extends HttpServlet {
                     }
                 }
                 if (check) {
-                    response.sendRedirect("customer/product/order.jsp?total=" + total);
+                    response.sendRedirect("customer/product/order.jsp?total=" + total); // neu check là false thi chuyen sang trang order hien total gia san pham
                 } else {
                     String requestURL = request.getRequestURI();
                     response.sendRedirect("./auth/login.jsp?returnURL=" + requestURL + "?total=" + total);

@@ -100,7 +100,7 @@
     </head>
 
     <body>
-        <%@include file="../header/header.jsp" %>
+        
         <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
             <a class="navbar-branch" href="index.jsp">

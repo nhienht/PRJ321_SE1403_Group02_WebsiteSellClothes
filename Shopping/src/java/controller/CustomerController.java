@@ -76,7 +76,7 @@ public class CustomerController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //   processRequest(request, response);
-        Customer c = new Customer();
+        Customer c = new Customer(); // goi class customer de thuc hien viec get cac  thong tin vao
         c.setcID(Integer.parseInt(request.getParameter("cID")));
         c.setcPassword(request.getParameter("cPassword"));
         c.setcUsername(request.getParameter("cUsername"));
@@ -88,9 +88,9 @@ public class CustomerController extends HttpServlet {
         c.setEmail(request.getParameter("email"));
         c.setStatus(Integer.parseInt(request.getParameter("status")));
         c.setGender(request.getParameter("gender"));
-        CustomerDAO cDao = new CustomerDAO();
-        cDao.update(c);
-        response.sendRedirect("./admin/customer/listcustomer.jsp");
+        CustomerDAO cDao = new CustomerDAO(); // goi class customer dao
+        cDao.update(c); // de thuc hien update cac thong tin da nhap
+        response.sendRedirect("./admin/customer/listcustomer.jsp"); // sau do chuyen laii trang list customer de show ra cac thong tin
 
     }
 
@@ -100,7 +100,7 @@ public class CustomerController extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-        public String getServletInfo() {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

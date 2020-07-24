@@ -40,33 +40,33 @@ public class ChangeStatusController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-         if(request.getParameter("pID") != null){
+         if(request.getParameter("pID") != null){ // get iD cua san pham
              int pID = Integer.parseInt(request.getParameter("pID"));
              ProductsDAO pDao = new ProductsDAO();
             Products p = pDao.getProduct(pID);
-            if(p.getSpID() == 1 ){
+            if(p.getSpID() == 1 ){ // neu san pham la  1 thi set changstt =0
                pDao.ChangeStatus(pID,0);
             }else{
-                pDao.ChangeStatus(pID,1);
+                pDao.ChangeStatus(pID,1); // nguoc lai thi set 1
             }
-            response.sendRedirect("admin/product/listproducts.jsp");
+            response.sendRedirect("admin/product/listproducts.jsp"); // chuyen den trang listproducts
          }else if(request.getParameter("cID") != null){
              int cID = Integer.parseInt(request.getParameter("cID"));
              CustomerDAO cDao = new CustomerDAO();
-             Customer c = cDao.getCustomer(cID);
-             if(c.getStatus() == 0){
+             Customer c = cDao.getCustomer(cID); // get customer
+             if(c.getStatus() == 0){ // neu get bang 0 thi doi ss sang 1
                  cDao.ChangeStatus(cID, 1);
              }else{
-                 cDao.ChangeStatus(cID, 0);
+                 cDao.ChangeStatus(cID, 0); // nguoc lai
              }
-              response.sendRedirect("admin/customer/listcustomer.jsp");
+              response.sendRedirect("admin/customer/listcustomer.jsp"); // chuyen den trang customer
          }else if(request.getParameter("bID") != null){
              int bID = Integer.parseInt(request.getParameter("bID"));
              BillDAO bDao = new BillDAO();
              Bill b = bDao.getBill(bID);
              
-             if(b.getbStatus().equals("New")){
-                 bDao.changeStatus(bID, "Delivered");
+             if(b.getbStatus().equals("New")){ //neu get Stt = new 
+                 bDao.changeStatus(bID, "Delivered"); // thi trang thai la evivered
              }else{
                  bDao.changeStatus(bID, "New");
              }

@@ -38,29 +38,29 @@ public class CartController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            int pID = Integer.parseInt(request.getParameter("id"));
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-                if (session.getAttribute("listCart") == null) {
-                    HashMap<Integer, Integer> listCart = new HashMap<Integer, Integer>();
-                    listCart.put(pID, quantity);
+            HttpSession session = request.getSession(); // get Session ve
+            int pID = Integer.parseInt(request.getParameter("id")); // get id
+            int quantity = Integer.parseInt(request.getParameter("quantity")); // get so luong
+            if (session.getAttribute("listCart") == null) {
+                HashMap<Integer, Integer> listCart = new HashMap<Integer, Integer>();
+                listCart.put(pID, quantity);
+                session.setAttribute("listCart", listCart);
+            } else {
+                HashMap<Integer, Integer> listCart = new HashMap<Integer, Integer>();
+                listCart = (HashMap<Integer, Integer>) session.getAttribute("listCart");
+                if (listCart.containsKey(pID)) {
+                    int q = listCart.get(pID);
+                    q += quantity; // cong so luong san pham len
+                    listCart.put(pID, q);
                     session.setAttribute("listCart", listCart);
                 } else {
-                    HashMap<Integer, Integer> listCart = new HashMap<Integer, Integer>();
-                    listCart = (HashMap<Integer, Integer>) session.getAttribute("listCart");
-                    if (listCart.containsKey(pID)) {
-                        int q = listCart.get(pID);
-                        q += quantity;
-                        listCart.put(pID, q);
-                        session.setAttribute("listCart", listCart);
-                    } else {
-                        listCart.put(pID, quantity);
-                        session.setAttribute("listCart", listCart);
-                    }
-
+                    listCart.put(pID, quantity);
+                    session.setAttribute("listCart", listCart);
                 }
-                response.sendRedirect("./customer/product/cart.jsp");
-            
+
+            }
+            response.sendRedirect("./customer/product/cart.jsp"); // chuyen den trang cart.jsp
+
         }
     }
 

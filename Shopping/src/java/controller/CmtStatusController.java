@@ -37,17 +37,17 @@ public class CmtStatusController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             CommentDAO cmtDao = new CommentDAO();
-            Comment c = new Comment();
-            if(request.getParameter("cmtID")!= null){
+            Comment c = new Comment(); // goi clas comment de get cac gia tri cmt ve 
+            if (request.getParameter("cmtID") != null) { // neu co cmt
                 int cmtID = Integer.parseInt(request.getParameter("cmtID"));
-               c = cmtDao.getComment(cmtID);
-               if(c.getStatus() == 1){
-                   cmtDao.changeStatus(cmtID, 0);
-               }else{
-                     cmtDao.changeStatus(cmtID, 1);
-               }
+                c = cmtDao.getComment(cmtID);
+                if (c.getStatus() == 1) { // neu ==1 
+                    cmtDao.changeStatus(cmtID, 0);  // thi an cmt
+                } else {
+                    cmtDao.changeStatus(cmtID, 1); // hien cmt
+                }
             }
-            response.sendRedirect("./admin/comment/listcomment.jsp");
+            response.sendRedirect("./admin/comment/listcomment.jsp"); // chuyen den trang list cmt
         }
     }
 
