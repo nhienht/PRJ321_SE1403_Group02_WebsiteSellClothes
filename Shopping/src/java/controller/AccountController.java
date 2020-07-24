@@ -136,8 +136,8 @@ public class AccountController extends HttpServlet {
 //                out.println("alert('User or password incorrect');");
 //                out.println("location='login.jsp';");
 //                out.println("</script>");
-                response.sendRedirect("./auth/login.jsp?message=fail");
-
+                  String mes = "Register is not success ! User's is exit !";
+              response.sendRedirect("./auth/login.jsp?message="+mes);   
             }
         } else if (request.getParameter("btnSignInPage") != null) {
             response.sendRedirect("./auth/signin.jsp"); // chuyen den trang dang ky
