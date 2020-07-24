@@ -459,7 +459,7 @@
 
     </style>
     <body>
-
+        <%-- kiem tra xem khach hang da dang nhap chua --%>
         <%
             Cookie[] cookies = request.getCookies();
             int id = 0;
@@ -474,7 +474,7 @@
 
         %>
 
-
+        <%--Show cac infor cua nguoi dung ra va cho nguoi dung chinh sua thong tin neu muon --%>
         <div class="wrapper fadeInDown">
             <div id="formContent">
 

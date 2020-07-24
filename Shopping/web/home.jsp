@@ -92,42 +92,42 @@
         </style>
     </head>
     <body>
+        <%@include  file="header/header.jsp" %>
+        <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
-            <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
+            <a class="navbar-branch" href="index.jsp">
+                <img src="./images/logo.jpg" height="80px" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto" style="padding-left: 600px">
+                    <li class="nav-item">
+                        <a href="./index.jsp" class="nav-link ">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="./customer/product/list.jsp" class="nav-link ">Products</a>
 
-                <a class="navbar-branch" href="index.jsp">
-                    <img src="./images/logo.jpg" height="80px" alt="">
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto" style="padding-left: 600px">
-                        <li class="nav-item">
-                            <a href="./index.jsp" class="nav-link ">Home</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="./customer/product/list.jsp" class="nav-link ">Products</a>
-
-                        </li>
-                        <li class="nav-item">
-                            <a href="./auth/about.jsp" class="nav-link">About us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="./auth/contact.jsp" class="nav-link">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="customer/product/cart.jsp" class="nav-link">Cart</a>
-                        </li>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./auth/about.jsp" class="nav-link">About us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./auth/contact.jsp" class="nav-link">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="customer/product/cart.jsp" class="nav-link">Cart</a>
+                    </li>
 
 
-                        <li class="nav-item dropdown no-arrow  ">
-                            <a style="color: black;position:relative; top: -20px;" class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                               >
-                                <h3><i style="color: black;position:relative; top: -1px;" class="fas fa-user-circle fa-fw"></i></h3>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu- bg-dark text-white "  >
-                                <!--<a class="dropdown-item" href="#">Logout</a>-->
+                    <li class="nav-item dropdown no-arrow  ">
+                        <a style="color: black;position:relative; top: -20px;" class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                           >
+                            <h3><i style="color: black;position:relative; top: -1px;" class="fas fa-user-circle fa-fw"></i></h3>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu- bg-dark text-white "  >
+                            <!--<a class="dropdown-item" href="#">Logout</a>-->
 
                             <%
                                 Cookie[] cookies = request.getCookies();
@@ -136,8 +136,8 @@
                                         if (cookie.getName().equals("user")) {
                                             out.print("<a class='nav-link dropdown-item bg-dark' style='color: white; font-size:20px;' href='customer/Information.jsp'>" + cookie.getValue() + "</a>");
                                             out.print("<a class='nav-link dropdown-item bg-dark' style='color: white; font-size:20px;' href='LogoutController'>Logout</a>");
-                                        } else if (cookie.getName().equals("admin")) {                                      
-                                          RequestDispatcher disp = request.getRequestDispatcher("dashboard.jsp");
+                                        } else if (cookie.getName().equals("admin")) {
+                                            RequestDispatcher disp = request.getRequestDispatcher("dashboard.jsp");
                                             disp.forward(request, response);
                                         }
                                     }
@@ -152,7 +152,7 @@
                 </ul>
             </div>
         </nav>
-                      
+
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -161,13 +161,13 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="./images/Capture.PNG" class="d-block w-100" alt="..." >
+                    <img src="./images/bia2.jpg" class="d-block w-100" alt="..." >
                 </div>
                 <div class="carousel-item">
-                    <img src="./images/pic3.png" class="d-block w-100" alt="...">
+                    <img src="./images/bia3.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="./images/pic22.jpg" class="d-block w-100" alt="...">
+                    <img src="./images/bia01.jpg" class="d-block w-100" alt="...">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -236,7 +236,7 @@
         </div>
         <div class="fotter">
             <div class="footer-copyright text-center py-3">
-                  © 2020 !997 Clothing ®
+                © 2020 !997 Clothing ®
             </div>
         </div>
     </body>
