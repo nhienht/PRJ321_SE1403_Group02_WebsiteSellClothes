@@ -65,4 +65,11 @@ public class SupplierDAO {
         }
         return null;
     }
+    public void closeConn(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(SupplierDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

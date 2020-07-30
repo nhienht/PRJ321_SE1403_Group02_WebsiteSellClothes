@@ -443,6 +443,11 @@
                             <i class="fas fa-fw fa-book"></i>
                             <span>Supplier</span></a>
                     </li>
+                     <li class="nav-item">
+                         <a class="nav-link" href="admin/other/list.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Other</span></a>
+                    </li>
 
 
 

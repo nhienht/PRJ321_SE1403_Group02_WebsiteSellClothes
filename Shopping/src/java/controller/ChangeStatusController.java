@@ -49,6 +49,7 @@ public class ChangeStatusController extends HttpServlet {
             }else{
                 pDao.ChangeStatus(pID,1); // nguoc lai thi set 1
             }
+            pDao.closeConn();
             response.sendRedirect("admin/product/listproducts.jsp"); // chuyen den trang listproducts
          }else if(request.getParameter("cID") != null){
              int cID = Integer.parseInt(request.getParameter("cID"));
@@ -59,6 +60,7 @@ public class ChangeStatusController extends HttpServlet {
              }else{
                  cDao.ChangeStatus(cID, 0); // nguoc lai
              }
+             cDao.closeConn();
               response.sendRedirect("admin/customer/listcustomer.jsp"); // chuyen den trang customer
          }else if(request.getParameter("bID") != null){
              int bID = Integer.parseInt(request.getParameter("bID"));
@@ -70,6 +72,7 @@ public class ChangeStatusController extends HttpServlet {
              }else{
                  bDao.changeStatus(bID, "New");
              }
+               bDao.closeConn();
               response.sendRedirect("admin/bill/listbill.jsp");
          }
         }

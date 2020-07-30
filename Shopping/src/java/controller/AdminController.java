@@ -76,6 +76,7 @@ public class AdminController extends HttpServlet {
             String pass = request.getParameter("pass");
                    
             int aID = aDao.login(user, pass);
+            aDao.closeConn();
             if (aID>0) {
                 Cookie adminCookie = new Cookie("admin", aID+"");    // luu id admin set time 24h           
                 adminCookie.setMaxAge(60 * 60 * 24);              

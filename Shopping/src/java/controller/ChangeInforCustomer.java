@@ -94,6 +94,7 @@ public class ChangeInforCustomer extends HttpServlet {
             c.setBirthday(date);
             CustomerDAO cDao = new CustomerDAO(); // goi class customerDao de thuc hien cong viec can thiet
             int check = cDao.update(c); // thuc hien viec update customer 
+            cDao.closeConn();
             if (check != 0) {
                 response.sendRedirect("./customer/Information.jsp"); // chuyen sang page Information
             }
@@ -109,6 +110,7 @@ public class ChangeInforCustomer extends HttpServlet {
             String newPass = request.getParameter("newPass");
             CustomerDAO cDao = new CustomerDAO(); // goi class customer dao de thuc hien check pass
             int check = cDao.changePass(id, oldPass, newPass);
+            cDao.closeConn();
             System.out.println(check);
             if (check == -1) {
                 response.sendRedirect("./customer/changePassword.jsp"); // neu neu la -1 co nghia sai thi nhay lai trang cu

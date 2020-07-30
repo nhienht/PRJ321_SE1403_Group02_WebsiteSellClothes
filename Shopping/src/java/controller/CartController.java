@@ -38,6 +38,7 @@ public class CartController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+             String url = request.getParameter("url");
             HttpSession session = request.getSession(); // get Session ve
             int pID = Integer.parseInt(request.getParameter("id")); // get id
             int quantity = Integer.parseInt(request.getParameter("quantity")); // get so luong
@@ -59,7 +60,8 @@ public class CartController extends HttpServlet {
                 }
 
             }
-            response.sendRedirect("./customer/product/cart.jsp"); // chuyen den trang cart.jsp
+           // response.sendRedirect("./customer/product/cart.jsp"); // chuyen den trang cart.jsp
+              response.sendRedirect(url +"?message=1&pID="+pID);
 
         }
     }

@@ -449,6 +449,11 @@
                             <i class="fas fa-fw fa-book"></i>
                             <span>Supplier</span></a>
                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="../other/list.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Other</span></a>
+                    </li>
 
 
                 </ul>
@@ -477,10 +482,28 @@
                                         <div class="contact-form">
                                             <div class="row">
                                             
-                                                <div class="col-sm-12 col-xs-12">
+                                                <div class="col-sm-6 col-xs-12">
                                                     <div>Supplier Name</div>
                                                     <div class="input-group">
                                                         <input type="text" class="form-control" autofocus="" required=" " name="supName" >
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div>Supplier Phone</div>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" autofocus="" required=" " name="phone" >
+                                                    </div>
+                                                </div>
+                                               <div class="col-sm-6 col-xs-12">
+                                                    <div>Supplier Address</div>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" autofocus="" required=" " name="address" >
+                                                    </div>
+                                                </div>
+                                               <div class="col-sm-6 col-xs-12">
+                                                    <div>Email</div>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" autofocus="" required=" " name="email" >
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-12">

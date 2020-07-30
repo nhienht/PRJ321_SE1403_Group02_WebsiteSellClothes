@@ -449,6 +449,11 @@
                             <i class="fas fa-fw fa-book"></i>
                             <span>Supplier</span></a>
                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="../other/list.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Other</span></a>
+                    </li>
 
 
                 </ul>
@@ -612,7 +617,7 @@
                                                 <div class="col-sm-12 col-xs-12">
                                                     <div>Image</div>
                                                     <div class="input-group">
-                                                        <input type="file" class="form-control" autofocus="" required=" " name="img" multiple>
+                                                        <input type="file" class="form-control" autofocus="" required=" " name="img" multiple accept="image/*">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-12">
@@ -624,29 +629,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="dataTable_info" role="status"
-                                                 aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled"
-                                                        id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                               data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item active"><a href="#"
-                                                                                                    aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                    class="page-link">1</a></li>
-                                                    <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                        <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                           class="page-link">Next</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                                                    </div>
                             </div>
                         </div>
                     </div>

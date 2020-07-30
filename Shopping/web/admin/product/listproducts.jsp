@@ -33,6 +33,53 @@
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
+
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
+
+        <script>
+//            $(document).ready(function () {
+//
+//                $('#example').dataTable({
+//                    "aoColumnDefs": [
+//                        {'bSortable': false, 'aTargets': [3, 4, 5, 10, 14]}
+//                    ]
+//                }); // dòng này để nhúng bảng biểu thành dạng bảng được phân trang
+//
+//            });
+// Material Design example
+            $(document).ready(function () {
+                $('#example').DataTable();
+                $('#dtMaterialDesignExample_wrapper').find('label').each(function () {
+                    $(this).parent().append($(this).children());
+                });
+                $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('input').each(function () {
+                    const $this = $(this);
+                    $this.attr("placeholder", "Search");
+                    $this.removeClass('form-control-sm');
+                });
+                $('#dtMaterialDesignExample_wrapper .dataTables_length').addClass('d-flex flex-row');
+                $('#dtMaterialDesignExample_wrapper .dataTables_filter').addClass('md-form');
+                $('#dtMaterialDesignExample_wrapper select').removeClass('custom-select custom-select-sm form-control form-control-sm');
+                $('#dtMaterialDesignExample_wrapper select').addClass('mdb-select');
+                $('#dtMaterialDesignExample_wrapper .mdb-select').materialSelect();
+                $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('label').remove();
+            });
+        </script>   
+        <script>
+            function myFunction(id) {
+                var person = confirm("Are you sure to Delete ?");
+                if (person) {
+                    location.href = "../../Change?pID=" + id;
+                }
+            }
+        </script>
         <title>List Products </title>
         <style>
             html {
@@ -342,7 +389,30 @@
                 -webkit-transform: rotate(15deg);
                 transform: rotate(15deg);
             }
+            .btn{
+                /*background: #F5A9BC;*/
+                color: #000;
+                background: none;
+                border: none;
 
+            }
+            #icon{
+                border-radius: 40px;
+                width: 70px;
+                margin-left: 10px 
+            }
+            #bestsale{
+                font-weight: bold;
+                width: 150px;
+                background: #F5A9BC;
+
+
+            }
+            #listAll{
+                color: #000;
+                background: #F5A9BC;
+                margin-left: 30px 
+            }
             @media (min-width: 576px) {
                 .card-columns {
                     -webkit-column-count: 1;
@@ -400,7 +470,7 @@
             <div id="wrapper">
                 <ul class="sidebar navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="../dashboard.jsp">
+                        <a class="nav-link" href="../../dashboard.jsp">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
@@ -438,6 +508,11 @@
                             <i class="fas fa-fw fa-book"></i>
                             <span>Supplier</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../other/list.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Other</span></a>
+                    </li>
                 </ul>
 
                 <div id="content-wrapper">
@@ -454,227 +529,384 @@
                         </ol>
 
                         <!-- DataTables Example -->
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <i class="fas fa-user"></i>
-                                List Products</div>
+                        <div class="card ">
+                            <div class="card-header mb-3 row">
+                                <div class="col col-md-3 col-sm-3">
+                                    <i class="fas fa-user"> List Products</i>
+
+                                </div>
+                                <div class="col col-md-3 col-sm-3">
+                                    <button type="button" id="bestsale" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                        Best sale 
+                                    </button>
+                                </div>
+                                <div class='col col-md-3 col-sm-3'>
+                                    <button  id="bestsale" class="btn btn-primary"><a style="color: #000" href='listproducts.jsp'>
+                                            List All</a>
+                                    </button>
+                                </div>
+                                <div class='col col-md-3 col-sm-3'>
+                                    <button  id="bestsale" class="btn btn-primary"><a style="color: #000" href='productsDel.jsp'>
+                                            List Deleted</a>
+                                    </button>
+                                </div>
+                            </div>
+
                             <div class="card-body">
-                                <div class="table-responsive">
+
+                                <div class="table-responsive table-hover">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 
-                                        <div class="row">                                     
-                                            <div class="col-sm-12 col-md-6">
-                                                <form class="d-flex justify-content-center h-100 search-form" action="">
-                                                    <input class="searchbar  w-100" type="text" name="word" placeholder="search">
-                                                    <input type="submit" name="find" class="btn btn-outline-primary "  value="FIND">
-                                                </form>
-                                            </div>
-                                        </div>
 
-                                        
-                                            <div class="col-sm-12">
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                                    Best sale 
-                                                </button>
-                                                
 
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <table class="table table-responsive table-hover" >
-                                                                    <tr>
-                                                                        <th>ID Product's</th>
-                                                                        <th>Name Product's</th>
-                                                                        <th>Price</th>
-                                                                        <th>Quantity sold</th>
-                                                                        <th>Quantity</th>
-                                                                    </tr>
-                                                                    <%
-                                                                         ProductsDAO pDao = new ProductsDAO();
-                                                                        HashMap<Integer, Integer> top = pDao.getTop10();
-                                                                        int i = 0;
 
-                                                                        for (Map.Entry<Integer, Integer> entry : top.entrySet()) {
-                                                                            i++;
-                                                                            if (i < 10) {
-                                                                                out.print("<tr>");
-                                                                                out.print("<td>" + entry.getKey() + "</td>");
-                                                                                Products p = pDao.getProduct(entry.getKey());
-                                                                                out.print("<td>" + p.getpName() + "</td>");
-                                                                                out.print("<td>" + p.getPrice() + "</td>");
-                                                                                out.print("<td>" + entry.getValue() + "</td>");
-                                                                                out.print("<td>" + p.getQuantity() + "</td>");
-                                                                                out.print("</tr>");
-                                                                            } else {
-                                                                                break;
-                                                                            }
-                                                                        }
-                                                                    %>
-                                                                </table>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </div>
+
+                                        <!--<div class="col-sm-12">-->
+                                        <!-- Button trigger modal -->
+
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Best Seller</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
                                                     </div>
+                                                    <div class="modal-body">
+                                                        <table class="table table-hover table-responsive-lg  "  >
+                                                            <tr >
+                                                                <th>No.</th>
+                                                                <th>ID Product's</th>
+                                                                <th >Name Product's</th>
+                                                                <th>Price</th>
+                                                                <th>Quantity sold</th>
+                                                                <th>Quantity</th>
+                                                            </tr>
+                                                            <%
+                                                                ProductsDAO pDao = new ProductsDAO();
+                                                                HashMap<Integer, Integer> top = pDao.getTop10();
+                                                                int i = 0;
+
+                                                                for (Map.Entry<Integer, Integer> entry : top.entrySet()) {
+                                                                    i++;
+                                                                    if (i <= 10) {
+                                                                        out.print("<tr>");
+                                                                        out.print("<td>" + i + "</td>");
+                                                                        out.print("<td>" + entry.getKey() + "</td>");
+                                                                        Products p = pDao.getProduct(entry.getKey());
+                                                                        out.print("<td>" + p.getpName() + "</td>");
+                                                                        out.print("<td>" + p.getPrice() + "</td>");
+                                                                        out.print("<td>" + entry.getValue() + "</td>");
+                                                                        out.print("<td>" + p.getQuantity() + "</td>");
+                                                                        out.print("</tr>");
+                                                                    } else {
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            %>
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <a href="../../SaveController" class="btn btn-secondary">Save</a>
+                                                    </div>
+
                                                 </div>
-                                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
-                                                       cellspacing="0" role="grid" aria-describedby="dataTable_info"
-                                                       style="width: 100%;">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width: 20px">ID</th>
-                                                            <th style="width: 40px">Product's name</th>
-                                                            <th>Image</th>
-                                                            <th>Brand Products</th>
-                                                            <th>Type Products</th>
-                                                            <th>Supplier </th>
-                                                            <th>Saleprice</th>
-                                                            <th>Price</th>
-                                                            <th>Describle</th>
-                                                            <th>Date</th>
-                                                            <th>Size </th>
-                                                            <th>Material</th>
-                                                            <th>Quantity</th>
-                                                            <th>Discount</th>
-                                                            <th>Gender</th>                                                         
-                                                            <th>Status Product</th>
-                                                            <th>Update</th>
-                                                            <th>Change Status</th>
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody>
-
-                                                        <%
-                                                           
-                                                            ResultSet rs = null;
-                                                            if (request.getParameter("find") != null) {
-                                                                String word = request.getParameter("word");
-                                                                rs = pDao.search(word);
-                                                            } else {
-
-                                                                rs = pDao.getAll();
-                                                            }
-                                                            while (rs.next()) {
-
-                                                                out.print("<tr>");
-                                                                out.print("<td>" + rs.getInt("pID") + "</td>");
-                                                                out.print("<td>" + rs.getString("pName") + "</td>");
-                                                                ImageDAO iDao = new ImageDAO();
-                                                                ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
-                                                                out.print("<td>");
-                                                                while (rsImg.next()) {
-                                                                    out.print("<a href='../../" + rsImg.getString("imageName") + "'> <img class='zoom' src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' /></a>");
-                                                                }
-                                                                out.print("</td>");
-                                                                BrandDao brDao = new BrandDao();
-                                                                String brand = brDao.getBrand(rs.getInt("brID"));
-                                                                out.print("<td>" + brand + "</td>");
-                                                                TypeDAO tDao = new TypeDAO();
-                                                                String type = tDao.getType(rs.getInt("tID"));
-                                                                out.print("<td>" + type + "</td>");
-                                                                SupplierDAO supDao = new SupplierDAO();
-                                                                String sup = supDao.getSupplier(rs.getInt("supID"));
-                                                                out.print("<td>" + sup + "</td>");
-                                                                out.print("<td>" + rs.getInt("sellingPrice") + "</td>");
-                                                                out.print("<td>" + rs.getInt("price") + "</td>");
-                                                                out.print("<td>" + rs.getString("describle") + "</td>");
-                                                                out.print("<td>" + rs.getDate("pDate") + "</td>");
-                                                                int size = rs.getInt("size");
-                                                                String s = "";
-                                                                if (size == 0) {
-                                                                    s = "S";
-                                                                } else if (size == 1) {
-                                                                    s = "M";
-                                                                } else if (size == 2) {
-                                                                    s = "L";
-                                                                } else if (size == 3) {
-                                                                    s = "XL";
-                                                                } else {
-                                                                    s = "XXL";
-                                                                }
-                                                                out.print("<td>" + s + "</td>");
-                                                                out.print("<td>" + rs.getString("material") + "</td>");
-                                                                out.print("<td>" + rs.getString("quantity") + "</td>");
-                                                                out.print("<td>" + rs.getString("discount") + "</td>");
-                                                                out.print("<td>" + rs.getString("gender") + "</td>");
-
-                                                                if (rs.getInt("status") == 1) {
-                                                                    out.println("<td style='color:green; font-weight: bold;' >Valid</td> ");
-                                                                } else {
-                                                                    out.println("<td style='color:red;font-weight: bold; '>Invalid</td> ");
-                                                                }
-                                                                out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'>Update</a></td>");
-                                                                out.print("<td><a href='../../Change?pID=" + rs.getInt("pID") + "' + '>Change</a></td>");
-
-                                                                out.print("</tr>");
-                                                            }
-                                                        %>
-                                                    </tbody>
-
-                                                </table>
                                             </div>
                                         </div>
 
 
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-5">
-                                                <div class="dataTables_info" id="dataTable_info" role="status"
-                                                     aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-7">
-                                                <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                    <ul class="pagination">
-                                                        <li class="paginate_button page-item previous disabled"
-                                                            id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                                   data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                        </li>
-                                                        <li class="paginate_button page-item active"><a href="#"
-                                                                                                        aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                        class="page-link">1</a></li>
-                                                        <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                            <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                               class="page-link">Next</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                        <div class='col col-md-5 col-sm-5 ml-5' >
+
+                                            <%
+                                                //                                                ProductsDAO pDao = new ProductsDAO();
+                                                ResultSet rs = null;
+                                                TypeDAO tDao = new TypeDAO();
+                                                SupplierDAO supDao = new SupplierDAO();
+                                                BrandDao brDao = new BrandDao();
+                                                if (request.getParameter("type") != null && request.getParameter("value") != null) {
+                                                    String type = request.getParameter("type");
+                                                    if (type.equals("gender")) {
+                                                        String gender = request.getParameter("value");
+                                                        rs = pDao.getProductByGendee(gender);
+
+//                                                        out.print("<h2 class='col col-md-12' >List product with gender is " + gender + "</h2>");
+                                                    } else {
+                                                        int id = Integer.parseInt(request.getParameter("value"));
+                                                        rs = pDao.getProductwithST(type, id);
+
+//                                                        if (type.equals("type")) {
+//                                                            out.print("<h2 class='col col-md-12' >List product with type is" + tDao.getType(id) + "</h2>");
+//                                                        } else if (type.equals("supplier")) {
+//                                                            out.print("<h2 class='col col-md-12' >List product with supplier is" + supDao.getSupplier(id) + "</h2>");
+//                                                        } else if (type.equals("brand")) {
+//                                                            out.print("<h2 class='col col-md-12' >List product with brand is " + brDao.getBrand(id) + "</h2>");
+//                                                        } else if (type.equals("size")) {
+//                                                            out.print("<h2 class='col col-md-12'>List product with size</h2>");
+//                                                        } else if (type.equals("status")) {
+//                                                            out.print("<h2class='col col-md-12' >List product with status </h2>");
+//                                                        }
+                                                    }
+
+                                                } else if (request.getParameter("find") != null) {
+                                                    String word = request.getParameter("word");
+                                                    rs = pDao.search(word);
+                                                } else {
+
+                                                    rs = pDao.getAll();
+                                                }
+
+                                            %>
                                         </div>
                                     </div>
+
+                                    <table id="example"  class="table table-bordered dataTable" id="dataTable" width="100%"
+                                           cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                           style="width: 100%;">
+                                        <thead>
+                                            <%--                                                        <tr>
+                                                <th style="width: 20px">ID</th>
+                                                <th style="width: 40px">Product's name</th>
+                                                <th>Image</th>
+                                                <th>Brand Products</th>
+                                                <th>Type Products</th>
+                                                <th>Supplier </th>
+                                                <th>Saleprice</th>
+                                                <th>Price</th>
+                                                <th>Describle</th>
+                                                <th>Date</th>
+                                                <th>Size </th>
+                                                <th>Material</th>
+                                                <th>Quantity</th>
+                                                <th>Discount</th>
+                                                <th>Gender</th>                                                         
+                                                <th>Status Product</th>
+                                                <th>Update</th>
+                                                <th>Change Status</th>
+                                            </tr>
+                                            --%>
+                                            <tr >
+                                                <th style="width: 20px" class="th-sm ">ID <i class="fa fa-sort btn" style="font-size:16px"></i></th>
+                                                <th style="width: 70px">Product's name<br><i class="fa fa-sort btn" style="font-size:16px"></i></th>
+                                                <th>Image</th>
+                                                <th>Brand Products
+                                                    <div class="btn-group" role="group">
+                                                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                            <%                                                                        ResultSet allRrand = brDao.getAll();
+                                                                while (allRrand.next()) {
+                                                                    out.println("<a class='dropdown-item' href='?type=brand&value=" + allRrand.getInt(1) + "' >" + allRrand.getString(2) + "</a>");
+                                                                }
+                                                            %>
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <th> Type Products
+                                                    <div class="btn-group" role="group">
+                                                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                            <%                                                                        ResultSet allType = tDao.getAll();
+                                                                while (allType.next()) {
+                                                                    out.println("<a class='dropdown-item' href='?type=type&value=" + allType.getInt(1) + "' >" + allType.getString(2) + "</a>");
+                                                                }
+                                                            %>
+
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <th>Supplier
+                                                    <div class="btn-group" role="group">
+                                                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                            <%
+                                                                ResultSet allSup = supDao.getAll();
+                                                                while (allSup.next()) {
+                                                                    out.println("<a class='dropdown-item' href='?type=supplier&value=" + allSup.getInt(1) + "' >" + allSup.getString(2) + "</a>");
+                                                                }
+                                                            %>
+                                                        </div>
+                                                </th>
+                                                <th class="th-sm">Saleprice <i class="fa fa-sort btn" style="font-size:16px"></i></th>
+                                                <th class="th-sm">Price <i class="fa fa-sort btn" style="font-size:16px"></i></th>
+                                                <th>Describle</th>
+                                                <th class="th-sm">Date<i class="fa fa-sort btn" style="font-size:16px"></i></th>
+                                                <th>Size 
+                                                    <div class="btn-group" role="group">
+                                                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                            <%
+                                                                out.println("<a class='dropdown-item' href='?type=size&value=0'>S</a>");
+                                                                out.println("<a class='dropdown-item' href='?type=size&value=1'>M</a>");
+                                                                out.println("<a class='dropdown-item' href='?type=size&value=2'>L</a>");
+                                                                out.println("<a class='dropdown-item' href='?type=size&value=3'>XL</a>");
+                                                                out.println("<a class='dropdown-item' href='?type=size&value=4'>XXL</a>");
+                                                            %>
+                                                        </div>
+                                                </th>
+                                                <th>Material</th>
+                                                <th>Quantity <i class="fa fa-sort btn" style="font-size:16px"></i></th>
+                                                <th>Discount<i class="fa fa-sort btn" style="font-size:16px"></i></th>
+                                                <th>Gender
+                                                    <div class="btn-group" role="group"> 
+                                                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                            <%
+                                                                out.println("<a class='dropdown-item' href='?type=gender&value=Male'>Male</a>");
+                                                                out.println("<a class='dropdown-item' href='?type=gender&value=Female'>Female</a>");
+                                                                out.println("<a class='dropdown-item' href='?type=gender&value=Unisex'>Unisex</a>");
+                                                            %>
+                                                        </div>
+
+                                                </th>                                                         
+                                                <th>Status Product
+
+                                                </th>
+
+                                                <th></th>
+                                            </tr>
+
+                                        </thead>
+
+                                        <tbody>
+
+                                            <%
+                                                //  ResultSet rs = null;
+                                                while (rs.next()) {
+
+                                                    out.print("<tr>");
+                                                    out.print("<td>" + rs.getInt("pID") + "</td>");
+                                                    out.print("<td>" + rs.getString("pName") + "</td>");
+                                                    ImageDAO iDao = new ImageDAO();
+                                                    ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
+                                                    out.print("<td>");
+                                                    while (rsImg.next()) {
+                                                        out.print("<a href='../../" + rsImg.getString("imageName") + "'> <img class='zoom' src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' /></a>");
+                                                    }
+                                                    out.print("</td>");
+                                                    iDao.closeConn();
+                                                    //   BrandDao brDao = new BrandDao();
+                                                    String brand = brDao.getBrand(rs.getInt("brID"));
+                                                    out.print("<td>" + brand + "</td>");
+
+                                                    //  TypeDAO tDao = new TypeDAO();
+                                                    String type = tDao.getType(rs.getInt("tID"));
+                                                    out.print("<td>" + type + "</td>");
+
+                                                    //  SupplierDAO supDao = new SupplierDAO();
+                                                    String sup = supDao.getSupplier(rs.getInt("supID"));
+                                                    out.print("<td>" + sup + "</td>");
+
+                                                    out.print("<td>" + rs.getInt("sellingPrice") + "</td>");
+                                                    out.print("<td>" + rs.getInt("price") + "</td>");
+                                                    out.print("<td>" + rs.getString("describle") + "</td>");
+                                                    out.print("<td>" + rs.getDate("pDate") + "</td>");
+                                                    int size = rs.getInt("size");
+                                                    String s = "";
+                                                    if (size == 0) {
+                                                        s = "S";
+                                                    } else if (size == 1) {
+                                                        s = "M";
+                                                    } else if (size == 2) {
+                                                        s = "L";
+                                                    } else if (size == 3) {
+                                                        s = "XL";
+                                                    } else {
+                                                        s = "XXL";
+                                                    }
+                                                    out.print("<td>" + s + "</td>");
+                                                    out.print("<td>" + rs.getString("material") + "</td>");
+                                                    out.print("<td>" + rs.getString("quantity") + "</td>");
+                                                    out.print("<td>" + rs.getString("discount") + "</td>");
+                                                    out.print("<td>" + rs.getString("gender") + "</td>");
+
+                                                    if (rs.getInt("status") == 1) {
+                                                        out.println("<td style='color:green; font-weight: bold;' >Valid</td> ");
+                                                    } else {
+                                                        out.println("<td style='color:red;font-weight: bold; '>Invalid</td> ");
+                                                    }
+                                                    //  out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'>Update</a></td>");
+//                                                    out.print("<td><a href='../../Change?pID=" + rs.getInt("pID") + "' + '>Delete</a></td>");
+                                                    out.print("<td><a  class='btn btn-link bg-transparent mb-10' href='updateProduct.jsp?id=" + rs.getInt("pID") + "'><i class='fa fa-edit w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></a>");
+                                                   // out.print("<button class='btn btn-link bg-transparent'  onclick='myFunction(" + rs.getInt("pID") + ")'> <i class='fa fa-trash-o w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></button></td>");
+                                                    %>
+                                                    
+                                                     <button type="button" class="btn btn-link bg-transparent" data-toggle="modal" data-target="#centralModalWarning"><i class='fa fa-trash-o w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></button>
+                                                   
+                                                     <!-- Central Modal Medium Warning -->
+                                                    <div class="modal fade" id="centralModalWarning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                                      aria-hidden="true">
+                                                      <div class="modal-dialog modal-notify modal-warning" role="document">
+                                                        <!--Content-->
+                                                        <div class="modal-content">
+                                                          <!--Header-->
+                                                          <div class="modal-header">
+                                                            <p class="heading lead">Message</p>
+
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                              <span aria-hidden="true" class="white-text">&times;</span>
+                                                            </button>
+                                                          </div>
+
+                                                          <!--Body-->
+                                                          <div class="modal-body">
+                                                            <div class="text-center">
+                                                              <i class="fas fa-check fa-4x mb-3 animated rotateIn"></i>
+                                                              <p>Do you want to delete</p>
+                                                            </div>
+                                                          </div>
+
+                                                          <!--Footer-->
+                                                          <div class="modal-footer justify-content-center">
+                                                            <a href='../../Change?pID=<%=rs.getInt("pID")%>' class="btn btn-warning">Yes</a>
+                                                            <a type="button" class="btn btn-outline-warning waves-effect" data-dismiss="modal">No</a>
+                                                          </div>
+                                                        </div>
+                                                        <!--/.Content-->
+                                                      </div>
+                                                    </div>
+                                                    <!-- Central Modal Medium Warning-->
+                                                    
+                                                    
+                                                 <%   
+                                                    out.print("</tr>");
+                                                }
+                                            %>
+                                        </tbody>
+
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-            <!-- /#wrapper -->
+        </div>
+    </div>
 
-            <!-- Scroll to Top Button-->
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fas fa-angle-up"></i>
-            </a>
+</div>
+<!-- /#wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<%
+    pDao.closeConn();
+    tDao.closeConn();
+    brDao.closeConn();
+
+    supDao.closeConn();
+%>
+</body>
 
 
-
-
-
-
-
-
-
-
-        </body>
-
-
-    </html>
+</html>
 

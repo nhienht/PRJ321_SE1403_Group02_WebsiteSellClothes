@@ -441,6 +441,11 @@
                             <i class="fas fa-fw fa-book"></i>
                             <span>Supplier</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../other/list.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Other</span></a>
+                    </li>
 
 
 
@@ -492,10 +497,10 @@
                                         String email = "";
                                         int status = 0;
                                         String gender = "";
-
+                                        CustomerDAO cDao = new CustomerDAO(); //goi customerdao
                                         if (request.getParameter("id") != null) { // neu id ma khong null
                                             cID = Integer.parseInt(request.getParameter("id")); // ep kieu int
-                                            CustomerDAO cDao = new CustomerDAO(); //goi customerdao
+
                                             Customer c = cDao.getCustomer(cID); // get id cua customer
                                             cUsername = c.getcUsername(); // get ac thông tin cua customer
                                             cPassword = c.getcPassword();
@@ -649,7 +654,9 @@
             <a class="scroll-to-top rounded" href="#page-top">
                 <i class="fas fa-angle-up"></i>
             </a>
-
+            <%
+                cDao.closeConn();
+            %>
         </body>
 
 

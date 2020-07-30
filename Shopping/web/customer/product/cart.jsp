@@ -238,6 +238,7 @@
                                 <%
                                     HashMap<Integer, Integer> listCart = (HashMap<Integer, Integer>) session.getAttribute("listCart");
                                     String rm = request.getParameter("rm");
+                                    ProductsDAO pDao = new ProductsDAO();
                                     double total = 0.0;
                                     if (rm != null) {
                                         listCart.remove(Integer.parseInt(rm));
@@ -258,7 +259,7 @@
                                                 + "</tr>"
                                                 + "   </thead>"
                                         );
-                                        ProductsDAO pDao = new ProductsDAO();
+                                        
                                         int stt = 0;
                                         for (Integer i : listCart.keySet()) {
                                             int quantity = listCart.get(i);
@@ -275,7 +276,8 @@
                                                                                     }
                                     }
                                     out.print(" </table>");
-
+                                    
+                                    pDao.closeConn();
                                 %>
                         </div>
                         <div class="row justify-content-start">

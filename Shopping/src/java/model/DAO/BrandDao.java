@@ -66,4 +66,22 @@ public class BrandDao {
         }
         return null;
     }
+    public void closeConn(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(BrandDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     public boolean insert(String brand){
+        try {
+            String sql= "INSERT INTO brand(brName) VALUES (?)";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, brand);
+            return pst.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(BrandDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }

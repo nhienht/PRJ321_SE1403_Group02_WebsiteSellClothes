@@ -181,7 +181,7 @@ public class CustomerDAO {
      */
     public ResultSet getAll() {
         try {
-            String sql = "SELECT * FROM `customer`";//declare sql query
+            String sql = "SELECT * FROM `customer` where status =1";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();//excute query
             return rs;//return customers
@@ -191,6 +191,17 @@ public class CustomerDAO {
         return null;
     }
 
+    public ResultSet getDel() {
+        try {
+            String sql = "SELECT * FROM `customer` where status =0";//declare sql query
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();//excute query
+            return rs;//return customers
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     /**
      * Function use to get customer by ID
      *
@@ -282,5 +293,12 @@ public class CustomerDAO {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
+    }
+    public void closeConn(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

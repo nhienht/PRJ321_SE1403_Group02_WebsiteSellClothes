@@ -65,5 +65,23 @@ public class TypeDAO {
         }
         return null;
     }
+    public void closeConn(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public boolean insert(String type){
+        try {
+            String sql= "INSERT INTO type(tName) VALUES (?)";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, type);
+            return pst.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
 }

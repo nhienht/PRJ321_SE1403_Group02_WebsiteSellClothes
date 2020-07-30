@@ -30,6 +30,22 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
+
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
+
+        <script>
+            $(document).ready(function () {
+
+                $('#example').dataTable({}); // dòng này để nhúng bảng biểu thành dạng bảng được phân trang
+
+            });
+        </script>
         <title>List Bill </title>
         <style>
             html {
@@ -360,9 +376,9 @@
 
 
         <%
+            ProductsDAO pDao = new ProductsDAO();
             if (request.getParameter("id") != null) { // neu da co id
                 int pId = Integer.parseInt(request.getParameter("id")); // ep kieu id va get gia tri id
-                ProductsDAO pDao = new ProductsDAO();
                 int kq = pDao.delete(pId); // goi de delete
                 if (kq > 0) {
                     out.println("<script> alert('Xoa thanh cong');</script>"); // xoa thanh cong
@@ -446,6 +462,16 @@
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Comment</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../supplier/supplierlist.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Supplier</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../other/list.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Other</span></a>
+                    </li>
 
 
 
@@ -472,10 +498,10 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-          
+
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                                <table  id="example" class="table table-bordered dataTable" id="dataTable" width="100%"
                                                        cellspacing="0" role="grid" aria-describedby="dataTable_info"
                                                        style="width: 100%;">
                                                     <thead>
@@ -520,35 +546,14 @@
 
                                                                 out.print("</tr>");
                                                             }
+
                                                         %>
                                                     </tbody>
 
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-5">
-                                                <div class="dataTables_info" id="dataTable_info" role="status"
-                                                     aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-7">
-                                                <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                    <ul class="pagination">
-                                                        <li class="paginate_button page-item previous disabled"
-                                                            id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                                   data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                        </li>
-                                                        <li class="paginate_button page-item active"><a href="#"
-                                                                                                        aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                        class="page-link">1</a></li>
-                                                        <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                            <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                               class="page-link">Next</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        
                                 </div>
                             </div>
                         </div>
@@ -562,16 +567,9 @@
             <a class="scroll-to-top rounded" href="#page-top">
                 <i class="fas fa-angle-up"></i>
             </a>
-
-
-
-
-
-
-
-
-
-
+            <%                bDao.closeConn();
+                pDao.closeConn();
+            %>
         </body>
 
 

@@ -113,7 +113,9 @@ public class OrderController extends HttpServlet {
             bdDao.addBillDetail(billID, i, quantity, p.getPrice()); //add cac thong tin
         }
         session.removeAttribute("listCart");  // remove listcarrt
-
+        pDao.closeConn();
+        bDao.closeConn();
+        bdDao.closeConn();
         response.sendRedirect("./customer/bill/billDetail.jsp"); // chuyen den trang chi tiet bill
 //        Enumeration<String> pIds = session.getAttributeNames();
 //        int success = 1;  // tạo biến kiểm tra mua thành công hay không   

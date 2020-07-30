@@ -25,6 +25,30 @@
         crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>List Customer</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
+
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script>
+            $(document).ready(function () {
+
+                $('#example').dataTable({}); // dòng này ?? nhúng b?ng bi?u thành d?ng b?ng ???c phân trang
+
+            });
+        </script>
+        <script>
+            function myFunction(id) {
+                var person = confirm("Are you sure to Delete ?");
+                if (person) {
+                    location.href = "../../Change?cID=" + id;
+                }
+            }
+        </script>
         <style>
             html {
                 position: relative;
@@ -34,7 +58,10 @@
             body {
                 height: 100%;
             }
-
+            .btn{
+                background: #F5A9BC;
+                font-weight: bold
+            }
             #wrapper {
                 display: -webkit-box;
                 display: -ms-flexbox;
@@ -430,6 +457,11 @@
                             <i class="fas fa-fw fa-book"></i>
                             <span>Supplier</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../other/list.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Other</span></a>
+                    </li>
 
 
 
@@ -451,19 +483,31 @@
 
                         <!-- DataTables Example -->
                         <div class="card mb-3">
-                            <div class="card-header">
-                                <i class="fas fa-user"></i>
-                                List Customers</div>
+                             <div class="card-header mb-3 row">
+                                <div class="col col-md-3 col-sm-3">
+                                    <i class="fas fa-user"> List Customer</i>
+
+                                </div>
+                                
+                                
+                                <div class='col col-md-3 col-sm-3'>
+                                    <button  id="bestsale" class="btn btn-outline-secondary"><a style="color: #000" href='customerDel.jsp'>
+                                            List Deleted</a>
+                                    </button>
+                                </div>
+                            </div>
+                            
                             <div class="card-body">
+                               
                                 <div class="table-responsive">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                       
+
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <table class="table table-bordered dataTable" id="dataTable" width="100%"
-                                                   cellspacing="0" role="grid" aria-describedby="dataTable_info"
-                                                   style="width: 100%;">
+                                            <table  id="example" class="table table-bordered dataTable" id="dataTable" width="100%"
+                                                    cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                                    style="width: 100%;">
                                                 <thead>
                                                     <tr>
                                                         <th>ID Customer</th>
@@ -498,9 +542,8 @@
                                                                 out.println("<td style='color:red;font-weight: bold; '>Invalid</td> ");
                                                             }
                                                             out.print("<td>" + rs.getString(10) + "</td>");
-                                                            //                            out.print("<td><a href='billDetail.jsp?id=" + rs.getInt("bID") + "'>Xem chi tiet hoa don</a></td>");
-                                                            //   out.print("<td><a href='updateCustomer.jsp?id=" + rs.getInt("cID") + "'>Update</a></td>");
-                                                            out.print("<td><a href='../../Change?cID=" + rs.getInt(1) + "' + '>Change</a></td>"); // dua id cua customer de thuc hien viec change stt customer do
+//                                                          out.print("<a href='../../Change?pID=" + rs.getInt("pID") + "' + '><i class='fa fa-recycle w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></a></td>");
+                                                            out.print("<td><button class='btn btn-link bg-transparent' onclick='myFunction(" + rs.getInt("cID") + ")'> <i class='fa fa-trash-o w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></button></td>");
                                                             out.print("</tr>");
                                                         }
                                                     %>
@@ -508,53 +551,24 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="dataTable_info" role="status"
-                                                 aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled"
-                                                        id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                               data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item active"><a href="#"
-                                                                                                    aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                    class="page-link">1</a></li>
-                                                    <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                        <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                           class="page-link">Next</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
+            <!-- /#wrapper -->
 
-        </div>
-        <!-- /#wrapper -->
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
+            <%
+                cDao.closeConn();
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-
-
-
-
-
+            %>
+        </body>
 
 
-
-
-
-    </body>
-
-
-</html>
+    </html>

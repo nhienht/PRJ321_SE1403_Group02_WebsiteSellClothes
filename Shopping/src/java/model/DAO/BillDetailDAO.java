@@ -80,5 +80,11 @@ public class BillDetailDAO {
         }
         return null;
     }
-
+     public void closeConn(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(BillDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

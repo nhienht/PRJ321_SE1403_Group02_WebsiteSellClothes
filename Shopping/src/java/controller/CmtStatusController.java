@@ -47,6 +47,7 @@ public class CmtStatusController extends HttpServlet {
                     cmtDao.changeStatus(cmtID, 1); // hien cmt
                 }
             }
+            cmtDao.closeConn();
             response.sendRedirect("./admin/comment/listcomment.jsp"); // chuyen den trang list cmt
         }
     }

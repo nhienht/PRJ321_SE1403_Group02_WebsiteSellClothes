@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -6,7 +7,7 @@
 <%@page import="model.DAO.TypeDAO"%>
 <%@page import="java.util.Date"%>
 <%@page import="model.entity.Products"%>
-<%@page import="model.DAO.ImageDAO"%>
+<%--<%@page import="model.DAO.ImageDAO"%>--%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="model.DAO.ProductsDAO"%>
 <!DOCTYPE html>
@@ -372,9 +373,10 @@
             Double sellingPrice = 0.0, price = 0.0;
             float discount = 0;
             Date pDate = null;
+            ProductsDAO pDao = new ProductsDAO();
             if (request.getParameter("id") != null) {
                 id = Integer.parseInt(request.getParameter("id"));
-                ProductsDAO pDao = new ProductsDAO();
+
                 Products p = pDao.getProduct(id);
                 status = p.getSpID();
                 brID = p.getBrID();
@@ -464,7 +466,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                         <a class="nav-link" href="../comment/listcomment.jsp">
+                        <a class="nav-link" href="../comment/listcomment.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Comment</span></a>
                     </li>
@@ -472,6 +474,11 @@
                         <a class="nav-link" href="../supplier/supplierlist.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>Supplier</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../other/list.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Other</span></a>
                     </li>
 
 
@@ -582,7 +589,7 @@
                                                     <div>Saleprice</div>
                                                     <div class="input-group">
 
-                                                        <input value="<%= sellingPrice%>" class="form-control" autofocus=""
+                                                        <input value="<%= sellingPrice%>" class="form-control" autofocus="" type="number" min="0"
                                                                required=" " name="sellingPrice">
                                                     </div>
                                                 </div>
@@ -590,7 +597,7 @@
                                                     <div>Price</div>
                                                     <div class="input-group">
 
-                                                        <input value="<%= price%>" class="form-control" autofocus=""
+                                                        <input value="<%= price%>" class="form-control" autofocus="" type="number" min="0"
                                                                required=" " name="price">
                                                     </div>
                                                 </div>
@@ -606,7 +613,7 @@
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Date</div>
                                                     <div class="input-group">
-                                                        <input value="<%= pDate%>" type="date" class="form-control"
+                                                        <input value="<%= pDate%>" type="date" class="form-control" 
                                                                autofocus="" required=" " name="pDate">
                                                     </div>
                                                 </div>
@@ -643,14 +650,14 @@
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Quantity</div>
                                                     <div class="input-group">
-                                                        <input value="<%= quantity%>" type="text" class="form-control"
+                                                        <input value="<%= quantity%>"  class="form-control"  type="number" min="0"
                                                                autofocus="" required=" " name="quantity">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Discount</div>
                                                     <div class="input-group">
-                                                        <input value="<%= discount%>" type="text" class="form-control"
+                                                        <input value="<%= discount%>"  class="form-control" type="number" min="0" max="100"
                                                                autofocus="" required=" " name="discount">
                                                     </div>
                                                 </div>
@@ -679,28 +686,7 @@
                                     </tbody>
 
 
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="dataTable_info" role="status"
-                                                 aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled"
-                                                        id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                               data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item active"><a href="#"
-                                                                                                    aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                    class="page-link">1</a></li>
-                                                    <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                        <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                           class="page-link">Next</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -715,6 +701,13 @@
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
+        <%
+            brDao.closeConn();
+            tDao.closeConn();
+            supDao.closeConn();
+            pDao.closeConn();
+
+        %>
     </body>
 
 

@@ -4,7 +4,6 @@
     Author     : Dat
 --%>
 <%@page import="model.DAO.BillDetailDAO"%>
-<%@page import="model.DAO.ImageDAO"%>
 <%@page import="model.entity.Products"%>
 <%@page import="model.DAO.ProductsDAO"%>
 <%@page import="java.sql.ResultSet"%>
@@ -178,6 +177,8 @@
                 Customer c = cDao.getCustomer(id);
                 BillDAO bDao = new BillDAO();
                 ResultSet bill = bDao.getBillbyCustomer(id);
+                ProductsDAO pDao = new ProductsDAO();
+                BillDetailDAO bdDao = new BillDetailDAO();
             %>
             <%-- Show cac thong in cua customer ra  --%>
             <h1 style="text-align: center"> Information </h1>
@@ -215,8 +216,8 @@
                         <%-- Cho customer changepassword va change thong tin --%>
                     </table>
                     <div class="row" style="position: relative ; left: 12px;" >
-                        <button style=" background: #f2f2f2; " type="button" class="btn btn-outline-danger mr-md-3"><a style="text-decoration: none" target="_blank" href="changeInfo.jsp">Change Information</a></button>   
-                        <button style=" background: #f2f2f2;" type="button" class="btn btn-outline-danger mr-md-3"><a style="text-decoration: none" target="_blank" href="changePassword.jsp">Change password</a></button> 
+                        <button style=" background: #f2f2f2; " type="button" class="btn btn-outline-danger mr-md-3"><a style="text-decoration: none"  href="changeInfo.jsp">Change Information</a></button>   
+                        <button style=" background: #f2f2f2;" type="button" class="btn btn-outline-danger mr-md-3"><a style="text-decoration: none" href="changePassword.jsp">Change password</a></button> 
                     </div>
                 </form> 
                 <hr>
@@ -246,9 +247,9 @@
                                 out.print("<td> " + bill.getString(7) + "</td>");
                                 out.print("<td> " + bill.getString(3) + "</td>");
                                 out.print("<td>");
-                                BillDetailDAO bdDao = new BillDetailDAO();
+
                                 ResultSet billDetail = bdDao.getBillDetail(bill.getInt(1));
-                                ProductsDAO pDao = new ProductsDAO();
+
                                 while (billDetail.next()) {
                                     Products p = pDao.getProduct(billDetail.getInt(2));
                                     out.print("<p> - " + p.getpName() + "<b> #SL:" + billDetail.getInt(3) + "</b>" + "</p>");
@@ -263,6 +264,12 @@
                     </table>
 
                 </div>
+                <%
+                    cDao.closeConn();
+                    bDao.closeConn();
+                    pDao.closeConn();
+                    bdDao.closeConn();
 
+                %>
         </body>
     </html>

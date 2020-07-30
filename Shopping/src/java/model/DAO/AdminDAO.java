@@ -52,4 +52,11 @@ public class AdminDAO {
         }
         return -1;
     }
+    public void closeConn(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

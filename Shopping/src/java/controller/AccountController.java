@@ -105,6 +105,7 @@ public class AccountController extends HttpServlet {
 
             response.addCookie(userCookie);
             response.addCookie(idCookie);
+            cDao.closeConn();
             //response.sendRedirect("home.jsp");
             if (request.getParameter("returnURL") != null) { // neu  returnURL ma khong rong
                 response.sendRedirect(request.getParameter("returnURL")); // thi chuyen sang
@@ -116,6 +117,7 @@ public class AccountController extends HttpServlet {
             String user = request.getParameter("user"); // get uername va password
             String pass = request.getParameter("pass");
             int id = cDao.login(user, pass);
+            cDao.closeConn();
             if (id != -1) {
                 Cookie userCookie = new Cookie("user", user); // tao cookie luu id username
                 Cookie idCookie = new Cookie("idCustomer", String.valueOf(id));
@@ -140,6 +142,7 @@ public class AccountController extends HttpServlet {
               response.sendRedirect("./auth/login.jsp?message="+mes);   
             }
         } else if (request.getParameter("btnSignInPage") != null) {
+            cDao.closeConn();
             response.sendRedirect("./auth/signin.jsp"); // chuyen den trang dang ky
         }
 

@@ -13,7 +13,7 @@
 <%@page import="model.entity.Products"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-<%@page import="model.DAO.ImageDAO"%>
+<%--<%@page import="model.DAO.ImageDAO"%>--%>
 <%@page import="model.DAO.ProductsDAO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -45,7 +45,28 @@
         crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
               integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">-->
 
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#centralModalSm").modal('show');
+            });
+        </script>
         <style> 
             @import url('https://fonts.google.com/specimen/Balsamiq+Sans');
 
@@ -129,6 +150,55 @@
 
     </head>
     <body>
+            
+        <%
+            String msg = request.getParameter("message");
+            if (msg != null) {%>
+            
+        <!-- Frame Modal Bottom -->
+        <!-- Button trigger modal -->
+
+        <!-- Central Modal Small -->
+        <div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+
+            <!-- Change class .modal-sm to change the size of the modal -->
+            <div class="modal-dialog modal-xl" role="document">
+
+
+                <div class="modal-content modal-dialog-centered">
+                    <div class="modal-header">
+                        <h4 class="modal-title w-100" id="myModalLabel"><p style="font-size: 30px; color:palevioletred ; font-weight: bold">Notification</p></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p style="font-size: 20px; font-weight: bold">The product has been added to cart.</p>
+                        <p style="font-size: 20px; font-weight: bold">Click on Cart to see details.</p>
+                        <p style="font-size: 20px; font-weight: bold"> Thank you!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <!--<button type="button" class="btn btn-primary  btn-sm" data-dismiss="modal">Close</button>-->
+                        <button type="button" class="btn btn-primary  btn-sm" data-dismiss="modal" onclick="reload(<%=   request.getParameter("pID") %>)" >Close</button>
+                        <script>
+                            function reload(pId) {
+                                location.href = "productDetail.jsp?pID="+ pId
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Central Modal Small -->
+
+
+        <%}
+
+        %>
+
+
+
         <jsp:include page="../../header/header.jsp" ></jsp:include>
             <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
@@ -274,10 +344,15 @@
 
                                 <span  class='  blue mr-1' style='font-size:25px'>Size:   <%= s%> </span>    
                                 <span  class='  blue mr-1' style='font-size:25px'>- Quantity:   <%= p.getQuantity()%> </span>      
-                            </p>                          
+                            </p>     
+                             <%
+                                String url = request.getRequestURI();
+                               // System.out.println(url);
+                                %>
                             <p class="lead font-weight-bold"  style='font-size:35px; color: darkred' ><%= p.getpName()%></p>
                             <form class="d-flex justify-content-left" action="../../CartController"> 
                                 <input type="hidden" value="${param.pID}" name="id"/>
+                                <input type="hidden" value="<%= url%>" name="url"/>
                                 <input type="number" value="1" aria-label="Search" class="form-control" name="quantity" min="0" max="<%=p.getQuantity()%>" style="width: 100px">
                                 <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
                                 </button>
@@ -286,7 +361,7 @@
 
                         </div>
                     </div>
-                    <div class="container-fluid padding" style="position: relative; top: -125px; left: 25px">
+                    <div class="container-fluid padding" style="position: relative; top: -100px; left: 25px">
                         <div class="row text-center padding"> 
                             <div  class="col-xs-4 col-sm-4 col-md-4 boder bg-light ">
 
@@ -304,20 +379,21 @@
 
             <div class="row d-flex justify-content-center wow fadeIn">
                 <div class="col-md-6 text-center">
-                    <h4 class="my-4 h4">Describle</h4>
-                    <p><%= p.getDescrible()%> </p>
+                    <h4 class="my-4 h2">Describle</h4>
+                    <h4><%= p.getDescrible()%> </h4>
                 </div>
             </div>
 
             <hr>
 
-            <div class="row d-flex justify-content-center wow fadeIn">
+           <div class="row d-flex justify-content-center wow fadeIn">
                 <div class="col-md-6 text-center">
-                    <h4 class="my-4 h3">Comment</h4>                   
+                    <h4 class="my-4 h2">Comment</h4>
                 </div>
-            </div>           
+                      
             <%
                 CommentDAO cDao = new CommentDAO();
+                  CustomerDAO cus = new CustomerDAO();
                 ResultSet rs = cDao.getCommentbyProduct(pID);
 
                 if (rs == null) {
@@ -325,13 +401,13 @@
                 } else {
                     while (rs.next()) {
                         int cID = rs.getInt(3);
-                        CustomerDAO cus = new CustomerDAO();
+                      
                         cus.getCustomer(cID);
                         String name = cus.getCustomer(cID).getcUsername();
 
 
             %>
-            <div class="col-sm-12  mb-4">
+            <div class="col-sm-8  mb-4">
                 <div class="row">
                     <div class="">
                         <p style="font-size: 28px" ><%= name%></p>
@@ -345,19 +421,23 @@
                                 }
                             }
                         %>
-                    </div>
+                    
                 </div>
-                <div class="panel-body px-2">
-                    <%= rs.getString(4)%>
+                        <div class="col-md-12">
+                    <p>
+                    <%= rs.getString(4)%>     
+                    </p>
+                   
                 </div>
-
+            </div>
             </div>
             <% }
                 }%>
-            <div>
+                <div class="col-sm-8 col-md-8">
+                
                 <form action="../../CommentController" method="POST">
                     <input type="hidden" value="<%= pID%>" name="pID"/>
-                    <div class="col-sm-12">                      
+                    <div class="">                      
                         <div class="panel-heading">
                             <strong style="font-size: 22px" >Your comment</strong>
                         </div>
@@ -367,16 +447,26 @@
                         <div class="panel-body px-4 ">
                             <input type="submit" value="Send" name="btnComment"/> 
                         </div> 
-
+</div>
                 </form>
-
             </div>
+            
         </div>
+                    
     </div>
     <div>
         <br>
 
     </div>
 </main>
+                    <%
+                        brDao.closeConn();
+                        cDao.closeConn();
+                        cus.closeConn();
+                        tDao.closeConn();
+                        supDao.closeConn();
+                        pDao.closeConn();
+                        
+                        %>
 </body>
 </html>

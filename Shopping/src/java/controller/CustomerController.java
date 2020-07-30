@@ -90,6 +90,7 @@ public class CustomerController extends HttpServlet {
         c.setGender(request.getParameter("gender"));
         CustomerDAO cDao = new CustomerDAO(); // goi class customer dao
         cDao.update(c); // de thuc hien update cac thong tin da nhap
+        cDao.closeConn();
         response.sendRedirect("./admin/customer/listcustomer.jsp"); // sau do chuyen laii trang list customer de show ra cac thong tin
 
     }

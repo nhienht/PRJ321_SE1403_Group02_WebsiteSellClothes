@@ -37,6 +37,7 @@
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
         <title>List Bill </title>
+        
         <style>
             html {
                 position: relative;
@@ -364,14 +365,7 @@
                 }
             </style>
         </head>
-
-
-
-
-
         <body id="page-top" class="">
-
-
             <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
                 <a class="navbar-brand mr-1 fas" href="../../dashboard.jsp">
                     <h3>Clothing</h3>
@@ -448,6 +442,11 @@
                             <span>Supplier</span></a>
                     </li>
 
+                     <li class="nav-item">
+                        <a class="nav-link" href="../other/list.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Other</span></a>
+                    </li>
 
 
                 </ul>
@@ -508,14 +507,13 @@
                                                             ResultSet rs = bdDao.getBillDetail(Integer.parseInt(request.getParameter("id")));
                                                             BillDAO bDao = new BillDAO();
                                                             Bill b = bDao.getBill(Integer.parseInt(request.getParameter("id")));
-
                                                             ProductsDAO pDao = new ProductsDAO();
-
+                                                             ImageDAO iDao = new ImageDAO();
                                                             double total = 0;
                                                             int i = 1;
                                                             while (rs.next()) {
                                                                 Products p = pDao.getProduct(rs.getInt(2));
-                                                                ImageDAO iDao = new ImageDAO();
+                                                               
                                                                 ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
 
                                                                 out.print("<tr>");
@@ -539,28 +537,7 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-5">
-                                                <div class="dataTables_info" id="dataTable_info" role="status"
-                                                     aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-7">
-                                                <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                    <ul class="pagination">
-                                                        <li class="paginate_button page-item previous disabled"
-                                                            id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                                   data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                        </li>
-                                                        <li class="paginate_button page-item active"><a href="#"
-                                                                                                        aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                        class="page-link">1</a></li>
-                                                        <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                            <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                               class="page-link">Next</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -572,17 +549,13 @@
             <!-- /#wrapper -->
 
             <!-- Scroll to Top Button-->
-
-
-
-
-
-
-
-
-
-
-
+            <%
+                bDao.closeConn();
+                bdDao.closeConn();
+                pDao.closeConn();
+                iDao.closeConn();
+                
+                %>
         </body>
 
 

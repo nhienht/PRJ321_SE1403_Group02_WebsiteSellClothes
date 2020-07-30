@@ -472,6 +472,7 @@
             CustomerDAO cDao = new CustomerDAO();
             Customer c = cDao.getCustomer(id);
 
+
         %>
 
         <%--Show cac infor cua nguoi dung ra va cho nguoi dung chinh sua thong tin neu muon --%>
@@ -487,16 +488,16 @@
                     <input  class="fadeIn second" type="hidden" name="txtID" value="<%= c.getcID()%>">
                     <input  class="fadeIn second" type="hidden" name="txtPassword" value="<%= c.getcPassword()%>">
                     <input  class="fadeIn second" type="hidden" name="txtStatus" value="<%= c.getStatus()%>">
-                    <input  class="fadeIn second" type="text"  name="txtName" value="<%= c.getcName()%>">
-                    <input  class="fadeIn second" type="text" name="txtUser" value="<%= c.getcUsername()%>">
-                    <input  class="fadeIn second" type="text" name="txtPhone" value="<%= c.getPhonenumber()%>">
-                    <input  class="fadeIn second" type="text" name="txtAddress" value="<%= c.getAddress()%>">
+                    <input  class="fadeIn second" required="" type="text"  name="txtName" value="<%= c.getcName()%>">
+                    <input  class="fadeIn second" required="" type="text" name="txtUser" value="<%= c.getcUsername()%>">
+                    <input  class="fadeIn second" required="" type="text" name="txtPhone" value="<%= c.getPhonenumber()%>">
+                    <input  class="fadeIn second" required="" type="text" name="txtAddress" value="<%= c.getAddress()%>">
                     <div class="col-sm-11 col-xs-11">
                         <input  class="hai" type="date" name="txtBirthday" value="<%= c.getBirthday()%>">
                     </div>
                     <div class="col-sm-11 col-xs-11">
                         <div class="input-group">
-                            <input  class="mail" type="email" name="txtEmail" value="<%= c.getEmail()%>">
+                            <input  class="mail" required="" type="email" name="txtEmail" value="<%= c.getEmail()%>">
                         </div>
                     </div>
                     <div class="col-sm-11 col-xs-11">
@@ -518,6 +519,8 @@
             </div>
         </div>
 
-
+        <%
+            cDao.closeConn();
+        %>
     </body>
 </html>

@@ -134,17 +134,17 @@
 
                         <form class="signup" action="./../ChangeInforCustomer" method="POST" onSubmit = "return checkPassword(this)" id="register" name="register">
                             <div class="form-group">
-                                <input class="form-control" type="password" name="Oldpass" id="Oldpass" required="">
+                                <input placeholder="Old Password" class="form-control" type="password" name="Oldpass" id="Oldpass" required="">
                             </div>
 
                             <div class="form-group"> 
-                                <input  class="form-control"  type="password" name="newPass" id="newPass" required="">
+                                <input placeholder="New password"  class="form-control"  type="password" name="newPass" id="newPass" required="">
 
                             </div>
                             <div style="position: relative; left: -150px;"> <input style="" type="checkbox" onclick="myFunction()"></div>
 
                             <div class="form-group"> 
-                                <input class="form-control"  type="password" name="Cofirmpass" id="Cofirmpass" required=""> 
+                                <input placeholder="Confirmpass" class="form-control"  type="password" name="Cofirmpass" id="Cofirmpass" required=""> 
                             </div>
 
                             <input type="submit" value="Change Password" name="btnChangePass" class="btn btn-primary">
@@ -173,8 +173,15 @@
                                     alert("Please enter Password");
 
                                 // If confirm password not entered 
-                                else if (password2 == '')
+                                else if (password2.length < 6)
+                                {
+                                    alert("Password must be length > 6");
+                                    return false;
+                                } else if (password2 == '')
+                                {
                                     alert("Please enter confirm password");
+                                    return  false;
+                                }
 
                                 // If Not same return False.     
                                 else if (password1 != password2) {

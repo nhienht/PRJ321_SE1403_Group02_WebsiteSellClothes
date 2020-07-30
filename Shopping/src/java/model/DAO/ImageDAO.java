@@ -70,5 +70,12 @@ public class ImageDAO {
         return null;
 
     }
+    public void closeConn(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ImageDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }

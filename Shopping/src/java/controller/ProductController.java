@@ -122,6 +122,7 @@ public class ProductController extends HttpServlet {
             p.setStatus(Integer.parseInt(request.getParameter("status")));
             pDao.insert(p); // neu thong thi thuc hien insert san pham
             int pID = pDao.getMax();
+            
             ImageDAO imgDao = new ImageDAO();
             try {
                 List<Part> fileParts = (List<Part>) request.getParts();
@@ -145,7 +146,10 @@ public class ProductController extends HttpServlet {
                 out.print("hi");
 
             }
+            imgDao.closeConn();
         }
+        pDao.closeConn();
+        
         response.sendRedirect("./admin/product/listproducts.jsp");// chuyen den trang listproduct
     }
 

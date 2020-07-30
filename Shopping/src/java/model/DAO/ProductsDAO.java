@@ -39,7 +39,7 @@ public class ProductsDAO {
      */
     public ResultSet getAll() {
         try {
-            String sql = "select * from products";//declare sql query
+            String sql = "select * from products where status  = 1";//declare sql query
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();//excute query
             return rs;//return products
@@ -422,5 +422,59 @@ public class ProductsDAO {
         Sort sort = new Sort();
         HashMap<Integer, Integer> newList = sort.sortHashMapByValues(products);
         return newList;
+    }
+    public void closeConn(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public ResultSet getProductByGendee(String gender) {
+        try {
+            String sql = "select * from products where gender=?  and status =1";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, gender);
+            ResultSet rs = pst.executeQuery();
+           return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    } 
+     
+    public ResultSet getProductwithST(String type, int id) {
+        try {
+            String sql = null;
+            if (type.equals("type")) {
+                sql = "select * from products where tID=? and status =1 ";
+            } else if (type.equals("supplier")) {
+                sql = "select * from products where supID=?  and status =1";
+            } else if (type.equals("brand")) {
+                sql = "select * from products where brID=? and status =1";
+            } else if (type.equals("size")) {
+                sql = "select * from products where size=?  and status =1";
+            } else if (type.equals("status")) {
+                sql = "select * from products where status=?  and status =1";          
+            }
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public ResultSet getDelete() {
+        try {
+            String sql = "select * from products where status =0 ";//declare sql query
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();//excute query
+            return rs;//return products
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

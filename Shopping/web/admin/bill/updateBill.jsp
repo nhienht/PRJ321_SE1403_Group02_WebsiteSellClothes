@@ -373,9 +373,10 @@
                 String phone = "";
                 String note = "";
                 double total = 0;
+                BillDAO bDao = new BillDAO();
                 if (request.getParameter("id") != null) { // neu ma id khong rong co nghi la co bill
                     bID = Integer.parseInt(request.getParameter("id")); // ep kieu id va get cac thong tin cua bill
-                    BillDAO bDao = new BillDAO();
+
                     Bill b = bDao.getBill(bID);
                     cID = b.getcID();
                     bStatus = b.getbStatus();
@@ -386,6 +387,7 @@
                     note = b.getNote();
                     total = b.getTotal();
                 }
+                bDao.closeConn();
             %>
         <body id="page-top" class="">
 
@@ -465,6 +467,11 @@
                             <i class="fas fa-fw fa-book"></i>
                             <span>Supplier</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../other/list.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Other</span></a>
+                    </li>
 
 
                 </ul>
@@ -495,8 +502,6 @@
                                             <div class="row">
                                                 <input type="hidden" value="<%= bID%>" name="bID"/>
                                                 <input type="hidden" value="<%= cID%>" name="cID"/>
-
-
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div>Customer Name </div>
                                                     <div class="input-group">

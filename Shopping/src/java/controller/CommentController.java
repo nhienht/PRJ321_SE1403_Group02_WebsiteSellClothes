@@ -43,6 +43,7 @@ public class CommentController extends HttpServlet {
             int pID = Integer.parseInt(request.getParameter("pID"));
             CommentDAO cDao = new CommentDAO();
             cDao.delete(cmtID);
+            cDao.closeConn();
             response.sendRedirect("./customer/product/productDetail.jsp?pID=" + pID);
 
         }
@@ -96,6 +97,7 @@ public class CommentController extends HttpServlet {
             c.setCmtMessage(message);
             CommentDAO cDao = new CommentDAO();
             check = cDao.insert(c); // thuc hien viec insert cmt co nghia la viec cmt
+            cDao.closeConn();
             response.sendRedirect("./customer/product/productDetail.jsp?pID=" + pID); // chuyen den trang chi tiết san pham
 
         } else {

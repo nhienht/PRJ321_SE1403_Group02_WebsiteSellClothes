@@ -91,6 +91,7 @@ public class BillController extends HttpServlet {
             b.setTotal(Double.parseDouble(request.getParameter("total")));
             BillDAO bDao = new BillDAO();
             bDao.update(b); // thhuc hien update bill
+            bDao.closeConn();
 
         }
         response.sendRedirect("./admin/bill/listbill.jsp"); // chuyen den trang danh sach bill

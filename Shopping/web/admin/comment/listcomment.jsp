@@ -33,7 +33,23 @@
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>List Customer</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
+
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
+
+        <script>
+            $(document).ready(function () {
+
+                $('#example').dataTable({}); // dòng này ?? nhúng b?ng bi?u thành d?ng b?ng ???c phân trang
+
+            });
+        </script>
+        <title>List Comment</title>
         <style>
             html {
                 position: relative;
@@ -412,7 +428,7 @@
                             <span>Bill</span></a>
                     </li>
 
-                    <li class="nav-item active"  >
+                    <li class="nav-item "  >
                         <a class="nav-link" href="../customer/listcustomer.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Customer</span></a>
@@ -434,6 +450,16 @@
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Comment</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../supplier/supplierlist.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Supplier</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../other/list.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Other</span></a>
+                    </li>
 
 
 
@@ -448,7 +474,7 @@
                             <li class="breadcrumb-item">
                                 <a href="../product/listproducts.jsp">Dashboard</a>
                             </li>
-                            <li class="breadcrumb-item active">Customers</li>
+                            <li class="breadcrumb-item active">Comment</li>
 
 
                         </ol>
@@ -461,11 +487,11 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                       
+
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                            <table id="example" class="table table-bordered dataTable" id="dataTable" width="100%"
                                                    cellspacing="0" role="grid" aria-describedby="dataTable_info"
                                                    style="width: 100%;">
                                                 <thead>
@@ -488,7 +514,7 @@
                                                         while (rs.next()) { // cho vong lap ?e show ra cac ket qua 
                                                             out.print("<tr>");
                                                             out.print("<td>" + rs.getInt(1) + "</td>");
-                                                            Customer c = cDao.getCustomer(rs.getInt(2));
+                                                            Customer c = cDao.getCustomer(rs.getInt(3));
                                                             out.print("<td>" + c.getcName() + "</td>");
                                                             Products p = pDao.getProduct(rs.getInt(2));
                                                             out.print("<td>" + p.getpName() + "</td>");
@@ -507,29 +533,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="dataTable_info" role="status"
-                                                 aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled"
-                                                        id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                               data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item active"><a href="#"
-                                                                                                    aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                    class="page-link">1</a></li>
-                                                    <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                        <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                           class="page-link">Next</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                   
                             </div>
                         </div>
                     </div>
@@ -543,16 +547,11 @@
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
-
-
-
-
-
-
-
-
-
-
+        <%
+            cDao.closeConn();
+            cmt.closeConn();
+            pDao.closeConn();
+        %>
     </body>
 
 

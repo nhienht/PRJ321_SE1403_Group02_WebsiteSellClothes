@@ -201,5 +201,12 @@ public class BillDAO {
         return null;
 
     }
+    public void closeConn(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }
